@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Contact — Amora</title>
+  <meta name="description" content="Contact Amora for demos, sales, or support.">
+  <link rel="canonical" href="https://example.com/contact.html">
+  <meta property="og:title" content="Contact — Amora">
+  <meta property="og:description" content="Contact Amora for demos, sales, or support.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="logo" href="/">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="24" height="24" rx="6" fill="#FF5A7A"/>
+          <path d="M7 12a5 5 0 0 1 10 0 5 5 0 0 1-10 0z" fill="#fff" opacity="0.9"/>
+        </svg>
+        <span class="brand">Amora</span>
+      </a>
+      <nav class="links">
+        <a href="/">Home</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <h1>Contact</h1>
+      <p class="lead">Have questions or want a demo? Send us a message and we'll reply shortly.</p>
+    </section>
+
+    <section class="container contact">
+      <form id="contact-form" class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
+        <label>
+          Name
+          <input type="text" name="name" required>
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" required>
+        </label>
+        <label>
+          Company (optional)
+          <input type="text" name="company">
+        </label>
+        <label>
+          Message
+          <textarea name="message" rows="6" required></textarea>
+        </label>
+        <p>
+          <button class="btn primary" type="submit">Send message</button>
+          <span class="form-status" aria-live="polite"></span>
+        </p>
+      </form>
+      <p class="muted">Or email us at <a href="mailto:hello@amora.com">hello@amora.com</a></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Amora</p>
+    </div>
+  </footer>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var form = document.getElementById('contact-form');
+    if (!form) return;
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      var status = form.querySelector('.form-status');
+      status.textContent = 'Sending...';
+      try {
+        var res = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        });
+        if (res.ok) {
+          form.reset();
+          status.textContent = 'Thanks — we will reply shortly.';
+        } else {
+          var data = await res.json();
+          status.textContent = (data && data.error) ? data.error : 'Submission failed. Try emailing hello@amora.com';
+        }
+      } catch (err) {
+        status.textContent = 'Network error. Try emailing hello@amora.com';
+      }
+    });
+  });
+  </script>
+
+</body>
+</html>
