@@ -335,7 +335,7 @@
     .hero-secondary-link:hover { color: var(--text-80); }
     .hero-secondary-link svg { width: 14px; height: 14px; }
     .hero-stats {
-      display: flex; align-items: center; justify-content: center; gap: 0;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
       margin-top: 44px; flex-wrap: wrap;
       animation: fadeInUp 0.6s ease 0.48s both;
     }
@@ -348,7 +348,7 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: var(--r-lg);
     }
-    .hero-stat + .hero-stat { margin-left: 8px; }
+    .hero-stat + .hero-stat { margin-left: 0; }
     .hero-stat-value { font-size: 1.375rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; line-height: 1.2; }
     .hero-stat-label { font-size: 0.75rem; color: var(--text-40); font-weight: 500; margin-top: 3px; }
     .hero-mockup {
@@ -374,7 +374,7 @@
     }
     .scroll-indicator:hover { color: var(--text-60); }
     @media (max-width: 768px) {
-      .hero-stat { padding: 0 16px; }
+      .hero-stat { padding: 8px 16px; }
       .hero-stat-value { font-size: 1.125rem; }
       .hero-mockup { padding: 0 16px; }
     }
@@ -622,10 +622,7 @@
     .pricing-table tbody tr:not(.cat-row):nth-child(even) {
       background: rgba(255, 255, 255, 0.02);
     }
-    .pricing-table tbody tr:not(.cat-row):nth-child(odd) {
-      background: transparent;
-    }
-    .pricing-table td.pro-col {
+    .pricing-table tbody tr:not(.cat-row) td:last-child {
       background: rgba(107, 142, 90, 0.05);
     }
 
