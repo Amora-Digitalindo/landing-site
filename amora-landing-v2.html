@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amora.id — Semua Bisa Punya Toko Online</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="./Amora.id — Semua Bisa Punya Toko Online_files/css2" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ═══════════════════════════════════════
+       DESIGN TOKENS
+    ═══════════════════════════════════════ */
+    :root {
+      --bg:           #09090E;
+      --elevated:     #0F0F17;
+      --card:         #131320;
+      --accent:       #6B8E5A;
+      --accent-light: #8FB87A;
+      --accent-glow:  rgba(107,142,90,0.22);
+      --accent-dim:   rgba(107,142,90,0.12);
+      --accent-border:rgba(107,142,90,0.32);
+      --border:        rgba(255,255,255,0.07);
+      --border-mid:    rgba(255,255,255,0.11);
+      --border-strong: rgba(255,255,255,0.17);
+      --text:    #F2F2F5;
+      --text-80: rgba(242,242,245,0.8);
+      --text-60: rgba(242,242,245,0.6);
+      --text-40: rgba(242,242,245,0.4);
+      --text-30: rgba(242,242,245,0.3);
+      --text-20: rgba(242,242,245,0.2);
+      --r-sm:  8px;  --r-md: 12px;  --r-lg: 16px;
+      --r-xl:  20px; --r-2xl:24px; --r-3xl:32px; --r-full:9999px;
+      --shadow-sm:     0 1px 4px rgba(0,0,0,0.4);
+      --shadow-md:     0 4px 16px rgba(0,0,0,0.45);
+      --shadow-lg:     0 8px 32px rgba(0,0,0,0.5);
+      --shadow-xl:     0 20px 60px rgba(0,0,0,0.55);
+      --shadow-accent: 0 8px 32px rgba(107,142,90,0.18);
+      --inset-top:     inset 0 1px 0 rgba(255,255,255,0.07);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+      overflow-x: hidden;
+      position: relative;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ═══════════════════════════════════════
+       SEAMLESS BACKGROUND CANVAS
+    ═══════════════════════════════════════ */
+    #page-bg {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none; overflow: hidden;
+    }
+    .pg-orb {
+      position: absolute; border-radius: 50%;
+      pointer-events: none;
+    }
+    /* Top-left — deep navy depth */
+    .pg-orb-1 {
+      top: -15%; left: -12%;
+      width: 65vw; height: 65vw;
+      background: radial-gradient(ellipse, rgba(8,22,55,0.65) 0%, transparent 68%);
+      filter: blur(90px);
+    }
+    /* Top-right — forest green glow */
+    .pg-orb-2 {
+      top: -8%; right: -8%;
+      width: 55vw; height: 55vw;
+      background: radial-gradient(ellipse, rgba(25,65,40,0.55) 0%, transparent 68%);
+      filter: blur(100px);
+    }
+    /* Center — main ambient bloom */
+    .pg-orb-3 {
+      top: 28%; left: 20%;
+      width: 70vw; height: 60vw;
+      background: radial-gradient(ellipse, rgba(15,40,25,0.4) 0%, transparent 65%);
+      filter: blur(120px);
+    }
+    /* Center-right — accent green pulse */
+    .pg-orb-4 {
+      top: 35%; right: 5%;
+      width: 40vw; height: 40vw;
+      background: radial-gradient(ellipse, rgba(107,142,90,0.1) 0%, transparent 65%);
+      filter: blur(80px);
+    }
+    /* Bottom-left — deep teal */
+    .pg-orb-5 {
+      bottom: 5%; left: -5%;
+      width: 50vw; height: 50vw;
+      background: radial-gradient(ellipse, rgba(10,35,30,0.6) 0%, transparent 68%);
+      filter: blur(100px);
+    }
+    /* Bottom-right — navy fade */
+    .pg-orb-6 {
+      bottom: -10%; right: -5%;
+      width: 50vw; height: 50vw;
+      background: radial-gradient(ellipse, rgba(10,18,45,0.6) 0%, transparent 68%);
+      filter: blur(90px);
+    }
+
+    /* Make all sections transparent to reveal bg canvas */
+    section { background: transparent !important; position: relative; z-index: 1; }
+    nav, footer { position: relative; z-index: 2; }
+    .mobile-menu { z-index: 40; }
+
+    /* ═══════════════════════════════════════
+       ANIMATIONS
+    ═══════════════════════════════════════ */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-10px); }
+    }
+    @keyframes float-slow {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-6px); }
+    }
+    @keyframes gradient-drift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes bounce-subtle {
+      0%, 100% { transform: translateY(0) translateX(-50%); }
+      50%       { transform: translateY(7px) translateX(-50%); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse-dot {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(107,142,90,0.5); }
+      50%       { box-shadow: 0 0 0 5px rgba(107,142,90,0); }
+    }
+    @keyframes spotlight-sweep {
+      from { left: -60%; }
+      to   { left: 130%; }
+    }
+
+    .animate-float      { animation: float 5s ease-in-out infinite; }
+    .animate-float-slow { animation: float-slow 6.5s ease-in-out 0.6s infinite; }
+
+    /* ═══════════════════════════════════════
+       SCROLL REVEAL
+    ═══════════════════════════════════════ */
+    .reveal {
+      opacity: 0; transform: translateY(26px);
+      transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1),
+                  transform 0.65s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.from-left  { transform: translateX(-34px); }
+    .reveal.from-right { transform: translateX(34px); }
+    .reveal.scale-in   { transform: scale(0.94); opacity: 0; }
+    .reveal.visible    { opacity: 1; transform: none; }
+    .reveal.delay-1 { transition-delay: 0.08s; }
+    .reveal.delay-2 { transition-delay: 0.16s; }
+    .reveal.delay-3 { transition-delay: 0.24s; }
+    .reveal.delay-4 { transition-delay: 0.32s; }
+    .reveal.delay-5 { transition-delay: 0.40s; }
+
+    /* ═══════════════════════════════════════
+       SHARED COMPONENTS
+    ═══════════════════════════════════════ */
+    .section-eyebrow {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 4px 12px; border-radius: var(--r-full);
+      background: var(--accent-dim); border: 1px solid var(--accent-border);
+      font-size: 0.6875rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--accent-light); margin-bottom: 16px;
+    }
+    .section-eyebrow-dot {
+      width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
+      animation: pulse-dot 2.5s ease-in-out infinite;
+    }
+    .section-divider {
+      width: 100%; height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+    }
+    .btn-ghost {
+      padding: 9px 18px; font-size: 0.875rem; font-weight: 500;
+      border: 1px solid var(--border-mid); border-radius: var(--r-xl);
+      color: var(--text-80);
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.05); border-color: var(--border-strong); color: var(--text); }
+    .btn-primary {
+      padding: 9px 18px; font-size: 0.875rem; font-weight: 600;
+      background: var(--accent); border-radius: var(--r-xl); color: #fff;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      display: inline-flex; align-items: center; gap: 7px;
+    }
+    .btn-primary:hover { background: var(--accent-light); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(107,142,90,0.38); }
+    .btn-primary:active { transform: translateY(0); box-shadow: none; }
+
+    /* ═══════════════════════════════════════
+       NAVBAR
+    ═══════════════════════════════════════ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50; height: 68px;
+      display: flex; align-items: center;
+      transition: background 0.35s, border-bottom 0.35s, box-shadow 0.35s;
+    }
+    nav.scrolled {
+      background: rgba(9,9,14,0.88);
+      backdrop-filter: blur(24px) saturate(1.5);
+      -webkit-backdrop-filter: blur(24px) saturate(1.5);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-inner {
+      width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 28px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo img { height: 30px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 36px; }
+    .nav-links a {
+      font-size: 0.875rem; font-weight: 500; color: var(--text-60);
+      transition: color 0.2s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 1px; background: var(--accent);
+      transform: scaleX(0); transform-origin: center; transition: transform 0.25s ease;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-ctas { display: flex; align-items: center; gap: 10px; }
+    .hamburger {
+      display: none; background: none; border: none; cursor: pointer;
+      color: var(--text); padding: 8px; border-radius: var(--r-md); transition: background 0.2s;
+    }
+    .hamburger:hover { background: rgba(255,255,255,0.06); }
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 40;
+      background: rgba(9,9,14,0.97); backdrop-filter: blur(24px);
+      flex-direction: column; align-items: center; justify-content: center; gap: 28px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 1.375rem; font-weight: 600; color: var(--text-80); transition: color 0.2s; }
+    .mobile-menu a:hover { color: var(--text); }
+    .mobile-menu .mobile-ctas { display: flex; flex-direction: column; gap: 10px; width: 220px; margin-top: 12px; }
+    .mobile-menu .mobile-ctas a { font-size: 0.9375rem; padding: 13px; text-align: center; border-radius: var(--r-xl); font-weight: 500; }
+    .mobile-menu .mobile-ctas a.outline { border: 1px solid var(--border-strong); color: var(--text-80); }
+    .mobile-menu .mobile-ctas a.filled  { background: var(--accent); font-weight: 600; color: #fff; }
+    @media (max-width: 768px) {
+      .nav-links, .nav-ctas { display: none; }
+      .hamburger { display: block; }
+    }
+
+    /* ═══════════════════════════════════════
+       SECTION FOUNDATION
+    ═══════════════════════════════════════ */
+    .section-inner { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+    .py-section  { padding: 100px 0; }
+    .py-section-sm { padding: 72px 0; }
+    @media (min-width: 1024px) {
+      .py-section    { padding: 132px 0; }
+      .py-section-sm { padding: 88px 0; }
+    }
+
+    /* ═══════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════ */
+    #hero {
+      position: relative; min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      overflow: hidden; padding: 80px 0 100px;
+    }
+    .hero-bg { position: absolute; inset: 0; overflow: hidden; }
+    .hero-gradient {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 15% 22%, rgba(12,40,80,0.5) 0%, transparent 42%),
+        radial-gradient(ellipse at 85% 78%, rgba(107,142,90,0.1) 0%, transparent 42%),
+        radial-gradient(ellipse at 50% 0%,  rgba(28,28,56,0.4) 0%, transparent 50%);
+      background-size: 200% 200%;
+      animation: gradient-drift 28s ease infinite;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 36px 36px;
+      mask-image: radial-gradient(ellipse at 50% 38%, black 15%, transparent 68%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 38%, black 15%, transparent 68%);
+    }
+    .hero-content {
+      position: relative; z-index: 10; max-width: 840px; margin: 0 auto;
+      padding: 0 28px; text-align: center;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 5px 14px; border-radius: var(--r-full);
+      background: var(--accent-dim); border: 1px solid var(--accent-border);
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--accent-light); margin-bottom: 26px;
+      animation: fadeInUp 0.5s ease 0.1s both;
+    }
+    .hero-eyebrow-dot {
+      width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
+      animation: pulse-dot 2.5s ease-in-out infinite;
+    }
+    .hero-title {
+      font-size: clamp(2.5rem, 6.5vw, 4.25rem); font-weight: 800;
+      line-height: 1.07; letter-spacing: -0.03em;
+      color: var(--text); margin-bottom: 22px;
+      animation: fadeInUp 0.6s ease 0.18s both;
+    }
+    .hero-title .highlight {
+      background: linear-gradient(135deg, #A4D490 0%, var(--accent) 50%, #8FB87A 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.125rem); color: var(--text-60);
+      max-width: 520px; margin: 0 auto 36px; line-height: 1.72;
+      animation: fadeInUp 0.6s ease 0.28s both;
+    }
+    .hero-cta {
+      display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;
+      animation: fadeInUp 0.6s ease 0.38s both;
+    }
+    .hero-cta .btn-primary { padding: 13px 26px; font-size: 0.9375rem; }
+    .hero-secondary-link {
+      font-size: 0.875rem; color: var(--text-60);
+      display: inline-flex; align-items: center; gap: 5px; transition: color 0.2s;
+    }
+    .hero-secondary-link:hover { color: var(--text-80); }
+    .hero-secondary-link svg { width: 14px; height: 14px; }
+    .hero-stats {
+      display: flex; align-items: center; justify-content: center; gap: 0;
+      margin-top: 44px; flex-wrap: wrap;
+      animation: fadeInUp 0.6s ease 0.48s both;
+    }
+    .hero-stat { display: flex; flex-direction: column; align-items: center; padding: 0 28px; }
+    .hero-stat + .hero-stat { border-left: 1px solid var(--border); }
+    .hero-stat-value { font-size: 1.375rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; line-height: 1.2; }
+    .hero-stat-label { font-size: 0.75rem; color: var(--text-40); font-weight: 500; margin-top: 3px; }
+    .hero-mockup {
+      margin-top: 72px; position: relative;
+      animation: fadeInUp 0.9s ease 0.52s both; padding: 0 28px;
+    }
+    .hero-mockup-frame {
+      position: relative; border-radius: var(--r-2xl); padding: 1.5px;
+      background: linear-gradient(135deg, rgba(107,142,90,0.5) 0%, rgba(255,255,255,0.06) 35%, rgba(107,142,90,0.14) 100%);
+      box-shadow: var(--shadow-xl), 0 0 60px rgba(107,142,90,0.08);
+      max-width: 780px; margin: 0 auto;
+    }
+    .hero-mockup-frame img { width: 100%; border-radius: calc(var(--r-2xl) - 1.5px); display: block; }
+    .hero-mockup-glow {
+      position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%);
+      width: 65%; height: 36px;
+      background: linear-gradient(to top, rgba(107,142,90,0.16), transparent);
+      filter: blur(18px); border-radius: 50%;
+    }
+    .scroll-indicator {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      color: var(--text-30); animation: bounce-subtle 2.2s ease-in-out infinite; transition: color 0.2s;
+    }
+    .scroll-indicator:hover { color: var(--text-60); }
+    @media (max-width: 768px) {
+      .hero-stat { padding: 0 16px; }
+      .hero-stat-value { font-size: 1.125rem; }
+      .hero-mockup { padding: 0 16px; }
+    }
+
+    /* ═══════════════════════════════════════
+       FEATURE SECTIONS
+    ═══════════════════════════════════════ */
+    #fitur { overflow: hidden; }
+    .feature-grid { display: grid; grid-template-columns: 1fr; gap: 56px; align-items: center; }
+    @media (min-width: 1024px) {
+      .feature-grid.margin-grid { grid-template-columns: 52% 48%; }
+      .feature-grid.setup-grid  { grid-template-columns: 44% 56%; }
+    }
+    .feature-text .section-eyebrow { margin-bottom: 16px; }
+    .feature-text h2 {
+      font-size: clamp(1.875rem, 4vw, 2.625rem); font-weight: 700;
+      line-height: 1.12; letter-spacing: -0.025em; color: var(--text); margin-bottom: 18px;
+    }
+    .feature-text > p { font-size: 1rem; color: var(--text-60); line-height: 1.75; max-width: 460px; margin-bottom: 28px; }
+    .feature-bullets { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .feature-bullets li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.9375rem; color: var(--text-80); line-height: 1.5; }
+    .feature-bullet-icon {
+      flex-shrink: 0; margin-top: 3px; width: 18px; height: 18px; border-radius: 50%;
+      background: var(--accent-dim); border: 1px solid var(--accent-border);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .feature-bullet-icon svg { width: 10px; height: 10px; color: var(--accent); }
+    .feature-image { position: relative; }
+    .feature-image-frame {
+      position: relative; border-radius: var(--r-2xl); padding: 1px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, var(--border) 45%, rgba(107,142,90,0.22) 100%);
+    }
+    .feature-image-frame img { width: 100%; border-radius: calc(var(--r-2xl) - 1px); display: block; }
+    .feature-image .glow-bg {
+      position: absolute; inset: -24px;
+      background: radial-gradient(ellipse at center, rgba(107,142,90,0.07) 0%, transparent 68%);
+      border-radius: 40px; z-index: -1;
+    }
+    #feature-setup { overflow: hidden; }
+    .feature-image.setup .feature-image-frame { max-width: 380px; margin: 0 auto; }
+    @media (max-width: 1023px) { .order-first { order: -1; } }
+
+    /* ═══════════════════════════════════════
+       FEATURES GRID
+    ═══════════════════════════════════════ */
+    #features-grid { overflow: hidden; }
+    .features-header { text-align: center; margin-bottom: 60px; }
+    .features-header h2 {
+      font-size: clamp(1.875rem, 4vw, 2.625rem); font-weight: 700;
+      line-height: 1.15; letter-spacing: -0.025em;
+      color: var(--text); max-width: 600px; margin: 0 auto;
+    }
+    .features-top  { display: grid; grid-template-columns: 1fr; gap: 18px; }
+    .features-bottom { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 18px; }
+    @media (min-width: 768px) {
+      .features-top    { grid-template-columns: repeat(2, 1fr); }
+      .features-bottom { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .features-top    { grid-template-columns: repeat(3, 1fr); }
+      .features-bottom { grid-template-columns: repeat(2, 1fr); }
+    }
+    .feature-card {
+      background: rgba(19,19,32,0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border); border-radius: var(--r-xl); padding: 24px;
+      box-shadow: var(--inset-top), var(--shadow-sm);
+      transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), border-color 0.3s, box-shadow 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.025) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .feature-card:hover {
+      transform: translateY(-5px); border-color: var(--border-mid);
+      box-shadow: var(--inset-top), var(--shadow-md), 0 0 0 1px rgba(107,142,90,0.1), var(--shadow-accent);
+    }
+    .feature-card-icon {
+      width: 44px; height: 44px; border-radius: var(--r-md);
+      background: linear-gradient(135deg, rgba(107,142,90,0.22) 0%, rgba(107,142,90,0.08) 100%);
+      border: 1px solid var(--accent-border);
+      display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+    }
+    .feature-card-icon svg { width: 18px; height: 18px; color: var(--accent-light); }
+    .feature-card h3 { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .feature-card p  { font-size: 0.875rem; color: var(--text-60); line-height: 1.65; margin-bottom: 16px; }
+    .feature-card-img { overflow: hidden; border-radius: var(--r-md); border: 1px solid var(--border); }
+    .feature-card-img img { width: 100%; height: 128px; object-fit: cover; opacity: 0.75; transition: opacity 0.5s, transform 0.5s; }
+    .feature-card:hover .feature-card-img img { opacity: 1; transform: scale(1.04); }
+
+    /* ═══════════════════════════════════════
+       PRICING — 2 TIERS + COMPARISON TABLE
+    ═══════════════════════════════════════ */
+    #harga { overflow: hidden; }
+
+    .pricing-header { text-align: center; margin-bottom: 56px; }
+    .pricing-header h2 {
+      font-size: clamp(1.875rem, 4vw, 2.625rem); font-weight: 700;
+      line-height: 1.12; letter-spacing: -0.025em; color: var(--text); margin-bottom: 14px;
+    }
+    .pricing-header > p { font-size: 1rem; color: var(--text-60); max-width: 520px; margin: 0 auto; line-height: 1.7; }
+
+    /* Two plan cards */
+    .pricing-plans-grid {
+      display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 48px;
+    }
+    @media (min-width: 640px) {
+      .pricing-plans-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .plan-card-wrapper {
+      border-radius: calc(var(--r-2xl) + 1.5px); padding: 1.5px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.04) 50%, rgba(107,142,90,0.2) 100%);
+      box-shadow: var(--shadow-lg);
+      transition: box-shadow 0.3s;
+    }
+    .plan-card-wrapper.featured {
+      background: linear-gradient(135deg, rgba(107,142,90,0.55) 0%, rgba(255,255,255,0.07) 30%, rgba(107,142,90,0.15) 60%, rgba(107,142,90,0.5) 100%);
+      box-shadow: var(--shadow-xl), 0 0 60px rgba(107,142,90,0.12);
+    }
+    .plan-card-wrapper:hover { box-shadow: var(--shadow-xl), 0 0 40px rgba(107,142,90,0.1); }
+
+    .plan-card {
+      background: rgba(15,15,23,0.95);
+      backdrop-filter: blur(20px);
+      border-radius: var(--r-2xl); padding: 32px;
+      position: relative; overflow: hidden;
+      box-shadow: var(--inset-top);
+      height: 100%;
+    }
+    .plan-card::after {
+      content: '';
+      position: absolute; top: -60%; left: -60%;
+      width: 80px; height: 220%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+      transform: rotate(-45deg); pointer-events: none;
+    }
+    .plan-card-wrapper:hover .plan-card::after {
+      animation: spotlight-sweep 1.2s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+
+    .plan-discount-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 3px 10px; border-radius: var(--r-full);
+      font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.06em;
+      margin-bottom: 10px;
+    }
+    .plan-discount-badge.starter-badge {
+      background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3);
+      color: #93C5FD;
+    }
+    .plan-discount-badge.pro-badge {
+      background: var(--accent-dim); border: 1px solid var(--accent-border);
+      color: var(--accent-light);
+    }
+    .plan-discount-icon { font-size: 0.75rem; }
+
+    .plan-tier {
+      font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-40); margin-bottom: 16px;
+    }
+    .plan-old-price { font-size: 0.875rem; color: var(--text-40); text-decoration: line-through; margin-bottom: 4px; }
+    .plan-price {
+      font-size: 2.5rem; font-weight: 800; color: var(--text);
+      letter-spacing: -0.03em; line-height: 1; margin-bottom: 4px;
+    }
+    .plan-price span { font-size: 1rem; font-weight: 500; color: var(--text-60); }
+    .plan-saving {
+      font-size: 0.8125rem; font-weight: 600; color: var(--accent-light);
+      margin-bottom: 28px;
+    }
+    .plan-cta {
+      display: block; width: 100%; padding: 13px; text-align: center;
+      font-size: 0.9375rem; font-weight: 700;
+      border-radius: var(--r-xl);
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .plan-cta.outline-cta {
+      color: var(--text-80); border: 1px solid var(--border-strong);
+    }
+    .plan-cta.outline-cta:hover { background: rgba(255,255,255,0.05); border-color: var(--accent-border); color: var(--text); }
+    .plan-cta.filled-cta {
+      background: var(--accent); color: #fff;
+    }
+    .plan-cta.filled-cta:hover { background: var(--accent-light); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(107,142,90,0.38); }
+
+    /* Comparison table */
+    .pricing-table {
+      border-radius: var(--r-2xl); overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--inset-top), var(--shadow-lg);
+    }
+    .pricing-table table {
+      width: 100%; border-collapse: collapse;
+    }
+    .pricing-table th, .pricing-table td {
+      padding: 14px 20px; text-align: left;
+    }
+    .pricing-table thead tr {
+      background: rgba(19,19,32,0.9);
+      border-bottom: 1px solid var(--border-mid);
+    }
+    .pricing-table thead th:first-child {
+      font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-40); width: 45%;
+    }
+    .pricing-table thead th:not(:first-child) {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      text-align: center; width: 27.5%;
+    }
+    .th-starter { color: #93C5FD; }
+    .th-pro     { color: var(--accent-light); }
+
+    .pricing-table .cat-row td {
+      background: rgba(9,9,14,0.6);
+      font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-40); padding: 10px 20px;
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    }
+    .pricing-table tbody tr { border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .pricing-table tbody tr:last-child { border-bottom: none; }
+    .pricing-table tbody tr:not(.cat-row) { background: rgba(15,15,23,0.5); }
+    .pricing-table tbody tr:not(.cat-row):hover { background: rgba(19,19,32,0.7); }
+
+    .pricing-table td.feat-name {
+      font-size: 0.875rem; color: var(--text-80); font-weight: 500;
+    }
+    .pricing-table td.feat-name small {
+      display: block; font-size: 0.75rem; color: var(--text-40); font-weight: 400; margin-top: 2px;
+    }
+    .pricing-table td.feat-val {
+      text-align: center; font-size: 0.875rem; font-weight: 500; color: var(--text-60);
+    }
+    .pricing-table td.feat-val.accent-val { color: var(--accent-light); font-weight: 600; }
+    .pricing-table td.feat-val.blue-val   { color: #93C5FD; font-weight: 600; }
+
+    .pill-limited {
+      display: inline-flex; padding: 3px 10px; border-radius: var(--r-full);
+      font-size: 0.75rem; font-weight: 600;
+      background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3);
+      color: #FCD34D;
+    }
+    .pill-full {
+      display: inline-flex; padding: 3px 10px; border-radius: var(--r-full);
+      font-size: 0.75rem; font-weight: 600;
+      background: var(--accent-dim); border: 1px solid var(--accent-border);
+      color: var(--accent-light);
+    }
+    .check-icon { color: var(--accent); }
+    .cross-icon { color: rgba(239,68,68,0.6); }
+
+    .pricing-table tfoot tr {
+      background: rgba(9,9,14,0.6);
+      border-top: 1px solid var(--border-mid);
+    }
+    .pricing-table tfoot td { padding: 16px 20px; }
+    .pricing-note { font-size: 0.8125rem; color: var(--text-40); }
+    .pricing-table tfoot .tfoot-cta { text-align: center; }
+    .pricing-table tfoot .tfoot-cta a {
+      display: inline-block; padding: 10px 24px;
+      font-size: 0.875rem; font-weight: 600;
+      border-radius: var(--r-xl); transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+    .tfoot-cta-starter a { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); color: #93C5FD; }
+    .tfoot-cta-starter a:hover { background: rgba(59,130,246,0.25); }
+    .tfoot-cta-pro    a { background: var(--accent); color: #fff; }
+    .tfoot-cta-pro    a:hover { background: var(--accent-light); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(107,142,90,0.35); }
+
+    @media (max-width: 640px) {
+      .pricing-table th, .pricing-table td { padding: 12px 14px; }
+      .plan-card { padding: 24px; }
+    }
+
+    /* ═══════════════════════════════════════
+       CTA BANNER
+    ═══════════════════════════════════════ */
+    #cta-banner { overflow: hidden; }
+    .cta-banner-inner {
+      max-width: 760px; margin: 0 auto; padding: 88px 28px; text-align: center;
+    }
+    .cta-banner-inner h2 {
+      font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 800;
+      line-height: 1.12; letter-spacing: -0.025em; color: var(--text); margin-bottom: 14px;
+    }
+    .cta-banner-inner > p { font-size: 1.0625rem; color: var(--text-60); max-width: 460px; margin: 0 auto 36px; line-height: 1.7; }
+    .cta-banner-actions { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .cta-banner-actions .btn-primary { padding: 13px 28px; font-size: 0.9375rem; }
+    .cta-banner-actions .btn-ghost   { padding: 13px 24px; font-size: 0.9375rem; }
+    .cta-note { margin-top: 18px; font-size: 0.8125rem; color: var(--text-40); }
+    @media (max-width: 768px) { .cta-banner-inner { padding: 64px 24px; } }
+
+    /* ═══════════════════════════════════════
+       FAQ
+    ═══════════════════════════════════════ */
+    .faq-inner  { max-width: 768px; margin: 0 auto; }
+    .faq-header { text-align: center; margin-bottom: 48px; }
+    .faq-header h2 {
+      font-size: clamp(1.875rem, 4vw, 2.5rem); font-weight: 700;
+      line-height: 1.15; letter-spacing: -0.025em; color: var(--text); margin-bottom: 12px;
+    }
+    .faq-header p { font-size: 1rem; color: var(--text-60); max-width: 500px; margin: 0 auto; line-height: 1.65; }
+    .faq-list {
+      background: rgba(15,15,23,0.8); backdrop-filter: blur(16px);
+      border: 1px solid var(--border); border-radius: var(--r-2xl);
+      overflow: hidden; box-shadow: var(--inset-top), var(--shadow-md);
+    }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-question {
+      width: 100%; padding: 20px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      text-align: left; background: none; border: none; cursor: pointer; gap: 16px;
+      transition: background 0.2s;
+    }
+    .faq-question:hover { background: rgba(255,255,255,0.025); }
+    .faq-item.active > .faq-question { background: rgba(107,142,90,0.05); }
+    .faq-question span { font-size: 0.9375rem; font-weight: 500; color: var(--text-80); transition: color 0.2s; }
+    .faq-question:hover span, .faq-item.active .faq-question span { color: var(--text); }
+    .faq-chevron { flex-shrink: 0; color: var(--text-40); transition: transform 0.32s ease, color 0.2s; }
+    .faq-chevron.open { transform: rotate(180deg); color: var(--accent); }
+    .faq-answer { overflow: hidden; max-height: 0; transition: max-height 0.38s ease, opacity 0.3s ease; opacity: 0; }
+    .faq-answer.open { max-height: 300px; opacity: 1; }
+    .faq-answer p { padding: 0 24px 20px; font-size: 0.875rem; color: var(--text-60); line-height: 1.7; }
+
+    /* ═══════════════════════════════════════
+       LEGAL SECTIONS (T&C + Privacy)
+    ═══════════════════════════════════════ */
+    .legal-inner { max-width: 800px; margin: 0 auto; }
+    .legal-header { text-align: center; margin-bottom: 40px; }
+    .legal-header h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700;
+      line-height: 1.2; letter-spacing: -0.02em; color: var(--text); margin-bottom: 8px;
+    }
+    .legal-header p { font-size: 0.875rem; color: var(--text-40); }
+
+    .legal-accordion {
+      background: rgba(15,15,23,0.7); backdrop-filter: blur(16px);
+      border: 1px solid var(--border); border-radius: var(--r-2xl);
+      overflow: hidden; box-shadow: var(--inset-top), var(--shadow-md);
+    }
+    .legal-item { border-bottom: 1px solid var(--border); }
+    .legal-item:last-child { border-bottom: none; }
+    .legal-question {
+      width: 100%; padding: 18px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      text-align: left; background: none; border: none; cursor: pointer; gap: 16px;
+      transition: background 0.2s;
+    }
+    .legal-question:hover { background: rgba(255,255,255,0.025); }
+    .legal-item.active > .legal-question { background: rgba(107,142,90,0.04); }
+    .legal-question span {
+      font-size: 0.875rem; font-weight: 600; color: var(--text-60); transition: color 0.2s;
+    }
+    .legal-question:hover span, .legal-item.active .legal-question span { color: var(--text-80); }
+    .legal-chevron { flex-shrink: 0; color: var(--text-40); transition: transform 0.32s ease, color 0.2s; }
+    .legal-chevron.open { transform: rotate(180deg); color: var(--accent); }
+    .legal-answer { overflow: hidden; max-height: 0; transition: max-height 0.42s ease, opacity 0.35s ease; opacity: 0; }
+    .legal-answer.open { max-height: 1200px; opacity: 1; }
+    .legal-answer-inner { padding: 4px 24px 20px; }
+    .legal-answer-inner p { font-size: 0.8125rem; color: var(--text-60); line-height: 1.75; }
+    .legal-answer-inner ul { list-style: none; margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }
+    .legal-answer-inner ul li {
+      font-size: 0.8125rem; color: var(--text-60); line-height: 1.65;
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .legal-answer-inner ul li::before {
+      content: '–'; color: var(--accent); flex-shrink: 0; margin-top: 1px;
+    }
+
+    /* ═══════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════ */
+    footer {
+      background: rgba(15,15,23,0.96) !important;
+      backdrop-filter: blur(24px);
+      border-top: 1px solid var(--border);
+    }
+    footer::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, transparent, var(--accent-border), transparent);
+    }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 72px 28px 36px; }
+    .footer-grid { display: grid; grid-template-columns: 1fr; gap: 48px 64px; margin-bottom: 52px; }
+    @media (min-width: 768px)  { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr; } }
+    .footer-brand img { height: 30px; width: auto; margin-bottom: 14px; }
+    .footer-brand p { font-size: 0.875rem; color: var(--text-60); line-height: 1.65; margin-bottom: 20px; max-width: 255px; }
+    .footer-brand small { font-size: 0.75rem; color: var(--text-30); }
+    .footer-col h4 {
+      font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-40); margin-bottom: 18px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .footer-col ul a { font-size: 0.875rem; color: var(--text-60); transition: color 0.2s; }
+    .footer-col ul a:hover { color: var(--text); }
+    .footer-contact-item { display: flex; align-items: center; gap: 10px; }
+    .footer-contact-item svg { width: 15px; height: 15px; color: var(--text-40); flex-shrink: 0; }
+    .footer-contact-item a { font-size: 0.875rem; color: var(--text-60); transition: color 0.2s; }
+    .footer-contact-item a:hover { color: var(--text); }
+    .footer-social { display: flex; gap: 8px; padding-top: 4px; }
+    .footer-social a {
+      color: var(--text-40); width: 36px; height: 36px; border-radius: var(--r-md);
+      border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .footer-social a:hover { color: var(--accent-light); border-color: var(--accent-border); background: var(--accent-dim); }
+    .footer-social svg { width: 16px; height: 16px; }
+    .footer-bottom {
+      padding-top: 26px; border-top: 1px solid rgba(255,255,255,0.05);
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+    }
+    .footer-bottom p { font-size: 0.75rem; color: var(--text-30); }
+    .footer-legal-links { display: flex; gap: 20px; }
+    .footer-legal-links a { font-size: 0.75rem; color: var(--text-40); transition: color 0.2s; }
+    .footer-legal-links a:hover { color: var(--text-60); }
+    @media (max-width: 768px) { .footer-bottom { justify-content: center; text-align: center; } }
+
+    svg[data-icon] { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ SEAMLESS BACKGROUND CANVAS ══════════════ -->
+<div id="page-bg" aria-hidden="true">
+  <div class="pg-orb pg-orb-1"></div>
+  <div class="pg-orb pg-orb-2"></div>
+  <div class="pg-orb pg-orb-3"></div>
+  <div class="pg-orb pg-orb-4"></div>
+  <div class="pg-orb pg-orb-5"></div>
+  <div class="pg-orb pg-orb-6"></div>
+</div>
+
+<!-- ══════════════ NAVBAR ══════════════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="./Amora.id — Semua Bisa Punya Toko Online_files/logo.png" alt="Amora.id">
+    </a>
+    <div class="nav-links">
+      <a href="#fitur">Fitur</a>
+      <a href="#harga">Harga</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-ctas">
+      <a href="#" class="btn-ghost">Masuk</a>
+      <a href="#" class="btn-primary">
+        Buat Toko
+        <svg data-icon viewBox="0 0 24 24" width="14" height="14"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <svg data-icon viewBox="0 0 24 24" width="22" height="22"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#fitur" class="mobile-link">Fitur</a>
+  <a href="#harga" class="mobile-link">Harga</a>
+  <a href="#faq" class="mobile-link">FAQ</a>
+  <div class="mobile-ctas">
+    <a href="#" class="outline">Masuk</a>
+    <a href="#" class="filled">Buat Toko</a>
+  </div>
+</div>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-gradient"></div>
+    <div class="hero-grid"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">
+      <span class="hero-eyebrow-dot"></span>
+      Solusi Website Toko Online
+    </p>
+    <h1 class="hero-title">
+      Semua Bisa Punya<br>
+      <span class="highlight">Toko Online</span>
+    </h1>
+    <p class="hero-subtitle">
+      Buat toko online Anda sendiri untuk margin jualan yang lebih sehat.
+      Tanpa komisi besar, tanpa ribet.
+    </p>
+    <div class="hero-cta">
+      <a href="#" class="btn-primary">
+        Buat Toko Gratis
+        <svg data-icon viewBox="0 0 24 24" width="15" height="15"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="#fitur" class="hero-secondary-link">
+        Lihat fitur lengkap
+        <svg data-icon viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-value">10.000+</span>
+        <span class="hero-stat-label">UMKM aktif</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">5 menit</span>
+        <span class="hero-stat-label">Waktu setup</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">0%</span>
+        <span class="hero-stat-label">Komisi transaksi</span>
+      </div>
+    </div>
+    <div class="hero-mockup">
+      <div class="animate-float">
+        <div class="hero-mockup-frame">
+          <img src="./Amora.id — Semua Bisa Punya Toko Online_files/hero-mockup.png" alt="Dashboard Amora">
+        </div>
+      </div>
+      <div class="hero-mockup-glow"></div>
+    </div>
+  </div>
+  <a href="#fitur" class="scroll-indicator" aria-label="Scroll">
+    <svg data-icon viewBox="0 0 24 24" width="24" height="24"><polyline points="6 9 12 15 18 9"/></svg>
+  </a>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ══════════════ FEATURE: MARGIN ══════════════ -->
+<section id="fitur" class="py-section">
+  <div class="section-inner">
+    <div class="feature-grid margin-grid">
+      <div class="feature-text reveal from-left">
+        <span class="section-eyebrow"><span class="section-eyebrow-dot"></span>Keunggulan Amora</span>
+        <h2>Amankan margin<br>produk toko Anda</h2>
+        <p>Jual langsung melalui website toko sendiri tanpa bergantung sepenuhnya pada marketplace. Margin keuntungan tetap optimal, brand bisnis lebih profesional.</p>
+        <ul class="feature-bullets">
+          <li><span class="feature-bullet-icon"><svg data-icon viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Tanpa potongan komisi marketplace</li>
+          <li><span class="feature-bullet-icon"><svg data-icon viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Brand bisnis yang lebih terpercaya</li>
+          <li><span class="feature-bullet-icon"><svg data-icon viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Kontrol penuh atas data pelanggan</li>
+        </ul>
+      </div>
+      <div class="feature-image reveal from-right delay-2">
+        <div class="animate-float">
+          <div class="feature-image-frame">
+            <img src="./Amora.id — Semua Bisa Punya Toko Online_files/feature-margin.png" alt="Margin Analytics">
+          </div>
+        </div>
+        <div class="glow-bg"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ FEATURE: SETUP ══════════════ -->
+<section id="feature-setup" class="py-section">
+  <div class="section-inner">
+    <div class="feature-grid setup-grid">
+      <div class="feature-image setup reveal from-left order-first">
+        <div class="animate-float-slow">
+          <div class="feature-image-frame">
+            <img src="./Amora.id — Semua Bisa Punya Toko Online_files/feature-setup.png" alt="Setup Toko Online">
+          </div>
+        </div>
+        <div class="glow-bg"></div>
+      </div>
+      <div class="feature-text reveal from-right delay-2">
+        <span class="section-eyebrow"><span class="section-eyebrow-dot"></span>Setup Cepat</span>
+        <h2>Buat toko online<br>dalam 5 menit</h2>
+        <p>Tidak perlu coding, server, atau biaya developer mahal. Toko profesional Anda siap menerima pesanan hari ini.</p>
+        <ul class="feature-bullets">
+          <li><span class="feature-bullet-icon"><svg data-icon viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Daftar dan upload produk langsung</li>
+          <li><span class="feature-bullet-icon"><svg data-icon viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Tampilan toko siap pakai, bisa dikustomisasi</li>
+          <li><span class="feature-bullet-icon"><svg data-icon viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Langsung terima pesanan &amp; pembayaran online</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ FEATURES GRID ══════════════ -->
+<section id="features-grid" class="py-section">
+  <div class="section-inner">
+    <div class="features-header reveal">
+      <div class="section-eyebrow"><span class="section-eyebrow-dot"></span>Semua Fitur</div>
+      <h2>Sistem toko online sesuai kebutuhan Anda</h2>
+    </div>
+    <div class="features-top">
+      <div class="feature-card reveal delay-1">
+        <div class="feature-card-icon"><svg data-icon viewBox="0 0 24 24" style="color:var(--accent-light)"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <h3>Website Toko Instan</h3>
+        <p>Buat website toko profesional sendiri tanpa perlu developer atau setup yang rumit.</p>
+        <div class="feature-card-img"><img src="./Amora.id — Semua Bisa Punya Toko Online_files/feature-illustration-1.png" alt="Website Toko Instan"></div>
+      </div>
+      <div class="feature-card reveal delay-2">
+        <div class="feature-card-icon"><svg data-icon viewBox="0 0 24 24" style="color:var(--accent-light)"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+        <h3>Dashboard yang Praktis</h3>
+        <p>Kelola produk, pesanan, dan toko dengan mudah dalam satu dashboard sederhana.</p>
+        <div class="feature-card-img"><img src="./Amora.id — Semua Bisa Punya Toko Online_files/feature-illustration-2.png" alt="Dashboard"></div>
+      </div>
+      <div class="feature-card reveal delay-3">
+        <div class="feature-card-icon"><svg data-icon viewBox="0 0 24 24" style="color:var(--accent-light)"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+        <h3>Pembayaran Terintegrasi</h3>
+        <p>Terima pembayaran melalui payment gateway langsung dari toko Anda.</p>
+        <div class="feature-card-img"><img src="./Amora.id — Semua Bisa Punya Toko Online_files/feature-illustration-3.png" alt="Pembayaran"></div>
+      </div>
+    </div>
+    <div class="features-bottom">
+      <div class="feature-card reveal delay-1">
+        <div class="feature-card-icon"><svg data-icon viewBox="0 0 24 24" style="color:var(--accent-light)"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg></div>
+        <h3>Kustomisasi Tampilan Toko</h3>
+        <p>Atur tampilan dan identitas toko agar lebih sesuai dengan karakter brand Anda.</p>
+        <div class="feature-card-img"><img src="./Amora.id — Semua Bisa Punya Toko Online_files/feature-illustration-4.png" alt="Kustomisasi"></div>
+      </div>
+      <div class="feature-card reveal delay-2">
+        <div class="feature-card-icon"><svg data-icon viewBox="0 0 24 24" style="color:var(--accent-light)"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div>
+        <h3>Promo Fleksibel</h3>
+        <p>Buat promo menarik untuk meningkatkan penjualan dan loyalitas pelanggan.</p>
+        <div class="feature-card-img"><img src="./Amora.id — Semua Bisa Punya Toko Online_files/feature-illustration-5.png" alt="Promo"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ PRICING ══════════════ -->
+<section id="harga" class="py-section">
+  <div class="section-inner">
+
+    <div class="pricing-header reveal">
+      <div class="section-eyebrow"><span class="section-eyebrow-dot"></span>Harga</div>
+      <h2>Transparan, sederhana,<br>tanpa biaya tersembunyi.</h2>
+      <p>Semua harga sudah termasuk PPN. Tidak ada biaya tambahan atau potongan tersembunyi.</p>
+    </div>
+
+    <!-- Two plan cards -->
+    <div class="pricing-plans-grid">
+      <!-- STARTER -->
+      <div class="plan-card-wrapper reveal delay-1">
+        <div class="plan-card">
+          <div class="plan-discount-badge starter-badge"><span class="plan-discount-icon">🏷</span> DISKON 10%</div>
+          <div class="plan-old-price">Rp 149.000</div>
+          <div class="plan-tier">STARTER</div>
+          <div class="plan-price">Rp 134.000<span>/bulan</span></div>
+          <div class="plan-saving">Hemat Rp 15.000!</div>
+          <a href="#" class="plan-cta outline-cta">Mulai Starter</a>
+        </div>
+      </div>
+      <!-- PRO -->
+      <div class="plan-card-wrapper featured reveal delay-2">
+        <div class="plan-card">
+          <div class="plan-discount-badge pro-badge"><span class="plan-discount-icon">🔥</span> DISKON 40%</div>
+          <div class="plan-old-price">Rp 349.000</div>
+          <div class="plan-tier">PRO</div>
+          <div class="plan-price">Rp 209.000<span>/bulan</span></div>
+          <div class="plan-saving">Hemat Rp 140.000!</div>
+          <a href="#" class="plan-cta filled-cta">Mulai Pro</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comparison table -->
+    <div class="pricing-table reveal delay-2">
+      <table>
+        <thead>
+          <tr>
+            <th>FITUR</th>
+            <th class="th-starter">Starter</th>
+            <th class="th-pro">Pro</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- TOKO & TAMPILAN -->
+          <tr class="cat-row"><td colspan="3">Toko &amp; Tampilan</td></tr>
+          <tr>
+            <td class="feat-name">Kustomisasi Desain Toko</td>
+            <td class="feat-val"><span class="pill-limited">Terbatas</span></td>
+            <td class="feat-val"><span class="pill-full">Fitur Lengkap</span></td>
+          </tr>
+          <tr>
+            <td class="feat-name">Integrasi Domain Kustom</td>
+            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg></td>
+            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg></td>
+          </tr>
+          <tr>
+            <td class="feat-name">Penjadwalan Peluncuran Produk</td>
+            <td class="feat-val"><svg class="cross-icon" data-icon viewBox="0 0 24 24" width="16" height="16"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></td>
+            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg></td>
+          </tr>
+
+          <!-- PRODUK & INVENTORI -->
+          <tr class="cat-row"><td colspan="3">Produk &amp; Inventori</td></tr>
+          <tr>
+            <td class="feat-name">Jumlah Produk</td>
+            <td class="feat-val blue-val">Maks. 100 produk</td>
+            <td class="feat-val accent-val">Maks. 250 produk</td>
+          </tr>
+          <tr>
+            <td class="feat-name">Koleksi Produk</td>
+            <td class="feat-val blue-val">Maks. 10 koleksi</td>
+            <td class="feat-val accent-val">Maks. 25 koleksi</td>
+          </tr>
+          <tr>
+            <td class="feat-name">Variasi per Produk</td>
+            <td class="feat-val blue-val">Maks. 256 variasi</td>
+            <td class="feat-val accent-val">Maks. 512 variasi</td>
+          </tr>
+          <tr>
+            <td class="feat-name">Pengaturan Diskon Produk</td>
+            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg></td>
+            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg></td>
+          </tr>
+          <tr>
+            <td class="feat-name">Kategori Produk</td>
+            <td class="feat-val blue-val">Tidak terbatas</td>
+            <td class="feat-val accent-val">Tidak terbatas</td>
+          </tr>
+
+          <!-- PESANAN -->
+          <tr class="cat-row"><td colspan="3">Pesanan</td></tr>
+          <tr>
+            <td class="feat-name">
+              Kuota Transaksi Bulanan
+              <small>sudah termasuk dalam paket</small>
+            </td>
+            <td class="feat-val blue-val">300 pesanan<br><span style="font-size:0.75rem;font-weight:400;color:var(--text-40)">per bulan</span></td>
+            <td class="feat-val accent-val">1.000 pesanan<br><span style="font-size:0.75rem;font-weight:400;color:var(--text-40)">per bulan</span></td>
+          </tr>
+          <tr>
+            <td class="feat-name">
+              Biaya Kelebihan Kuota
+              <small>dikenakan per pesanan di atas kuota</small>
+            </td>
+            <td class="feat-val blue-val">2% per pesanan</td>
+            <td class="feat-val accent-val">1% per pesanan</td>
+          </tr>
+
+          <!-- PEMBAYARAN & PENGIRIMAN -->
+          <tr class="cat-row"><td colspan="3">Pembayaran &amp; Pengiriman</td></tr>
+          <tr>
+            <td class="feat-name">
+              Integrasi Payment Gateway Lokal
+              <small>Xendit, Doku, Midtrans</small>
+            </td>
+            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg></td>
+            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg></td>
+          </tr>
+          <tr>
+            <td class="feat-name">Cek Ongkir, Cetak Resi &amp; Pelacakan Pengiriman</td>
+            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg></td>
+            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td><p class="pricing-note">* Harga sudah termasuk PPN</p></td>
+            <td class="tfoot-cta tfoot-cta-starter"><a href="#">Starter</a></td>
+            <td class="tfoot-cta tfoot-cta-pro"><a href="#">Pro</a></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════ CTA BANNER ══════════════ -->
+<section id="cta-banner">
+  <div class="section-divider"></div>
+  <div class="cta-banner-inner reveal">
+    <h2>Siap punya toko<br>online sendiri?</h2>
+    <p>Bergabung dengan ribuan UMKM yang sudah membangun bisnis online mereka bersama Amora.id.</p>
+    <div class="cta-banner-actions">
+      <a href="#" class="btn-primary">
+        Mulai Gratis Sekarang
+        <svg data-icon viewBox="0 0 24 24" width="15" height="15"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="#harga" class="btn-ghost">Lihat Harga</a>
+    </div>
+    <p class="cta-note">Tidak perlu kartu kredit · Gratis 14 hari pertama</p>
+  </div>
+  <div class="section-divider"></div>
+</section>
+
+<!-- ══════════════ FAQ ══════════════ -->
+<section id="faq" class="py-section">
+  <div class="section-inner faq-inner">
+    <div class="faq-header reveal">
+      <h2>Pertanyaan Seputar Amora.id</h2>
+      <p>Temukan jawaban seputar fitur, pembayaran, pengiriman, dan cara menggunakan Amora.id.</p>
+    </div>
+    <div class="reveal delay-2 faq-list" id="faqList"></div>
+  </div>
+</section>
+
+<!-- ══════════════ SYARAT & KETENTUAN ══════════════ -->
+<section id="syarat-ketentuan" class="py-section-sm">
+  <div class="section-inner legal-inner">
+    <div class="legal-header reveal">
+      <div class="section-eyebrow"><span class="section-eyebrow-dot"></span>Legal</div>
+      <h2>Syarat &amp; Ketentuan</h2>
+      <p>Versi 1.1 · 24 Mei 2026 · Berlaku sejak tanggal publikasi</p>
+    </div>
+    <div class="legal-accordion reveal delay-1" id="sykList"></div>
+  </div>
+</section>
+
+<!-- ══════════════ KEBIJAKAN PRIVASI ══════════════ -->
+<section id="kebijakan-privasi" class="py-section-sm">
+  <div class="section-inner legal-inner">
+    <div class="legal-header reveal">
+      <div class="section-eyebrow"><span class="section-eyebrow-dot"></span>Legal</div>
+      <h2>Kebijakan Privasi</h2>
+      <p>24 Mei 2026 · Disusun sesuai UU No. 27 Tahun 2022 (UU PDP)</p>
+    </div>
+    <div class="legal-accordion reveal delay-1" id="privList"></div>
+  </div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid reveal">
+      <div class="footer-brand">
+        <img src="./Amora.id — Semua Bisa Punya Toko Online_files/logo.png" alt="Amora.id">
+        <p>Solusi Website Jualan untuk Bisnis Modern Indonesia</p>
+        <small>© 2025 Amora.id. Hak cipta dilindungi.</small>
+      </div>
+      <div class="footer-col">
+        <h4>Menu</h4>
+        <ul>
+          <li><a href="#">About Amora</a></li>
+          <li><a href="#fitur">Fitur</a></li>
+          <li><a href="#harga">Harga</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Kontak</h4>
+        <ul style="gap:14px">
+          <li class="footer-contact-item">
+            <svg data-icon viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:hello@amora.id">hello@amora.id</a>
+          </li>
+          <li class="footer-contact-item">
+            <svg data-icon viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.58 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l1.32-1.32a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <a href="tel:+6287832011500">0878 3201 1500</a>
+          </li>
+          <li class="footer-social">
+            <a href="#" aria-label="Instagram">
+              <svg data-icon viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#" aria-label="WhatsApp">
+              <svg data-icon viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Made with care in Indonesia</p>
+      <div class="footer-legal-links">
+        <a href="#syarat-ketentuan">Syarat &amp; Ketentuan</a>
+        <a href="#kebijakan-privasi">Kebijakan Privasi</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
+
+  // Mobile menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  document.querySelectorAll('.mobile-link, .mobile-ctas a').forEach(el => {
+    el.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '-40px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── Generic accordion factory ──
+  function makeAccordion(containerId, items, openFirst) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    let openIndex = openFirst ? 0 : null;
+
+    function render() {
+      container.innerHTML = items.map((item, i) => `
+        <div class="legal-item${i === openIndex ? ' active' : ''}">
+          <button class="legal-question" data-idx="${i}">
+            <span>${item.q}</span>
+            <svg class="legal-chevron${i === openIndex ? ' open' : ''}" data-icon viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+          <div class="legal-answer${i === openIndex ? ' open' : ''}">
+            <div class="legal-answer-inner">${item.a}</div>
+          </div>
+        </div>
+      `).join('');
+      container.querySelectorAll('.legal-question').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt(btn.dataset.idx);
+          openIndex = openIndex === idx ? null : idx;
+          render();
+        });
+      });
+    }
+    render();
+  }
+
+  // ── FAQ ──
+  const faqs = [
+    { q: 'Apakah saya perlu bisa coding untuk menggunakan Amora.id?',  a: '<p>Tidak. Amora.id dibuat agar UMKM bisa punya toko online sendiri tanpa perlu kemampuan teknis atau developer.</p>' },
+    { q: 'Berapa lama sampai toko saya bisa online?',                   a: '<p>Toko Anda bisa online dalam hitungan menit. Cukup daftar, upload produk, dan toko Anda siap menerima pesanan.</p>' },
+    { q: 'Apakah saya bisa menggunakan domain sendiri?',                a: '<p>Ya, kedua paket (Starter dan Pro) mendukung integrasi domain kustom untuk brand bisnis Anda.</p>' },
+    { q: 'Metode pembayaran apa saja yang didukung?',                   a: '<p>Kami mendukung berbagai payment gateway populer di Indonesia termasuk Xendit, Midtrans, dan Doku — mencakup transfer bank, e-wallet, dan kartu kredit.</p>' },
+    { q: 'Apakah ada biaya per transaksi?',                             a: '<p>Tidak ada biaya transaksi selama pesanan masih dalam kuota paket Anda. Biaya kelebihan kuota berlaku jika melebihi batas (2% untuk Starter, 1% untuk Pro per pesanan lebih).</p>' },
+    { q: 'Apakah saya bisa membuat promo dan voucher?',                 a: '<p>Ya, Anda bisa membuat berbagai jenis promo, diskon, dan voucher untuk menarik lebih banyak pelanggan.</p>' },
+    { q: 'Apakah data toko saya aman?',                                 a: '<p>Kami menggunakan enkripsi data saat dikirim dan disimpan, kontrol akses ketat, serta pemantauan sistem secara berkala sesuai standar industri.</p>' },
+    { q: 'Bagaimana jika saya butuh bantuan setup?',                    a: '<p>Tim support kami siap membantu melalui chat, email, atau WhatsApp. Jam layanan: Senin–Jumat, 09.00–17.00 WIB.</p>' },
+  ];
+
+  const faqList = document.getElementById('faqList');
+  let faqOpen = 0;
+  function renderFaqs() {
+    faqList.innerHTML = faqs.map((f, i) => `
+      <div class="faq-item${i === faqOpen ? ' active' : ''}">
+        <button class="faq-question" data-index="${i}">
+          <span>${f.q}</span>
+          <svg class="faq-chevron${i === faqOpen ? ' open' : ''}" data-icon viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer${i === faqOpen ? ' open' : ''}"><p>${f.a.replace(/<\/?p>/g,'')}</p></div>
+      </div>
+    `).join('');
+    faqList.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.dataset.index);
+        faqOpen = faqOpen === idx ? null : idx;
+        renderFaqs();
+      });
+    });
+  }
+  renderFaqs();
+
+  // ── Syarat & Ketentuan ──
+  makeAccordion('sykList', [
+    {
+      q: 'Tentang Amora',
+      a: '<p>Amora adalah platform web builder berbasis langganan (SaaS) yang membantu UMKM membangun dan mengelola toko online sendiri. Amora adalah penyedia teknologi, bukan marketplace.</p><p style="margin-top:8px">Amora tidak ikut campur dalam transaksi jual beli antara Merchant dan Pembeli, tidak menyentuh dana transaksi, dan tidak bertanggung jawab atas pengiriman pesanan.</p>'
+    },
+    {
+      q: 'Siapa yang Bisa Menggunakan Amora?',
+      a: '<p>Anda bisa menggunakan Amora jika memenuhi syarat berikut:</p><ul><li>Berusia minimal 18 tahun atau memiliki persetujuan dari orang tua/wali yang sah</li><li>Memiliki kapasitas hukum untuk membuat perjanjian</li><li>Mendaftarkan diri dengan informasi yang benar dan lengkap</li></ul><p style="margin-top:8px">Amora berhak menolak atau menutup akun yang menggunakan informasi palsu.</p>'
+    },
+    {
+      q: 'Paket dan Harga',
+      a: '<p>Tersedia dua paket: <strong style="color:var(--text-80)">Starter</strong> dan <strong style="color:var(--accent-light)">Pro</strong>. Detail fitur dan harga terbaru selalu tersedia di halaman harga Amora.</p><ul><li>Harga sudah termasuk PPN — tidak ada biaya pajak tambahan di luar harga yang tertera</li><li>Pembayaran pertama dilakukan di muka saat subscription</li><li>Tagihan bulanan berikutnya dibayarkan setiap bulan</li><li>Invoice tagihan bulanan diterbitkan 3 hari sebelum tanggal jatuh tempo</li><li>Pembayaran yang sudah dilakukan tidak dapat dikembalikan (non-refundable)</li></ul>'
+    },
+    {
+      q: 'Batas Waktu Pembayaran',
+      a: '<p>Pembayaran pertama harus diselesaikan dalam waktu <strong style="color:var(--text-80)">2 jam</strong> setelah order dibuat. Halaman pembayaran akan kadaluarsa setelah 2 jam dan order otomatis dibatalkan.</p><p style="margin-top:8px">Setelah pembayaran pertama berhasil, layanan Platform langsung aktif dan dapat digunakan.</p>'
+    },
+    {
+      q: 'Perpanjangan Bulanan',
+      a: '<p>Untuk tagihan bulanan berikutnya:</p><ul><li>Invoice diterbitkan otomatis 3 hari sebelum tanggal jatuh tempo</li><li>Tanggal jatuh tempo adalah tanggal yang sama setiap bulannya dengan tanggal pembayaran pertama</li><li>Pembayaran harus diselesaikan maksimal pada tanggal jatuh tempo</li><li>Jika melewati jatuh tempo, akses Platform ditangguhkan hingga pembayaran diselesaikan</li></ul>'
+    },
+    {
+      q: 'Biaya Kelebihan Kuota',
+      a: '<p>Jika pesanan melebihi kuota bulanan paket Anda, biaya tambahan dikenakan:</p><ul><li>Starter (kuota 300 pesanan/bulan): +2% per pesanan lebih</li><li>Pro (kuota 1.000 pesanan/bulan): +1% per pesanan lebih</li></ul><p style="margin-top:8px">Tagihan kelebihan kuota diproses di periode berikutnya.</p>'
+    },
+    {
+      q: 'Pembayaran dan Payment Gateway',
+      a: '<p>Amora tidak memproses, menampung, atau memiliki akses ke dana dari transaksi toko Anda. Semua pembayaran dari Pembeli mengalir langsung melalui payment gateway yang Anda pilih sendiri.</p><ul><li>Amora hanya menyediakan integrasi teknis dengan payment gateway (Xendit, Midtrans, Doku, dll)</li><li>Tanggung jawab atas transaksi, klaim, dan pengembalian dana sepenuhnya ada di tangan Merchant dan payment gateway masing-masing</li></ul>'
+    },
+    {
+      q: 'Kewajiban Merchant',
+      a: '<p>Sebagai Merchant, Anda berkewajiban untuk:</p><ul><li>Memastikan semua informasi produk akurat dan tidak menyesatkan sesuai UU No. 8 Tahun 1999</li><li>Tidak menjual produk yang melanggar hukum Indonesia</li><li>Mengisi dan mempublikasikan Kebijakan Refund sebelum toko aktif</li><li>Memproses pesanan dalam waktu wajar</li><li>Membalas komplain Pembeli dalam 2×24 jam hari kerja</li></ul>'
+    },
+    {
+      q: 'Yang Tidak Boleh Dilakukan',
+      a: '<p>Pelanggaran berikut dapat mengakibatkan akun dinonaktifkan tanpa pemberitahuan:</p><ul><li>Menjual barang ilegal (palsu, narkotika, senjata, konten melanggar kesusilaan)</li><li>Menipu atau menyesatkan Pembeli</li><li>Menyebarkan informasi palsu atau hoaks</li><li>Melanggar hak kekayaan intelektual pihak lain</li><li>Merusak atau membebani sistem Platform</li><li>Pencucian uang atau kegiatan ilegal lainnya</li></ul>'
+    },
+    {
+      q: 'Penanganan Fraud dan Sanksi',
+      a: '<p>Jika Amora menemukan atau menerima laporan yang dapat dipercaya tentang fraud, akun Merchant akan langsung dinonaktifkan. Untuk pelanggaran ringan, sanksi bertahap berlaku:</p><ul><li>Peringatan tertulis</li><li>Penangguhan sementara</li><li>Penghentian layanan permanen</li></ul><p style="margin-top:8px">Biaya langganan yang sudah dibayar tidak akan dikembalikan. Kasus pidana dilaporkan ke pihak berwajib.</p>'
+    },
+    {
+      q: 'Hak Kekayaan Intelektual',
+      a: '<p><strong style="color:var(--text-80)">Milik Amora:</strong> Seluruh Platform termasuk kode, desain, merek, dan logo adalah milik Amora. Anda hanya mendapat lisensi pakai selama berlangganan.</p><p style="margin-top:8px"><strong style="color:var(--text-80)">Milik Anda:</strong> Semua konten yang Anda unggah tetap milik Anda. Anda memberi Amora izin menampilkannya untuk operasional Platform. Anda bertanggung jawab jika konten Anda melanggar hak pihak lain.</p>'
+    },
+    {
+      q: 'Batasan Tanggung Jawab Amora',
+      a: '<p>Platform disediakan as-is tanpa garansi bebas gangguan setiap saat. Amora tidak bertanggung jawab atas:</p><ul><li>Kerugian dari transaksi Merchant-Pembeli</li><li>Gangguan akibat bencana atau serangan siber</li><li>Kerugian tidak langsung</li><li>Kegagalan payment gateway atau jasa pengiriman</li></ul><p style="margin-top:8px">Maksimal kewajiban Amora kepada Anda = biaya langganan 3 bulan terakhir.</p>'
+    },
+    {
+      q: 'Penghentian Layanan',
+      a: '<ul><li><strong style="color:var(--text-80)">Oleh Merchant:</strong> Bisa berhenti kapan saja. Berlaku di akhir periode tagihan. Tidak ada refund.</li><li><strong style="color:var(--text-80)">Oleh Amora (30 hari pemberitahuan):</strong> Jika Amora menghentikan layanan secara keseluruhan.</li><li><strong style="color:var(--text-80)">Oleh Amora (tanpa pemberitahuan):</strong> Jika ada pelanggaran berat, fraud, atau perintah otoritas.</li></ul><p style="margin-top:8px">Ekspor data Anda sebelum akun ditutup.</p>'
+    },
+    {
+      q: 'Perubahan Ketentuan & Penyelesaian Sengketa',
+      a: '<p>Amora bisa mengubah ketentuan ini kapan saja. Perubahan besar diberitahukan minimal 14 hari sebelum berlaku. Terus menggunakan Platform berarti menyetujui ketentuan baru.</p><p style="margin-top:8px">Sengketa diselesaikan melalui: musyawarah (30 hari) → mediasi → Pengadilan Negeri Jakarta Pusat. Berlaku hukum Republik Indonesia.</p><p style="margin-top:8px">Hubungi kami: <a href="mailto:support@amora.id" style="color:var(--accent-light)">support@amora.id</a></p>'
+    },
+  ], false);
+
+  // ── Kebijakan Privasi ──
+  makeAccordion('privList', [
+    {
+      q: 'Data Apa yang Kami Kumpulkan?',
+      a: '<p><strong style="color:var(--text-80)">Data yang Anda berikan:</strong></p><ul><li>Nama, email, nomor telepon, tanggal lahir</li><li>Username dan kata sandi (disimpan terenkripsi)</li><li>Informasi bisnis untuk keperluan toko</li></ul><p style="margin-top:8px"><strong style="color:var(--text-80)">Data yang dikumpulkan otomatis:</strong></p><ul><li>Jenis perangkat, browser, alamat IP</li><li>Halaman yang dikunjungi dan durasi kunjungan</li><li>Data dari cookies dan teknologi pelacakan serupa</li></ul>'
+    },
+    {
+      q: 'Untuk Apa Data Anda Digunakan?',
+      a: '<p>Data Anda digunakan untuk:</p><ul><li>Menjalankan dan meningkatkan layanan Platform</li><li>Mengelola akun dan komunikasi dengan Anda</li><li>Mendeteksi dan mencegah penipuan atau penyalahgunaan</li><li>Memenuhi kewajiban hukum jika diminta otoritas berwenang</li><li>Mengirim info produk dan promosi (bisa Anda nonaktifkan kapan saja)</li></ul><p style="margin-top:8px">Amora memproses data berdasarkan: persetujuan Anda, pelaksanaan kontrak, kewajiban hukum, atau kepentingan yang sah.</p>'
+    },
+    {
+      q: 'Siapa yang Bisa Mengakses Data Anda?',
+      a: '<p>Amora tidak menjual data pribadi Anda. Data bisa dibagikan kepada:</p><ul><li>Mitra teknis yang membantu operasional Platform (terikat perjanjian kerahasiaan)</li><li>Otoritas hukum jika diwajibkan oleh pengadilan atau peraturan</li><li>Pihak pengakuisisi jika Amora mengalami merger atau akuisisi</li></ul><p style="margin-top:8px"><strong style="color:var(--text-80)">Catatan untuk Merchant:</strong> Anda adalah Pengendali Data atas informasi Pembeli yang dikumpulkan di toko Anda dan bertanggung jawab mematuhi UU PDP.</p>'
+    },
+    {
+      q: 'Bagaimana Kami Melindungi Data Anda?',
+      a: '<p>Langkah perlindungan yang kami terapkan:</p><ul><li>Enkripsi data saat dikirim dan disimpan</li><li>Kontrol akses ketat dan autentikasi berlapis</li><li>Pemantauan sistem secara berkala</li></ul><p style="margin-top:8px">Data disimpan hanya selama diperlukan, lalu dihapus atau dianonimkan. Tidak ada sistem yang 100% aman.</p>'
+    },
+    {
+      q: 'Hak Anda atas Data Pribadi',
+      a: '<p>Sesuai UU No. 27 Tahun 2022 (UU PDP), Anda berhak untuk:</p><ul><li>Mengakses data yang kami miliki tentang Anda</li><li>Memperbaiki data yang tidak akurat</li><li>Menghapus data Anda dalam kondisi tertentu</li><li>Menolak pemrosesan untuk tujuan pemasaran</li><li>Memindahkan data ke platform lain (portabilitas data)</li><li>Menarik persetujuan kapan saja</li></ul><p style="margin-top:8px">Ajukan permintaan ke <a href="mailto:support@amora.id" style="color:var(--accent-light)">support@amora.id</a>. Jika tidak puas, Anda bisa melapor ke Kementerian Komunikasi dan Digital.</p>'
+    },
+    {
+      q: 'Cookies',
+      a: '<p>Kami menggunakan cookies untuk: fungsi dasar (login, keamanan), preferensi, analitik, dan pemasaran.</p><p style="margin-top:8px">Anda bisa mengatur atau menonaktifkan cookies di browser, namun ini bisa mempengaruhi fungsi Platform.</p>'
+    },
+    {
+      q: 'Platform Tidak untuk Anak di Bawah 18 Tahun',
+      a: '<p>Amora tidak ditujukan untuk pengguna di bawah usia 18 tahun. Jika kami mengetahui ada data anak yang terkumpul tanpa izin orang tua, data tersebut akan segera dihapus.</p>'
+    },
+    {
+      q: 'Perubahan Kebijakan',
+      a: '<p>Kebijakan ini bisa diperbarui sewaktu-waktu. Perubahan besar diberitahukan lewat email atau notifikasi di Platform. Terus menggunakan Platform setelah perubahan berarti menyetujui kebijakan baru.</p><p style="margin-top:8px">Hubungi kami: <a href="mailto:support@amora.id" style="color:var(--accent-light)">support@amora.id</a> · Jakarta, Indonesia</p>'
+    },
+  ], false);
+</script>
+
+</body>
+</html>
