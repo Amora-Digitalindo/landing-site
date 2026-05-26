@@ -513,6 +513,7 @@
       box-shadow: var(--shadow-xl), 0 0 60px rgba(107,142,90,0.12);
     }
     .plan-card-wrapper:hover { box-shadow: var(--shadow-xl), 0 0 40px rgba(107,142,90,0.1); }
+    /* PRO card hover glow — .plan-card-pro class is added in pricing redesign (Task 4) */
     .plan-card-wrapper:hover .plan-card-pro {
       box-shadow:
         0 0 0 1px rgba(107, 142, 90, 0.08),
@@ -1380,7 +1381,7 @@
         const value = Math.round(easeOutQuart(progress) * target);
         let display = value.toString();
         if (separator) {
-          display = value.toLocaleString('id-ID').replace(/,/g, '.');
+          display = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
         }
         el.textContent = display + suffix;
         if (progress < 1) requestAnimationFrame(tick);
@@ -1400,10 +1401,7 @@
         // statValues[0] = "10.000+", statValues[1] = "5 menit", statValues[2] = "0%"
         if (statValues[0]) animateCount(statValues[0], 10000, '+', true, 1800);
         if (statValues[1]) animateCount(statValues[1], 5, ' menit', false, 1800);
-        if (statValues[2]) {
-          // Already 0 — just set it
-          statValues[2].textContent = '0%';
-        }
+        // stat[2] = "0%" — no animation needed, HTML value stays as-is
       });
     }, { threshold: 0.5 });
 
