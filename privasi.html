@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kebijakan Privasi — Amora.id</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="./Amora.id — Semua Bisa Punya Toko Online_files/css2" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #09090E; --elevated: #0F0F17; --card: #131320;
+      --accent: #6B8E5A; --accent-light: #8FB87A;
+      --accent-glow: rgba(107,142,90,0.22); --accent-dim: rgba(107,142,90,0.12);
+      --accent-border: rgba(107,142,90,0.32);
+      --border: rgba(255,255,255,0.07); --border-mid: rgba(255,255,255,0.11);
+      --border-strong: rgba(255,255,255,0.17);
+      --text: #F2F2F5; --text-80: rgba(242,242,245,0.8);
+      --text-60: rgba(242,242,245,0.6); --text-40: rgba(242,242,245,0.4);
+      --text-30: rgba(242,242,245,0.3);
+      --r-sm: 8px; --r-md: 12px; --r-lg: 16px;
+      --r-xl: 20px; --r-2xl: 24px; --r-full: 9999px;
+      --shadow-sm: 0 1px 4px rgba(0,0,0,0.4);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.45);
+      --inset-top: inset 0 1px 0 rgba(255,255,255,0.07);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5; overflow-x: hidden; position: relative;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    #page-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .pg-orb { position: absolute; border-radius: 50%; pointer-events: none; }
+    .pg-orb-1 { top: -15%; left: -12%; width: 65vw; height: 65vw; background: radial-gradient(ellipse, rgba(8,22,55,0.65) 0%, transparent 68%); filter: blur(90px); }
+    .pg-orb-2 { top: -8%; right: -8%; width: 55vw; height: 55vw; background: radial-gradient(ellipse, rgba(25,65,40,0.55) 0%, transparent 68%); filter: blur(100px); }
+    .pg-orb-3 { top: 28%; left: 20%; width: 70vw; height: 60vw; background: radial-gradient(ellipse, rgba(15,40,25,0.4) 0%, transparent 65%); filter: blur(120px); }
+    .pg-orb-4 { top: 35%; right: 5%; width: 40vw; height: 40vw; background: radial-gradient(ellipse, rgba(107,142,90,0.1) 0%, transparent 65%); filter: blur(80px); }
+    .pg-orb-5 { bottom: 5%; left: -5%; width: 50vw; height: 50vw; background: radial-gradient(ellipse, rgba(10,35,30,0.6) 0%, transparent 68%); filter: blur(100px); }
+    .pg-orb-6 { bottom: -10%; right: -5%; width: 50vw; height: 50vw; background: radial-gradient(ellipse, rgba(10,18,45,0.6) 0%, transparent 68%); filter: blur(90px); }
+    section, main { background: transparent !important; position: relative; z-index: 1; }
+    nav, footer { position: relative; z-index: 2; }
+
+    @keyframes pulse-dot { 0%, 100% { box-shadow: 0 0 0 0 rgba(107,142,90,0.5); } 50% { box-shadow: 0 0 0 5px rgba(107,142,90,0); } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; height: 68px; display: flex; align-items: center; transition: background 0.35s, border-bottom 0.35s, box-shadow 0.35s; }
+    nav.scrolled { background: rgba(9,9,14,0.88); backdrop-filter: blur(24px) saturate(1.5); -webkit-backdrop-filter: blur(24px) saturate(1.5); border-bottom: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+    .nav-inner { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo img { height: 30px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 36px; }
+    .nav-links a { font-size: 0.875rem; font-weight: 500; color: var(--text-60); transition: color 0.2s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; height: 1px; width: 0; background: var(--accent-light); transition: width 0.2s ease; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-ctas { display: flex; align-items: center; gap: 10px; }
+    .btn-ghost { padding: 9px 18px; font-size: 0.875rem; font-weight: 500; border: 1px solid var(--border-mid); border-radius: var(--r-full); color: var(--text-80); transition: background 0.2s, border-color 0.2s, color 0.2s; }
+    .btn-ghost:hover { background: rgba(255,255,255,0.05); border-color: var(--border-strong); color: var(--text); }
+    .btn-primary { padding: 9px 18px; font-size: 0.875rem; font-weight: 600; background: var(--accent); border-radius: var(--r-full); color: #fff; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; display: inline-flex; align-items: center; gap: 7px; }
+    .btn-primary:hover { background: var(--accent-light); transform: translateY(-1px); box-shadow: 0 12px 40px rgba(107,142,90,0.3); }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; color: var(--text); padding: 8px; border-radius: var(--r-md); transition: background 0.2s; }
+    .hamburger:hover { background: rgba(255,255,255,0.06); }
+    .mobile-menu { display: none; position: fixed; inset: 0; z-index: 40; background: rgba(9,9,14,0.97); backdrop-filter: blur(24px); flex-direction: column; align-items: center; justify-content: center; gap: 28px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 1.375rem; font-weight: 600; color: var(--text-80); transition: color 0.2s; }
+    .mobile-menu a:hover { color: var(--text); }
+    .mobile-menu .mobile-ctas { display: flex; flex-direction: column; gap: 10px; width: 220px; margin-top: 12px; }
+    .mobile-menu .mobile-ctas a { font-size: 0.9375rem; padding: 13px; text-align: center; border-radius: var(--r-full); font-weight: 500; }
+    .mobile-menu .mobile-ctas a.outline { border: 1px solid var(--border-strong); color: var(--text-80); }
+    .mobile-menu .mobile-ctas a.filled { background: var(--accent); font-weight: 600; color: #fff; }
+    @media (max-width: 768px) { .nav-links, .nav-ctas { display: none; } .hamburger { display: block; } }
+
+    .legal-page { max-width: 760px; margin: 0 auto; padding: 120px 24px 80px; }
+    .legal-page-header { margin-bottom: 56px; animation: fadeInUp 0.6s ease 0.1s both; }
+    .legal-eyebrow {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 4px 12px; border-radius: var(--r-full);
+      background: var(--accent-dim); border: 1px solid var(--accent-border);
+      font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--accent-light); margin-bottom: 16px;
+    }
+    .legal-eyebrow-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: pulse-dot 2.5s ease-in-out infinite; }
+    .legal-page-header h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; letter-spacing: -0.025em; color: var(--text); margin-bottom: 8px; }
+    .legal-page-header p { font-size: 0.875rem; color: var(--text-40); }
+
+    .legal-sections { display: flex; flex-direction: column; gap: 16px; }
+    .legal-section {
+      background: rgba(13, 13, 24, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--r-xl); padding: 28px 32px;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.07),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+        0 8px 32px rgba(0, 0, 0, 0.45);
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1), transform 0.55s cubic-bezier(0.22,1,0.36,1);
+    }
+    .legal-section.visible { opacity: 1; transform: translateY(0); }
+    .legal-section h3 {
+      font-size: 1rem; font-weight: 700; color: var(--text);
+      margin-bottom: 14px; padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .legal-section p { font-size: 0.875rem; color: var(--text-60); line-height: 1.75; }
+    .legal-section p + p { margin-top: 10px; }
+    .legal-section ul { list-style: none; display: flex; flex-direction: column; gap: 7px; margin-top: 10px; }
+    .legal-section ul li {
+      font-size: 0.875rem; color: var(--text-60); line-height: 1.65;
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .legal-section ul li::before { content: '–'; color: var(--accent); flex-shrink: 0; margin-top: 1px; }
+    .legal-section a { color: var(--accent-light); transition: color 0.2s; }
+    .legal-section a:hover { color: var(--text-80); }
+    .legal-section strong { color: var(--text-80); }
+
+    footer { background: rgba(15,15,23,0.96) !important; backdrop-filter: blur(24px); border-top: 1px solid var(--border); margin-top: 80px; position: relative; }
+    footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--accent-border), transparent); }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 48px 28px 32px; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+    .footer-bottom p { font-size: 0.75rem; color: var(--text-30); }
+    .footer-legal-links { display: flex; gap: 20px; }
+    .footer-legal-links a { font-size: 0.75rem; color: var(--text-40); transition: color 0.2s; }
+    .footer-legal-links a:hover { color: var(--text-60); }
+    @media (max-width: 768px) { .footer-bottom { justify-content: center; text-align: center; } }
+
+    svg[data-icon] { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+</head>
+<body>
+
+<div id="page-bg" aria-hidden="true">
+  <div class="pg-orb pg-orb-1"></div>
+  <div class="pg-orb pg-orb-2"></div>
+  <div class="pg-orb pg-orb-3"></div>
+  <div class="pg-orb pg-orb-4"></div>
+  <div class="pg-orb pg-orb-5"></div>
+  <div class="pg-orb pg-orb-6"></div>
+</div>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="amora-landing-v2.html" class="nav-logo">
+      <img src="./Amora.id — Semua Bisa Punya Toko Online_files/logo.png" alt="Amora.id">
+    </a>
+    <div class="nav-links">
+      <a href="amora-landing-v2.html#fitur">Fitur</a>
+      <a href="amora-landing-v2.html#harga">Harga</a>
+      <a href="amora-landing-v2.html#faq">FAQ</a>
+    </div>
+    <div class="nav-ctas">
+      <a href="#" class="btn-ghost">Masuk</a>
+      <a href="#" class="btn-primary">
+        Buat Toko
+        <svg data-icon viewBox="0 0 24 24" width="14" height="14"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <svg data-icon viewBox="0 0 24 24" width="22" height="22"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="amora-landing-v2.html#fitur" class="mobile-link">Fitur</a>
+  <a href="amora-landing-v2.html#harga" class="mobile-link">Harga</a>
+  <a href="amora-landing-v2.html#faq" class="mobile-link">FAQ</a>
+  <div class="mobile-ctas">
+    <a href="#" class="outline">Masuk</a>
+    <a href="#" class="filled">Buat Toko</a>
+  </div>
+</div>
+
+<main>
+  <div class="legal-page">
+    <div class="legal-page-header">
+      <div class="legal-eyebrow"><span class="legal-eyebrow-dot"></span>Legal</div>
+      <h1>Kebijakan Privasi</h1>
+      <p>24 Mei 2026 · Disusun sesuai UU No. 27 Tahun 2022 (UU PDP)</p>
+    </div>
+    <div class="legal-sections">
+
+      <div class="legal-section">
+        <h3>Data Apa yang Kami Kumpulkan?</h3>
+        <p><strong>Data yang Anda berikan:</strong></p>
+        <ul>
+          <li>Nama, email, nomor telepon, tanggal lahir</li>
+          <li>Username dan kata sandi (disimpan terenkripsi)</li>
+          <li>Informasi bisnis untuk keperluan toko</li>
+        </ul>
+        <p><strong>Data yang dikumpulkan otomatis:</strong></p>
+        <ul>
+          <li>Jenis perangkat, browser, alamat IP</li>
+          <li>Halaman yang dikunjungi dan durasi kunjungan</li>
+          <li>Data dari cookies dan teknologi pelacakan serupa</li>
+        </ul>
+      </div>
+
+      <div class="legal-section">
+        <h3>Untuk Apa Data Anda Digunakan?</h3>
+        <p>Data Anda digunakan untuk:</p>
+        <ul>
+          <li>Menjalankan dan meningkatkan layanan Platform</li>
+          <li>Mengelola akun dan komunikasi dengan Anda</li>
+          <li>Mendeteksi dan mencegah penipuan atau penyalahgunaan</li>
+          <li>Memenuhi kewajiban hukum jika diminta otoritas berwenang</li>
+          <li>Mengirim info produk dan promosi (bisa Anda nonaktifkan kapan saja)</li>
+        </ul>
+        <p>Amora memproses data berdasarkan: persetujuan Anda, pelaksanaan kontrak, kewajiban hukum, atau kepentingan yang sah.</p>
+      </div>
+
+      <div class="legal-section">
+        <h3>Siapa yang Bisa Mengakses Data Anda?</h3>
+        <p>Amora tidak menjual data pribadi Anda. Data bisa dibagikan kepada:</p>
+        <ul>
+          <li>Mitra teknis yang membantu operasional Platform (terikat perjanjian kerahasiaan)</li>
+          <li>Otoritas hukum jika diwajibkan oleh pengadilan atau peraturan</li>
+          <li>Pihak pengakuisisi jika Amora mengalami merger atau akuisisi</li>
+        </ul>
+        <p><strong>Catatan untuk Merchant:</strong> Anda adalah Pengendali Data atas informasi Pembeli yang dikumpulkan di toko Anda dan bertanggung jawab mematuhi UU PDP.</p>
+      </div>
+
+      <div class="legal-section">
+        <h3>Bagaimana Kami Melindungi Data Anda?</h3>
+        <p>Langkah perlindungan yang kami terapkan:</p>
+        <ul>
+          <li>Enkripsi data saat dikirim dan disimpan</li>
+          <li>Kontrol akses ketat dan autentikasi berlapis</li>
+          <li>Pemantauan sistem secara berkala</li>
+        </ul>
+        <p>Data disimpan hanya selama diperlukan, lalu dihapus atau dianonimkan. Tidak ada sistem yang 100% aman.</p>
+      </div>
+
+      <div class="legal-section">
+        <h3>Hak Anda atas Data Pribadi</h3>
+        <p>Sesuai UU No. 27 Tahun 2022 (UU PDP), Anda berhak untuk:</p>
+        <ul>
+          <li>Mengakses data yang kami miliki tentang Anda</li>
+          <li>Memperbaiki data yang tidak akurat</li>
+          <li>Menghapus data Anda dalam kondisi tertentu</li>
+          <li>Menolak pemrosesan untuk tujuan pemasaran</li>
+          <li>Memindahkan data ke platform lain (portabilitas data)</li>
+          <li>Menarik persetujuan kapan saja</li>
+        </ul>
+        <p>Ajukan permintaan ke <a href="mailto:support@amora.id">support@amora.id</a>. Jika tidak puas, Anda bisa melapor ke Kementerian Komunikasi dan Digital.</p>
+      </div>
+
+      <div class="legal-section">
+        <h3>Cookies</h3>
+        <p>Kami menggunakan cookies untuk: fungsi dasar (login, keamanan), preferensi, analitik, dan pemasaran.</p>
+        <p>Anda bisa mengatur atau menonaktifkan cookies di browser, namun ini bisa mempengaruhi fungsi Platform.</p>
+      </div>
+
+      <div class="legal-section">
+        <h3>Platform Tidak untuk Anak di Bawah 18 Tahun</h3>
+        <p>Amora tidak ditujukan untuk pengguna di bawah usia 18 tahun. Jika kami mengetahui ada data anak yang terkumpul tanpa izin orang tua, data tersebut akan segera dihapus.</p>
+      </div>
+
+      <div class="legal-section">
+        <h3>Perubahan Kebijakan</h3>
+        <p>Kebijakan ini bisa diperbarui sewaktu-waktu. Perubahan besar diberitahukan lewat email atau notifikasi di Platform. Terus menggunakan Platform setelah perubahan berarti menyetujui kebijakan baru.</p>
+        <p>Hubungi kami: <a href="mailto:support@amora.id">support@amora.id</a> · Jakarta, Indonesia</p>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <p>© 2025 Amora.id. Hak cipta dilindungi.</p>
+      <div class="footer-legal-links">
+        <a href="syarat.html">Syarat &amp; Ketentuan</a>
+        <a href="privasi.html">Kebijakan Privasi</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
+
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  document.querySelectorAll('.mobile-link, .mobile-ctas a').forEach(el => {
+    el.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  });
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); sectionObserver.unobserve(e.target); } });
+  }, { threshold: 0.06, rootMargin: '-20px' });
+  document.querySelectorAll('.legal-section').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.05}s`;
+    sectionObserver.observe(el);
+  });
+</script>
+</body>
+</html>
