@@ -198,7 +198,7 @@
       transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
       display: inline-flex; align-items: center; gap: 7px;
     }
-    .btn-primary:hover { background: var(--accent-light); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(107,142,90,0.38); }
+    .btn-primary:hover { background: var(--accent-light); transform: translateY(-1px); box-shadow: 0 12px 40px rgba(107,142,90,0.3); }
     .btn-primary:active { transform: translateY(0); box-shadow: none; }
 
     /* ═══════════════════════════════════════
@@ -227,12 +227,13 @@
       transition: color 0.2s; position: relative;
     }
     .nav-links a::after {
-      content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
-      height: 1px; background: var(--accent);
-      transform: scaleX(0); transform-origin: center; transition: transform 0.25s ease;
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      height: 1px; width: 0;
+      background: var(--accent-light);
+      transition: width 0.2s ease;
     }
     .nav-links a:hover { color: var(--text); }
-    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-links a:hover::after { width: 100%; }
     .nav-ctas { display: flex; align-items: center; gap: 10px; }
     .hamburger {
       display: none; background: none; border: none; cursor: pointer;
@@ -512,6 +513,12 @@
       box-shadow: var(--shadow-xl), 0 0 60px rgba(107,142,90,0.12);
     }
     .plan-card-wrapper:hover { box-shadow: var(--shadow-xl), 0 0 40px rgba(107,142,90,0.1); }
+    .plan-card-wrapper:hover .plan-card-pro {
+      box-shadow:
+        0 0 0 1px rgba(107, 142, 90, 0.08),
+        0 24px 64px rgba(0, 0, 0, 0.6),
+        0 0 100px rgba(107, 142, 90, 0.2);
+    }
 
     .plan-card {
       background: rgba(15,15,23,0.95);
@@ -1361,6 +1368,48 @@
       });
     });
   }
+  // ── Count-up stats ──
+  (function() {
+    function easeOutQuart(t) { return 1 - Math.pow(1 - t, 4); }
+
+    function animateCount(el, target, suffix, separator, duration) {
+      const start = performance.now();
+      function tick(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const value = Math.round(easeOutQuart(progress) * target);
+        let display = value.toString();
+        if (separator) {
+          display = value.toLocaleString('id-ID').replace(/,/g, '.');
+        }
+        el.textContent = display + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    const statsSection = document.querySelector('.hero-stats');
+    if (!statsSection) return;
+
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        statObserver.unobserve(entry.target);
+
+        const statValues = document.querySelectorAll('.hero-stat-value');
+        // statValues[0] = "10.000+", statValues[1] = "5 menit", statValues[2] = "0%"
+        if (statValues[0]) animateCount(statValues[0], 10000, '+', true, 1800);
+        if (statValues[1]) animateCount(statValues[1], 5, ' menit', false, 1800);
+        if (statValues[2]) {
+          // Already 0 — just set it
+          statValues[2].textContent = '0%';
+        }
+      });
+    }, { threshold: 0.5 });
+
+    statObserver.observe(statsSection);
+  })();
+
   renderFaqs();
 
   // ── Syarat & Ketentuan ──
