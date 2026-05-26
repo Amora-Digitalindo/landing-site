@@ -502,42 +502,67 @@
       .pricing-plans-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
+    /* Plan card wrappers become direct cards — no gradient-border wrapper */
     .plan-card-wrapper {
-      border-radius: calc(var(--r-2xl) + 1.5px); padding: 1.5px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.04) 50%, rgba(107,142,90,0.2) 100%);
-      box-shadow: var(--shadow-lg);
+      border-radius: var(--r-2xl);
       transition: box-shadow 0.3s;
     }
-    .plan-card-wrapper.featured {
-      background: linear-gradient(135deg, rgba(107,142,90,0.55) 0%, rgba(255,255,255,0.07) 30%, rgba(107,142,90,0.15) 60%, rgba(107,142,90,0.5) 100%);
-      box-shadow: var(--shadow-xl), 0 0 60px rgba(107,142,90,0.12);
+
+    /* Starter card */
+    .plan-card-starter {
+      background: rgba(13, 13, 24, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--r-2xl); padding: 32px;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 20px 60px rgba(0, 0, 0, 0.5);
+      position: relative; overflow: hidden; height: 100%;
+      transition: box-shadow 0.3s;
     }
-    .plan-card-wrapper:hover { box-shadow: var(--shadow-xl), 0 0 40px rgba(107,142,90,0.1); }
-    /* PRO card hover glow — .plan-card-pro class is added in pricing redesign (Task 4) */
-    .plan-card-wrapper:hover .plan-card-pro {
+
+    /* Pro card — glow card */
+    .plan-card-pro {
+      background: radial-gradient(ellipse at 60% -20%, rgba(107,142,90,0.28) 0%, rgba(10,20,14,0.95) 60%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(107, 142, 90, 0.5);
+      border-radius: var(--r-2xl); padding: 32px;
       box-shadow:
         0 0 0 1px rgba(107, 142, 90, 0.08),
         0 24px 64px rgba(0, 0, 0, 0.6),
-        0 0 100px rgba(107, 142, 90, 0.2);
+        0 0 80px rgba(107, 142, 90, 0.15);
+      position: relative; overflow: hidden; height: 100%;
+      transition: box-shadow 0.3s;
     }
 
-    .plan-card {
-      background: rgba(15,15,23,0.95);
-      backdrop-filter: blur(20px);
-      border-radius: var(--r-2xl); padding: 32px;
-      position: relative; overflow: hidden;
-      box-shadow: var(--inset-top);
-      height: 100%;
+    /* Pro top glow line */
+    .plan-card-pro::before {
+      content: '';
+      position: absolute; top: 0; left: 10%; width: 80%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(107,142,90,0.6), transparent);
     }
-    .plan-card::after {
+
+    /* Spotlight sweep — keep on both */
+    .plan-card-starter::after,
+    .plan-card-pro::after {
       content: '';
       position: absolute; top: -60%; left: -60%;
       width: 80px; height: 220%;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
       transform: rotate(-45deg); pointer-events: none;
     }
-    .plan-card-wrapper:hover .plan-card::after {
+    .plan-card-wrapper:hover .plan-card-starter::after,
+    .plan-card-wrapper:hover .plan-card-pro::after {
       animation: spotlight-sweep 1.2s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+    /* PRO card hover glow — .plan-card-pro class is added in pricing redesign (Task 4) */
+    .plan-card-wrapper:hover .plan-card-pro {
+      box-shadow:
+        0 0 0 1px rgba(107, 142, 90, 0.08),
+        0 24px 64px rgba(0, 0, 0, 0.6),
+        0 0 100px rgba(107, 142, 90, 0.2);
     }
 
     .plan-discount-badge {
@@ -576,14 +601,28 @@
       border-radius: var(--r-xl);
       transition: background 0.2s, transform 0.15s, box-shadow 0.2s, border-color 0.2s;
     }
+    /* Starter — glass style */
     .plan-cta.outline-cta {
-      color: var(--text-80); border: 1px solid var(--border-strong);
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-80);
     }
-    .plan-cta.outline-cta:hover { background: rgba(255,255,255,0.05); border-color: var(--accent-border); color: var(--text); }
+    .plan-cta.outline-cta:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.2);
+      color: var(--text);
+    }
+    /* Pro — full gradient */
     .plan-cta.filled-cta {
-      background: var(--accent); color: #fff;
+      background: linear-gradient(135deg, #6B8E5A, #8FB87A);
+      color: #fff;
+      font-size: 1rem;
     }
-    .plan-cta.filled-cta:hover { background: var(--accent-light); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(107,142,90,0.38); }
+    .plan-cta.filled-cta:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 28px rgba(107, 142, 90, 0.4);
+    }
 
     /* Comparison table */
     .pricing-table {
@@ -602,9 +641,17 @@
     .pricing-table th, .pricing-table td {
       padding: 14px 20px; text-align: left;
     }
+    .pricing-table thead {
+      position: sticky; top: 68px; z-index: 10;
+    }
     .pricing-table thead tr {
-      background: rgba(19,19,32,0.9);
+      background: rgba(13, 13, 24, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border-mid);
+    }
+    .pricing-table thead th.th-pro {
+      background: rgba(107, 142, 90, 0.1);
     }
     .pricing-table thead th:first-child {
       font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
@@ -618,10 +665,12 @@
     .th-pro     { color: var(--accent-light); }
 
     .pricing-table .cat-row td {
-      background: rgba(9,9,14,0.6);
-      font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.03);
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.8px; text-transform: uppercase;
       color: var(--text-40); padding: 10px 20px;
-      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
     .pricing-table tbody tr { border-bottom: 1px solid rgba(255,255,255,0.04); }
     .pricing-table tbody tr:last-child { border-bottom: none; }
@@ -658,8 +707,8 @@
       background: var(--accent-dim); border: 1px solid var(--accent-border);
       color: var(--accent-light);
     }
-    .check-icon { color: var(--accent); }
-    .cross-icon { color: rgba(239,68,68,0.6); }
+    .check-icon { color: #8FB87A; }
+    .cross-icon { color: rgba(242, 242, 245, 0.25); }
 
     .pricing-table tfoot tr {
       background: rgba(9,9,14,0.6);
@@ -1057,7 +1106,7 @@
     <div class="pricing-plans-grid">
       <!-- STARTER -->
       <div class="plan-card-wrapper reveal delay-1">
-        <div class="plan-card">
+        <div class="plan-card plan-card-starter">
           <div class="plan-discount-badge starter-badge"><span class="plan-discount-icon">🏷</span> DISKON 10%</div>
           <div class="plan-old-price">Rp 149.000</div>
           <div class="plan-tier">STARTER</div>
@@ -1067,8 +1116,8 @@
         </div>
       </div>
       <!-- PRO -->
-      <div class="plan-card-wrapper featured reveal delay-2">
-        <div class="plan-card">
+      <div class="plan-card-wrapper reveal delay-2">
+        <div class="plan-card plan-card-pro">
           <div class="plan-discount-badge pro-badge"><span class="plan-discount-icon">🔥</span> DISKON 40%</div>
           <div class="plan-old-price">Rp 349.000</div>
           <div class="plan-tier">PRO</div>
@@ -1099,13 +1148,13 @@
           </tr>
           <tr>
             <td class="feat-name">Integrasi Domain Kustom</td>
-            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg></td>
-            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg></td>
+            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="20" height="20"><polyline points="20 6 9 17 4 12"/></svg></td>
+            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="20" height="20"><polyline points="20 6 9 17 4 12"/></svg></td>
           </tr>
           <tr>
             <td class="feat-name">Penjadwalan Peluncuran Produk</td>
-            <td class="feat-val"><svg class="cross-icon" data-icon viewBox="0 0 24 24" width="16" height="16"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></td>
-            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg></td>
+            <td class="feat-val"><svg class="cross-icon" data-icon viewBox="0 0 24 24" width="18" height="18"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></td>
+            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="20" height="20"><polyline points="20 6 9 17 4 12"/></svg></td>
           </tr>
 
           <!-- PRODUK & INVENTORI -->
@@ -1127,8 +1176,8 @@
           </tr>
           <tr>
             <td class="feat-name">Pengaturan Diskon Produk</td>
-            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg></td>
-            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg></td>
+            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="20" height="20"><polyline points="20 6 9 17 4 12"/></svg></td>
+            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="20" height="20"><polyline points="20 6 9 17 4 12"/></svg></td>
           </tr>
           <tr>
             <td class="feat-name">Kategori Produk</td>
@@ -1162,13 +1211,13 @@
               Integrasi Payment Gateway Lokal
               <small>Xendit, Doku, Midtrans</small>
             </td>
-            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg></td>
-            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg></td>
+            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="20" height="20"><polyline points="20 6 9 17 4 12"/></svg></td>
+            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="20" height="20"><polyline points="20 6 9 17 4 12"/></svg></td>
           </tr>
           <tr>
             <td class="feat-name">Cek Ongkir, Cetak Resi &amp; Pelacakan Pengiriman</td>
-            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg></td>
-            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg></td>
+            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="20" height="20"><polyline points="20 6 9 17 4 12"/></svg></td>
+            <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="20" height="20"><polyline points="20 6 9 17 4 12"/></svg></td>
           </tr>
         </tbody>
         <tfoot>
