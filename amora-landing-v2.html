@@ -114,7 +114,7 @@
     /* Make all sections transparent to reveal bg canvas */
     section { background: transparent !important; position: relative; z-index: 1; }
     nav, footer { position: relative; z-index: 2; }
-    .mobile-menu { z-index: 40; }
+    /* mobile-menu z-index lives in its own rule below */
 
     /* ═══════════════════════════════════════
        ANIMATIONS
@@ -240,21 +240,68 @@
       color: var(--text); padding: 8px; border-radius: var(--r-md); transition: background 0.2s;
     }
     .hamburger:hover { background: rgba(255,255,255,0.06); }
+    .hamburger .icon-close { display: none; }
+    .hamburger.active .icon-menu { display: none; }
+    .hamburger.active .icon-close { display: block; }
+
+    /* ── Mobile fullscreen menu ── */
     .mobile-menu {
-      display: none; position: fixed; inset: 0; z-index: 40;
-      background: rgba(9,9,14,0.97); backdrop-filter: blur(24px);
-      flex-direction: column; align-items: center; justify-content: center; gap: 28px;
+      display: none;
+      position: fixed; inset: 0; z-index: 45; top: 68px;
+      background: rgba(9,9,14,0.95);
+      backdrop-filter: blur(16px) saturate(1.3);
+      -webkit-backdrop-filter: blur(16px) saturate(1.3);
+      flex-direction: column;
+      padding: 32px 20px;
+      gap: 20px;
+      opacity: 0;
+      transform: translateY(-100%);
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.22,1,0.36,1);
     }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a { font-size: 1.375rem; font-weight: 600; color: var(--text-80); transition: color 0.2s; }
-    .mobile-menu a:hover { color: var(--text); }
-    .mobile-menu .mobile-ctas { display: flex; flex-direction: column; gap: 10px; width: 220px; margin-top: 12px; }
-    .mobile-menu .mobile-ctas a { font-size: 0.9375rem; padding: 13px; text-align: center; border-radius: var(--r-xl); font-weight: 500; }
-    .mobile-menu .mobile-ctas a.outline { border: 1px solid var(--border-strong); color: var(--text-80); }
-    .mobile-menu .mobile-ctas a.filled  { background: var(--accent); font-weight: 600; color: #fff; }
+    .mobile-nav-links {
+      display: flex; flex-direction: column; gap: 0;
+      flex: 1; justify-content: flex-start;
+    }
+    .mobile-link {
+      font-size: 1.125rem; font-weight: 500; color: var(--text-80);
+      padding: 16px 12px; border-radius: 12px; display: block;
+      transition: color 0.2s, background 0.2s;
+    }
+    .mobile-link:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+    .mobile-ctas {
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .mobile-ctas a {
+      font-size: 1rem; padding: 14px; text-align: center;
+      border-radius: var(--r-xl); font-weight: 500; display: block;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .mobile-ctas a.outline {
+      border: 1px solid var(--border-strong); color: var(--text-80);
+    }
+    .mobile-ctas a.filled {
+      background: var(--accent); font-weight: 600; color: #fff;
+    }
+    .mobile-ctas a:active { transform: scale(0.98); }
+    .mobile-divider-outline { height: 1px; background: rgba(255,255,255,0.08); }
+    .mobile-divider { height: 1px; background: rgba(255,255,255,0.08); }
+    .mobile-legal {
+      display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+      padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .mobile-legal a {
+      font-size: 0.8125rem; color: var(--text-60); transition: color 0.2s;
+    }
+    .mobile-legal a:hover { color: var(--accent-light); }
+    .mobile-menu.open {
+      opacity: 1; transform: translateY(0); pointer-events: auto;
+    }
+
     @media (max-width: 768px) {
       .nav-links, .nav-ctas { display: none; }
       .hamburger { display: block; }
+      .mobile-menu { display: flex; }
     }
 
     /* ═══════════════════════════════════════
@@ -898,19 +945,28 @@
       </a>
     </div>
     <button class="hamburger" id="hamburger" aria-label="Menu">
-      <svg data-icon viewBox="0 0 24 24" width="22" height="22"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg class="icon-menu" data-icon viewBox="0 0 24 24" width="22" height="22"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg class="icon-close" data-icon viewBox="0 0 24 24" width="22" height="22"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
   </div>
 </nav>
 
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#fitur" class="mobile-link">Fitur</a>
-  <a href="#harga" class="mobile-link">Harga</a>
-  <a href="#faq" class="mobile-link">FAQ</a>
+  <div class="mobile-nav-links">
+    <a href="#fitur" class="mobile-link">Fitur</a>
+    <a href="#harga" class="mobile-link">Harga</a>
+    <a href="#faq" class="mobile-link">FAQ</a>
+  </div>
+  <div class="mobile-divider-outline"></div>
   <div class="mobile-ctas">
     <a href="login.html" class="outline">Masuk</a>
     <a href="login.html" class="filled">Buat Toko</a>
+  </div>
+  <div class="mobile-divider"></div>
+  <div class="mobile-legal">
+    <a href="syarat.html">Syarat &amp; Ketentuan</a>
+    <a href="privasi.html">Kebijakan Privasi</a>
   </div>
 </div>
 
@@ -1299,9 +1355,15 @@
   // Mobile menu
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
-  hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
-  document.querySelectorAll('.mobile-link, .mobile-ctas a').forEach(el => {
-    el.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('active');
+  });
+  document.querySelectorAll('.mobile-link, .mobile-ctas a, .mobile-legal a').forEach(el => {
+    el.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('active');
+    });
   });
 
   // Scroll reveal
