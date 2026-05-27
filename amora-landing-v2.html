@@ -247,7 +247,7 @@
     /* ── Mobile fullscreen menu ── */
     .mobile-menu {
       display: none;
-      position: fixed; inset: 0; z-index: 45; top: 68px; left: -100%;
+      position: fixed; inset: 0; z-index: 45; top: 68px;
       background: rgba(9,9,14,0.72);
       backdrop-filter: blur(12px) saturate(1.2);
       -webkit-backdrop-filter: blur(12px) saturate(1.2);
@@ -255,8 +255,9 @@
       padding: 32px 20px;
       gap: 20px;
       opacity: 0;
+      transform: translateX(100%);
       pointer-events: none;
-      transition: opacity 0.3s ease, left 0.35s cubic-bezier(0.22,1,0.36,1);
+      transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.22,1,0.36,1);
     }
     .mobile-nav-links {
       display: flex; flex-direction: column; gap: 0;
@@ -294,7 +295,7 @@
     }
     .mobile-legal a:hover { color: var(--accent-light); }
     .mobile-menu.open {
-      opacity: 1; left: 0; pointer-events: auto;
+      opacity: 1; transform: translateX(0); pointer-events: auto;
     }
 
     @media (max-width: 768px) {
@@ -797,12 +798,31 @@
     }
 
     @media (max-width: 640px) {
-      .pricing-table th, .pricing-table td { padding: 10px 12px; }
-      .pricing-table thead th:first-child { font-size: 0.625rem; width: 50%; }
-      .pricing-table thead th:not(:first-child) { font-size: 0.65rem; width: 25%; }
-      .pricing-table td.feat-name { font-size: 0.8125rem; }
-      .pricing-table td.feat-val { font-size: 0.8125rem; }
-      .pricing-table .cat-row td { padding: 8px 12px; font-size: 10px; }
+      /* Fixed layout: force all 3 columns to share the full width */
+      .pricing-table table {
+        table-layout: fixed;
+        width: 100%;
+      }
+      /* Tighten padding */
+      .pricing-table th, .pricing-table td { padding: 10px 8px; }
+      .pricing-table .cat-row td { padding: 8px 8px; font-size: 10px; }
+      /* Column widths: 40% feature / 30% each plan */
+      .pricing-table thead th:first-child {
+        font-size: 0.6rem; width: 40%;
+      }
+      .pricing-table thead th:not(:first-child) {
+        font-size: 0.6875rem; width: 30%;
+      }
+      /* Smaller feature text, allow wrapping */
+      .pricing-table td.feat-name { font-size: 0.75rem; line-height: 1.4; }
+      .pricing-table td.feat-name small { font-size: 0.6875rem; }
+      .pricing-table td.feat-val  { font-size: 0.75rem; }
+      /* Pills: compact, allow wrapping inside cell */
+      .pill-limited, .pill-full {
+        font-size: 0.625rem; padding: 2px 6px;
+        white-space: normal; word-break: break-word;
+        display: inline-block; line-height: 1.3;
+      }
       .plan-card-starter, .plan-card-pro { padding: 24px; }
     }
 
