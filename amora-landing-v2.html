@@ -799,51 +799,6 @@
     .faq-answer p { padding: 0 24px 20px; font-size: 0.875rem; color: var(--text-60); line-height: 1.7; }
 
     /* ═══════════════════════════════════════
-       LEGAL SECTIONS (T&C + Privacy)
-    ═══════════════════════════════════════ */
-    .legal-inner { max-width: 800px; margin: 0 auto; }
-    .legal-header { text-align: center; margin-bottom: 40px; }
-    .legal-header h2 {
-      font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700;
-      line-height: 1.2; letter-spacing: -0.02em; color: var(--text); margin-bottom: 8px;
-    }
-    .legal-header p { font-size: 0.875rem; color: var(--text-40); }
-
-    .legal-accordion {
-      background: rgba(15,15,23,0.7); backdrop-filter: blur(16px);
-      border: 1px solid var(--border); border-radius: var(--r-2xl);
-      overflow: hidden; box-shadow: var(--inset-top), var(--shadow-md);
-    }
-    .legal-item { border-bottom: 1px solid var(--border); }
-    .legal-item:last-child { border-bottom: none; }
-    .legal-question {
-      width: 100%; padding: 18px 24px;
-      display: flex; align-items: center; justify-content: space-between;
-      text-align: left; background: none; border: none; cursor: pointer; gap: 16px;
-      transition: background 0.2s;
-    }
-    .legal-question:hover { background: rgba(255,255,255,0.025); }
-    .legal-item.active > .legal-question { background: rgba(107,142,90,0.04); }
-    .legal-question span {
-      font-size: 0.875rem; font-weight: 600; color: var(--text-60); transition: color 0.2s;
-    }
-    .legal-question:hover span, .legal-item.active .legal-question span { color: var(--text-80); }
-    .legal-chevron { flex-shrink: 0; color: var(--text-40); transition: transform 0.32s ease, color 0.2s; }
-    .legal-chevron.open { transform: rotate(180deg); color: var(--accent); }
-    .legal-answer { overflow: hidden; max-height: 0; transition: max-height 0.42s ease, opacity 0.35s ease; opacity: 0; }
-    .legal-answer.open { max-height: 1200px; opacity: 1; }
-    .legal-answer-inner { padding: 4px 24px 20px; }
-    .legal-answer-inner p { font-size: 0.8125rem; color: var(--text-60); line-height: 1.75; }
-    .legal-answer-inner ul { list-style: none; margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }
-    .legal-answer-inner ul li {
-      font-size: 0.8125rem; color: var(--text-60); line-height: 1.65;
-      display: flex; align-items: flex-start; gap: 8px;
-    }
-    .legal-answer-inner ul li::before {
-      content: '–'; color: var(--accent); flex-shrink: 0; margin-top: 1px;
-    }
-
-    /* ═══════════════════════════════════════
        FOOTER
     ═══════════════════════════════════════ */
     footer {
@@ -1262,30 +1217,6 @@
   </div>
 </section>
 
-<!-- ══════════════ SYARAT & KETENTUAN ══════════════ -->
-<section id="syarat-ketentuan" class="py-section-sm">
-  <div class="section-inner legal-inner">
-    <div class="legal-header reveal">
-      <div class="section-eyebrow"><span class="section-eyebrow-dot"></span>Legal</div>
-      <h2>Syarat &amp; Ketentuan</h2>
-      <p>Versi 1.1 · 24 Mei 2026 · Berlaku sejak tanggal publikasi</p>
-    </div>
-    <div class="legal-accordion reveal delay-1" id="sykList"></div>
-  </div>
-</section>
-
-<!-- ══════════════ KEBIJAKAN PRIVASI ══════════════ -->
-<section id="kebijakan-privasi" class="py-section-sm">
-  <div class="section-inner legal-inner">
-    <div class="legal-header reveal">
-      <div class="section-eyebrow"><span class="section-eyebrow-dot"></span>Legal</div>
-      <h2>Kebijakan Privasi</h2>
-      <p>24 Mei 2026 · Disusun sesuai UU No. 27 Tahun 2022 (UU PDP)</p>
-    </div>
-    <div class="legal-accordion reveal delay-1" id="privList"></div>
-  </div>
-</section>
-
 <!-- ══════════════ FOOTER ══════════════ -->
 <footer>
   <div class="footer-inner">
@@ -1329,8 +1260,8 @@
     <div class="footer-bottom">
       <p>Made with care in Indonesia</p>
       <div class="footer-legal-links">
-        <a href="#syarat-ketentuan">Syarat &amp; Ketentuan</a>
-        <a href="#kebijakan-privasi">Kebijakan Privasi</a>
+        <a href="syarat.html">Syarat &amp; Ketentuan</a>
+        <a href="privasi.html">Kebijakan Privasi</a>
       </div>
     </div>
   </div>
@@ -1356,37 +1287,6 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
   }, { threshold: 0.08, rootMargin: '-40px' });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  // ── Generic accordion factory ──
-  function makeAccordion(containerId, items, openFirst) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    let openIndex = openFirst ? 0 : null;
-
-    function render() {
-      container.innerHTML = items.map((item, i) => `
-        <div class="legal-item${i === openIndex ? ' active' : ''}">
-          <button class="legal-question" data-idx="${i}">
-            <span>${item.q}</span>
-            <svg class="legal-chevron${i === openIndex ? ' open' : ''}" data-icon viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="6 9 12 15 18 9"/>
-            </svg>
-          </button>
-          <div class="legal-answer${i === openIndex ? ' open' : ''}">
-            <div class="legal-answer-inner">${item.a}</div>
-          </div>
-        </div>
-      `).join('');
-      container.querySelectorAll('.legal-question').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const idx = parseInt(btn.dataset.idx);
-          openIndex = openIndex === idx ? null : idx;
-          render();
-        });
-      });
-    }
-    render();
-  }
 
   // ── FAQ ──
   const faqs = [
@@ -1461,101 +1361,6 @@
 
   renderFaqs();
 
-  // ── Syarat & Ketentuan ──
-  makeAccordion('sykList', [
-    {
-      q: 'Tentang Amora',
-      a: '<p>Amora adalah platform web builder berbasis langganan (SaaS) yang membantu UMKM membangun dan mengelola toko online sendiri. Amora adalah penyedia teknologi, bukan marketplace.</p><p style="margin-top:8px">Amora tidak ikut campur dalam transaksi jual beli antara Merchant dan Pembeli, tidak menyentuh dana transaksi, dan tidak bertanggung jawab atas pengiriman pesanan.</p>'
-    },
-    {
-      q: 'Siapa yang Bisa Menggunakan Amora?',
-      a: '<p>Anda bisa menggunakan Amora jika memenuhi syarat berikut:</p><ul><li>Berusia minimal 18 tahun atau memiliki persetujuan dari orang tua/wali yang sah</li><li>Memiliki kapasitas hukum untuk membuat perjanjian</li><li>Mendaftarkan diri dengan informasi yang benar dan lengkap</li></ul><p style="margin-top:8px">Amora berhak menolak atau menutup akun yang menggunakan informasi palsu.</p>'
-    },
-    {
-      q: 'Paket dan Harga',
-      a: '<p>Tersedia dua paket: <strong style="color:var(--text-80)">Starter</strong> dan <strong style="color:var(--accent-light)">Pro</strong>. Detail fitur dan harga terbaru selalu tersedia di halaman harga Amora.</p><ul><li>Harga sudah termasuk PPN — tidak ada biaya pajak tambahan di luar harga yang tertera</li><li>Pembayaran pertama dilakukan di muka saat subscription</li><li>Tagihan bulanan berikutnya dibayarkan setiap bulan</li><li>Invoice tagihan bulanan diterbitkan 3 hari sebelum tanggal jatuh tempo</li><li>Pembayaran yang sudah dilakukan tidak dapat dikembalikan (non-refundable)</li></ul>'
-    },
-    {
-      q: 'Batas Waktu Pembayaran',
-      a: '<p>Pembayaran pertama harus diselesaikan dalam waktu <strong style="color:var(--text-80)">2 jam</strong> setelah order dibuat. Halaman pembayaran akan kadaluarsa setelah 2 jam dan order otomatis dibatalkan.</p><p style="margin-top:8px">Setelah pembayaran pertama berhasil, layanan Platform langsung aktif dan dapat digunakan.</p>'
-    },
-    {
-      q: 'Perpanjangan Bulanan',
-      a: '<p>Untuk tagihan bulanan berikutnya:</p><ul><li>Invoice diterbitkan otomatis 3 hari sebelum tanggal jatuh tempo</li><li>Tanggal jatuh tempo adalah tanggal yang sama setiap bulannya dengan tanggal pembayaran pertama</li><li>Pembayaran harus diselesaikan maksimal pada tanggal jatuh tempo</li><li>Jika melewati jatuh tempo, akses Platform ditangguhkan hingga pembayaran diselesaikan</li></ul>'
-    },
-    {
-      q: 'Biaya Kelebihan Kuota',
-      a: '<p>Jika pesanan melebihi kuota bulanan paket Anda, biaya tambahan dikenakan:</p><ul><li>Starter (kuota 300 pesanan/bulan): +2% per pesanan lebih</li><li>Pro (kuota 1.000 pesanan/bulan): +1% per pesanan lebih</li></ul><p style="margin-top:8px">Tagihan kelebihan kuota diproses di periode berikutnya.</p>'
-    },
-    {
-      q: 'Pembayaran dan Payment Gateway',
-      a: '<p>Amora tidak memproses, menampung, atau memiliki akses ke dana dari transaksi toko Anda. Semua pembayaran dari Pembeli mengalir langsung melalui payment gateway yang Anda pilih sendiri.</p><ul><li>Amora hanya menyediakan integrasi teknis dengan payment gateway (Xendit, Midtrans, Doku, dll)</li><li>Tanggung jawab atas transaksi, klaim, dan pengembalian dana sepenuhnya ada di tangan Merchant dan payment gateway masing-masing</li></ul>'
-    },
-    {
-      q: 'Kewajiban Merchant',
-      a: '<p>Sebagai Merchant, Anda berkewajiban untuk:</p><ul><li>Memastikan semua informasi produk akurat dan tidak menyesatkan sesuai UU No. 8 Tahun 1999</li><li>Tidak menjual produk yang melanggar hukum Indonesia</li><li>Mengisi dan mempublikasikan Kebijakan Refund sebelum toko aktif</li><li>Memproses pesanan dalam waktu wajar</li><li>Membalas komplain Pembeli dalam 2×24 jam hari kerja</li></ul>'
-    },
-    {
-      q: 'Yang Tidak Boleh Dilakukan',
-      a: '<p>Pelanggaran berikut dapat mengakibatkan akun dinonaktifkan tanpa pemberitahuan:</p><ul><li>Menjual barang ilegal (palsu, narkotika, senjata, konten melanggar kesusilaan)</li><li>Menipu atau menyesatkan Pembeli</li><li>Menyebarkan informasi palsu atau hoaks</li><li>Melanggar hak kekayaan intelektual pihak lain</li><li>Merusak atau membebani sistem Platform</li><li>Pencucian uang atau kegiatan ilegal lainnya</li></ul>'
-    },
-    {
-      q: 'Penanganan Fraud dan Sanksi',
-      a: '<p>Jika Amora menemukan atau menerima laporan yang dapat dipercaya tentang fraud, akun Merchant akan langsung dinonaktifkan. Untuk pelanggaran ringan, sanksi bertahap berlaku:</p><ul><li>Peringatan tertulis</li><li>Penangguhan sementara</li><li>Penghentian layanan permanen</li></ul><p style="margin-top:8px">Biaya langganan yang sudah dibayar tidak akan dikembalikan. Kasus pidana dilaporkan ke pihak berwajib.</p>'
-    },
-    {
-      q: 'Hak Kekayaan Intelektual',
-      a: '<p><strong style="color:var(--text-80)">Milik Amora:</strong> Seluruh Platform termasuk kode, desain, merek, dan logo adalah milik Amora. Anda hanya mendapat lisensi pakai selama berlangganan.</p><p style="margin-top:8px"><strong style="color:var(--text-80)">Milik Anda:</strong> Semua konten yang Anda unggah tetap milik Anda. Anda memberi Amora izin menampilkannya untuk operasional Platform. Anda bertanggung jawab jika konten Anda melanggar hak pihak lain.</p>'
-    },
-    {
-      q: 'Batasan Tanggung Jawab Amora',
-      a: '<p>Platform disediakan as-is tanpa garansi bebas gangguan setiap saat. Amora tidak bertanggung jawab atas:</p><ul><li>Kerugian dari transaksi Merchant-Pembeli</li><li>Gangguan akibat bencana atau serangan siber</li><li>Kerugian tidak langsung</li><li>Kegagalan payment gateway atau jasa pengiriman</li></ul><p style="margin-top:8px">Maksimal kewajiban Amora kepada Anda = biaya langganan 3 bulan terakhir.</p>'
-    },
-    {
-      q: 'Penghentian Layanan',
-      a: '<ul><li><strong style="color:var(--text-80)">Oleh Merchant:</strong> Bisa berhenti kapan saja. Berlaku di akhir periode tagihan. Tidak ada refund.</li><li><strong style="color:var(--text-80)">Oleh Amora (30 hari pemberitahuan):</strong> Jika Amora menghentikan layanan secara keseluruhan.</li><li><strong style="color:var(--text-80)">Oleh Amora (tanpa pemberitahuan):</strong> Jika ada pelanggaran berat, fraud, atau perintah otoritas.</li></ul><p style="margin-top:8px">Ekspor data Anda sebelum akun ditutup.</p>'
-    },
-    {
-      q: 'Perubahan Ketentuan & Penyelesaian Sengketa',
-      a: '<p>Amora bisa mengubah ketentuan ini kapan saja. Perubahan besar diberitahukan minimal 14 hari sebelum berlaku. Terus menggunakan Platform berarti menyetujui ketentuan baru.</p><p style="margin-top:8px">Sengketa diselesaikan melalui: musyawarah (30 hari) → mediasi → Pengadilan Negeri Jakarta Pusat. Berlaku hukum Republik Indonesia.</p><p style="margin-top:8px">Hubungi kami: <a href="mailto:support@amora.id" style="color:var(--accent-light)">support@amora.id</a></p>'
-    },
-  ], false);
-
-  // ── Kebijakan Privasi ──
-  makeAccordion('privList', [
-    {
-      q: 'Data Apa yang Kami Kumpulkan?',
-      a: '<p><strong style="color:var(--text-80)">Data yang Anda berikan:</strong></p><ul><li>Nama, email, nomor telepon, tanggal lahir</li><li>Username dan kata sandi (disimpan terenkripsi)</li><li>Informasi bisnis untuk keperluan toko</li></ul><p style="margin-top:8px"><strong style="color:var(--text-80)">Data yang dikumpulkan otomatis:</strong></p><ul><li>Jenis perangkat, browser, alamat IP</li><li>Halaman yang dikunjungi dan durasi kunjungan</li><li>Data dari cookies dan teknologi pelacakan serupa</li></ul>'
-    },
-    {
-      q: 'Untuk Apa Data Anda Digunakan?',
-      a: '<p>Data Anda digunakan untuk:</p><ul><li>Menjalankan dan meningkatkan layanan Platform</li><li>Mengelola akun dan komunikasi dengan Anda</li><li>Mendeteksi dan mencegah penipuan atau penyalahgunaan</li><li>Memenuhi kewajiban hukum jika diminta otoritas berwenang</li><li>Mengirim info produk dan promosi (bisa Anda nonaktifkan kapan saja)</li></ul><p style="margin-top:8px">Amora memproses data berdasarkan: persetujuan Anda, pelaksanaan kontrak, kewajiban hukum, atau kepentingan yang sah.</p>'
-    },
-    {
-      q: 'Siapa yang Bisa Mengakses Data Anda?',
-      a: '<p>Amora tidak menjual data pribadi Anda. Data bisa dibagikan kepada:</p><ul><li>Mitra teknis yang membantu operasional Platform (terikat perjanjian kerahasiaan)</li><li>Otoritas hukum jika diwajibkan oleh pengadilan atau peraturan</li><li>Pihak pengakuisisi jika Amora mengalami merger atau akuisisi</li></ul><p style="margin-top:8px"><strong style="color:var(--text-80)">Catatan untuk Merchant:</strong> Anda adalah Pengendali Data atas informasi Pembeli yang dikumpulkan di toko Anda dan bertanggung jawab mematuhi UU PDP.</p>'
-    },
-    {
-      q: 'Bagaimana Kami Melindungi Data Anda?',
-      a: '<p>Langkah perlindungan yang kami terapkan:</p><ul><li>Enkripsi data saat dikirim dan disimpan</li><li>Kontrol akses ketat dan autentikasi berlapis</li><li>Pemantauan sistem secara berkala</li></ul><p style="margin-top:8px">Data disimpan hanya selama diperlukan, lalu dihapus atau dianonimkan. Tidak ada sistem yang 100% aman.</p>'
-    },
-    {
-      q: 'Hak Anda atas Data Pribadi',
-      a: '<p>Sesuai UU No. 27 Tahun 2022 (UU PDP), Anda berhak untuk:</p><ul><li>Mengakses data yang kami miliki tentang Anda</li><li>Memperbaiki data yang tidak akurat</li><li>Menghapus data Anda dalam kondisi tertentu</li><li>Menolak pemrosesan untuk tujuan pemasaran</li><li>Memindahkan data ke platform lain (portabilitas data)</li><li>Menarik persetujuan kapan saja</li></ul><p style="margin-top:8px">Ajukan permintaan ke <a href="mailto:support@amora.id" style="color:var(--accent-light)">support@amora.id</a>. Jika tidak puas, Anda bisa melapor ke Kementerian Komunikasi dan Digital.</p>'
-    },
-    {
-      q: 'Cookies',
-      a: '<p>Kami menggunakan cookies untuk: fungsi dasar (login, keamanan), preferensi, analitik, dan pemasaran.</p><p style="margin-top:8px">Anda bisa mengatur atau menonaktifkan cookies di browser, namun ini bisa mempengaruhi fungsi Platform.</p>'
-    },
-    {
-      q: 'Platform Tidak untuk Anak di Bawah 18 Tahun',
-      a: '<p>Amora tidak ditujukan untuk pengguna di bawah usia 18 tahun. Jika kami mengetahui ada data anak yang terkumpul tanpa izin orang tua, data tersebut akan segera dihapus.</p>'
-    },
-    {
-      q: 'Perubahan Kebijakan',
-      a: '<p>Kebijakan ini bisa diperbarui sewaktu-waktu. Perubahan besar diberitahukan lewat email atau notifikasi di Platform. Terus menggunakan Platform setelah perubahan berarti menyetujui kebijakan baru.</p><p style="margin-top:8px">Hubungi kami: <a href="mailto:support@amora.id" style="color:var(--accent-light)">support@amora.id</a> · Jakarta, Indonesia</p>'
-    },
-  ], false);
 </script>
 
 </body>
