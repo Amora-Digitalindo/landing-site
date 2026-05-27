@@ -210,7 +210,7 @@
       transition: background 0.35s, border-bottom 0.35s, box-shadow 0.35s;
     }
     nav.scrolled {
-      background: rgba(9,9,14,0.88);
+      background: rgba(9,9,14,0.72);
       backdrop-filter: blur(24px) saturate(1.5);
       -webkit-backdrop-filter: blur(24px) saturate(1.5);
       border-bottom: 1px solid var(--border);
@@ -220,7 +220,7 @@
       width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 28px;
       display: flex; align-items: center; justify-content: space-between;
     }
-    .nav-logo img { height: 30px; width: auto; }
+    .nav-logo img { height: 30px; width: auto; filter: brightness(0) invert(1); }
     .nav-links { display: flex; align-items: center; gap: 36px; }
     .nav-links a {
       font-size: 0.875rem; font-weight: 500; color: var(--text-60);
@@ -276,7 +276,11 @@
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       overflow: hidden; padding: 80px 0 100px;
     }
-    .hero-bg { position: absolute; inset: 0; overflow: hidden; }
+    .hero-bg {
+      position: absolute; inset: 0; overflow: hidden;
+      mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+    }
     .hero-gradient {
       position: absolute; inset: 0;
       background:
@@ -352,6 +356,7 @@
     .hero-stat + .hero-stat { margin-left: 0; }
     .hero-stat-value { font-size: 1.375rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; line-height: 1.2; }
     .hero-stat-label { font-size: 0.75rem; color: var(--text-40); font-weight: 500; margin-top: 3px; }
+    .hero-stat-note { font-size: 0.6875rem; color: var(--text-30); margin-top: 10px; text-align: center; animation: fadeInUp 0.6s ease 0.52s both; }
     .hero-mockup {
       margin-top: 72px; position: relative;
       animation: fadeInUp 0.9s ease 0.52s both; padding: 0 28px;
@@ -506,6 +511,17 @@
     .plan-card-wrapper {
       border-radius: var(--r-2xl);
       transition: box-shadow 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .plan-ribbon {
+      position: absolute; top: 22px; right: -30px;
+      width: 130px; text-align: center;
+      background: linear-gradient(135deg, #4d7a3a, var(--accent-light));
+      color: #fff; font-size: 0.625rem; font-weight: 800;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 6px 0; transform: rotate(45deg);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+      z-index: 10;
     }
 
     /* Starter card */
@@ -749,7 +765,7 @@
     .cta-banner-actions { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
     .cta-banner-actions .btn-primary { padding: 13px 28px; font-size: 0.9375rem; }
     .cta-banner-actions .btn-ghost   { padding: 13px 24px; font-size: 0.9375rem; }
-    .cta-note { margin-top: 18px; font-size: 0.8125rem; color: var(--text-40); }
+    .cta-note { margin-top: 32px; font-size: 0.8125rem; color: var(--text-40); }
     @media (max-width: 768px) { .cta-banner-inner { padding: 64px 24px; } }
 
     /* ═══════════════════════════════════════
@@ -794,9 +810,11 @@
     .faq-question:hover span, .faq-item.active .faq-question span { color: var(--text); }
     .faq-chevron { flex-shrink: 0; color: var(--text-40); transition: transform 0.32s ease, color 0.2s; }
     .faq-chevron.open { transform: rotate(180deg); color: var(--accent); }
-    .faq-answer { overflow: hidden; max-height: 0; transition: max-height 0.38s ease, opacity 0.3s ease; opacity: 0; }
-    .faq-answer.open { max-height: 300px; opacity: 1; }
-    .faq-answer p { padding: 0 24px 20px; font-size: 0.875rem; color: var(--text-60); line-height: 1.7; }
+    .faq-answer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s cubic-bezier(0.22,1,0.36,1); }
+    .faq-answer.open { grid-template-rows: 1fr; }
+    .faq-answer-body { overflow: hidden; opacity: 0; transform: translateY(-6px); transition: opacity 0.28s ease 0.06s, transform 0.32s ease 0.04s; }
+    .faq-answer.open .faq-answer-body { opacity: 1; transform: translateY(0); }
+    .faq-answer-body p { padding: 0 24px 20px; font-size: 0.875rem; color: var(--text-60); line-height: 1.7; }
 
     /* ═══════════════════════════════════════
        FOOTER
@@ -813,8 +831,8 @@
     .footer-inner { max-width: 1200px; margin: 0 auto; padding: 72px 28px 36px; }
     .footer-grid { display: grid; grid-template-columns: 1fr; gap: 48px 64px; margin-bottom: 52px; }
     @media (min-width: 768px)  { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (min-width: 1024px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr; } }
-    .footer-brand img { height: 30px; width: auto; margin-bottom: 14px; }
+    @media (min-width: 1024px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1.5fr; } }
+    .footer-brand img { height: 30px; width: auto; margin-bottom: 14px; filter: brightness(0) invert(1); }
     .footer-brand p { font-size: 0.875rem; color: var(--text-60); line-height: 1.65; margin-bottom: 20px; max-width: 255px; }
     .footer-brand small { font-size: 0.75rem; color: var(--text-30); }
     .footer-col h4 {
@@ -873,8 +891,8 @@
       <a href="#faq">FAQ</a>
     </div>
     <div class="nav-ctas">
-      <a href="#" class="btn-ghost">Masuk</a>
-      <a href="#" class="btn-primary">
+      <a href="login.html" class="btn-ghost">Masuk</a>
+      <a href="login.html" class="btn-primary">
         Buat Toko
         <svg data-icon viewBox="0 0 24 24" width="14" height="14"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
@@ -891,8 +909,8 @@
   <a href="#harga" class="mobile-link">Harga</a>
   <a href="#faq" class="mobile-link">FAQ</a>
   <div class="mobile-ctas">
-    <a href="#" class="outline">Masuk</a>
-    <a href="#" class="filled">Buat Toko</a>
+    <a href="login.html" class="outline">Masuk</a>
+    <a href="login.html" class="filled">Buat Toko</a>
   </div>
 </div>
 
@@ -916,8 +934,8 @@
       Tanpa komisi besar, tanpa ribet.
     </p>
     <div class="hero-cta">
-      <a href="#" class="btn-primary">
-        Buat Toko Gratis
+      <a href="login.html" class="btn-primary">
+        Buka Toko Sekarang
         <svg data-icon viewBox="0 0 24 24" width="15" height="15"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
       <a href="#fitur" class="hero-secondary-link">
@@ -927,18 +945,19 @@
     </div>
     <div class="hero-stats">
       <div class="hero-stat">
-        <span class="hero-stat-value">10.000+</span>
-        <span class="hero-stat-label">UMKM aktif</span>
-      </div>
-      <div class="hero-stat">
         <span class="hero-stat-value">5 menit</span>
-        <span class="hero-stat-label">Waktu setup</span>
+        <span class="hero-stat-label">Waktu setup toko</span>
       </div>
       <div class="hero-stat">
         <span class="hero-stat-value">0%</span>
-        <span class="hero-stat-label">Komisi transaksi</span>
+        <span class="hero-stat-label">Komisi*</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">100%</span>
+        <span class="hero-stat-label">Kepemilikan data toko</span>
       </div>
     </div>
+    <p class="hero-stat-note">*sesuai dengan kuota transaksi paket</p>
     <div class="hero-mockup">
       <div class="animate-float">
         <div class="hero-mockup-frame">
@@ -1069,18 +1088,19 @@
           <div class="plan-tier">STARTER</div>
           <div class="plan-price">Rp 134.000<span>/bulan</span></div>
           <div class="plan-saving">Hemat Rp 15.000!</div>
-          <a href="#" class="plan-cta outline-cta">Mulai Starter</a>
+          <a href="login.html" class="plan-cta outline-cta">Mulai Starter</a>
         </div>
       </div>
       <!-- PRO -->
       <div class="plan-card-wrapper reveal delay-2">
+        <span class="plan-ribbon">Rekomendasi</span>
         <div class="plan-card plan-card-pro">
           <div class="plan-discount-badge pro-badge"><span class="plan-discount-icon">🔥</span> DISKON 40%</div>
           <div class="plan-old-price">Rp 349.000</div>
           <div class="plan-tier">PRO</div>
           <div class="plan-price">Rp 209.000<span>/bulan</span></div>
           <div class="plan-saving">Hemat Rp 140.000!</div>
-          <a href="#" class="plan-cta filled-cta">Mulai Pro</a>
+          <a href="login.html" class="plan-cta filled-cta">Mulai Pro</a>
         </div>
       </div>
     </div>
@@ -1180,8 +1200,8 @@
         <tfoot>
           <tr>
             <td><p class="pricing-note">* Harga sudah termasuk PPN</p></td>
-            <td class="tfoot-cta tfoot-cta-starter"><a href="#">Starter</a></td>
-            <td class="tfoot-cta tfoot-cta-pro"><a href="#">Pro</a></td>
+            <td class="tfoot-cta tfoot-cta-starter"><a href="login.html">Starter</a></td>
+            <td class="tfoot-cta tfoot-cta-pro"><a href="login.html">Pro</a></td>
           </tr>
         </tfoot>
       </table>
@@ -1196,13 +1216,12 @@
     <h2>Siap punya toko<br>online sendiri?</h2>
     <p>Bergabung dengan ribuan UMKM yang sudah membangun bisnis online mereka bersama Amora.id.</p>
     <div class="cta-banner-actions">
-      <a href="#" class="btn-primary">
-        Mulai Gratis Sekarang
+      <a href="login.html" class="btn-primary">
+        Buka Toko Sekarang
         <svg data-icon viewBox="0 0 24 24" width="15" height="15"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
       <a href="#harga" class="btn-ghost">Lihat Harga</a>
     </div>
-    <p class="cta-note">Tidak perlu kartu kredit · Gratis 14 hari pertama</p>
   </div>
 </section>
 
@@ -1227,12 +1246,19 @@
         <small>© 2025 Amora.id. Hak cipta dilindungi.</small>
       </div>
       <div class="footer-col">
-        <h4>Menu</h4>
+        <h4>Amora.id</h4>
         <ul>
           <li><a href="#">About Amora</a></li>
           <li><a href="#fitur">Fitur</a></li>
           <li><a href="#harga">Harga</a></li>
           <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Panduan</h4>
+        <ul>
+          <li><a href="syarat.html">Syarat &amp; Ketentuan</a></li>
+          <li><a href="privasi.html">Kebijakan Privasi</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1250,18 +1276,14 @@
             <a href="#" aria-label="Instagram">
               <svg data-icon viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
             </a>
+            <a href="#" aria-label="Threads">
+              <svg data-icon viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><path d="M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2m0 2a8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8 8 8 0 0 0-8-8z"/><path d="M12 7a1 1 0 0 1 0 2 1 1 0 0 1 0-2m0 4a1 1 0 0 1 0 2 1 1 0 0 1 0-2m0 4a1 1 0 0 1 0 2 1 1 0 0 1 0-2"/></svg>
+            </a>
             <a href="#" aria-label="WhatsApp">
-              <svg data-icon viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <svg data-icon viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.54.36 3.01.97 4.31L2 22l6.31-.97C9.99 23.64 11.46 24 13 24c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.41 0-2.73-.35-3.88-.96l-.28-.15-2.89.44.44-2.89-.15-.28C4.35 14.73 4 13.41 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/><path d="M16.5 12.5c-.28 0-.5-.22-.5-.5s.22-.5.5-.5.5.22.5.5-.22.5-.5.5m-3 0c-.28 0-.5-.22-.5-.5s.22-.5.5-.5.5.22.5.5-.22.5-.5.5m-3 0c-.28 0-.5-.22-.5-.5s.22-.5.5-.5.5.22.5.5-.22.5-.5.5"/></svg>
             </a>
           </li>
         </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>Made with care in Indonesia</p>
-      <div class="footer-legal-links">
-        <a href="syarat.html">Syarat &amp; Ketentuan</a>
-        <a href="privasi.html">Kebijakan Privasi</a>
       </div>
     </div>
   </div>
@@ -1301,26 +1323,38 @@
   ];
 
   const faqList = document.getElementById('faqList');
-  let faqOpen = 0;
-  function renderFaqs() {
+  function initFaqs() {
     faqList.innerHTML = faqs.map((f, i) => `
-      <div class="faq-item${i === faqOpen ? ' active' : ''}">
+      <div class="faq-item${i === 0 ? ' active' : ''}">
         <button class="faq-question" data-index="${i}">
           <span>${f.q}</span>
-          <svg class="faq-chevron${i === faqOpen ? ' open' : ''}" data-icon viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          <svg class="faq-chevron${i === 0 ? ' open' : ''}" data-icon viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
-        <div class="faq-answer${i === faqOpen ? ' open' : ''}"><p>${f.a.replace(/<\/?p>/g,'')}</p></div>
+        <div class="faq-answer${i === 0 ? ' open' : ''}">
+          <div class="faq-answer-body"><p>${f.a.replace(/<\/?p>/g,'')}</p></div>
+        </div>
       </div>
     `).join('');
     faqList.querySelectorAll('.faq-question').forEach(btn => {
       btn.addEventListener('click', () => {
         const idx = parseInt(btn.dataset.index);
-        faqOpen = faqOpen === idx ? null : idx;
-        renderFaqs();
+        const items = faqList.querySelectorAll('.faq-item');
+        const clicked = items[idx];
+        const wasOpen = clicked.classList.contains('active');
+        items.forEach(item => {
+          item.classList.remove('active');
+          item.querySelector('.faq-answer').classList.remove('open');
+          item.querySelector('.faq-chevron').classList.remove('open');
+        });
+        if (!wasOpen) {
+          clicked.classList.add('active');
+          clicked.querySelector('.faq-answer').classList.add('open');
+          clicked.querySelector('.faq-chevron').classList.add('open');
+        }
       });
     });
   }
-  // ── Count-up stats ──
+  // ── Count-up / countdown stats ──
   (function() {
     function easeOutQuart(t) { return 1 - Math.pow(1 - t, 4); }
 
@@ -1331,10 +1365,20 @@
         const progress = Math.min(elapsed / duration, 1);
         const value = Math.round(easeOutQuart(progress) * target);
         let display = value.toString();
-        if (separator) {
-          display = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-        }
+        if (separator) display = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
         el.textContent = display + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    function animateCountDown(el, from, to, suffix, duration) {
+      const startTime = performance.now();
+      function tick(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const value = Math.round(from - easeOutQuart(progress) * (from - to));
+        el.textContent = value + suffix;
         if (progress < 1) requestAnimationFrame(tick);
       }
       requestAnimationFrame(tick);
@@ -1349,17 +1393,16 @@
         statObserver.unobserve(entry.target);
 
         const statValues = document.querySelectorAll('.hero-stat-value');
-        // statValues[0] = "10.000+", statValues[1] = "5 menit", statValues[2] = "0%"
-        if (statValues[0]) animateCount(statValues[0], 10000, '+', true, 1800);
-        if (statValues[1]) animateCount(statValues[1], 5, ' menit', false, 1800);
-        // stat[2] = "0%" — no animation needed, HTML value stays as-is
+        // statValues[0] = "5 menit", statValues[1] = "0%", statValues[2] = "100%"
+        if (statValues[0]) animateCountDown(statValues[0], 120, 5, ' menit', 2000);
+        // stat[1] and stat[2] — no animation needed, HTML values stay as-is
       });
     }, { threshold: 0.5 });
 
     statObserver.observe(statsSection);
   })();
 
-  renderFaqs();
+  initFaqs();
 
 </script>
 
