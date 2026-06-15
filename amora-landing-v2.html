@@ -732,6 +732,16 @@
       pointer-events: none;
     }
 
+    /* ── Shared "app window" chrome — signals these widgets are UI mockups ── */
+    .bento-chrome {
+      display: flex; align-items: center; gap: 6px;
+      margin-bottom: 18px; position: relative; z-index: 1;
+    }
+    .bento-chrome-dot { width: 9px; height: 9px; border-radius: 50%; opacity: 0.55; }
+    .bento-chrome-dot.dot-red    { background: #ff5f57; }
+    .bento-chrome-dot.dot-yellow { background: #febc2e; }
+    .bento-chrome-dot.dot-green  { background: #28c840; }
+
     /* ── Live Orders widget ── */
     .orders-widget-header {
       display: flex; align-items: center; gap: 10px;
@@ -773,6 +783,14 @@
     }
     .order-card.entering { opacity: 0; transform: scale(0.92) translateY(-18px); }
     .order-card.exiting  { opacity: 0; transform: scale(0.95) translateY(18px); }
+    .order-card.just-in  { animation: order-card-flash 1.8s cubic-bezier(0.22,1,0.36,1) forwards; }
+    @keyframes order-card-flash {
+      0%   { background: rgba(107,142,90,0.16); border-color: var(--accent-border); box-shadow: 0 0 0 1px var(--accent-border), 0 0 24px rgba(107,142,90,0.18); }
+      100% { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.06); box-shadow: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .order-card.just-in { animation: none; }
+    }
     .order-card-icon {
       flex-shrink: 0;
       width: 36px; height: 36px; border-radius: var(--r-md);
@@ -830,26 +848,26 @@
       position: absolute; top: 0; left: 0; right: 0;
       height: 0%;
       background: linear-gradient(180deg, var(--accent) 0%, var(--accent-light) 100%);
-      animation: track-fill 6s cubic-bezier(0.45,0,0.55,1) infinite;
+      transition: height 1.7s cubic-bezier(0.22,1,0.36,1) 0.3s;
     }
     .tracking-dot {
       position: absolute; left: 16px; top: 0;
       width: 8px; height: 8px; border-radius: 50%;
       background: var(--accent-light);
       box-shadow: 0 0 8px 2px var(--accent-glow);
-      animation: track-dot 6s cubic-bezier(0.45,0,0.55,1) infinite;
+      opacity: 0;
+      transition: top 1.7s cubic-bezier(0.22,1,0.36,1) 0.3s, opacity 0.4s ease 0.3s;
     }
-    @keyframes track-fill {
-      0%   { height: 0%; }
-      45%  { height: 75%; }
-      55%  { height: 75%; }
-      100% { height: 0%; }
+    /* Fill in once when the widget scrolls into view (reuses the global .reveal system) */
+    .reveal.visible .tracking-line-fill { height: 75%; }
+    .reveal.visible .tracking-dot {
+      top: 75%;
+      opacity: 1;
+      animation: track-dot-glow 2.6s ease-in-out 2s infinite;
     }
-    @keyframes track-dot {
-      0%   { top: 0%; }
-      45%  { top: 75%; }
-      55%  { top: 75%; }
-      100% { top: 0%; }
+    @keyframes track-dot-glow {
+      0%, 100% { box-shadow: 0 0 8px 2px var(--accent-glow); }
+      50%      { box-shadow: 0 0 14px 5px var(--accent-glow); }
     }
     .tracking-step {
       position: relative;
@@ -891,8 +909,8 @@
     .tracking-step-text span { font-size: 0.75rem; color: var(--text-40); }
 
     @media (prefers-reduced-motion: reduce) {
-      .tracking-line-fill { animation: none; height: 75%; }
-      .tracking-dot       { animation: none; opacity: 0; }
+      .tracking-line-fill { transition: none; height: 75%; }
+      .tracking-dot       { transition: none; animation: none; top: 75%; opacity: 1; }
       .tracking-node-pulse::after { animation: none; opacity: 0; }
     }
 
@@ -1646,6 +1664,11 @@
       </div>
       <div class="feature-image order-first reveal from-right delay-2">
         <div class="bento-widget orders-widget" id="ordersWidget">
+          <div class="bento-chrome">
+            <span class="bento-chrome-dot dot-red"></span>
+            <span class="bento-chrome-dot dot-yellow"></span>
+            <span class="bento-chrome-dot dot-green"></span>
+          </div>
           <div class="orders-widget-header">
             <span class="orders-widget-icon"><svg data-icon viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
             <span class="orders-widget-title">Pesanan Masuk</span>
@@ -1665,6 +1688,11 @@
     <div class="feature-grid setup-grid">
       <div class="feature-image setup reveal from-left order-first">
         <div class="bento-widget tracking-widget">
+          <div class="bento-chrome">
+            <span class="bento-chrome-dot dot-red"></span>
+            <span class="bento-chrome-dot dot-yellow"></span>
+            <span class="bento-chrome-dot dot-green"></span>
+          </div>
           <div class="tracking-widget-header">
             <span class="tracking-widget-title">Lacak Pesanan</span>
             <span class="tracking-widget-id">#AMR-7421</span>
@@ -2241,6 +2269,7 @@
       requestAnimationFrame(function() {
         requestAnimationFrame(function() {
           card.classList.remove('entering');
+          card.classList.add('just-in');
         });
       });
 
@@ -2264,10 +2293,18 @@
 
     var widget = document.getElementById('ordersWidget');
     var started = false;
+    function scheduleNext() {
+      // Slightly randomized interval so new orders don't feel metronomic
+      var delay = 2600 + Math.random() * 2200;
+      setTimeout(function() {
+        addOrder();
+        scheduleNext();
+      }, delay);
+    }
     function start() {
       if (started) return;
       started = true;
-      setInterval(addOrder, 3000);
+      scheduleNext();
     }
 
     if ('IntersectionObserver' in window && widget) {
