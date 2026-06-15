@@ -1630,25 +1630,28 @@
 
 <div class="section-divider" aria-hidden="true"></div>
 
-<!-- ══════════════ FEATURE: MARGIN ══════════════ -->
+<!-- ══════════════ FEATURE: LIVE ORDERS ══════════════ -->
 <section id="fitur" class="py-section">
   <div class="section-inner">
     <div class="feature-grid margin-grid">
       <div class="feature-text reveal from-left">
         <span class="section-eyebrow"><span class="section-eyebrow-dot"></span>Keunggulan Amora</span>
         <h2>Amankan <span class="accent">margin</span><br>produk toko Anda</h2>
-        <p>Jual langsung melalui website toko sendiri tanpa bergantung sepenuhnya pada marketplace. Margin keuntungan tetap optimal, brand bisnis lebih profesional.</p>
+        <p>Jual langsung melalui website toko sendiri tanpa bergantung sepenuhnya pada marketplace. Setiap pesanan masuk langsung ke dashboard Anda secara real-time — margin keuntungan tetap optimal, brand bisnis lebih profesional.</p>
         <ul class="feature-bullets">
+          <li><span class="feature-bullet-icon"><svg data-icon viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Notifikasi pesanan masuk secara real-time</li>
           <li><span class="feature-bullet-icon"><svg data-icon viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Tanpa potongan komisi marketplace</li>
-          <li><span class="feature-bullet-icon"><svg data-icon viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Brand bisnis yang lebih terpercaya</li>
           <li><span class="feature-bullet-icon"><svg data-icon viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Kontrol penuh atas data pelanggan</li>
         </ul>
       </div>
       <div class="feature-image order-first reveal from-right delay-2">
-        <div class="animate-float">
-          <div class="feature-image-frame">
-            <img src="./asset/feature-margin.png" alt="Margin Analytics">
+        <div class="bento-widget orders-widget" id="ordersWidget">
+          <div class="orders-widget-header">
+            <span class="orders-widget-icon"><svg data-icon viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+            <span class="orders-widget-title">Pesanan Masuk</span>
+            <span class="orders-widget-live"><span class="section-eyebrow-dot"></span>Live</span>
           </div>
+          <div class="orders-widget-list" id="ordersList"></div>
         </div>
         <div class="glow-bg"></div>
       </div>
