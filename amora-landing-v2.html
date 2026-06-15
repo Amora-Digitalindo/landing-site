@@ -560,6 +560,24 @@
         drop-shadow(0 60px 120px rgba(0,0,0,0.90))
         drop-shadow(0 20px 40px rgba(0,0,0,0.75));
     }
+    /* Inline SVG store UI hero */
+    .hero-store-svg {
+      width: 100%; display: block; border-radius: var(--r-2xl);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.08),
+        0 0 48px rgba(107,142,90,0.38),
+        0 0 120px rgba(107,142,90,0.18),
+        0 60px 120px rgba(0,0,0,0.88),
+        0 20px 40px rgba(0,0,0,0.72);
+    }
+    /* animated notif badge */
+    @keyframes heroNotifPop {
+      0% { opacity: 0; transform: translateY(8px) scale(0.9); }
+      100% { opacity: 1; transform: none; }
+    }
+    .hero-notif-badge {
+      animation: heroNotifPop 0.5s cubic-bezier(0.22,1,0.36,1) 1.4s both;
+    }
     /* Ambient glow layers behind mockup */
     .hero-mockup-glow {
       position: absolute; z-index: -1;
@@ -1376,22 +1394,46 @@
     .sv-stat-label { font-size: 8px; color: rgba(255,255,255,0.35); margin-bottom: 4px; }
     .sv-stat-value { font-size: 15px; font-weight: 800; color: var(--text); font-family: var(--font-display); }
     .sv-stat-sub { font-size: 7.5px; color: rgba(107,142,90,0.8); margin-top: 2px; }
-    .sv-chart-label { font-size: 8.5px; color: rgba(255,255,255,0.3); margin-bottom: 8px; }
-    .sv-chart { display: flex; align-items: flex-end; gap: 5px; height: 100px; }
+    /* Dashboard chart — rich bar chart */
+    .sv-chart-hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .sv-chart-label { font-size: 8.5px; color: rgba(255,255,255,0.3); }
+    .sv-chart-growth { font-size: 7px; font-weight: 700; color: var(--accent-light); background: rgba(107,142,90,0.12); border: 1px solid rgba(107,142,90,0.22); padding: 2px 7px; border-radius: 8px; }
+    .sv-chart { display: flex; align-items: flex-end; gap: 4px; height: 84px; }
     .sv-bar {
-      flex: 1; border-radius: 3px 3px 0 0;
-      background: linear-gradient(180deg, rgba(107,142,90,0.8) 0%, rgba(107,142,90,0.2) 100%);
-      height: 0;
-      transition: height 0.7s cubic-bezier(0.22,1,0.36,1);
+      flex: 1; border-radius: 3px 3px 0 0; height: 0; position: relative;
+      background: linear-gradient(180deg,
+        rgba(143,184,122,0.9) 0%,
+        rgba(107,142,90,0.6) 45%,
+        rgba(107,142,90,0.15) 100%);
+      transition: height 0.65s cubic-bezier(0.22,1,0.36,1);
+    }
+    .sv-bar::before {
+      content: attr(data-v);
+      position: absolute; top: 4px; left: 50%; transform: translateX(-50%);
+      font-size: 6px; font-weight: 700; color: rgba(255,255,255,0.6);
+      white-space: nowrap; opacity: 0;
+      transition: opacity 0.2s var(--vd, 0.9s);
+    }
+    .sv-bar::after {
+      content: ''; position: absolute; top: 0; left: 10%; width: 80%; height: 2px;
+      border-radius: 2px; background: rgba(255,255,255,0.28);
     }
     .showcase-view.active .sv-bar { height: var(--bh); }
-    .sv-bar:nth-child(1) { --bh: 45%; transition-delay: 0.1s; }
-    .sv-bar:nth-child(2) { --bh: 62%; transition-delay: 0.16s; }
-    .sv-bar:nth-child(3) { --bh: 38%; transition-delay: 0.22s; }
-    .sv-bar:nth-child(4) { --bh: 80%; transition-delay: 0.28s; }
-    .sv-bar:nth-child(5) { --bh: 55%; transition-delay: 0.34s; }
-    .sv-bar:nth-child(6) { --bh: 70%; transition-delay: 0.40s; }
-    .sv-bar:nth-child(7) { --bh: 91%; transition-delay: 0.46s; background: linear-gradient(180deg, rgba(107,142,90,1) 0%, rgba(107,142,90,0.35) 100%); }
+    .showcase-view.active .sv-bar::before { opacity: 1; }
+    .sv-chart-days { display: flex; gap: 4px; margin-top: 4px; }
+    .sv-bar-day { flex: 1; text-align: center; font-size: 6.5px; color: rgba(255,255,255,0.2); }
+    .sv-bar:nth-child(1) { --bh: 45%; transition-delay: 0.10s; --vd: 0.65s; }
+    .sv-bar:nth-child(2) { --bh: 62%; transition-delay: 0.16s; --vd: 0.71s; }
+    .sv-bar:nth-child(3) { --bh: 38%; transition-delay: 0.22s; --vd: 0.77s; }
+    .sv-bar:nth-child(4) { --bh: 80%; transition-delay: 0.28s; --vd: 0.83s; }
+    .sv-bar:nth-child(5) { --bh: 55%; transition-delay: 0.34s; --vd: 0.89s; }
+    .sv-bar:nth-child(6) { --bh: 70%; transition-delay: 0.40s; --vd: 0.95s; }
+    .sv-bar:nth-child(7) { --bh: 91%; transition-delay: 0.46s; --vd: 1.01s;
+      background: linear-gradient(180deg, var(--accent-light) 0%, var(--accent) 45%, rgba(107,142,90,0.3) 100%);
+      filter: drop-shadow(0 -2px 6px rgba(143,184,122,0.5));
+    }
+    .sv-bar:nth-child(7)::before { color: var(--accent-light); }
+    .sv-bar:nth-child(7)::after { background: rgba(255,255,255,0.4); }
     .sv-orders-label { font-size: 8.5px; color: rgba(255,255,255,0.3); margin: 10px 0 6px; }
     .sv-order-row {
       display: flex; align-items: center; gap: 8px; padding: 5px 0;
@@ -1454,39 +1496,159 @@
       box-shadow: 0 0 20px rgba(107,142,90,0.3);
     }
 
-    /* ── Panel 3: Kustomisasi ── */
-    .sv-kust-wrap {
-      display: grid; grid-template-columns: 160px 1fr; gap: 20px; height: 100%;
+    /* ── Panel 3: Kustomisasi (redesigned) ── */
+    .sv-visual-kust { display: flex; flex-direction: column; gap: 10px; height: 100%; padding: 16px 20px; }
+
+    /* Browser chrome wrapper */
+    .sv-kust-browser {
+      flex: 1; display: flex; flex-direction: column; min-height: 0;
+      border-radius: 10px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.4);
+      background: #10121a;
     }
-    .sv-kust-controls { display: flex; flex-direction: column; gap: 16px; }
-    .sv-kust-group-label { font-size: 9px; font-weight: 600; color: rgba(255,255,255,0.3); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; }
-    .sv-kust-colors { display: flex; gap: 8px; flex-wrap: wrap; }
-    .sv-kust-color {
-      width: 28px; height: 28px; border-radius: 50%; cursor: default;
-      transition: transform 0.2s, box-shadow 0.3s;
+    .sv-kust-chrome {
+      display: flex; align-items: center; gap: 8px; padding: 7px 12px;
+      background: rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.07);
+      flex-shrink: 0;
     }
-    .sv-kust-color.active { box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--kc, #6B8E5A); transform: scale(1.1); }
-    .sv-font-option {
-      padding: 7px 10px; border-radius: 6px; font-size: 10px;
-      border: 1px solid rgba(255,255,255,0.07); color: rgba(255,255,255,0.4);
-      margin-bottom: 4px; cursor: default; transition: all 0.2s;
+    .sv-kust-chrome-dots { display: flex; gap: 5px; }
+    .sv-kust-chrome-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .sv-kust-chrome-dot:nth-child(1) { background: #FF5F56; }
+    .sv-kust-chrome-dot:nth-child(2) { background: #FEBC2E; }
+    .sv-kust-chrome-dot:nth-child(3) { background: #27C840; }
+    .sv-kust-chrome-url {
+      flex: 1; background: rgba(255,255,255,0.06); border-radius: 4px;
+      padding: 3px 10px; font-size: 9px; font-family: 'SF Mono',monospace;
+      color: rgba(255,255,255,0.3); letter-spacing: 0.01em;
     }
-    .sv-font-option.active { border-color: rgba(107,142,90,0.4); color: var(--accent-light); background: rgba(107,142,90,0.06); }
-    .sv-kust-preview {
-      border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; overflow: hidden;
+
+    /* Store nav header inside browser */
+    .sv-kust-nav {
+      padding: 9px 16px; display: flex; align-items: center; justify-content: space-between;
+      transition: background-color 0.55s cubic-bezier(0.22,1,0.36,1); flex-shrink: 0;
+    }
+    .sv-kust-nav-logo { font-size: 10px; font-weight: 800; color: rgba(255,255,255,0.92); letter-spacing: 0.05em; }
+    .sv-kust-nav-links { display: flex; gap: 12px; }
+    .sv-kust-nav-links span { font-size: 8px; color: rgba(255,255,255,0.45); }
+    .sv-kust-nav-cta {
+      font-size: 8px; font-weight: 700; padding: 4px 10px; border-radius: 4px;
+      color: #fff; transition: background-color 0.55s cubic-bezier(0.22,1,0.36,1);
+    }
+
+    /* Products grid inside browser */
+    .sv-kust-products {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 8px;
+      padding: 12px 16px 14px; flex: 1; background: rgba(0,0,0,0.25);
+    }
+    .sv-kust-product {
+      border-radius: 8px; overflow: hidden;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
       display: flex; flex-direction: column;
     }
-    .sv-kust-store-header {
-      padding: 10px 16px; transition: background-color 0.5s ease;
-      display: flex; align-items: center; justify-content: space-between;
+    .sv-kust-product-thumb {
+      height: 52px; display: flex; align-items: center; justify-content: center;
+      transition: background 0.55s cubic-bezier(0.22,1,0.36,1);
     }
-    .sv-kust-store-logo { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.9); }
-    .sv-kust-store-links { display: flex; gap: 10px; }
-    .sv-kust-store-links span { font-size: 8px; color: rgba(255,255,255,0.4); }
-    .sv-kust-products { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; padding: 12px; flex: 1; }
-    .sv-kust-product { border-radius: 6px; overflow: hidden; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); }
-    .sv-kust-product-img { height: 54px; transition: background 0.5s; }
-    .sv-kust-product-label { font-size: 8px; color: rgba(255,255,255,0.5); padding: 5px 7px; }
+    .sv-kust-product-thumb svg { opacity: 0.55; }
+    .sv-kust-product-info { padding: 6px 8px; display: flex; flex-direction: column; gap: 3px; }
+    .sv-kust-product-name { font-size: 8px; font-weight: 600; color: rgba(255,255,255,0.75); }
+    .sv-kust-product-price {
+      font-size: 9px; font-weight: 700;
+      transition: color 0.55s cubic-bezier(0.22,1,0.36,1);
+    }
+    .sv-kust-product-btn {
+      margin: 0 8px 8px; padding: 4px 0; border-radius: 4px; text-align: center;
+      font-size: 7.5px; font-weight: 700; color: #fff;
+      transition: background-color 0.55s cubic-bezier(0.22,1,0.36,1);
+    }
+
+    /* Palette swatches toolbar below browser */
+    .sv-kust-palette {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 8px 12px; background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; flex-shrink: 0;
+    }
+    .sv-kust-palette-label { font-size: 9px; color: rgba(255,255,255,0.3); font-weight: 500; letter-spacing: 0.04em; margin-right: 4px; }
+    .sv-kust-swatch-wrap { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+    .sv-kust-swatch {
+      width: 22px; height: 22px; border-radius: 50%; cursor: default;
+      transition: transform 0.2s, box-shadow 0.35s;
+    }
+    .sv-kust-swatch.active { transform: scale(1.18); box-shadow: 0 0 0 2px rgba(0,0,0,0.8), 0 0 0 4px var(--kc, #6B8E5A); }
+    .sv-kust-swatch-name { font-size: 7px; color: rgba(255,255,255,0.3); transition: color 0.25s; }
+    .sv-kust-swatch-wrap.active .sv-kust-swatch-name { color: rgba(255,255,255,0.6); }
+
+    /* Kustomisasi — product thumbnails with images */
+    .sv-kust-product-thumb img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      mix-blend-mode: luminosity; opacity: 0.75;
+      transition: opacity 0.3s;
+    }
+    .sv-kust-product:hover .sv-kust-product-thumb img { opacity: 0.9; }
+
+    /* Kustomisasi — multi-tab control panel */
+    .sv-kust-controls {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 8px; overflow: hidden; flex-shrink: 0;
+    }
+    .sv-kust-tabs {
+      display: flex; border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .sv-kust-tab {
+      flex: 1; padding: 6px 4px; font-size: 8.5px; font-weight: 600; cursor: pointer;
+      color: rgba(255,255,255,0.3); background: none; border: none;
+      transition: color 0.2s, background 0.2s; position: relative;
+    }
+    .sv-kust-tab.active {
+      color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.04);
+    }
+    .sv-kust-tab.active::after {
+      content: ''; position: absolute; bottom: 0; left: 20%; width: 60%; height: 1.5px;
+      background: var(--accent-light); border-radius: 2px;
+    }
+    .sv-kust-pane { display: none; padding: 8px 10px; }
+    .sv-kust-pane.active { display: flex; align-items: center; justify-content: center; gap: 8px; }
+
+    /* Warna pane */
+    .sv-kust-pane[data-pane="warna"].active { gap: 10px; }
+
+    /* Font pane */
+    .sv-kust-font-opt {
+      flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
+      padding: 6px 4px; border-radius: 6px; cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .sv-kust-font-opt.active {
+      border-color: rgba(107,142,90,0.4); background: rgba(107,142,90,0.08);
+    }
+    .sv-kust-font-preview {
+      font-size: 16px; font-weight: 700; color: rgba(255,255,255,0.7); line-height: 1;
+    }
+    .sv-kust-font-name { font-size: 7px; color: rgba(255,255,255,0.3); }
+    .sv-kust-font-opt.active .sv-kust-font-name { color: var(--accent-light); }
+
+    /* Layout pane */
+    .sv-kust-layout-opt {
+      flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px;
+      padding: 6px 4px; border-radius: 6px; cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .sv-kust-layout-opt.active {
+      border-color: rgba(107,142,90,0.4); background: rgba(107,142,90,0.08);
+    }
+    .sv-kust-layout-opt svg { width: 16px; height: 16px; opacity: 0.5; }
+    .sv-kust-layout-opt.active svg { opacity: 1; color: var(--accent-light); }
+    .sv-kust-layout-name { font-size: 7px; color: rgba(255,255,255,0.3); }
+    .sv-kust-layout-opt.active .sv-kust-layout-name { color: var(--accent-light); }
+
+    /* Kustomisasi — product grid layout variants */
+    .sv-kust-products.layout-list { grid-template-columns: 1fr; }
+    .sv-kust-products.layout-list .sv-kust-product { flex-direction: row; }
+    .sv-kust-products.layout-list .sv-kust-product-thumb { height: 42px; width: 52px; flex-shrink: 0; }
+    .sv-kust-products.layout-mosaic .sv-kust-product:nth-child(2) .sv-kust-product-thumb { height: 72px; }
 
     /* ── Panel 4: Promo ── */
     .sv-promo-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
@@ -1536,8 +1698,14 @@
     .showcase-view { padding: 0; }
 
     .sv-split {
-      display: grid; grid-template-columns: 260px 1fr; height: 100%;
+      display: grid; grid-template-columns: 280px 1fr; height: 100%;
     }
+    @media (min-width: 1100px) {
+      .sv-split { grid-template-columns: 310px 1fr; }
+      .showcase-panel { height: 490px; }
+    }
+
+    /* Copy (wording) column */
     .sv-copy {
       padding: 36px 28px; display: flex; flex-direction: column; justify-content: center; gap: 18px;
       border-right: 1px solid rgba(255,255,255,0.06);
@@ -1641,9 +1809,8 @@
       .showcase-panel { height: auto; min-height: 420px; }
       .sv-products { grid-template-columns: repeat(2, 1fr); }
       .sv-stats { grid-template-columns: 1fr 1fr; }
-      .sv-kust-wrap { grid-template-columns: 1fr; }
-      .sv-kust-controls { display: none; }
       .sv-visual { padding: 14px; }
+      .sv-visual-kust { padding: 10px; gap: 8px; }
     }
 
     /* ═══════════════════════════════════════
@@ -2252,7 +2419,172 @@
           <div class="hero-mockup-rays" aria-hidden="true"></div>
           <div class="hero-mockup-ground"></div>
           <div class="hero-3d-card" id="hero3dCard">
-            <img src="./asset/hero-mockup.png" alt="Dashboard Amora">
+            <svg class="hero-store-svg" viewBox="0 0 960 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tampilan toko online Amora">
+              <defs>
+                <linearGradient id="hsBannerGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#1c3320"/>
+                  <stop offset="100%" stop-color="#0d1a10"/>
+                </linearGradient>
+                <linearGradient id="hsAccentGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#8FB87A"/>
+                  <stop offset="100%" stop-color="#4d7a3a"/>
+                </linearGradient>
+                <linearGradient id="hsCardGrad1" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#1a1f2e"/>
+                  <stop offset="100%" stop-color="#141820"/>
+                </linearGradient>
+                <linearGradient id="hsStatGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="rgba(107,142,90,0.18)"/>
+                  <stop offset="100%" stop-color="rgba(107,142,90,0.04)"/>
+                </linearGradient>
+                <clipPath id="hsCardClip">
+                  <rect width="960" height="480" rx="20"/>
+                </clipPath>
+                <clipPath id="hsProdClip1"><rect x="24" y="168" width="210" height="110" rx="8"/></clipPath>
+                <clipPath id="hsProdClip2"><rect x="248" y="168" width="210" height="110" rx="8"/></clipPath>
+                <clipPath id="hsProdClip3"><rect x="472" y="168" width="210" height="110" rx="8"/></clipPath>
+                <clipPath id="hsProdClip4"><rect x="696" y="168" width="240" height="110" rx="8"/></clipPath>
+                <clipPath id="hsProdClip5"><rect x="24" y="294" width="210" height="110" rx="8"/></clipPath>
+                <clipPath id="hsProdClip6"><rect x="248" y="294" width="210" height="110" rx="8"/></clipPath>
+                <clipPath id="hsProdClip7"><rect x="472" y="294" width="210" height="110" rx="8"/></clipPath>
+              </defs>
+
+              <!-- Base card -->
+              <rect width="960" height="480" rx="20" fill="#0c0e1a"/>
+              <g clip-path="url(#hsCardClip)">
+
+                <!-- Subtle grid background -->
+                <line x1="0" y1="56" x2="960" y2="56" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+
+                <!-- ── Nav bar ── -->
+                <rect width="960" height="56" fill="#0f1120"/>
+                <!-- Logo dot -->
+                <circle cx="32" cy="28" r="7" fill="url(#hsAccentGrad)"/>
+                <text x="48" y="34" font-family="Geist,Inter,sans-serif" font-size="14" font-weight="800" fill="rgba(255,255,255,0.92)" letter-spacing="0.5">TOKO NUSANTARA</text>
+                <!-- Nav links -->
+                <text x="560" y="34" font-family="Inter,sans-serif" font-size="11.5" fill="rgba(255,255,255,0.4)">Beranda</text>
+                <text x="638" y="34" font-family="Inter,sans-serif" font-size="11.5" fill="rgba(255,255,255,0.4)">Produk</text>
+                <text x="706" y="34" font-family="Inter,sans-serif" font-size="11.5" fill="rgba(255,255,255,0.4)">Promo</text>
+                <text x="764" y="34" font-family="Inter,sans-serif" font-size="11.5" fill="rgba(255,255,255,0.4)">Kontak</text>
+                <!-- CTA Button -->
+                <rect x="836" y="15" width="100" height="30" rx="8" fill="url(#hsAccentGrad)"/>
+                <text x="886" y="35" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">Buka Toko</text>
+                <!-- Cart icon -->
+                <circle cx="946" cy="19" r="8" fill="rgba(107,142,90,0.2)" stroke="rgba(107,142,90,0.4)" stroke-width="1"/>
+                <text x="946" y="24" font-family="Inter,sans-serif" font-size="9" fill="rgba(255,255,255,0.7)" text-anchor="middle">3</text>
+
+                <!-- ── Hero banner strip ── -->
+                <rect x="16" y="68" width="928" height="86" rx="12" fill="url(#hsBannerGrad)"/>
+                <rect x="16" y="68" width="928" height="86" rx="12" fill="none" stroke="rgba(107,142,90,0.25)" stroke-width="1"/>
+                <!-- Banner text left -->
+                <text x="40" y="98" font-family="Inter,sans-serif" font-size="9" fill="rgba(107,142,90,0.8)" letter-spacing="1" font-weight="600">✦ KOLEKSI TERBARU 2025</text>
+                <text x="40" y="118" font-family="Geist,Inter,sans-serif" font-size="20" font-weight="800" fill="rgba(255,255,255,0.92)">Belanja Lebih Hemat</text>
+                <text x="40" y="140" font-family="Inter,sans-serif" font-size="13" fill="rgba(255,255,255,0.45)">Promo spesial hingga 50% untuk semua kategori</text>
+                <!-- Banner CTA -->
+                <rect x="582" y="86" width="130" height="32" rx="8" fill="rgba(107,142,90,0.2)" stroke="rgba(107,142,90,0.4)" stroke-width="1"/>
+                <text x="647" y="107" font-family="Inter,sans-serif" font-size="11.5" font-weight="600" fill="rgba(143,184,122,0.9)" text-anchor="middle">Lihat Koleksi →</text>
+                <!-- Banner decorative dots -->
+                <circle cx="860" cy="90" r="28" fill="rgba(107,142,90,0.08)"/>
+                <circle cx="860" cy="90" r="16" fill="rgba(107,142,90,0.12)"/>
+                <circle cx="860" cy="90" r="7" fill="rgba(107,142,90,0.35)"/>
+                <circle cx="900" cy="120" r="18" fill="rgba(107,142,90,0.07)"/>
+                <circle cx="820" cy="130" r="12" fill="rgba(107,142,90,0.06)"/>
+
+                <!-- ── Section label ── -->
+                <text x="24" y="160" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="rgba(255,255,255,0.35)" letter-spacing="0.5">PRODUK PILIHAN</text>
+                <line x1="110" y1="155" x2="940" y2="155" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+
+                <!-- ── Product cards row 1 ── -->
+                <!-- Card 1 -->
+                <rect x="24" y="168" width="210" height="110" rx="8" fill="url(#hsCardGrad1)" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+                <image href="./asset/feature-illustration-1.png" x="24" y="168" width="210" height="68" clip-path="url(#hsProdClip1)" preserveAspectRatio="xMidYMid slice" opacity="0.7"/>
+                <rect x="24" y="168" width="210" height="68" fill="url(#hsBannerGrad)" opacity="0.4"/>
+                <text x="36" y="256" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="rgba(255,255,255,0.8)">Batik Kontemporer</text>
+                <text x="36" y="270" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="#8FB87A">Rp 299.000</text>
+
+                <!-- Card 2 -->
+                <rect x="248" y="168" width="210" height="110" rx="8" fill="url(#hsCardGrad1)" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+                <image href="./asset/feature-illustration-2.png" x="248" y="168" width="210" height="68" clip-path="url(#hsProdClip2)" preserveAspectRatio="xMidYMid slice" opacity="0.7"/>
+                <rect x="248" y="168" width="210" height="68" fill="url(#hsBannerGrad)" opacity="0.4"/>
+                <text x="260" y="256" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="rgba(255,255,255,0.8)">Tas Anyam Premium</text>
+                <text x="260" y="270" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="#8FB87A">Rp 189.000</text>
+
+                <!-- Card 3 -->
+                <rect x="472" y="168" width="210" height="110" rx="8" fill="url(#hsCardGrad1)" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+                <image href="./asset/feature-illustration-3.png" x="472" y="168" width="210" height="68" clip-path="url(#hsProdClip3)" preserveAspectRatio="xMidYMid slice" opacity="0.7"/>
+                <rect x="472" y="168" width="210" height="68" fill="url(#hsBannerGrad)" opacity="0.4"/>
+                <text x="484" y="256" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="rgba(255,255,255,0.8)">Kaos Lokal Edition</text>
+                <text x="484" y="270" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="#8FB87A">Rp 149.000</text>
+
+                <!-- Card 4 — wide featured -->
+                <rect x="696" y="168" width="240" height="236" rx="8" fill="rgba(107,142,90,0.07)" stroke="rgba(107,142,90,0.2)" stroke-width="1"/>
+                <rect x="696" y="168" width="240" height="1" fill="rgba(107,142,90,0.4)"/>
+                <image href="./asset/feature-illustration-4.png" x="696" y="168" width="240" height="130" clip-path="url(#hsProdClip4)" preserveAspectRatio="xMidYMid slice" opacity="0.65"/>
+                <rect x="700" y="174" width="60" height="16" rx="4" fill="rgba(107,142,90,0.3)" stroke="rgba(107,142,90,0.5)" stroke-width="1"/>
+                <text x="730" y="186" font-family="Inter,sans-serif" font-size="8" font-weight="700" fill="#8FB87A" text-anchor="middle">★ TERLARIS</text>
+                <text x="710" y="312" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="rgba(255,255,255,0.88)">Kain Tenun Flores</text>
+                <text x="710" y="328" font-family="Inter,sans-serif" font-size="9" fill="rgba(255,255,255,0.4)">Handwoven · Limited</text>
+                <text x="710" y="348" font-family="Inter,sans-serif" font-size="14" font-weight="800" fill="#8FB87A">Rp 450.000</text>
+                <rect x="706" y="362" width="224" height="30" rx="6" fill="url(#hsAccentGrad)"/>
+                <text x="818" y="382" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">+ Tambah ke Keranjang</text>
+
+                <!-- ── Product cards row 2 ── -->
+                <!-- Card 5 -->
+                <rect x="24" y="294" width="210" height="110" rx="8" fill="url(#hsCardGrad1)" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+                <image href="./asset/feature-illustration-5.png" x="24" y="294" width="210" height="68" clip-path="url(#hsProdClip5)" preserveAspectRatio="xMidYMid slice" opacity="0.7"/>
+                <rect x="24" y="294" width="210" height="68" fill="url(#hsBannerGrad)" opacity="0.4"/>
+                <text x="36" y="382" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="rgba(255,255,255,0.8)">Sepatu Kulit Asli</text>
+                <text x="36" y="396" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="#8FB87A">Rp 520.000</text>
+
+                <!-- Card 6 -->
+                <rect x="248" y="294" width="210" height="110" rx="8" fill="url(#hsCardGrad1)" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+                <image href="./asset/feature-illustration-1.png" x="248" y="294" width="210" height="68" clip-path="url(#hsProdClip6)" preserveAspectRatio="xMidYMid slice" opacity="0.6"/>
+                <rect x="248" y="294" width="210" height="68" fill="url(#hsBannerGrad)" opacity="0.4"/>
+                <text x="260" y="382" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="rgba(255,255,255,0.8)">Dompet Anyaman</text>
+                <text x="260" y="396" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="#8FB87A">Rp 95.000</text>
+
+                <!-- Card 7 -->
+                <rect x="472" y="294" width="210" height="110" rx="8" fill="url(#hsCardGrad1)" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+                <image href="./asset/feature-illustration-2.png" x="472" y="294" width="210" height="68" clip-path="url(#hsProdClip7)" preserveAspectRatio="xMidYMid slice" opacity="0.6"/>
+                <rect x="472" y="294" width="210" height="68" fill="url(#hsBannerGrad)" opacity="0.4"/>
+                <text x="484" y="382" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="rgba(255,255,255,0.8)">Jilbab Motif Nusantara</text>
+                <text x="484" y="396" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="#8FB87A">Rp 75.000</text>
+
+                <!-- ── Floating notification badges ── -->
+                <!-- New order badge (bottom-left area) -->
+                <g class="hero-notif-badge" transform="translate(28, 415)">
+                  <rect width="192" height="38" rx="9" fill="rgba(15,18,28,0.95)" stroke="rgba(107,142,90,0.35)" stroke-width="1"/>
+                  <rect width="192" height="1" rx="0" fill="rgba(107,142,90,0.5)" transform="translate(0,0)"/>
+                  <circle cx="20" cy="19" r="9" fill="rgba(107,142,90,0.2)"/>
+                  <text x="20" y="24" font-family="Inter,sans-serif" font-size="11" fill="#8FB87A" text-anchor="middle">✓</text>
+                  <text x="36" y="15" font-family="Inter,sans-serif" font-size="8.5" font-weight="700" fill="rgba(255,255,255,0.85)">Pesanan Baru Masuk</text>
+                  <text x="36" y="28" font-family="Inter,sans-serif" font-size="8" fill="rgba(255,255,255,0.35)">#AMR-9021 · Rp 299.000</text>
+                  <circle cx="182" cy="10" r="5" fill="#6B8E5A"/>
+                  <circle cx="182" cy="10" r="5" fill="rgba(107,142,90,0.4)" opacity="0.6"/>
+                </g>
+
+                <!-- Analytics mini widget -->
+                <g transform="translate(470, 415)">
+                  <rect width="210" height="50" rx="9" fill="rgba(15,18,28,0.92)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+                  <text x="12" y="18" font-family="Inter,sans-serif" font-size="8" fill="rgba(255,255,255,0.35)" font-weight="600" letter-spacing="0.5">PENGUNJUNG HARI INI</text>
+                  <text x="12" y="36" font-family="Geist,Inter,sans-serif" font-size="18" font-weight="800" fill="rgba(255,255,255,0.9)">1.284</text>
+                  <text x="78" y="36" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#8FB87A">↑ 18%</text>
+                  <!-- mini sparkline -->
+                  <polyline points="118,40 130,32 142,35 154,25 166,28 178,20 190,16 202,12" fill="none" stroke="rgba(107,142,90,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="202" cy="12" r="3" fill="#8FB87A"/>
+                </g>
+
+                <!-- bottom fade gradient -->
+                <defs>
+                  <linearGradient id="hsFadeBot" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="rgba(12,14,26,0)"/>
+                    <stop offset="100%" stop-color="rgba(12,14,26,0.65)"/>
+                  </linearGradient>
+                </defs>
+                <rect y="380" width="960" height="100" fill="url(#hsFadeBot)"/>
+
+              </g><!-- end clip -->
+            </svg>
           </div>
         </div>
       </div>
@@ -2560,11 +2892,24 @@
                       <div class="sv-stat-sub">↑ 24% bulan ini</div>
                     </div>
                   </div>
-                  <div class="sv-chart-label">Penjualan 7 Hari Terakhir</div>
+                  <div class="sv-chart-hdr">
+                    <span class="sv-chart-label">Penjualan 7 Hari Terakhir</span>
+                    <span class="sv-chart-growth">↑ 24%</span>
+                  </div>
                   <div class="sv-chart">
-                    <div class="sv-bar"></div><div class="sv-bar"></div><div class="sv-bar"></div>
-                    <div class="sv-bar"></div><div class="sv-bar"></div><div class="sv-bar"></div>
-                    <div class="sv-bar"></div>
+                    <div class="sv-bar" data-v="3.2jt"></div>
+                    <div class="sv-bar" data-v="4.5jt"></div>
+                    <div class="sv-bar" data-v="2.8jt"></div>
+                    <div class="sv-bar" data-v="5.9jt"></div>
+                    <div class="sv-bar" data-v="4.0jt"></div>
+                    <div class="sv-bar" data-v="5.1jt"></div>
+                    <div class="sv-bar" data-v="6.7jt"></div>
+                  </div>
+                  <div class="sv-chart-days">
+                    <span class="sv-bar-day">Sen</span><span class="sv-bar-day">Sel</span>
+                    <span class="sv-bar-day">Rab</span><span class="sv-bar-day">Kam</span>
+                    <span class="sv-bar-day">Jum</span><span class="sv-bar-day">Sab</span>
+                    <span class="sv-bar-day">Min</span>
                   </div>
                   <div class="sv-orders-label">Pesanan Terbaru</div>
                   <div class="sv-order-row">
@@ -2654,62 +2999,127 @@
                 <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Sinkron otomatis mobile &amp; desktop</div>
               </div>
             </div>
-            <div class="sv-visual">
-              <div class="sv-kust-wrap">
-                <div class="sv-kust-controls">
-                  <div>
-                    <div class="sv-kust-group-label">Tema Warna</div>
-                    <div class="sv-kust-colors" id="svKustColors">
-                      <div class="sv-kust-color-wrap">
-                        <div class="sv-kust-color active" style="background:#6B8E5A;--kc:#6B8E5A" data-bg="rgba(107,142,90,0.28)" data-name="Hijau Sage"></div>
-                        <div class="sv-kust-theme-label">Sage</div>
-                      </div>
-                      <div class="sv-kust-color-wrap">
-                        <div class="sv-kust-color" style="background:#5A7DB8;--kc:#5A7DB8" data-bg="rgba(90,125,184,0.28)" data-name="Biru Ocean"></div>
-                        <div class="sv-kust-theme-label">Ocean</div>
-                      </div>
-                      <div class="sv-kust-color-wrap">
-                        <div class="sv-kust-color" style="background:#C1614A;--kc:#C1614A" data-bg="rgba(193,97,74,0.28)" data-name="Merah Terracotta"></div>
-                        <div class="sv-kust-theme-label">Terra</div>
-                      </div>
-                      <div class="sv-kust-color-wrap">
-                        <div class="sv-kust-color" style="background:#B8963E;--kc:#B8963E" data-bg="rgba(184,150,62,0.28)" data-name="Emas Amber"></div>
-                        <div class="sv-kust-theme-label">Amber</div>
-                      </div>
-                      <div class="sv-kust-color-wrap">
-                        <div class="sv-kust-color" style="background:#8B5CB8;--kc:#8B5CB8" data-bg="rgba(139,92,184,0.28)" data-name="Ungu Royal"></div>
-                        <div class="sv-kust-theme-label">Royal</div>
-                      </div>
-                    </div>
+            <div class="sv-visual sv-visual-kust">
+
+              <!-- Browser frame -->
+              <div class="sv-kust-browser">
+                <!-- Chrome bar -->
+                <div class="sv-kust-chrome">
+                  <div class="sv-kust-chrome-dots">
+                    <div class="sv-kust-chrome-dot"></div>
+                    <div class="sv-kust-chrome-dot"></div>
+                    <div class="sv-kust-chrome-dot"></div>
                   </div>
-                  <div>
-                    <div class="sv-kust-group-label">Tipografi</div>
-                    <div class="sv-font-option active">Inter — Modern</div>
-                    <div class="sv-font-option">Playfair — Elegan</div>
-                    <div class="sv-font-option">Space Grotesk</div>
-                  </div>
+                  <div class="sv-kust-chrome-url">tokosaya.amora.id</div>
                 </div>
-                <div class="sv-kust-preview" id="svKustPreview">
-                  <div class="sv-kust-store-header" id="svKustHeader" style="background:rgba(107,142,90,0.28)">
-                    <div class="sv-kust-store-logo">TOKO SAYA</div>
-                    <div class="sv-kust-store-links"><span>Produk</span><span>Promo</span></div>
+                <!-- Store nav header (color-animated) -->
+                <div class="sv-kust-nav" id="svKustNav" style="background:rgba(107,142,90,0.3)">
+                  <div class="sv-kust-nav-logo">TOKO SAYA</div>
+                  <div class="sv-kust-nav-links">
+                    <span>Produk</span><span>Tentang</span><span>Promo</span>
                   </div>
-                  <div class="sv-kust-products">
-                    <div class="sv-kust-product">
-                      <div class="sv-kust-product-img" id="svKustImg1" style="background:rgba(107,142,90,0.22)"></div>
-                      <div class="sv-kust-product-label">Produk 1</div>
+                  <div class="sv-kust-nav-cta" id="svKustCta" style="background:#6B8E5A">Belanja</div>
+                </div>
+                <!-- Product grid -->
+                <div class="sv-kust-products" id="svKustGrid">
+                  <!-- Product 1 -->
+                  <div class="sv-kust-product">
+                    <div class="sv-kust-product-thumb" id="svKustThumb1" style="background:rgba(107,142,90,0.2)">
+                      <img src="./asset/feature-illustration-1.png" alt="Produk 1">
                     </div>
-                    <div class="sv-kust-product">
-                      <div class="sv-kust-product-img" id="svKustImg2" style="background:rgba(107,142,90,0.13)"></div>
-                      <div class="sv-kust-product-label">Produk 2</div>
+                    <div class="sv-kust-product-info">
+                      <div class="sv-kust-product-name" id="svKustName1">Sneakers Classic</div>
+                      <div class="sv-kust-product-price" id="svKustPrice1" style="color:#6B8E5A">Rp 249.000</div>
                     </div>
-                    <div class="sv-kust-product">
-                      <div class="sv-kust-product-img" id="svKustImg3" style="background:rgba(107,142,90,0.08)"></div>
-                      <div class="sv-kust-product-label">Produk 3</div>
+                    <div class="sv-kust-product-btn" id="svKustBtn1" style="background:#6B8E5A">+ Keranjang</div>
+                  </div>
+                  <!-- Product 2 -->
+                  <div class="sv-kust-product">
+                    <div class="sv-kust-product-thumb" id="svKustThumb2" style="background:rgba(107,142,90,0.13)">
+                      <img src="./asset/feature-illustration-2.png" alt="Produk 2">
                     </div>
+                    <div class="sv-kust-product-info">
+                      <div class="sv-kust-product-name" id="svKustName2">Tas Minimalis</div>
+                      <div class="sv-kust-product-price" id="svKustPrice2" style="color:#6B8E5A">Rp 189.000</div>
+                    </div>
+                    <div class="sv-kust-product-btn" id="svKustBtn2" style="background:#6B8E5A">+ Keranjang</div>
+                  </div>
+                  <!-- Product 3 -->
+                  <div class="sv-kust-product">
+                    <div class="sv-kust-product-thumb" id="svKustThumb3" style="background:rgba(107,142,90,0.08)">
+                      <img src="./asset/feature-illustration-3.png" alt="Produk 3">
+                    </div>
+                    <div class="sv-kust-product-info">
+                      <div class="sv-kust-product-name" id="svKustName3">Kaos Premium</div>
+                      <div class="sv-kust-product-price" id="svKustPrice3" style="color:#6B8E5A">Rp 129.000</div>
+                    </div>
+                    <div class="sv-kust-product-btn" id="svKustBtn3" style="background:#6B8E5A">+ Keranjang</div>
                   </div>
                 </div>
               </div>
+
+              <!-- Multi-tab customization controls -->
+              <div class="sv-kust-controls">
+                <div class="sv-kust-tabs" id="svKustTabs">
+                  <button class="sv-kust-tab active" data-tab="warna">🎨 Warna</button>
+                  <button class="sv-kust-tab" data-tab="font">Aa Font</button>
+                  <button class="sv-kust-tab" data-tab="layout">⊞ Layout</button>
+                </div>
+                <!-- Warna pane -->
+                <div class="sv-kust-pane active" data-pane="warna" id="svKustSwatches">
+                  <div class="sv-kust-swatch-wrap active">
+                    <div class="sv-kust-swatch active" style="background:#6B8E5A;--kc:#6B8E5A" data-solid="#6B8E5A" data-nav="rgba(107,142,90,0.3)"></div>
+                    <span class="sv-kust-swatch-name">Sage</span>
+                  </div>
+                  <div class="sv-kust-swatch-wrap">
+                    <div class="sv-kust-swatch" style="background:#5A7DB8;--kc:#5A7DB8" data-solid="#5A7DB8" data-nav="rgba(90,125,184,0.3)"></div>
+                    <span class="sv-kust-swatch-name">Ocean</span>
+                  </div>
+                  <div class="sv-kust-swatch-wrap">
+                    <div class="sv-kust-swatch" style="background:#C1614A;--kc:#C1614A" data-solid="#C1614A" data-nav="rgba(193,97,74,0.3)"></div>
+                    <span class="sv-kust-swatch-name">Terra</span>
+                  </div>
+                  <div class="sv-kust-swatch-wrap">
+                    <div class="sv-kust-swatch" style="background:#B8963E;--kc:#B8963E" data-solid="#B8963E" data-nav="rgba(184,150,62,0.3)"></div>
+                    <span class="sv-kust-swatch-name">Amber</span>
+                  </div>
+                  <div class="sv-kust-swatch-wrap">
+                    <div class="sv-kust-swatch" style="background:#8B5CB8;--kc:#8B5CB8" data-solid="#8B5CB8" data-nav="rgba(139,92,184,0.3)"></div>
+                    <span class="sv-kust-swatch-name">Royal</span>
+                  </div>
+                </div>
+                <!-- Font pane -->
+                <div class="sv-kust-pane" data-pane="font">
+                  <div class="sv-kust-font-opt active" data-font="sans">
+                    <span class="sv-kust-font-preview" style="font-family:Inter,sans-serif">Aa</span>
+                    <span class="sv-kust-font-name">Modern</span>
+                  </div>
+                  <div class="sv-kust-font-opt" data-font="serif">
+                    <span class="sv-kust-font-preview" style="font-family:Georgia,serif">Aa</span>
+                    <span class="sv-kust-font-name">Classic</span>
+                  </div>
+                  <div class="sv-kust-font-opt" data-font="mono">
+                    <span class="sv-kust-font-preview" style="font-family:'SF Mono',monospace">Aa</span>
+                    <span class="sv-kust-font-name">Techy</span>
+                  </div>
+                </div>
+                <!-- Layout pane -->
+                <div class="sv-kust-pane" data-pane="layout">
+                  <div class="sv-kust-layout-opt active" data-layout="grid">
+                    <svg viewBox="0 0 16 16" fill="currentColor"><rect x="0" y="0" width="7" height="7" rx="1"/><rect x="9" y="0" width="7" height="7" rx="1"/><rect x="0" y="9" width="7" height="7" rx="1"/><rect x="9" y="9" width="7" height="7" rx="1"/></svg>
+                    <span class="sv-kust-layout-name">Grid</span>
+                  </div>
+                  <div class="sv-kust-layout-opt" data-layout="list">
+                    <svg viewBox="0 0 16 16" fill="currentColor"><rect x="0" y="1" width="16" height="4" rx="1"/><rect x="0" y="7" width="16" height="4" rx="1"/><rect x="0" y="13" width="16" height="2" rx="1"/></svg>
+                    <span class="sv-kust-layout-name">List</span>
+                  </div>
+                  <div class="sv-kust-layout-opt" data-layout="mosaic">
+                    <svg viewBox="0 0 16 16" fill="currentColor"><rect x="0" y="0" width="7" height="10" rx="1"/><rect x="9" y="0" width="7" height="6" rx="1"/><rect x="0" y="12" width="7" height="4" rx="1"/><rect x="9" y="8" width="7" height="8" rx="1"/></svg>
+                    <span class="sv-kust-layout-name">Mosaic</span>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -3115,30 +3525,101 @@
     let timer = null;
     let started = false;
 
-    // Kustomisasi live color cycling in view 3
-    const kustColors = Array.from(document.querySelectorAll('#svKustColors .sv-kust-color'));
-    const kustHeader = document.getElementById('svKustHeader');
-    const kustImgs = [
-      document.getElementById('svKustImg1'),
-      document.getElementById('svKustImg2'),
-      document.getElementById('svKustImg3'),
+    // Kustomisasi live color cycling + font/layout switching in view 3
+    const kustSwatchWraps = Array.from(document.querySelectorAll('#svKustSwatches .sv-kust-swatch-wrap'));
+    const kustSwatches = Array.from(document.querySelectorAll('#svKustSwatches .sv-kust-swatch'));
+    const kustNav = document.getElementById('svKustNav');
+    const kustCta = document.getElementById('svKustCta');
+    const kustGrid = document.getElementById('svKustGrid');
+    const kustThumbs = [
+      document.getElementById('svKustThumb1'),
+      document.getElementById('svKustThumb2'),
+      document.getElementById('svKustThumb3'),
+    ];
+    const kustPrices = [
+      document.getElementById('svKustPrice1'),
+      document.getElementById('svKustPrice2'),
+      document.getElementById('svKustPrice3'),
+    ];
+    const kustBtns = [
+      document.getElementById('svKustBtn1'),
+      document.getElementById('svKustBtn2'),
+      document.getElementById('svKustBtn3'),
+    ];
+    const kustNames = [
+      document.getElementById('svKustName1'),
+      document.getElementById('svKustName2'),
+      document.getElementById('svKustName3'),
     ];
     let kustIdx = 0;
     let kustTimer = null;
 
+    // Tab switching
+    const kustTabBtns = Array.from(document.querySelectorAll('#svKustTabs .sv-kust-tab'));
+    const kustPanes = Array.from(document.querySelectorAll('.sv-kust-controls .sv-kust-pane'));
+    kustTabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        kustTabBtns.forEach(b => b.classList.remove('active'));
+        kustPanes.forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        const pane = document.querySelector(`.sv-kust-controls .sv-kust-pane[data-pane="${btn.dataset.tab}"]`);
+        if (pane) pane.classList.add('active');
+        // stop auto-cycle when user manually interacts with font/layout tabs
+        if (btn.dataset.tab !== 'warna') stopKustCycle();
+      });
+    });
+
+    // Font options
+    document.querySelectorAll('.sv-kust-font-opt').forEach(opt => {
+      opt.addEventListener('click', () => {
+        document.querySelectorAll('.sv-kust-font-opt').forEach(o => o.classList.remove('active'));
+        opt.classList.add('active');
+        const fontMap = { sans: 'Inter,sans-serif', serif: 'Georgia,serif', mono: "'SF Mono',monospace" };
+        const ff = fontMap[opt.dataset.font] || 'Inter,sans-serif';
+        kustNames.forEach(n => { if (n) n.style.fontFamily = ff; });
+        if (kustNav) kustNav.querySelector('.sv-kust-nav-logo').style.fontFamily = ff;
+      });
+    });
+
+    // Layout options
+    document.querySelectorAll('.sv-kust-layout-opt').forEach(opt => {
+      opt.addEventListener('click', () => {
+        document.querySelectorAll('.sv-kust-layout-opt').forEach(o => o.classList.remove('active'));
+        opt.classList.add('active');
+        if (!kustGrid) return;
+        kustGrid.classList.remove('layout-list', 'layout-mosaic');
+        if (opt.dataset.layout === 'list') kustGrid.classList.add('layout-list');
+        else if (opt.dataset.layout === 'mosaic') kustGrid.classList.add('layout-mosaic');
+      });
+    });
+
     function applyKustColor(idx) {
-      kustColors.forEach((c, i) => c.classList.toggle('active', i === idx));
-      const bg = kustColors[idx] ? kustColors[idx].dataset.bg : '';
-      if (kustHeader) kustHeader.style.background = bg;
-      if (kustImgs[0]) { kustImgs[0].style.background = bg; }
-      if (kustImgs[1]) { kustImgs[1].style.background = bg.replace('0.28','0.14'); }
-      if (kustImgs[2]) { kustImgs[2].style.background = bg.replace('0.28','0.08'); }
+      const swatch = kustSwatches[idx];
+      if (!swatch) return;
+      kustSwatches.forEach((s, i) => s.classList.toggle('active', i === idx));
+      kustSwatchWraps.forEach((w, i) => w.classList.toggle('active', i === idx));
+      const solid = swatch.dataset.solid || '#6B8E5A';
+      const nav = swatch.dataset.nav || 'rgba(107,142,90,0.3)';
+      if (kustNav) kustNav.style.background = nav;
+      if (kustCta) kustCta.style.background = solid;
+      kustPrices.forEach(p => { if (p) p.style.color = solid; });
+      kustBtns.forEach(b => { if (b) b.style.background = solid; });
+      const opacities = [0.2, 0.13, 0.08];
+      kustThumbs.forEach((t, i) => {
+        if (!t) return;
+        const h = solid.replace('#','');
+        const r = parseInt(h.slice(0,2),16), g = parseInt(h.slice(2,4),16), b = parseInt(h.slice(4,6),16);
+        t.style.background = `rgba(${r},${g},${b},${opacities[i]})`;
+      });
     }
 
     function startKustCycle() {
       if (reduced || kustTimer) return;
+      // only cycle if on warna tab
       kustTimer = setInterval(() => {
-        kustIdx = (kustIdx + 1) % kustColors.length;
+        const activeTab = document.querySelector('#svKustTabs .sv-kust-tab.active');
+        if (activeTab && activeTab.dataset.tab !== 'warna') return;
+        kustIdx = (kustIdx + 1) % kustSwatches.length;
         applyKustColor(kustIdx);
       }, 2200);
     }
