@@ -2195,6 +2195,96 @@
 
   initFaqs();
 
+  // ── Live Orders feed (Section: Pesanan Masuk) ──
+  (function() {
+    var list = document.getElementById('ordersList');
+    if (!list) return;
+
+    var ITEMS = [
+      { item: 'Sneakers Classic White', price: 'Rp 249.000' },
+      { item: 'Kaos Polos Premium',     price: 'Rp 89.000'  },
+      { item: 'Tas Selempang Kanvas',   price: 'Rp 175.000' },
+      { item: 'Kopi Arabika 250g',      price: 'Rp 65.000'  },
+      { item: 'Jaket Hoodie Oversize',  price: 'Rp 219.000' },
+      { item: 'Sandal Slip-On',         price: 'Rp 129.000' },
+      { item: 'Botol Minum Stainless',  price: 'Rp 95.000'  },
+      { item: 'Dompet Kulit Asli',      price: 'Rp 159.000' }
+    ];
+
+    var BAG_ICON = '<svg data-icon viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>';
+
+    function randomOrderId() {
+      return '#AMR-' + Math.floor(1000 + Math.random() * 9000);
+    }
+
+    function buildCard(data, animate) {
+      var card = document.createElement('div');
+      card.className = 'order-card' + (animate ? ' entering' : '');
+      card.innerHTML =
+        '<div class="order-card-icon">' + BAG_ICON + '</div>' +
+        '<div class="order-card-info">' +
+          '<div class="order-card-top">' +
+            '<span class="order-card-label">Pesanan Baru</span>' +
+            '<span class="order-card-id">' + randomOrderId() + '</span>' +
+          '</div>' +
+          '<div class="order-card-item">' + data.item + '</div>' +
+        '</div>' +
+        '<div class="order-card-price">' + data.price + '</div>';
+      return card;
+    }
+
+    function addOrder() {
+      var data = ITEMS[Math.floor(Math.random() * ITEMS.length)];
+      var card = buildCard(data, true);
+      list.insertBefore(card, list.firstChild);
+
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          card.classList.remove('entering');
+        });
+      });
+
+      var cards = list.querySelectorAll('.order-card');
+      if (cards.length > 3) {
+        var last = cards[cards.length - 1];
+        last.classList.add('exiting');
+        last.addEventListener('transitionend', function() {
+          if (last.parentNode) last.parentNode.removeChild(last);
+        }, { once: true });
+      }
+    }
+
+    // Initial 3 cards, no entrance animation
+    [ITEMS[0], ITEMS[1], ITEMS[2]].forEach(function(data) {
+      list.appendChild(buildCard(data, false));
+    });
+
+    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    var widget = document.getElementById('ordersWidget');
+    var started = false;
+    function start() {
+      if (started) return;
+      started = true;
+      setInterval(addOrder, 3000);
+    }
+
+    if ('IntersectionObserver' in window && widget) {
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            start();
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      io.observe(widget);
+    } else {
+      start();
+    }
+  })();
+
   // ── Logo Animation ──
   (function(){
     var la=document.querySelector('.logo-anim');
