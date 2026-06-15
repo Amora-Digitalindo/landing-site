@@ -1839,7 +1839,7 @@
     el.addEventListener('click', closeMenu);
   });
 
-  // Scroll reveal — with staggered entrance and fallback
+  // Scroll reveal — with staggered entrance and per-element fallback
   const revealEls = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
@@ -1850,13 +1850,17 @@
         }
       });
     }, { threshold: 0.05, rootMargin: '0px 0px -60px 0px' });
-    revealEls.forEach(el => observer.observe(el));
-    // Fallback: if observer hasn't revealed anything after 3s, force all visible
-    setTimeout(() => {
-      if (!document.querySelector('.reveal.visible')) {
-        revealEls.forEach(el => el.classList.add('visible'));
-      }
-    }, 3000);
+    revealEls.forEach(el => {
+      observer.observe(el);
+      // Per-element fallback: reveal this element if the observer hasn't
+      // caught it within 1.5s (handles edge cases/timing misses).
+      setTimeout(() => {
+        if (!el.classList.contains('visible')) {
+          el.classList.add('visible');
+          observer.unobserve(el);
+        }
+      }, 1500);
+    });
   } else {
     revealEls.forEach(el => el.classList.add('visible'));
   }
