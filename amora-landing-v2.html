@@ -1200,6 +1200,347 @@
     }
 
     /* ═══════════════════════════════════════
+       FEATURE SHOWCASE (resend-style)
+    ═══════════════════════════════════════ */
+    .feature-showcase { margin-top: 48px; }
+
+    /* Tab selector row — icons like resend.com tech stack */
+    .showcase-tabs-wrap {
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-bottom: none;
+      border-radius: var(--r-xl) var(--r-xl) 0 0;
+      padding: 16px 20px 0;
+      display: flex; gap: 4px;
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .showcase-tabs-wrap::-webkit-scrollbar { display: none; }
+
+    .showcase-tab {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      padding: 10px 16px 14px;
+      border-radius: var(--r-md) var(--r-md) 0 0;
+      cursor: pointer; flex-shrink: 0;
+      background: none; border: none;
+      color: rgba(255,255,255,0.35);
+      transition: color 0.2s, background 0.2s;
+      position: relative;
+    }
+    .showcase-tab::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px; border-radius: 2px 2px 0 0;
+      background: var(--accent-light);
+      transform: scaleX(0); transition: transform 0.25s;
+    }
+    .showcase-tab:hover { color: rgba(255,255,255,0.65); background: rgba(255,255,255,0.03); }
+    .showcase-tab.active { color: var(--accent-light); }
+    .showcase-tab.active::after { transform: scaleX(1); }
+
+    .showcase-tab-icon {
+      width: 38px; height: 38px; border-radius: var(--r-md);
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.25s;
+    }
+    .showcase-tab-icon svg { width: 17px; height: 17px; stroke: currentColor; }
+    .showcase-tab.active .showcase-tab-icon {
+      background: rgba(107,142,90,0.15); border-color: rgba(107,142,90,0.35);
+    }
+    .showcase-tab-label { font-size: 10.5px; font-weight: 500; white-space: nowrap; letter-spacing: 0.01em; }
+
+    /* Progress bar connecting tabs to panel */
+    .showcase-progress {
+      height: 2px; background: rgba(255,255,255,0.06);
+      position: relative; overflow: hidden;
+    }
+    .showcase-progress-fill {
+      position: absolute; left: 0; top: 0; height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+    }
+    @keyframes prog-run { from { width: 0% } to { width: 100% } }
+    .showcase-progress-fill.animating {
+      animation: prog-run 5s linear forwards;
+    }
+
+    /* Large panel */
+    .showcase-panel {
+      position: relative; height: 460px;
+      background: rgba(8,10,16,0.95);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-top: none;
+      border-radius: 0 0 var(--r-xl) var(--r-xl);
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 8px 24px rgba(0,0,0,0.4), inset 0 -1px 0 rgba(0,0,0,0.5);
+    }
+
+    /* Individual panel views */
+    .showcase-view {
+      position: absolute; inset: 0; padding: 28px 32px;
+      opacity: 0; transform: translateY(10px);
+      transition: opacity 0.35s cubic-bezier(0.22,1,0.36,1), transform 0.35s cubic-bezier(0.22,1,0.36,1);
+      pointer-events: none;
+    }
+    .showcase-view.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+    /* ── Panel 0: Website Toko ── */
+    .sv-browser {
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 10px;
+      overflow: hidden; height: 100%;
+      display: flex; flex-direction: column;
+      background: rgba(255,255,255,0.02);
+    }
+    .sv-browser-bar {
+      display: flex; align-items: center; gap: 8px; padding: 8px 14px;
+      background: rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.06);
+      flex-shrink: 0;
+    }
+    .sv-browser-dots { display: flex; gap: 5px; }
+    .sv-browser-dots span { width: 8px; height: 8px; border-radius: 50%; }
+    .sv-browser-dots span:nth-child(1) { background: rgba(255,90,90,0.5); }
+    .sv-browser-dots span:nth-child(2) { background: rgba(255,180,50,0.4); }
+    .sv-browser-dots span:nth-child(3) { background: rgba(80,200,80,0.4); }
+    .sv-url-bar {
+      flex: 1; height: 22px; background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.07); border-radius: 4px;
+      display: flex; align-items: center; padding: 0 8px; gap: 5px;
+    }
+    .sv-url-bar span { font-size: 9.5px; color: rgba(255,255,255,0.3); font-family: 'SF Mono',monospace; }
+    .sv-url-lock { width: 8px; height: 8px; color: rgba(107,142,90,0.7); }
+    .sv-store-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 16px; border-bottom: 1px solid rgba(255,255,255,0.04); flex-shrink: 0;
+    }
+    .sv-store-logo { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.8); letter-spacing: 0.05em; }
+    .sv-store-links { display: flex; gap: 14px; }
+    .sv-store-links span { font-size: 9px; color: rgba(255,255,255,0.35); }
+    .sv-store-btn {
+      font-size: 8px; font-weight: 600; padding: 4px 10px; border-radius: 20px;
+      background: var(--accent); color: #fff;
+    }
+    .sv-hero-banner {
+      margin: 12px 16px; border-radius: 8px; height: 80px;
+      background: linear-gradient(135deg, rgba(107,142,90,0.18) 0%, rgba(255,255,255,0.04) 100%);
+      border: 1px solid rgba(107,142,90,0.12);
+      display: flex; align-items: center; padding: 0 20px; gap: 12px;
+      flex-shrink: 0;
+    }
+    .sv-hero-text h4 { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.9); }
+    .sv-hero-text p { font-size: 9px; color: rgba(255,255,255,0.4); margin-top: 3px; }
+    .sv-hero-cta { font-size: 8px; font-weight: 600; padding: 5px 12px; border-radius: 20px; background: var(--accent); color: #fff; white-space: nowrap; }
+    .sv-products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 0 16px 16px; }
+    .sv-product {
+      border-radius: 6px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+      overflow: hidden;
+      opacity: 0; transform: translateY(8px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .showcase-view.active .sv-product:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.1s; }
+    .showcase-view.active .sv-product:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.18s; }
+    .showcase-view.active .sv-product:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.26s; }
+    .showcase-view.active .sv-product:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.34s; }
+    .sv-product-img { height: 64px; background: rgba(255,255,255,0.04); }
+    .sv-product-info { padding: 6px 8px; }
+    .sv-product-name { font-size: 8.5px; color: rgba(255,255,255,0.6); }
+    .sv-product-price { font-size: 9px; font-weight: 700; color: var(--accent-light); margin-top: 2px; }
+
+    /* ── Panel 1: Dashboard ── */
+    .sv-app {
+      display: flex; gap: 0; height: 100%;
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; overflow: hidden;
+    }
+    .sv-sidebar {
+      width: 100px; flex-shrink: 0; background: rgba(255,255,255,0.02);
+      border-right: 1px solid rgba(255,255,255,0.06);
+      display: flex; flex-direction: column; padding: 14px 8px; gap: 2px;
+    }
+    .sv-sidebar-logo { font-size: 10px; font-weight: 700; color: var(--accent-light); padding: 4px 8px 12px; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 8px; }
+    .sv-sidebar-item {
+      display: flex; align-items: center; gap: 7px; padding: 7px 8px; border-radius: 6px;
+      font-size: 9.5px; color: rgba(255,255,255,0.3);
+      transition: all 0.2s; cursor: default;
+    }
+    .sv-sidebar-item svg { width: 12px; height: 12px; }
+    .sv-sidebar-item.active { background: rgba(107,142,90,0.12); color: var(--accent-light); border-left: 2px solid var(--accent-light); }
+    .sv-main { flex: 1; padding: 16px 18px; overflow: hidden; }
+    .sv-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
+    .sv-stat {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px; padding: 10px 12px;
+      opacity: 0; transform: translateY(6px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .showcase-view.active .sv-stat:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.05s; }
+    .showcase-view.active .sv-stat:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.1s; }
+    .showcase-view.active .sv-stat:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.15s; }
+    .sv-stat-label { font-size: 8px; color: rgba(255,255,255,0.35); margin-bottom: 4px; }
+    .sv-stat-value { font-size: 15px; font-weight: 800; color: var(--text); font-family: var(--font-display); }
+    .sv-stat-sub { font-size: 7.5px; color: rgba(107,142,90,0.8); margin-top: 2px; }
+    .sv-chart-label { font-size: 8.5px; color: rgba(255,255,255,0.3); margin-bottom: 8px; }
+    .sv-chart { display: flex; align-items: flex-end; gap: 5px; height: 100px; }
+    .sv-bar {
+      flex: 1; border-radius: 3px 3px 0 0;
+      background: linear-gradient(180deg, rgba(107,142,90,0.8) 0%, rgba(107,142,90,0.2) 100%);
+      height: 0;
+      transition: height 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+    .showcase-view.active .sv-bar { height: var(--bh); }
+    .sv-bar:nth-child(1) { --bh: 45%; transition-delay: 0.1s; }
+    .sv-bar:nth-child(2) { --bh: 62%; transition-delay: 0.16s; }
+    .sv-bar:nth-child(3) { --bh: 38%; transition-delay: 0.22s; }
+    .sv-bar:nth-child(4) { --bh: 80%; transition-delay: 0.28s; }
+    .sv-bar:nth-child(5) { --bh: 55%; transition-delay: 0.34s; }
+    .sv-bar:nth-child(6) { --bh: 70%; transition-delay: 0.40s; }
+    .sv-bar:nth-child(7) { --bh: 91%; transition-delay: 0.46s; background: linear-gradient(180deg, rgba(107,142,90,1) 0%, rgba(107,142,90,0.35) 100%); }
+    .sv-orders-label { font-size: 8.5px; color: rgba(255,255,255,0.3); margin: 10px 0 6px; }
+    .sv-order-row {
+      display: flex; align-items: center; gap: 8px; padding: 5px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 8.5px;
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .sv-order-row:last-child { border-bottom: none; }
+    .showcase-view.active .sv-order-row:nth-child(1) { opacity: 1; transition-delay: 0.5s; }
+    .showcase-view.active .sv-order-row:nth-child(2) { opacity: 1; transition-delay: 0.6s; }
+    .showcase-view.active .sv-order-row:nth-child(3) { opacity: 1; transition-delay: 0.7s; }
+    .sv-order-id { color: rgba(255,255,255,0.3); font-family: monospace; width: 60px; }
+    .sv-order-name { flex: 1; color: rgba(255,255,255,0.65); }
+    .sv-order-amount { color: var(--accent-light); font-weight: 600; }
+    .sv-order-badge { font-size: 7px; padding: 2px 6px; border-radius: 10px; background: rgba(107,142,90,0.15); color: var(--accent-light); border: 1px solid rgba(107,142,90,0.2); }
+
+    /* ── Panel 2: Pembayaran ── */
+    .sv-pay-wrap { max-width: 420px; margin: 0 auto; }
+    .sv-pay-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .sv-pay-sub { font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 20px; }
+    .sv-pay-method {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 16px; border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.07);
+      background: rgba(255,255,255,0.02);
+      margin-bottom: 8px; cursor: default;
+      transition: border-color 0.25s, background 0.25s;
+      opacity: 0; transform: translateX(-10px);
+      transition: opacity 0.3s, transform 0.3s, border-color 0.25s, background 0.25s;
+    }
+    .showcase-view.active .sv-pay-method:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.05s; }
+    .showcase-view.active .sv-pay-method:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.12s; }
+    .showcase-view.active .sv-pay-method:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.19s; }
+    .showcase-view.active .sv-pay-method:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.26s; }
+    .sv-pay-method.selected { border-color: rgba(107,142,90,0.5); background: rgba(107,142,90,0.06); }
+    .sv-pay-method-icon {
+      width: 34px; height: 34px; border-radius: 8px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .sv-pay-method-icon svg { width: 14px; height: 14px; color: rgba(255,255,255,0.5); }
+    .sv-pay-method.selected .sv-pay-method-icon { background: rgba(107,142,90,0.15); border-color: rgba(107,142,90,0.3); }
+    .sv-pay-method.selected .sv-pay-method-icon svg { color: var(--accent-light); }
+    .sv-pay-method-name { flex: 1; font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.65); }
+    .sv-pay-method.selected .sv-pay-method-name { color: rgba(255,255,255,0.9); }
+    .sv-radio { width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; }
+    .sv-radio-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-light); transform: scale(0); transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1); }
+    .sv-pay-method.selected .sv-radio { border-color: var(--accent-light); }
+    .sv-pay-method.selected .sv-radio-dot { transform: scale(1); }
+    .sv-pay-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06);
+      opacity: 0; transition: opacity 0.3s 0.4s;
+    }
+    .showcase-view.active .sv-pay-footer { opacity: 1; }
+    .sv-pay-total-label { font-size: 10px; color: rgba(255,255,255,0.4); }
+    .sv-pay-total-amount { font-size: 18px; font-weight: 800; color: var(--text); font-family: var(--font-display); }
+    .sv-pay-btn {
+      padding: 10px 24px; border-radius: 8px; font-size: 11px; font-weight: 700;
+      background: var(--accent); color: #fff;
+      box-shadow: 0 0 20px rgba(107,142,90,0.3);
+    }
+
+    /* ── Panel 3: Kustomisasi ── */
+    .sv-kust-wrap {
+      display: grid; grid-template-columns: 160px 1fr; gap: 20px; height: 100%;
+    }
+    .sv-kust-controls { display: flex; flex-direction: column; gap: 16px; }
+    .sv-kust-group-label { font-size: 9px; font-weight: 600; color: rgba(255,255,255,0.3); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; }
+    .sv-kust-colors { display: flex; gap: 8px; flex-wrap: wrap; }
+    .sv-kust-color {
+      width: 28px; height: 28px; border-radius: 50%; cursor: default;
+      transition: transform 0.2s, box-shadow 0.3s;
+    }
+    .sv-kust-color.active { box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--kc, #6B8E5A); transform: scale(1.1); }
+    .sv-font-option {
+      padding: 7px 10px; border-radius: 6px; font-size: 10px;
+      border: 1px solid rgba(255,255,255,0.07); color: rgba(255,255,255,0.4);
+      margin-bottom: 4px; cursor: default; transition: all 0.2s;
+    }
+    .sv-font-option.active { border-color: rgba(107,142,90,0.4); color: var(--accent-light); background: rgba(107,142,90,0.06); }
+    .sv-kust-preview {
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+    .sv-kust-store-header {
+      padding: 10px 16px; transition: background-color 0.5s ease;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .sv-kust-store-logo { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.9); }
+    .sv-kust-store-links { display: flex; gap: 10px; }
+    .sv-kust-store-links span { font-size: 8px; color: rgba(255,255,255,0.4); }
+    .sv-kust-products { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; padding: 12px; flex: 1; }
+    .sv-kust-product { border-radius: 6px; overflow: hidden; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); }
+    .sv-kust-product-img { height: 54px; transition: background 0.5s; }
+    .sv-kust-product-label { font-size: 8px; color: rgba(255,255,255,0.5); padding: 5px 7px; }
+
+    /* ── Panel 4: Promo ── */
+    .sv-promo-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .sv-promo-title { font-size: 14px; font-weight: 700; color: var(--text); }
+    .sv-promo-add { font-size: 10px; padding: 5px 14px; border-radius: 6px; background: rgba(107,142,90,0.15); border: 1px solid rgba(107,142,90,0.3); color: var(--accent-light); font-weight: 600; }
+    .sv-promo-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 11px 14px; border-radius: 8px;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 8px;
+      opacity: 0; transform: translateX(-8px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .showcase-view.active .sv-promo-row:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.05s; }
+    .showcase-view.active .sv-promo-row:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.13s; }
+    .showcase-view.active .sv-promo-row:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.21s; }
+    .showcase-view.active .sv-promo-row:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.29s; }
+    .sv-promo-code { font-family: 'SF Mono',monospace; font-size: 11px; font-weight: 700; color: var(--text); min-width: 80px; }
+    .sv-promo-name { flex: 1; font-size: 10px; color: rgba(255,255,255,0.45); }
+    .sv-promo-usage { font-size: 9px; color: rgba(255,255,255,0.3); min-width: 40px; text-align: right; }
+    .sv-promo-toggle {
+      width: 30px; height: 17px; border-radius: 9px; position: relative; flex-shrink: 0;
+      transition: background 0.3s;
+    }
+    .sv-promo-toggle.on { background: var(--accent); }
+    .sv-promo-toggle.off { background: rgba(255,255,255,0.1); }
+    .sv-promo-thumb {
+      position: absolute; top: 2px; width: 13px; height: 13px; border-radius: 50%;
+      background: #fff; transition: left 0.3s cubic-bezier(0.22,1,0.36,1);
+    }
+    .sv-promo-toggle.on .sv-promo-thumb { left: 15px; }
+    .sv-promo-toggle.off .sv-promo-thumb { left: 2px; }
+    .sv-promo-new {
+      display: flex; gap: 8px; margin-top: 16px; align-items: center;
+      opacity: 0; transition: opacity 0.3s 0.4s;
+    }
+    .showcase-view.active .sv-promo-new { opacity: 1; }
+    .sv-promo-input {
+      flex: 1; height: 34px; background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.09); border-radius: 6px;
+      padding: 0 10px; font-size: 10px; color: rgba(255,255,255,0.5);
+      font-family: 'SF Mono',monospace; display: flex; align-items: center;
+    }
+    .sv-promo-create { font-size: 10px; padding: 0 14px; height: 34px; display: flex; align-items: center; border-radius: 6px; background: rgba(107,142,90,0.15); border: 1px solid rgba(107,142,90,0.3); color: var(--accent-light); font-weight: 600; white-space: nowrap; }
+
+    @media (max-width: 767px) {
+      .showcase-panel { height: 380px; }
+      .sv-products { grid-template-columns: repeat(2, 1fr); }
+      .sv-stats { grid-template-columns: 1fr 1fr; }
+      .sv-kust-wrap { grid-template-columns: 1fr; }
+      .sv-kust-controls { display: none; }
+    }
+
+    /* ═══════════════════════════════════════
        PRICING — 2 TIERS + COMPARISON TABLE
     ═══════════════════════════════════════ */
     #harga { overflow: hidden; }
@@ -1947,166 +2288,313 @@
       <div class="section-eyebrow"><span class="section-eyebrow-dot"></span>Semua Fitur</div>
       <h2>Sistem toko online sesuai <span class="accent">kebutuhan Anda</span></h2>
     </div>
-    <div class="features-top">
+    <!-- Showcase: resend-style tab selector + large panel -->
+    <div class="feature-showcase reveal">
 
-      <!-- Card 1: Website Toko Instan -->
-      <div class="feature-card reveal delay-1">
-        <div class="feature-card-icon"><svg data-icon viewBox="0 0 24 24" style="color:var(--accent-light)"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-        <h3>Website Toko Instan</h3>
-        <p>Buat website toko profesional sendiri tanpa perlu developer atau setup yang rumit.</p>
-        <div class="feature-mockup">
-          <div class="bento-chrome"><span></span><span></span><span></span></div>
-          <div class="mockup-panel">
-            <div class="sk sk-nav"></div>
-            <div class="sk sk-hero"></div>
-            <div class="sk-grid">
-              <div class="sk sk-product"></div>
-              <div class="sk sk-product"></div>
-              <div class="sk sk-product"></div>
-              <div class="sk sk-product"></div>
-            </div>
+      <!-- Tab selector row -->
+      <div class="showcase-tabs-wrap" id="showcaseTabs">
+
+        <button class="showcase-tab active" data-idx="0">
+          <div class="showcase-tab-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           </div>
-        </div>
+          <span class="showcase-tab-label">Website Toko</span>
+        </button>
+
+        <button class="showcase-tab" data-idx="1">
+          <div class="showcase-tab-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <span class="showcase-tab-label">Dashboard</span>
+        </button>
+
+        <button class="showcase-tab" data-idx="2">
+          <div class="showcase-tab-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          </div>
+          <span class="showcase-tab-label">Pembayaran</span>
+        </button>
+
+        <button class="showcase-tab" data-idx="3">
+          <div class="showcase-tab-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+          </div>
+          <span class="showcase-tab-label">Kustomisasi</span>
+        </button>
+
+        <button class="showcase-tab" data-idx="4">
+          <div class="showcase-tab-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+          </div>
+          <span class="showcase-tab-label">Promo</span>
+        </button>
+
       </div>
 
-      <!-- Card 2: Dashboard -->
-      <div class="feature-card reveal delay-2" id="dashCard">
-        <div class="feature-card-icon"><svg data-icon viewBox="0 0 24 24" style="color:var(--accent-light)"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
-        <h3>Dashboard yang Praktis</h3>
-        <p>Kelola produk, pesanan, dan toko dengan mudah dalam satu dashboard sederhana.</p>
-        <div class="feature-mockup has-sidebar">
-          <div class="bento-chrome"><span></span><span></span><span></span></div>
-          <div class="mockup-body">
-            <div class="mockup-sidebar" id="dashSidebar">
-              <div class="mockup-tab active" data-color="">
-                <svg data-icon viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                <span>Ringkasan</span>
-              </div>
-              <div class="mockup-tab" data-color="">
-                <svg data-icon viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/></svg>
-                <span>Pesanan</span>
-              </div>
-              <div class="mockup-tab" data-color="">
-                <svg data-icon viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-                <span>Produk</span>
-              </div>
-            </div>
-            <div class="mockup-content">
-              <div class="dash-stats">
-                <div class="dash-stat"><div class="dash-stat-label">Pesanan</div><div class="dash-stat-value">142</div></div>
-                <div class="dash-stat"><div class="dash-stat-label">Pendapatan</div><div class="dash-stat-value">4.2jt</div></div>
-                <div class="dash-stat"><div class="dash-stat-label">Pengunjung</div><div class="dash-stat-value">891</div></div>
-              </div>
-              <div class="dash-chart" id="dashChart">
-                <div class="dash-bar" style="--h:55%"></div>
-                <div class="dash-bar" style="--h:72%"></div>
-                <div class="dash-bar" style="--h:45%"></div>
-                <div class="dash-bar" style="--h:88%"></div>
-                <div class="dash-bar" style="--h:63%"></div>
-                <div class="dash-bar" style="--h:78%"></div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <!-- Progress bar -->
+      <div class="showcase-progress">
+        <div class="showcase-progress-fill animating" id="showcaseProgress"></div>
       </div>
 
-      <!-- Card 3: Pembayaran -->
-      <div class="feature-card reveal delay-3">
-        <div class="feature-card-icon"><svg data-icon viewBox="0 0 24 24" style="color:var(--accent-light)"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
-        <h3>Pembayaran Terintegrasi</h3>
-        <p>Terima pembayaran melalui payment gateway langsung dari toko Anda.</p>
-        <div class="feature-mockup">
-          <div class="bento-chrome"><span></span><span></span><span></span></div>
-          <div class="mockup-panel" style="gap:5px">
-            <div class="pay-row">
-              <div class="pay-icon"><svg data-icon viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
-              <span class="pay-label">Kartu Kredit / Debit</span>
-              <div class="pay-check"><svg data-icon viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-            </div>
-            <div class="pay-row">
-              <div class="pay-icon"><svg data-icon viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
-              <span class="pay-label">E-Wallet (GoPay, OVO, Dana)</span>
-              <div class="pay-check"><svg data-icon viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-            </div>
-            <div class="pay-row">
-              <div class="pay-icon"><svg data-icon viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></div>
-              <span class="pay-label">Transfer Bank</span>
-              <div class="pay-check"><svg data-icon viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-            </div>
-            <div class="pay-row">
-              <div class="pay-icon"><svg data-icon viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
-              <span class="pay-label">QRIS</span>
-              <div class="pay-check"><svg data-icon viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      <!-- Large showcase panel -->
+      <div class="showcase-panel">
 
-    <div class="features-bottom">
-
-      <!-- Card 4: Kustomisasi -->
-      <div class="feature-card reveal delay-1" id="kustCard">
-        <div class="feature-card-icon"><svg data-icon viewBox="0 0 24 24" style="color:var(--accent-light)"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg></div>
-        <h3>Kustomisasi Tampilan Toko</h3>
-        <p>Atur tampilan dan identitas toko agar lebih sesuai dengan karakter brand Anda.</p>
-        <div class="feature-mockup has-sidebar">
-          <div class="bento-chrome"><span></span><span></span><span></span></div>
-          <div class="mockup-body">
-            <div class="mockup-sidebar" id="kustSidebar">
-              <div class="mockup-tab active">
-                <svg data-icon viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-                <span>Warna</span>
-              </div>
-              <div class="mockup-tab">
-                <svg data-icon viewBox="0 0 24 24"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
-                <span>Font</span>
-              </div>
-              <div class="mockup-tab">
-                <svg data-icon viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-                <span>Layout</span>
+        <!-- View 0: Website Toko -->
+        <div class="showcase-view active" data-view="0">
+          <div class="sv-browser">
+            <div class="sv-browser-bar">
+              <div class="sv-browser-dots"><span></span><span></span><span></span></div>
+              <div class="sv-url-bar">
+                <svg class="sv-url-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <span>tokosaya.amora.id</span>
               </div>
             </div>
-            <div class="mockup-content">
-              <div class="kust-preview" id="kustPreview" style="--kust-color: rgba(107,142,90,0.5)">
-                <div class="kust-preview-dot"></div>
-                <div class="kust-preview-bar" style="width:40px"></div>
-                <div class="kust-preview-bar" style="width:28px"></div>
+            <div class="sv-store-nav">
+              <div class="sv-store-logo">TOKO SAYA</div>
+              <div class="sv-store-links">
+                <span>Produk</span><span>Tentang</span><span>Kontak</span>
               </div>
-              <div class="kust-swatches" id="kustSwatches">
-                <div class="kust-swatch active" style="background:#6B8E5A" data-color="rgba(107,142,90,0.5)"></div>
-                <div class="kust-swatch" style="background:#5A7DB8" data-color="rgba(90,125,184,0.5)"></div>
-                <div class="kust-swatch" style="background:#C1614A" data-color="rgba(193,97,74,0.5)"></div>
-                <div class="kust-swatch" style="background:#B8963E" data-color="rgba(184,150,62,0.5)"></div>
+              <div class="sv-store-btn">Beli Sekarang</div>
+            </div>
+            <div class="sv-hero-banner">
+              <div class="sv-hero-text">
+                <h4>Koleksi Terbaru</h4>
+                <p>Temukan produk pilihan dengan kualitas terjamin</p>
+              </div>
+              <div class="sv-hero-cta">Lihat Koleksi</div>
+            </div>
+            <div class="sv-products">
+              <div class="sv-product">
+                <div class="sv-product-img" style="background:linear-gradient(135deg,rgba(107,142,90,0.15),rgba(255,255,255,0.03))"></div>
+                <div class="sv-product-info">
+                  <div class="sv-product-name">Sneakers Classic</div>
+                  <div class="sv-product-price">Rp 249.000</div>
+                </div>
+              </div>
+              <div class="sv-product">
+                <div class="sv-product-img" style="background:linear-gradient(135deg,rgba(90,125,184,0.15),rgba(255,255,255,0.03))"></div>
+                <div class="sv-product-info">
+                  <div class="sv-product-name">Tas Minimalis</div>
+                  <div class="sv-product-price">Rp 189.000</div>
+                </div>
+              </div>
+              <div class="sv-product">
+                <div class="sv-product-img" style="background:linear-gradient(135deg,rgba(193,97,74,0.15),rgba(255,255,255,0.03))"></div>
+                <div class="sv-product-info">
+                  <div class="sv-product-name">Kaos Premium</div>
+                  <div class="sv-product-price">Rp 129.000</div>
+                </div>
+              </div>
+              <div class="sv-product">
+                <div class="sv-product-img" style="background:linear-gradient(135deg,rgba(184,150,62,0.15),rgba(255,255,255,0.03))"></div>
+                <div class="sv-product-info">
+                  <div class="sv-product-name">Aksesoris Jam</div>
+                  <div class="sv-product-price">Rp 349.000</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Card 5: Promo -->
-      <div class="feature-card reveal delay-2">
-        <div class="feature-card-icon"><svg data-icon viewBox="0 0 24 24" style="color:var(--accent-light)"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div>
-        <h3>Promo Fleksibel</h3>
-        <p>Buat promo menarik untuk meningkatkan penjualan dan loyalitas pelanggan.</p>
-        <div class="feature-mockup">
-          <div class="bento-chrome"><span></span><span></span><span></span></div>
-          <div class="mockup-panel">
-            <div class="promo-toggle-row">
-              <div class="promo-toggle"><div class="promo-thumb"></div></div>
-              <span class="promo-toggle-label">Aktifkan Promo</span>
+        <!-- View 1: Dashboard -->
+        <div class="showcase-view" data-view="1">
+          <div class="sv-app">
+            <div class="sv-sidebar">
+              <div class="sv-sidebar-logo">amora</div>
+              <div class="sv-sidebar-item active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                Ringkasan
+              </div>
+              <div class="sv-sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/></svg>
+                Pesanan
+              </div>
+              <div class="sv-sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                Produk
+              </div>
+              <div class="sv-sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                Pelanggan
+              </div>
             </div>
-            <div class="promo-card">
-              <div class="promo-badge">Diskon 20%</div>
-              <div class="promo-code-row">
-                <span class="promo-code">AMORA20</span>
-                <span class="promo-copy">Salin</span>
+            <div class="sv-main">
+              <div class="sv-stats">
+                <div class="sv-stat">
+                  <div class="sv-stat-label">Total Pesanan</div>
+                  <div class="sv-stat-value">1.842</div>
+                  <div class="sv-stat-sub">↑ 12% bulan ini</div>
+                </div>
+                <div class="sv-stat">
+                  <div class="sv-stat-label">Pendapatan</div>
+                  <div class="sv-stat-value">48.6jt</div>
+                  <div class="sv-stat-sub">↑ 8% bulan ini</div>
+                </div>
+                <div class="sv-stat">
+                  <div class="sv-stat-label">Pengunjung</div>
+                  <div class="sv-stat-value">9.241</div>
+                  <div class="sv-stat-sub">↑ 24% bulan ini</div>
+                </div>
+              </div>
+              <div class="sv-chart-label">Penjualan 7 Hari Terakhir</div>
+              <div class="sv-chart">
+                <div class="sv-bar"></div>
+                <div class="sv-bar"></div>
+                <div class="sv-bar"></div>
+                <div class="sv-bar"></div>
+                <div class="sv-bar"></div>
+                <div class="sv-bar"></div>
+                <div class="sv-bar"></div>
+              </div>
+              <div class="sv-orders-label">Pesanan Terbaru</div>
+              <div class="sv-order-row">
+                <span class="sv-order-id">#AMR-8821</span>
+                <span class="sv-order-name">Budi Santoso</span>
+                <span class="sv-order-amount">Rp 249.000</span>
+                <span class="sv-order-badge">Baru</span>
+              </div>
+              <div class="sv-order-row">
+                <span class="sv-order-id">#AMR-8820</span>
+                <span class="sv-order-name">Siti Rahayu</span>
+                <span class="sv-order-amount">Rp 518.000</span>
+                <span class="sv-order-badge">Diproses</span>
+              </div>
+              <div class="sv-order-row">
+                <span class="sv-order-id">#AMR-8819</span>
+                <span class="sv-order-name">Agus Priyadi</span>
+                <span class="sv-order-amount">Rp 189.000</span>
+                <span class="sv-order-badge">Dikirim</span>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
+        <!-- View 2: Pembayaran -->
+        <div class="showcase-view" data-view="2">
+          <div class="sv-pay-wrap">
+            <div class="sv-pay-title">Pilih Metode Pembayaran</div>
+            <div class="sv-pay-sub">Semua metode pembayaran populer tersedia</div>
+            <div class="sv-pay-method selected">
+              <div class="sv-pay-method-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              </div>
+              <span class="sv-pay-method-name">Kartu Kredit / Debit</span>
+              <div class="sv-radio"><div class="sv-radio-dot"></div></div>
+            </div>
+            <div class="sv-pay-method">
+              <div class="sv-pay-method-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </div>
+              <span class="sv-pay-method-name">E-Wallet (GoPay, OVO, Dana)</span>
+              <div class="sv-radio"><div class="sv-radio-dot"></div></div>
+            </div>
+            <div class="sv-pay-method">
+              <div class="sv-pay-method-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+              </div>
+              <span class="sv-pay-method-name">Transfer Bank</span>
+              <div class="sv-radio"><div class="sv-radio-dot"></div></div>
+            </div>
+            <div class="sv-pay-method">
+              <div class="sv-pay-method-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              </div>
+              <span class="sv-pay-method-name">QRIS</span>
+              <div class="sv-radio"><div class="sv-radio-dot"></div></div>
+            </div>
+            <div class="sv-pay-footer">
+              <div>
+                <div class="sv-pay-total-label">Total Pembayaran</div>
+                <div class="sv-pay-total-amount">Rp 249.000</div>
+              </div>
+              <div class="sv-pay-btn">Bayar Sekarang</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- View 3: Kustomisasi -->
+        <div class="showcase-view" data-view="3">
+          <div class="sv-kust-wrap">
+            <div class="sv-kust-controls">
+              <div>
+                <div class="sv-kust-group-label">Warna Utama</div>
+                <div class="sv-kust-colors" id="svKustColors">
+                  <div class="sv-kust-color active" style="background:#6B8E5A;--kc:#6B8E5A" data-bg="rgba(107,142,90,0.25)"></div>
+                  <div class="sv-kust-color" style="background:#5A7DB8;--kc:#5A7DB8" data-bg="rgba(90,125,184,0.25)"></div>
+                  <div class="sv-kust-color" style="background:#C1614A;--kc:#C1614A" data-bg="rgba(193,97,74,0.25)"></div>
+                  <div class="sv-kust-color" style="background:#B8963E;--kc:#B8963E" data-bg="rgba(184,150,62,0.25)"></div>
+                  <div class="sv-kust-color" style="background:#8B5CB8;--kc:#8B5CB8" data-bg="rgba(139,92,184,0.25)"></div>
+                </div>
+              </div>
+              <div>
+                <div class="sv-kust-group-label">Tipografi</div>
+                <div class="sv-font-option active">Inter (Modern)</div>
+                <div class="sv-font-option">Playfair (Elegan)</div>
+                <div class="sv-font-option">Space Grotesk</div>
+              </div>
+            </div>
+            <div class="sv-kust-preview" id="svKustPreview">
+              <div class="sv-kust-store-header" id="svKustHeader" style="background:rgba(107,142,90,0.25)">
+                <div class="sv-kust-store-logo">TOKO SAYA</div>
+                <div class="sv-kust-store-links"><span>Produk</span><span>Promo</span></div>
+              </div>
+              <div class="sv-kust-products">
+                <div class="sv-kust-product">
+                  <div class="sv-kust-product-img" id="svKustImg1" style="background:rgba(107,142,90,0.2)"></div>
+                  <div class="sv-kust-product-label">Produk 1</div>
+                </div>
+                <div class="sv-kust-product">
+                  <div class="sv-kust-product-img" id="svKustImg2" style="background:rgba(107,142,90,0.12)"></div>
+                  <div class="sv-kust-product-label">Produk 2</div>
+                </div>
+                <div class="sv-kust-product">
+                  <div class="sv-kust-product-img" id="svKustImg3" style="background:rgba(107,142,90,0.08)"></div>
+                  <div class="sv-kust-product-label">Produk 3</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- View 4: Promo -->
+        <div class="showcase-view" data-view="4">
+          <div>
+            <div class="sv-promo-header">
+              <div class="sv-promo-title">Kelola Promo</div>
+              <div class="sv-promo-add">+ Promo Baru</div>
+            </div>
+            <div class="sv-promo-row">
+              <span class="sv-promo-code">AMORA20</span>
+              <span class="sv-promo-name">Diskon 20% semua produk</span>
+              <span class="sv-promo-usage">142×</span>
+              <div class="sv-promo-toggle on"><div class="sv-promo-thumb"></div></div>
+            </div>
+            <div class="sv-promo-row">
+              <span class="sv-promo-code">ONGKIR0</span>
+              <span class="sv-promo-name">Gratis ongkir min. Rp 100rb</span>
+              <span class="sv-promo-usage">89×</span>
+              <div class="sv-promo-toggle on"><div class="sv-promo-thumb"></div></div>
+            </div>
+            <div class="sv-promo-row">
+              <span class="sv-promo-code">BELI2</span>
+              <span class="sv-promo-name">Beli 2 gratis 1 item pilihan</span>
+              <span class="sv-promo-usage">34×</span>
+              <div class="sv-promo-toggle off"><div class="sv-promo-thumb"></div></div>
+            </div>
+            <div class="sv-promo-row">
+              <span class="sv-promo-code">FLASH50</span>
+              <span class="sv-promo-name">Flash sale 50% — weekend</span>
+              <span class="sv-promo-usage">0×</span>
+              <div class="sv-promo-toggle off"><div class="sv-promo-thumb"></div></div>
+            </div>
+            <div class="sv-promo-new">
+              <div class="sv-promo-input">KODE_BARU</div>
+              <div class="sv-promo-create">Buat Promo</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </section>
@@ -2439,79 +2927,106 @@
   }
 
   // ── Feature card mockup animations ──
+  // ── Feature Showcase (resend-style) ──
   (function() {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const INTERVAL = 5000;
 
-    // Bar chart: set heights via CSS variable after .visible is applied
-    function initDashBars() {
-      const bars = document.querySelectorAll('.dash-bar');
-      bars.forEach(bar => {
-        const h = bar.style.getPropertyValue('--h') || '60%';
-        bar.style.height = '0';
-        // Trigger after a frame so the 0 state is painted first
-        requestAnimationFrame(() => { bar.style.height = h; });
+    const tabs = Array.from(document.querySelectorAll('#showcaseTabs .showcase-tab'));
+    const views = Array.from(document.querySelectorAll('.showcase-panel .showcase-view'));
+    const progressFill = document.getElementById('showcaseProgress');
+    let current = 0;
+    let timer = null;
+    let started = false;
+
+    // Kustomisasi live color cycling in view 3
+    const kustColors = Array.from(document.querySelectorAll('#svKustColors .sv-kust-color'));
+    const kustHeader = document.getElementById('svKustHeader');
+    const kustImgs = [
+      document.getElementById('svKustImg1'),
+      document.getElementById('svKustImg2'),
+      document.getElementById('svKustImg3'),
+    ];
+    let kustIdx = 0;
+    let kustTimer = null;
+
+    function applyKustColor(idx) {
+      kustColors.forEach((c, i) => c.classList.toggle('active', i === idx));
+      const bg = kustColors[idx] ? kustColors[idx].dataset.bg : '';
+      if (kustHeader) kustHeader.style.background = bg;
+      if (kustImgs[0]) kustImgs[0].style.background = bg;
+    }
+
+    function startKustCycle() {
+      if (reduced || kustTimer) return;
+      kustTimer = setInterval(() => {
+        kustIdx = (kustIdx + 1) % kustColors.length;
+        applyKustColor(kustIdx);
+      }, 2200);
+    }
+
+    function stopKustCycle() {
+      clearInterval(kustTimer);
+      kustTimer = null;
+    }
+
+    function restartProgress() {
+      if (!progressFill) return;
+      progressFill.classList.remove('animating');
+      void progressFill.offsetWidth; // reflow
+      progressFill.classList.add('animating');
+      progressFill.style.animationDuration = INTERVAL + 'ms';
+    }
+
+    function goTo(idx, manual) {
+      if (idx === current && !manual) return;
+      tabs[current].classList.remove('active');
+      views[current].classList.remove('active');
+      current = idx;
+      tabs[current].classList.add('active');
+      views[current].classList.add('active');
+      restartProgress();
+
+      // Start/stop kust cycle when entering/leaving view 3
+      if (current === 3) startKustCycle();
+      else stopKustCycle();
+    }
+
+    function startAuto() {
+      if (reduced) return;
+      timer = setInterval(() => {
+        goTo((current + 1) % tabs.length, false);
+      }, INTERVAL);
+    }
+
+    function resetAuto() {
+      clearInterval(timer);
+      startAuto();
+    }
+
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => {
+        goTo(i, true);
+        resetAuto();
       });
+    });
+
+    function initShowcase() {
+      if (started) return;
+      started = true;
+      restartProgress();
+      startAuto();
     }
 
-    // Dashboard tab cycling
-    function initDashCycle() {
-      if (reduced) return;
-      const sidebar = document.getElementById('dashSidebar');
-      if (!sidebar) return;
-      const tabs = sidebar.querySelectorAll('.mockup-tab');
-      let idx = 0;
-      return setInterval(() => {
-        tabs[idx].classList.remove('active');
-        idx = (idx + 1) % tabs.length;
-        tabs[idx].classList.add('active');
-      }, 4000);
-    }
-
-    // Kustomisasi swatch cycling
-    function initKustCycle() {
-      if (reduced) return;
-      const swatches = document.querySelectorAll('#kustSwatches .kust-swatch');
-      const preview = document.getElementById('kustPreview');
-      if (!swatches.length || !preview) return;
-      let idx = 0;
-      return setInterval(() => {
-        swatches[idx].classList.remove('active');
-        idx = (idx + 1) % swatches.length;
-        swatches[idx].classList.add('active');
-        const color = swatches[idx].dataset.color;
-        preview.style.backgroundColor = color;
-      }, 4000);
-    }
-
-    // Start cycles only when the features-grid section is visible
     const fgSection = document.getElementById('features-grid');
-    let cyclesStarted = false;
     if (fgSection && 'IntersectionObserver' in window) {
-      const fgObserver = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting && !cyclesStarted) {
-            cyclesStarted = true;
-            initDashBars();
-            initDashCycle();
-            initKustCycle();
-            fgObserver.unobserve(fgSection);
-          }
-        });
-      }, { threshold: 0.1 });
-      fgObserver.observe(fgSection);
-      // Fallback if observer never fires
-      setTimeout(() => {
-        if (!cyclesStarted) {
-          cyclesStarted = true;
-          initDashBars();
-          initDashCycle();
-          initKustCycle();
-        }
-      }, 3000);
+      const obs = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) { initShowcase(); obs.unobserve(fgSection); }
+      }, { threshold: 0.15 });
+      obs.observe(fgSection);
+      setTimeout(initShowcase, 2500);
     } else {
-      initDashBars();
-      initDashCycle();
-      initKustCycle();
+      initShowcase();
     }
   })();
 
