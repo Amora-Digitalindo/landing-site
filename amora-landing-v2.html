@@ -707,6 +707,196 @@
     @media (max-width: 1023px) { .order-first { order: -1; } }
 
     /* ═══════════════════════════════════════
+       BENTO WIDGETS (Live Orders / Tracking)
+    ═══════════════════════════════════════ */
+    .bento-widget {
+      position: relative;
+      background: var(--surface-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-top: 1px solid rgba(255,255,255,0.14);
+      border-radius: var(--r-2xl);
+      padding: 22px;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.09),
+        inset 0 -1px 0 rgba(0,0,0,0.3),
+        0 12px 40px rgba(0,0,0,0.5),
+        0 4px 12px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+    .bento-widget::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.025) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* ── Live Orders widget ── */
+    .orders-widget-header {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 16px; position: relative; z-index: 1;
+    }
+    .orders-widget-icon {
+      flex-shrink: 0;
+      width: 32px; height: 32px; border-radius: var(--r-md);
+      background: linear-gradient(135deg, rgba(107,142,90,0.22) 0%, rgba(107,142,90,0.08) 100%);
+      border: 1px solid var(--accent-border);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .orders-widget-icon svg { width: 15px; height: 15px; color: var(--accent-light); }
+    .orders-widget-title {
+      font-family: var(--font-display);
+      font-size: 0.9375rem; font-weight: 700; color: var(--text);
+      flex: 1;
+    }
+    .orders-widget-live {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 3px 10px; border-radius: var(--r-full);
+      background: var(--accent-dim); border: 1px solid var(--accent-border);
+      font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--accent-light);
+    }
+    .orders-widget-list {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; gap: 10px;
+      height: 204px; overflow: hidden;
+    }
+    .order-card {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--r-lg);
+      transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1),
+                  transform 0.5s cubic-bezier(0.22,1,0.36,1);
+    }
+    .order-card.entering { opacity: 0; transform: scale(0.92) translateY(-18px); }
+    .order-card.exiting  { opacity: 0; transform: scale(0.95) translateY(18px); }
+    .order-card-icon {
+      flex-shrink: 0;
+      width: 36px; height: 36px; border-radius: var(--r-md);
+      background: linear-gradient(135deg, rgba(107,142,90,0.25) 0%, rgba(107,142,90,0.08) 100%);
+      border: 1px solid var(--accent-border);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .order-card-icon svg { width: 16px; height: 16px; color: var(--accent-light); }
+    .order-card-info { flex: 1; min-width: 0; }
+    .order-card-top {
+      display: flex; align-items: center; justify-content: space-between; gap: 8px;
+      margin-bottom: 2px;
+    }
+    .order-card-label {
+      font-size: 0.6875rem; font-weight: 600; color: var(--text-40);
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .order-card-id {
+      font-family: 'SF Mono', 'Roboto Mono', 'Consolas', monospace;
+      font-size: 0.6875rem; color: var(--text-30);
+    }
+    .order-card-item {
+      font-size: 0.875rem; font-weight: 500; color: var(--text-80);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .order-card-price {
+      flex-shrink: 0;
+      font-family: var(--font-display);
+      font-size: 0.9375rem; font-weight: 700; color: var(--accent-light);
+      text-shadow: 0 0 16px var(--accent-glow);
+    }
+
+    /* ── Delivery Tracking widget ── */
+    .tracking-widget-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 28px; position: relative; z-index: 1;
+    }
+    .tracking-widget-title {
+      font-family: var(--font-display);
+      font-size: 0.9375rem; font-weight: 700; color: var(--text);
+    }
+    .tracking-widget-id {
+      font-family: 'SF Mono', 'Roboto Mono', 'Consolas', monospace;
+      font-size: 0.75rem; color: var(--text-30);
+    }
+    .tracking-steps { position: relative; z-index: 1; padding-left: 4px; }
+    .tracking-line {
+      position: absolute; top: 16px; bottom: 16px; left: 19px;
+      width: 2px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 1px;
+      overflow: hidden;
+    }
+    .tracking-line-fill {
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 0%;
+      background: linear-gradient(180deg, var(--accent) 0%, var(--accent-light) 100%);
+      animation: track-fill 6s cubic-bezier(0.45,0,0.55,1) infinite;
+    }
+    .tracking-dot {
+      position: absolute; left: 16px; top: 0;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent-light);
+      box-shadow: 0 0 8px 2px var(--accent-glow);
+      animation: track-dot 6s cubic-bezier(0.45,0,0.55,1) infinite;
+    }
+    @keyframes track-fill {
+      0%   { height: 0%; }
+      45%  { height: 75%; }
+      55%  { height: 75%; }
+      100% { height: 0%; }
+    }
+    @keyframes track-dot {
+      0%   { top: 0%; }
+      45%  { top: 75%; }
+      55%  { top: 75%; }
+      100% { top: 0%; }
+    }
+    .tracking-step {
+      position: relative;
+      display: flex; align-items: flex-start; gap: 14px;
+      padding-bottom: 28px;
+    }
+    .tracking-step:last-child { padding-bottom: 0; }
+    .tracking-node {
+      flex-shrink: 0;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; z-index: 1;
+    }
+    .tracking-node svg { width: 14px; height: 14px; color: var(--text-40); }
+    .tracking-step.done .tracking-node,
+    .tracking-step.active .tracking-node {
+      background: var(--accent-dim);
+      border-color: var(--accent-border);
+    }
+    .tracking-step.done .tracking-node svg,
+    .tracking-step.active .tracking-node svg { color: var(--accent-light); }
+    .tracking-node-pulse::after {
+      content: '';
+      position: absolute; inset: -1px;
+      border-radius: 50%;
+      border: 1px solid var(--accent-light);
+      animation: track-pulse 2s cubic-bezier(0.22,1,0.36,1) infinite;
+    }
+    @keyframes track-pulse {
+      0%   { transform: scale(1);   opacity: 0.7; }
+      100% { transform: scale(1.6); opacity: 0; }
+    }
+    .tracking-step-text { display: flex; flex-direction: column; gap: 3px; padding-top: 4px; }
+    .tracking-step-text strong { font-size: 0.875rem; font-weight: 600; color: var(--text-60); }
+    .tracking-step.done .tracking-step-text strong,
+    .tracking-step.active .tracking-step-text strong { color: var(--text); }
+    .tracking-step-text span { font-size: 0.75rem; color: var(--text-40); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tracking-line-fill { animation: none; height: 75%; }
+      .tracking-dot       { animation: none; opacity: 0; }
+      .tracking-node-pulse::after { animation: none; opacity: 0; }
+    }
+
+    /* ═══════════════════════════════════════
        FEATURES GRID
     ═══════════════════════════════════════ */
     #features-grid {
