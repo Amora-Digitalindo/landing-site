@@ -863,11 +863,6 @@
     .reveal.visible .tracking-dot {
       top: 75%;
       opacity: 1;
-      animation: track-dot-glow 2.6s ease-in-out 2s infinite;
-    }
-    @keyframes track-dot-glow {
-      0%, 100% { box-shadow: 0 0 8px 2px var(--accent-glow); }
-      50%      { box-shadow: 0 0 14px 5px var(--accent-glow); }
     }
     .tracking-step {
       position: relative;
@@ -910,7 +905,7 @@
 
     @media (prefers-reduced-motion: reduce) {
       .tracking-line-fill { transition: none; height: 75%; }
-      .tracking-dot       { transition: none; animation: none; top: 75%; opacity: 1; }
+      .tracking-dot       { transition: none; top: 75%; opacity: 1; }
       .tracking-node-pulse::after { animation: none; opacity: 0; }
     }
 
