@@ -1532,12 +1532,118 @@
     }
     .sv-promo-create { font-size: 10px; padding: 0 14px; height: 34px; display: flex; align-items: center; border-radius: 6px; background: rgba(107,142,90,0.15); border: 1px solid rgba(107,142,90,0.3); color: var(--accent-light); font-weight: 600; white-space: nowrap; }
 
+    /* ── Split layout: wording left + visual right ── */
+    .showcase-view { padding: 0; }
+
+    .sv-split {
+      display: grid; grid-template-columns: 260px 1fr; height: 100%;
+    }
+    .sv-copy {
+      padding: 36px 28px; display: flex; flex-direction: column; justify-content: center; gap: 18px;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.012);
+      position: relative; overflow: hidden;
+      opacity: 0; transform: translateX(-12px);
+      transition: opacity 0.45s 0.08s cubic-bezier(0.22,1,0.36,1), transform 0.45s 0.08s cubic-bezier(0.22,1,0.36,1);
+    }
+    .showcase-view.active .sv-copy { opacity: 1; transform: translateX(0); }
+    .sv-copy::before {
+      content: ''; position: absolute; top: 40%; left: -80px;
+      width: 200px; height: 200px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(107,142,90,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .sv-copy-eyebrow {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 9.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent-light);
+    }
+    .sv-copy-eyebrow-dot {
+      width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0;
+      background: var(--accent-light); box-shadow: 0 0 6px var(--accent-light);
+    }
+    .sv-copy h3 {
+      font-size: 18px; font-weight: 800; line-height: 1.28;
+      color: var(--text); font-family: var(--font-display); margin: 0;
+    }
+    .sv-copy-desc {
+      font-size: 12px; line-height: 1.65; color: rgba(255,255,255,0.45);
+    }
+    .sv-copy-bullets { display: flex; flex-direction: column; gap: 9px; }
+    .sv-copy-bullet {
+      display: flex; align-items: flex-start; gap: 9px;
+      font-size: 11px; color: rgba(255,255,255,0.6); line-height: 1.4;
+    }
+    .sv-copy-check {
+      width: 15px; height: 15px; border-radius: 50%; flex-shrink: 0; margin-top: 1px;
+      background: rgba(107,142,90,0.14); border: 1px solid rgba(107,142,90,0.3);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .sv-copy-check svg { width: 7px; height: 7px; stroke: var(--accent-light); stroke-width: 2.5; fill: none; }
+
+    .sv-visual {
+      padding: 20px; overflow: hidden; position: relative;
+      display: flex; align-items: stretch;
+    }
+    .sv-visual > * { width: 100%; }
+
+    /* product image icons inside website view */
+    .sv-product-img { position: relative; display: flex; align-items: center; justify-content: center; }
+    .sv-product-img svg { width: 22px; height: 22px; opacity: 0.18; }
+    .sv-product-badge {
+      position: absolute; top: 6px; right: 6px;
+      font-size: 7px; font-weight: 700; padding: 2px 6px; border-radius: 10px;
+      background: rgba(107,142,90,0.25); color: var(--accent-light);
+      border: 1px solid rgba(107,142,90,0.35); letter-spacing: 0.04em;
+    }
+
+    /* order badge variants */
+    .sv-order-badge.new { background: rgba(107,142,90,0.15); color: var(--accent-light); border-color: rgba(107,142,90,0.2); }
+    .sv-order-badge.proc { background: rgba(184,150,62,0.15); color: #C9A84C; border-color: rgba(184,150,62,0.2); }
+    .sv-order-badge.ship { background: rgba(90,125,184,0.15); color: #7BA0D4; border-color: rgba(90,125,184,0.2); }
+
+    /* payment method logos */
+    .sv-pay-logo {
+      font-size: 9px; font-weight: 800; letter-spacing: -0.02em;
+      padding: 2px 7px; border-radius: 4px; color: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    }
+    .sv-pay-fee { font-size: 9px; color: rgba(255,255,255,0.28); margin-left: auto; margin-right: 8px; }
+
+    /* kust view: add theme label */
+    .sv-kust-theme-label {
+      font-size: 8px; color: rgba(255,255,255,0.3); text-align: center; margin-top: 4px;
+    }
+    .sv-kust-color.active ~ .sv-kust-theme-label,
+    .sv-kust-color-wrap.active .sv-kust-theme-label { color: var(--accent-light); }
+    .sv-kust-color-wrap { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+
+    /* promo usage bar */
+    .sv-promo-bar { flex: 1; height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
+    .sv-promo-bar-fill { height: 100%; border-radius: 2px; background: var(--accent); width: 0; transition: width 0.8s cubic-bezier(0.22,1,0.36,1); }
+    .showcase-view.active .sv-promo-bar-fill { width: var(--pw, 0%); }
+
+    @media (max-width: 900px) {
+      .sv-split { grid-template-columns: 200px 1fr; }
+      .sv-copy { padding: 28px 20px; }
+      .sv-copy h3 { font-size: 15px; }
+      .sv-copy-desc { display: none; }
+    }
     @media (max-width: 767px) {
-      .showcase-panel { height: 380px; }
+      .sv-split { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+      .sv-copy {
+        padding: 22px 20px; border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+        gap: 10px;
+      }
+      .sv-copy h3 { font-size: 15px; }
+      .sv-copy-desc, .sv-copy-bullets { display: none; }
+      .showcase-panel { height: auto; min-height: 420px; }
       .sv-products { grid-template-columns: repeat(2, 1fr); }
       .sv-stats { grid-template-columns: 1fr 1fr; }
       .sv-kust-wrap { grid-template-columns: 1fr; }
       .sv-kust-controls { display: none; }
+      .sv-visual { padding: 14px; }
     }
 
     /* ═══════════════════════════════════════
@@ -2341,55 +2447,65 @@
 
         <!-- View 0: Website Toko -->
         <div class="showcase-view active" data-view="0">
-          <div class="sv-browser">
-            <div class="sv-browser-bar">
-              <div class="sv-browser-dots"><span></span><span></span><span></span></div>
-              <div class="sv-url-bar">
-                <svg class="sv-url-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                <span>tokosaya.amora.id</span>
+          <div class="sv-split">
+            <div class="sv-copy">
+              <div class="sv-copy-eyebrow"><span class="sv-copy-eyebrow-dot"></span>Website Toko</div>
+              <h3>Toko online siap buka dalam hitungan menit</h3>
+              <p class="sv-copy-desc">Pilih template, isi produk, dan langsung terima pesanan — tanpa coding, tanpa developer, tanpa pusing.</p>
+              <div class="sv-copy-bullets">
+                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Domain gratis (nama.amora.id)</div>
+                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Tampilan mobile-friendly otomatis</div>
+                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>SEO-ready sejak hari pertama</div>
               </div>
             </div>
-            <div class="sv-store-nav">
-              <div class="sv-store-logo">TOKO SAYA</div>
-              <div class="sv-store-links">
-                <span>Produk</span><span>Tentang</span><span>Kontak</span>
-              </div>
-              <div class="sv-store-btn">Beli Sekarang</div>
-            </div>
-            <div class="sv-hero-banner">
-              <div class="sv-hero-text">
-                <h4>Koleksi Terbaru</h4>
-                <p>Temukan produk pilihan dengan kualitas terjamin</p>
-              </div>
-              <div class="sv-hero-cta">Lihat Koleksi</div>
-            </div>
-            <div class="sv-products">
-              <div class="sv-product">
-                <div class="sv-product-img" style="background:linear-gradient(135deg,rgba(107,142,90,0.15),rgba(255,255,255,0.03))"></div>
-                <div class="sv-product-info">
-                  <div class="sv-product-name">Sneakers Classic</div>
-                  <div class="sv-product-price">Rp 249.000</div>
+            <div class="sv-visual">
+              <div class="sv-browser">
+                <div class="sv-browser-bar">
+                  <div class="sv-browser-dots"><span></span><span></span><span></span></div>
+                  <div class="sv-url-bar">
+                    <svg class="sv-url-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <span>tokosaya.amora.id</span>
+                  </div>
                 </div>
-              </div>
-              <div class="sv-product">
-                <div class="sv-product-img" style="background:linear-gradient(135deg,rgba(90,125,184,0.15),rgba(255,255,255,0.03))"></div>
-                <div class="sv-product-info">
-                  <div class="sv-product-name">Tas Minimalis</div>
-                  <div class="sv-product-price">Rp 189.000</div>
+                <div class="sv-store-nav">
+                  <div class="sv-store-logo">TOKO SAYA</div>
+                  <div class="sv-store-links"><span>Produk</span><span>Tentang</span><span>Kontak</span></div>
+                  <div class="sv-store-btn">Beli Sekarang</div>
                 </div>
-              </div>
-              <div class="sv-product">
-                <div class="sv-product-img" style="background:linear-gradient(135deg,rgba(193,97,74,0.15),rgba(255,255,255,0.03))"></div>
-                <div class="sv-product-info">
-                  <div class="sv-product-name">Kaos Premium</div>
-                  <div class="sv-product-price">Rp 129.000</div>
+                <div class="sv-hero-banner">
+                  <div class="sv-hero-text">
+                    <h4>Koleksi Terbaru</h4>
+                    <p>Temukan produk pilihan dengan kualitas terjamin</p>
+                  </div>
+                  <div class="sv-hero-cta">Lihat Koleksi</div>
                 </div>
-              </div>
-              <div class="sv-product">
-                <div class="sv-product-img" style="background:linear-gradient(135deg,rgba(184,150,62,0.15),rgba(255,255,255,0.03))"></div>
-                <div class="sv-product-info">
-                  <div class="sv-product-name">Aksesoris Jam</div>
-                  <div class="sv-product-price">Rp 349.000</div>
+                <div class="sv-products">
+                  <div class="sv-product">
+                    <div class="sv-product-img" style="background:linear-gradient(135deg,rgba(107,142,90,0.18),rgba(107,142,90,0.04))">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                      <span class="sv-product-badge">Terlaris</span>
+                    </div>
+                    <div class="sv-product-info"><div class="sv-product-name">Sneakers Classic</div><div class="sv-product-price">Rp 249.000</div></div>
+                  </div>
+                  <div class="sv-product">
+                    <div class="sv-product-img" style="background:linear-gradient(135deg,rgba(90,125,184,0.18),rgba(90,125,184,0.04))">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+                    </div>
+                    <div class="sv-product-info"><div class="sv-product-name">Tas Minimalis</div><div class="sv-product-price">Rp 189.000</div></div>
+                  </div>
+                  <div class="sv-product">
+                    <div class="sv-product-img" style="background:linear-gradient(135deg,rgba(193,97,74,0.18),rgba(193,97,74,0.04))">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                      <span class="sv-product-badge">Baru</span>
+                    </div>
+                    <div class="sv-product-info"><div class="sv-product-name">Kaos Premium</div><div class="sv-product-price">Rp 129.000</div></div>
+                  </div>
+                  <div class="sv-product">
+                    <div class="sv-product-img" style="background:linear-gradient(135deg,rgba(184,150,62,0.18),rgba(184,150,62,0.04))">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <div class="sv-product-info"><div class="sv-product-name">Aksesoris Jam</div><div class="sv-product-price">Rp 349.000</div></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2398,72 +2514,78 @@
 
         <!-- View 1: Dashboard -->
         <div class="showcase-view" data-view="1">
-          <div class="sv-app">
-            <div class="sv-sidebar">
-              <div class="sv-sidebar-logo">amora</div>
-              <div class="sv-sidebar-item active">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                Ringkasan
-              </div>
-              <div class="sv-sidebar-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/></svg>
-                Pesanan
-              </div>
-              <div class="sv-sidebar-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-                Produk
-              </div>
-              <div class="sv-sidebar-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-                Pelanggan
+          <div class="sv-split">
+            <div class="sv-copy">
+              <div class="sv-copy-eyebrow"><span class="sv-copy-eyebrow-dot"></span>Dashboard</div>
+              <h3>Semua data toko dalam satu layar</h3>
+              <p class="sv-copy-desc">Pantau penjualan, pesanan masuk, dan performa produk secara real-time tanpa perlu buka banyak aplikasi.</p>
+              <div class="sv-copy-bullets">
+                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Update data real-time</div>
+                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Laporan harian &amp; bulanan</div>
+                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Akses dari HP atau laptop</div>
               </div>
             </div>
-            <div class="sv-main">
-              <div class="sv-stats">
-                <div class="sv-stat">
-                  <div class="sv-stat-label">Total Pesanan</div>
-                  <div class="sv-stat-value">1.842</div>
-                  <div class="sv-stat-sub">↑ 12% bulan ini</div>
+            <div class="sv-visual" style="padding:0">
+              <div class="sv-app">
+                <div class="sv-sidebar">
+                  <div class="sv-sidebar-logo">amora</div>
+                  <div class="sv-sidebar-item active">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Ringkasan
+                  </div>
+                  <div class="sv-sidebar-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/></svg>Pesanan
+                  </div>
+                  <div class="sv-sidebar-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Produk
+                  </div>
+                  <div class="sv-sidebar-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Pelanggan
+                  </div>
                 </div>
-                <div class="sv-stat">
-                  <div class="sv-stat-label">Pendapatan</div>
-                  <div class="sv-stat-value">48.6jt</div>
-                  <div class="sv-stat-sub">↑ 8% bulan ini</div>
+                <div class="sv-main">
+                  <div class="sv-stats">
+                    <div class="sv-stat">
+                      <div class="sv-stat-label">Total Pesanan</div>
+                      <div class="sv-stat-value">1.842</div>
+                      <div class="sv-stat-sub">↑ 12% bulan ini</div>
+                    </div>
+                    <div class="sv-stat">
+                      <div class="sv-stat-label">Pendapatan</div>
+                      <div class="sv-stat-value">48.6jt</div>
+                      <div class="sv-stat-sub">↑ 8% bulan ini</div>
+                    </div>
+                    <div class="sv-stat">
+                      <div class="sv-stat-label">Pengunjung</div>
+                      <div class="sv-stat-value">9.241</div>
+                      <div class="sv-stat-sub">↑ 24% bulan ini</div>
+                    </div>
+                  </div>
+                  <div class="sv-chart-label">Penjualan 7 Hari Terakhir</div>
+                  <div class="sv-chart">
+                    <div class="sv-bar"></div><div class="sv-bar"></div><div class="sv-bar"></div>
+                    <div class="sv-bar"></div><div class="sv-bar"></div><div class="sv-bar"></div>
+                    <div class="sv-bar"></div>
+                  </div>
+                  <div class="sv-orders-label">Pesanan Terbaru</div>
+                  <div class="sv-order-row">
+                    <span class="sv-order-id">#AMR-8821</span>
+                    <span class="sv-order-name">Budi Santoso</span>
+                    <span class="sv-order-amount">Rp 249.000</span>
+                    <span class="sv-order-badge new">Baru</span>
+                  </div>
+                  <div class="sv-order-row">
+                    <span class="sv-order-id">#AMR-8820</span>
+                    <span class="sv-order-name">Siti Rahayu</span>
+                    <span class="sv-order-amount">Rp 518.000</span>
+                    <span class="sv-order-badge proc">Diproses</span>
+                  </div>
+                  <div class="sv-order-row">
+                    <span class="sv-order-id">#AMR-8819</span>
+                    <span class="sv-order-name">Agus Priyadi</span>
+                    <span class="sv-order-amount">Rp 189.000</span>
+                    <span class="sv-order-badge ship">Dikirim</span>
+                  </div>
                 </div>
-                <div class="sv-stat">
-                  <div class="sv-stat-label">Pengunjung</div>
-                  <div class="sv-stat-value">9.241</div>
-                  <div class="sv-stat-sub">↑ 24% bulan ini</div>
-                </div>
-              </div>
-              <div class="sv-chart-label">Penjualan 7 Hari Terakhir</div>
-              <div class="sv-chart">
-                <div class="sv-bar"></div>
-                <div class="sv-bar"></div>
-                <div class="sv-bar"></div>
-                <div class="sv-bar"></div>
-                <div class="sv-bar"></div>
-                <div class="sv-bar"></div>
-                <div class="sv-bar"></div>
-              </div>
-              <div class="sv-orders-label">Pesanan Terbaru</div>
-              <div class="sv-order-row">
-                <span class="sv-order-id">#AMR-8821</span>
-                <span class="sv-order-name">Budi Santoso</span>
-                <span class="sv-order-amount">Rp 249.000</span>
-                <span class="sv-order-badge">Baru</span>
-              </div>
-              <div class="sv-order-row">
-                <span class="sv-order-id">#AMR-8820</span>
-                <span class="sv-order-name">Siti Rahayu</span>
-                <span class="sv-order-amount">Rp 518.000</span>
-                <span class="sv-order-badge">Diproses</span>
-              </div>
-              <div class="sv-order-row">
-                <span class="sv-order-id">#AMR-8819</span>
-                <span class="sv-order-name">Agus Priyadi</span>
-                <span class="sv-order-amount">Rp 189.000</span>
-                <span class="sv-order-badge">Dikirim</span>
               </div>
             </div>
           </div>
@@ -2471,85 +2593,121 @@
 
         <!-- View 2: Pembayaran -->
         <div class="showcase-view" data-view="2">
-          <div class="sv-pay-wrap">
-            <div class="sv-pay-title">Pilih Metode Pembayaran</div>
-            <div class="sv-pay-sub">Semua metode pembayaran populer tersedia</div>
-            <div class="sv-pay-method selected">
-              <div class="sv-pay-method-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          <div class="sv-split">
+            <div class="sv-copy">
+              <div class="sv-copy-eyebrow"><span class="sv-copy-eyebrow-dot"></span>Pembayaran</div>
+              <h3>Terima semua metode, dana langsung masuk</h3>
+              <p class="sv-copy-desc">Payment gateway lokal terintegrasi penuh. Pelanggan bayar pakai apapun, uang langsung ke rekening Anda.</p>
+              <div class="sv-copy-bullets">
+                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Kartu, e-wallet, bank, QRIS</div>
+                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Dana cair H+1 ke rekening</div>
+                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Tanpa biaya setup awal</div>
               </div>
-              <span class="sv-pay-method-name">Kartu Kredit / Debit</span>
-              <div class="sv-radio"><div class="sv-radio-dot"></div></div>
             </div>
-            <div class="sv-pay-method">
-              <div class="sv-pay-method-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            <div class="sv-visual">
+              <div class="sv-pay-wrap">
+                <div class="sv-pay-title">Pilih Metode Pembayaran</div>
+                <div class="sv-pay-sub">Semua metode pembayaran populer tersedia</div>
+                <div class="sv-pay-method selected">
+                  <div class="sv-pay-method-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+                  <span class="sv-pay-method-name">Kartu Kredit / Debit</span>
+                  <span class="sv-pay-fee">Visa · Mastercard</span>
+                  <div class="sv-radio"><div class="sv-radio-dot"></div></div>
+                </div>
+                <div class="sv-pay-method">
+                  <div class="sv-pay-method-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+                  <span class="sv-pay-method-name">E-Wallet</span>
+                  <span class="sv-pay-fee">GoPay · OVO · Dana</span>
+                  <div class="sv-radio"><div class="sv-radio-dot"></div></div>
+                </div>
+                <div class="sv-pay-method">
+                  <div class="sv-pay-method-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></div>
+                  <span class="sv-pay-method-name">Transfer Bank</span>
+                  <span class="sv-pay-fee">BCA · Mandiri · BNI</span>
+                  <div class="sv-radio"><div class="sv-radio-dot"></div></div>
+                </div>
+                <div class="sv-pay-method">
+                  <div class="sv-pay-method-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+                  <span class="sv-pay-method-name">QRIS</span>
+                  <span class="sv-pay-fee">Semua dompet digital</span>
+                  <div class="sv-radio"><div class="sv-radio-dot"></div></div>
+                </div>
+                <div class="sv-pay-footer">
+                  <div><div class="sv-pay-total-label">Total Pembayaran</div><div class="sv-pay-total-amount">Rp 249.000</div></div>
+                  <div class="sv-pay-btn">Bayar Sekarang</div>
+                </div>
               </div>
-              <span class="sv-pay-method-name">E-Wallet (GoPay, OVO, Dana)</span>
-              <div class="sv-radio"><div class="sv-radio-dot"></div></div>
-            </div>
-            <div class="sv-pay-method">
-              <div class="sv-pay-method-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
-              </div>
-              <span class="sv-pay-method-name">Transfer Bank</span>
-              <div class="sv-radio"><div class="sv-radio-dot"></div></div>
-            </div>
-            <div class="sv-pay-method">
-              <div class="sv-pay-method-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-              </div>
-              <span class="sv-pay-method-name">QRIS</span>
-              <div class="sv-radio"><div class="sv-radio-dot"></div></div>
-            </div>
-            <div class="sv-pay-footer">
-              <div>
-                <div class="sv-pay-total-label">Total Pembayaran</div>
-                <div class="sv-pay-total-amount">Rp 249.000</div>
-              </div>
-              <div class="sv-pay-btn">Bayar Sekarang</div>
             </div>
           </div>
         </div>
 
         <!-- View 3: Kustomisasi -->
         <div class="showcase-view" data-view="3">
-          <div class="sv-kust-wrap">
-            <div class="sv-kust-controls">
-              <div>
-                <div class="sv-kust-group-label">Warna Utama</div>
-                <div class="sv-kust-colors" id="svKustColors">
-                  <div class="sv-kust-color active" style="background:#6B8E5A;--kc:#6B8E5A" data-bg="rgba(107,142,90,0.25)"></div>
-                  <div class="sv-kust-color" style="background:#5A7DB8;--kc:#5A7DB8" data-bg="rgba(90,125,184,0.25)"></div>
-                  <div class="sv-kust-color" style="background:#C1614A;--kc:#C1614A" data-bg="rgba(193,97,74,0.25)"></div>
-                  <div class="sv-kust-color" style="background:#B8963E;--kc:#B8963E" data-bg="rgba(184,150,62,0.25)"></div>
-                  <div class="sv-kust-color" style="background:#8B5CB8;--kc:#8B5CB8" data-bg="rgba(139,92,184,0.25)"></div>
-                </div>
-              </div>
-              <div>
-                <div class="sv-kust-group-label">Tipografi</div>
-                <div class="sv-font-option active">Inter (Modern)</div>
-                <div class="sv-font-option">Playfair (Elegan)</div>
-                <div class="sv-font-option">Space Grotesk</div>
+          <div class="sv-split">
+            <div class="sv-copy">
+              <div class="sv-copy-eyebrow"><span class="sv-copy-eyebrow-dot"></span>Kustomisasi</div>
+              <h3>Tampilan toko sesuai identitas brand Anda</h3>
+              <p class="sv-copy-desc">Atur warna, font, dan layout toko langsung dari panel editor — tanpa menyentuh satu baris kode pun.</p>
+              <div class="sv-copy-bullets">
+                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Ratusan kombinasi tema warna</div>
+                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Preview perubahan langsung</div>
+                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Sinkron otomatis mobile &amp; desktop</div>
               </div>
             </div>
-            <div class="sv-kust-preview" id="svKustPreview">
-              <div class="sv-kust-store-header" id="svKustHeader" style="background:rgba(107,142,90,0.25)">
-                <div class="sv-kust-store-logo">TOKO SAYA</div>
-                <div class="sv-kust-store-links"><span>Produk</span><span>Promo</span></div>
-              </div>
-              <div class="sv-kust-products">
-                <div class="sv-kust-product">
-                  <div class="sv-kust-product-img" id="svKustImg1" style="background:rgba(107,142,90,0.2)"></div>
-                  <div class="sv-kust-product-label">Produk 1</div>
+            <div class="sv-visual">
+              <div class="sv-kust-wrap">
+                <div class="sv-kust-controls">
+                  <div>
+                    <div class="sv-kust-group-label">Tema Warna</div>
+                    <div class="sv-kust-colors" id="svKustColors">
+                      <div class="sv-kust-color-wrap">
+                        <div class="sv-kust-color active" style="background:#6B8E5A;--kc:#6B8E5A" data-bg="rgba(107,142,90,0.28)" data-name="Hijau Sage"></div>
+                        <div class="sv-kust-theme-label">Sage</div>
+                      </div>
+                      <div class="sv-kust-color-wrap">
+                        <div class="sv-kust-color" style="background:#5A7DB8;--kc:#5A7DB8" data-bg="rgba(90,125,184,0.28)" data-name="Biru Ocean"></div>
+                        <div class="sv-kust-theme-label">Ocean</div>
+                      </div>
+                      <div class="sv-kust-color-wrap">
+                        <div class="sv-kust-color" style="background:#C1614A;--kc:#C1614A" data-bg="rgba(193,97,74,0.28)" data-name="Merah Terracotta"></div>
+                        <div class="sv-kust-theme-label">Terra</div>
+                      </div>
+                      <div class="sv-kust-color-wrap">
+                        <div class="sv-kust-color" style="background:#B8963E;--kc:#B8963E" data-bg="rgba(184,150,62,0.28)" data-name="Emas Amber"></div>
+                        <div class="sv-kust-theme-label">Amber</div>
+                      </div>
+                      <div class="sv-kust-color-wrap">
+                        <div class="sv-kust-color" style="background:#8B5CB8;--kc:#8B5CB8" data-bg="rgba(139,92,184,0.28)" data-name="Ungu Royal"></div>
+                        <div class="sv-kust-theme-label">Royal</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="sv-kust-group-label">Tipografi</div>
+                    <div class="sv-font-option active">Inter — Modern</div>
+                    <div class="sv-font-option">Playfair — Elegan</div>
+                    <div class="sv-font-option">Space Grotesk</div>
+                  </div>
                 </div>
-                <div class="sv-kust-product">
-                  <div class="sv-kust-product-img" id="svKustImg2" style="background:rgba(107,142,90,0.12)"></div>
-                  <div class="sv-kust-product-label">Produk 2</div>
-                </div>
-                <div class="sv-kust-product">
-                  <div class="sv-kust-product-img" id="svKustImg3" style="background:rgba(107,142,90,0.08)"></div>
-                  <div class="sv-kust-product-label">Produk 3</div>
+                <div class="sv-kust-preview" id="svKustPreview">
+                  <div class="sv-kust-store-header" id="svKustHeader" style="background:rgba(107,142,90,0.28)">
+                    <div class="sv-kust-store-logo">TOKO SAYA</div>
+                    <div class="sv-kust-store-links"><span>Produk</span><span>Promo</span></div>
+                  </div>
+                  <div class="sv-kust-products">
+                    <div class="sv-kust-product">
+                      <div class="sv-kust-product-img" id="svKustImg1" style="background:rgba(107,142,90,0.22)"></div>
+                      <div class="sv-kust-product-label">Produk 1</div>
+                    </div>
+                    <div class="sv-kust-product">
+                      <div class="sv-kust-product-img" id="svKustImg2" style="background:rgba(107,142,90,0.13)"></div>
+                      <div class="sv-kust-product-label">Produk 2</div>
+                    </div>
+                    <div class="sv-kust-product">
+                      <div class="sv-kust-product-img" id="svKustImg3" style="background:rgba(107,142,90,0.08)"></div>
+                      <div class="sv-kust-product-label">Produk 3</div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2558,38 +2716,56 @@
 
         <!-- View 4: Promo -->
         <div class="showcase-view" data-view="4">
-          <div>
-            <div class="sv-promo-header">
-              <div class="sv-promo-title">Kelola Promo</div>
-              <div class="sv-promo-add">+ Promo Baru</div>
+          <div class="sv-split">
+            <div class="sv-copy">
+              <div class="sv-copy-eyebrow"><span class="sv-copy-eyebrow-dot"></span>Promo &amp; Diskon</div>
+              <h3>Tingkatkan penjualan dengan promo fleksibel</h3>
+              <p class="sv-copy-desc">Buat kode diskon, flash sale, atau gratis ongkir dalam 30 detik — dan pantau kinerjanya langsung dari dashboard.</p>
+              <div class="sv-copy-bullets">
+                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Voucher, kupon &amp; flash sale</div>
+                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Jadwal aktif otomatis</div>
+                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Pantau penggunaan real-time</div>
+              </div>
             </div>
-            <div class="sv-promo-row">
-              <span class="sv-promo-code">AMORA20</span>
-              <span class="sv-promo-name">Diskon 20% semua produk</span>
-              <span class="sv-promo-usage">142×</span>
-              <div class="sv-promo-toggle on"><div class="sv-promo-thumb"></div></div>
-            </div>
-            <div class="sv-promo-row">
-              <span class="sv-promo-code">ONGKIR0</span>
-              <span class="sv-promo-name">Gratis ongkir min. Rp 100rb</span>
-              <span class="sv-promo-usage">89×</span>
-              <div class="sv-promo-toggle on"><div class="sv-promo-thumb"></div></div>
-            </div>
-            <div class="sv-promo-row">
-              <span class="sv-promo-code">BELI2</span>
-              <span class="sv-promo-name">Beli 2 gratis 1 item pilihan</span>
-              <span class="sv-promo-usage">34×</span>
-              <div class="sv-promo-toggle off"><div class="sv-promo-thumb"></div></div>
-            </div>
-            <div class="sv-promo-row">
-              <span class="sv-promo-code">FLASH50</span>
-              <span class="sv-promo-name">Flash sale 50% — weekend</span>
-              <span class="sv-promo-usage">0×</span>
-              <div class="sv-promo-toggle off"><div class="sv-promo-thumb"></div></div>
-            </div>
-            <div class="sv-promo-new">
-              <div class="sv-promo-input">KODE_BARU</div>
-              <div class="sv-promo-create">Buat Promo</div>
+            <div class="sv-visual">
+              <div>
+                <div class="sv-promo-header">
+                  <div class="sv-promo-title">Kelola Promo</div>
+                  <div class="sv-promo-add">+ Promo Baru</div>
+                </div>
+                <div class="sv-promo-row">
+                  <span class="sv-promo-code">AMORA20</span>
+                  <span class="sv-promo-name">Diskon 20% semua produk</span>
+                  <div class="sv-promo-bar"><div class="sv-promo-bar-fill" style="--pw:78%"></div></div>
+                  <span class="sv-promo-usage">142×</span>
+                  <div class="sv-promo-toggle on"><div class="sv-promo-thumb"></div></div>
+                </div>
+                <div class="sv-promo-row">
+                  <span class="sv-promo-code">ONGKIR0</span>
+                  <span class="sv-promo-name">Gratis ongkir min. Rp 100rb</span>
+                  <div class="sv-promo-bar"><div class="sv-promo-bar-fill" style="--pw:55%"></div></div>
+                  <span class="sv-promo-usage">89×</span>
+                  <div class="sv-promo-toggle on"><div class="sv-promo-thumb"></div></div>
+                </div>
+                <div class="sv-promo-row">
+                  <span class="sv-promo-code">BELI2</span>
+                  <span class="sv-promo-name">Beli 2 gratis 1 item pilihan</span>
+                  <div class="sv-promo-bar"><div class="sv-promo-bar-fill" style="--pw:22%"></div></div>
+                  <span class="sv-promo-usage">34×</span>
+                  <div class="sv-promo-toggle off"><div class="sv-promo-thumb"></div></div>
+                </div>
+                <div class="sv-promo-row">
+                  <span class="sv-promo-code">FLASH50</span>
+                  <span class="sv-promo-name">Flash sale 50% — weekend</span>
+                  <div class="sv-promo-bar"><div class="sv-promo-bar-fill" style="--pw:0%"></div></div>
+                  <span class="sv-promo-usage">0×</span>
+                  <div class="sv-promo-toggle off"><div class="sv-promo-thumb"></div></div>
+                </div>
+                <div class="sv-promo-new">
+                  <div class="sv-promo-input">KODE_BARU</div>
+                  <div class="sv-promo-create">Buat Promo</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -2954,7 +3130,9 @@
       kustColors.forEach((c, i) => c.classList.toggle('active', i === idx));
       const bg = kustColors[idx] ? kustColors[idx].dataset.bg : '';
       if (kustHeader) kustHeader.style.background = bg;
-      if (kustImgs[0]) kustImgs[0].style.background = bg;
+      if (kustImgs[0]) { kustImgs[0].style.background = bg; }
+      if (kustImgs[1]) { kustImgs[1].style.background = bg.replace('0.28','0.14'); }
+      if (kustImgs[2]) { kustImgs[2].style.background = bg.replace('0.28','0.08'); }
     }
 
     function startKustCycle() {
