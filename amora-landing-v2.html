@@ -222,6 +222,12 @@
                   transform 0.8s cubic-bezier(0.22,1,0.36,1),
                   filter 0.8s cubic-bezier(0.22,1,0.36,1);
     }
+    .reveal:not(.visible) {
+      animation: reveal-safety 0.6s 2.5s forwards;
+    }
+    @keyframes reveal-safety {
+      to { opacity: 1; transform: none; filter: blur(0); }
+    }
     .reveal.from-left  { transform: translateX(-40px) translateY(0); }
     .reveal.from-right { transform: translateX(40px) translateY(0); }
     .reveal.scale-in   { transform: scale(0.92); }
