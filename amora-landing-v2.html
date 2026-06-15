@@ -3,6 +3,14 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://esm.sh/three@0.169.0",
+      "three/addons/": "https://esm.sh/three@0.169.0/examples/jsm/"
+    }
+  }
+  </script>
   <title>Amora.id — Semua Bisa Punya Toko Online</title>
   <link rel="preconnect" href="https://fonts.googleapis.com/">
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
@@ -1231,14 +1239,15 @@
 
     /* Large panel */
     .showcase-panel {
-      position: relative; height: 460px;
-      background: rgba(8,10,16,0.95);
+      position: relative; height: 500px;
+      background: rgba(8,10,16,0.97);
       border: 1px solid rgba(255,255,255,0.09);
       border-top: none;
       border-radius: 0 0 var(--r-xl) var(--r-xl);
       overflow: hidden;
       box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 8px 24px rgba(0,0,0,0.4), inset 0 -1px 0 rgba(0,0,0,0.5);
     }
+    @media (min-width: 1100px) { .showcase-panel { height: 520px; } }
 
     /* Individual panel views */
     .showcase-view {
@@ -1396,6 +1405,33 @@
     .sv-order-name { flex: 1; color: rgba(255,255,255,0.65); }
     .sv-order-amount { color: var(--accent-light); font-weight: 600; }
     .sv-order-badge { font-size: 7px; padding: 2px 6px; border-radius: 10px; background: rgba(107,142,90,0.15); color: var(--accent-light); border: 1px solid rgba(107,142,90,0.2); }
+
+    /* ── Widget interactivity ── */
+    .sv-bar { cursor: pointer; }
+    .sv-bar:hover { filter: brightness(1.25); }
+    .sv-bar.bar-selected {
+      background: linear-gradient(180deg, #B8E6A0 0%, var(--accent-light) 45%, rgba(107,142,90,0.3) 100%) !important;
+      filter: drop-shadow(0 -3px 8px rgba(143,184,122,0.7)) !important;
+    }
+    .sv-bar-tooltip {
+      position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+      background: rgba(12,16,24,0.95); border: 1px solid rgba(143,184,122,0.35);
+      color: rgba(255,255,255,0.9); font-size: 7px; font-weight: 700;
+      padding: 3px 7px; border-radius: 5px; white-space: nowrap; pointer-events: none;
+      opacity: 0; transition: opacity 0.15s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+    .sv-bar:hover .sv-bar-tooltip, .sv-bar.bar-selected .sv-bar-tooltip { opacity: 1; }
+    .sv-product { cursor: pointer; transition: opacity 0.3s, transform 0.3s, border-color 0.2s, box-shadow 0.2s; }
+    .sv-product:hover { border-color: rgba(107,142,90,0.3) !important; transform: translateY(-2px) !important; box-shadow: 0 4px 16px rgba(107,142,90,0.15); }
+    .sv-product.in-cart { border-color: rgba(107,142,90,0.6) !important; }
+    .sv-product.in-cart .sv-product-price::before { content: '✓ '; color: var(--accent-light); }
+    .sv-sidebar-item { cursor: pointer; }
+    .sv-sidebar-item:hover:not(.active) { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.55); }
+    .sv-stat { cursor: default; transition: opacity 0.3s, transform 0.3s, border-color 0.2s; }
+    .sv-stat:hover { border-color: rgba(107,142,90,0.3) !important; }
+    .sv-order-row { cursor: pointer; transition: opacity 0.3s, background 0.15s; border-radius: 4px; }
+    .sv-order-row:hover { background: rgba(255,255,255,0.03); }
 
     /* ── Panel 2: Pembayaran ── */
     .sv-pay-wrap { max-width: 420px; margin: 0 auto; }
@@ -2678,13 +2714,13 @@
                     <span class="sv-chart-growth">↑ 24%</span>
                   </div>
                   <div class="sv-chart">
-                    <div class="sv-bar" data-v="3.2jt"></div>
-                    <div class="sv-bar" data-v="4.5jt"></div>
-                    <div class="sv-bar" data-v="2.8jt"></div>
-                    <div class="sv-bar" data-v="5.9jt"></div>
-                    <div class="sv-bar" data-v="4.0jt"></div>
-                    <div class="sv-bar" data-v="5.1jt"></div>
-                    <div class="sv-bar" data-v="6.7jt"></div>
+                    <div class="sv-bar" data-v="3.2jt"><span class="sv-bar-tooltip">Rp 3.2jt</span></div>
+                    <div class="sv-bar" data-v="4.5jt"><span class="sv-bar-tooltip">Rp 4.5jt</span></div>
+                    <div class="sv-bar" data-v="2.8jt"><span class="sv-bar-tooltip">Rp 2.8jt</span></div>
+                    <div class="sv-bar" data-v="5.9jt"><span class="sv-bar-tooltip">Rp 5.9jt</span></div>
+                    <div class="sv-bar" data-v="4.0jt"><span class="sv-bar-tooltip">Rp 4.0jt</span></div>
+                    <div class="sv-bar" data-v="5.1jt"><span class="sv-bar-tooltip">Rp 5.1jt</span></div>
+                    <div class="sv-bar" data-v="6.7jt"><span class="sv-bar-tooltip">Rp 6.7jt</span></div>
                   </div>
                   <div class="sv-chart-days">
                     <span class="sv-bar-day">Sen</span><span class="sv-bar-day">Sel</span>
@@ -3201,203 +3237,313 @@
     navbar.classList.toggle('scrolled', window.scrollY > 50);
   }, { passive: true });
 
-  // ── Hero abstract 3D canvas ──
+  // ── Hero 3D canvas: handled by Three.js module script below ──
   (function() {
+    // Canvas 2D disabled — Three.js WebGL module takes over #heroCanvas
+    return;
     const canvas = document.getElementById('heroCanvas');
     if (!canvas) return;
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
+    const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const ctx = canvas.getContext('2d');
     const DPR = Math.min(window.devicePixelRatio || 1, 2);
 
     function resize() {
-      const rect = canvas.getBoundingClientRect();
-      canvas.width  = rect.width  * DPR;
-      canvas.height = rect.height * DPR;
+      const r = canvas.getBoundingClientRect();
+      canvas.width = r.width * DPR; canvas.height = r.height * DPR;
       ctx.scale(DPR, DPR);
     }
     resize();
     window.addEventListener('resize', resize, { passive: true });
 
-    // ── 3-D projection helpers ──
-    function project(x, y, z, cx, cy, fov) {
-      const scale = fov / (fov + z);
-      return { x: cx + x * scale, y: cy + y * scale, s: scale };
-    }
+    const proj = (x,y,z,cx,cy,fov=520) => { const s=fov/(fov+z); return {x:cx+x*s,y:cy+y*s,s}; };
+    const rotX = (p,a) => { const c=Math.cos(a),s=Math.sin(a); return [p[0],p[1]*c-p[2]*s,p[1]*s+p[2]*c]; };
+    const rotY = (p,a) => { const c=Math.cos(a),s=Math.sin(a); return [p[0]*c+p[2]*s,p[1],-p[0]*s+p[2]*c]; };
 
-    // Define 8 vertices of a unit cube then scale
-    function cubeVerts(S) {
-      const h = S / 2;
-      return [
-        [-h,-h,-h],[h,-h,-h],[h,h,-h],[-h,h,-h],
-        [-h,-h, h],[h,-h, h],[h,h, h],[-h,h, h]
-      ];
+    function cubeVerts(h) {
+      return [[-h,-h,-h],[h,-h,-h],[h,h,-h],[-h,h,-h],[-h,-h,h],[h,-h,h],[h,h,h],[-h,h,h]];
     }
-    const EDGES = [
-      [0,1],[1,2],[2,3],[3,0], // back face
-      [4,5],[5,6],[6,7],[7,4], // front face
-      [0,4],[1,5],[2,6],[3,7]  // connecting
+    const FACES = [
+      {v:[0,1,2,3],label:'back'},{v:[4,5,6,7],label:'front'},
+      {v:[0,1,5,4],label:'top'},{v:[2,3,7,6],label:'bottom'},
+      {v:[0,3,7,4],label:'left'},{v:[1,2,6,5],label:'right'}
     ];
+    const EDGES = [[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]];
 
-    // Rotation matrices
-    function rotX(p, a) {
-      const c = Math.cos(a), s = Math.sin(a);
-      return [p[0], p[1]*c - p[2]*s, p[1]*s + p[2]*c];
+    let rX=0.42, rY=-0.55, tX=0.42, tY=-0.55, vX=0, vY=0, drag=false, lx=0, ly=0;
+    canvas.addEventListener('pointerdown', e => { drag=true; lx=e.clientX; ly=e.clientY; vX=vY=0; canvas.setPointerCapture(e.pointerId); });
+    canvas.addEventListener('pointermove', e => { if(!drag) return; vX=(e.clientY-ly)*0.007; vY=(e.clientX-lx)*0.007; tX+=vX; tY+=vY; lx=e.clientX; ly=e.clientY; });
+    canvas.addEventListener('pointerup',    () => drag=false);
+    canvas.addEventListener('pointercancel',() => drag=false);
+
+    function clipPoly(pts) {
+      ctx.beginPath(); ctx.moveTo(pts[0].x,pts[0].y);
+      for(let i=1;i<pts.length;i++) ctx.lineTo(pts[i].x,pts[i].y);
+      ctx.closePath();
     }
-    function rotY(p, a) {
-      const c = Math.cos(a), s = Math.sin(a);
-      return [p[0]*c + p[2]*s, p[1], -p[0]*s + p[2]*c];
+    function faceCenter(pts) {
+      const cx=(pts[0].x+pts[1].x+pts[2].x+pts[3].x)/4;
+      const cy=(pts[0].y+pts[1].y+pts[2].y+pts[3].y)/4;
+      const fw=Math.hypot(pts[1].x-pts[0].x,pts[1].y-pts[0].y);
+      const fh=Math.hypot(pts[3].x-pts[0].x,pts[3].y-pts[0].y);
+      return {cx,cy,fw,fh};
     }
-    function rotZ(p, a) {
-      const c = Math.cos(a), s = Math.sin(a);
-      return [p[0]*c - p[1]*s, p[0]*s + p[1]*c, p[2]];
-    }
 
-    // Cubes definition: [size, tx, ty, tz, rxOffset, ryOffset, rzOffset, alpha]
-    const CUBES = [
-      { s:160, tx:  0, ty:  0, tz:  0, rx:0,    ry:0,    rz:0,    a:0.92 },
-      { s: 72, tx:145, ty:-110, tz: 40, rx:0.4,  ry:0.7,  rz:0.2,  a:0.52 },
-      { s: 52, tx:-120, ty: 95, tz:-25, rx:-0.3, ry:0.5,  rz:-0.4, a:0.42 },
-      { s: 42, tx: 95, ty:125, tz: 15, rx:0.6,  ry:-0.3, rz:0.5,  a:0.36 },
-      { s: 32, tx:-100, ty:-115, tz:-15, rx:-0.5, ry:0.8,  rz:0.1,  a:0.30 },
-    ];
-
-    // Rotation state
-    let rotX_ = 0.3, rotY_ = -0.4;
-    let targetX = rotX_, targetY = rotY_;
-    let autoX = 0, autoY = 0;
-    let dragging = false, lastMX = 0, lastMY = 0;
-    let velX = 0, velY = 0;
-
-    // Drag interaction
-    canvas.addEventListener('pointerdown', e => {
-      dragging = true;
-      lastMX = e.clientX;
-      lastMY = e.clientY;
-      velX = velY = 0;
-      canvas.setPointerCapture(e.pointerId);
-    });
-    canvas.addEventListener('pointermove', e => {
-      if (!dragging) return;
-      const dx = e.clientX - lastMX;
-      const dy = e.clientY - lastMY;
-      velX = dy * 0.008;
-      velY = dx * 0.008;
-      targetX += velX;
-      targetY += velY;
-      lastMX = e.clientX;
-      lastMY = e.clientY;
-    });
-    canvas.addEventListener('pointerup',    () => { dragging = false; });
-    canvas.addEventListener('pointercancel',() => { dragging = false; });
-
-    // Draw a single cube
-    function drawCube(cube, rx, ry, t) {
-      const rect = canvas.getBoundingClientRect();
-      const W = rect.width, H = rect.height;
-      const cx = W / 2, cy = H / 2;
-      const fov = 520;
-
-      const verts = cubeVerts(cube.s).map(v => {
-        let p = [v[0], v[1], v[2]];
-        p = rotX(p, cube.rx * 1.2);
-        p = rotY(p, cube.ry * 1.2 + t * 0.12);
-        p = rotZ(p, cube.rz * 0.8 + t * 0.04);
-        p = rotX(p, rx);
-        p = rotY(p, ry);
-        // translate
-        p[0] += cube.tx; p[1] += cube.ty; p[2] += cube.tz;
-        return p;
+    function sparkline(x0,y0,W,H,data,color) {
+      const max=Math.max(...data),min=Math.min(...data);
+      ctx.beginPath();
+      data.forEach((v,i)=>{
+        const px=x0+i/(data.length-1)*W, py=y0+H-(v-min)/(max-min||1)*H;
+        i===0?ctx.moveTo(px,py):ctx.lineTo(px,py);
       });
+      ctx.strokeStyle=color; ctx.lineWidth=1.5; ctx.lineJoin='round'; ctx.stroke();
+      ctx.lineTo(x0+W,y0+H); ctx.lineTo(x0,y0+H); ctx.closePath();
+      ctx.fillStyle=color.replace('rgb(','rgba(').replace(')',',0.12)'); ctx.fill();
+    }
 
-      const proj = verts.map(v => project(v[0], v[1], v[2], cx, cy, fov));
-
-      // Edge alpha modulated by z-depth of midpoint
-      EDGES.forEach(([a, b]) => {
-        const za = verts[a][2], zb = verts[b][2];
-        const zmid = (za + zb) / 2;
-        const depthAlpha = Math.max(0.15, Math.min(1, (zmid + 200) / 350));
-        const lineAlpha = cube.a * depthAlpha;
-
-        ctx.beginPath();
-        ctx.moveTo(proj[a].x, proj[a].y);
-        ctx.lineTo(proj[b].x, proj[b].y);
-        ctx.strokeStyle = `rgba(143,184,122,${lineAlpha})`;
-        ctx.lineWidth = cube.s > 80 ? 1.5 : 1;
-        ctx.stroke();
+    function barChart(x0,y0,W,H,data) {
+      const max=Math.max(...data), gap=W/data.length, bw=gap*0.62;
+      data.forEach((v,i)=>{
+        const bh=(v/max)*H, bx=x0+i*gap+(gap-bw)/2, by=y0+H-bh;
+        const g=ctx.createLinearGradient(bx,by,bx,y0+H);
+        g.addColorStop(0,'rgba(143,184,122,0.9)'); g.addColorStop(1,'rgba(107,142,90,0.15)');
+        ctx.fillStyle=g;
+        ctx.beginPath(); ctx.roundRect(bx,by,bw,bh,2); ctx.fill();
       });
+    }
 
-      // Vertex dots on main cube
-      if (cube.s > 80) {
-        proj.forEach((p, i) => {
-          const za = verts[i][2];
-          const dotAlpha = Math.max(0.1, Math.min(0.7, (za + 200) / 350)) * cube.a;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, 2.5 * p.s, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(143,184,122,${dotAlpha})`;
-          ctx.fill();
+    // Draw rich UI content clipped inside a cube face
+    function drawFaceContent(pts, label, t) {
+      const {cx,cy,fw,fh} = faceCenter(pts);
+      const pad = fw*0.09;
+
+      ctx.save();
+      clipPoly(pts); ctx.clip();
+
+      // dark glass background
+      clipPoly(pts);
+      ctx.fillStyle='rgba(8,12,18,0.82)'; ctx.fill();
+
+      // subtle inner gradient overlay
+      const g=ctx.createRadialGradient(cx,cy-fh*0.2,0,cx,cy,fw*0.8);
+      g.addColorStop(0,'rgba(107,142,90,0.08)'); g.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=g; clipPoly(pts); ctx.fill();
+
+      const x0=cx-fw/2+pad, y0=cy-fh/2+pad, W=fw-pad*2, H=fh-pad*2;
+      const fs = n => Math.max(6, fw*n);
+
+      if (label==='front') {
+        // Header row
+        ctx.fillStyle='rgba(143,184,122,0.85)';
+        ctx.font=`bold ${fs(0.075)}px Inter,sans-serif`; ctx.textAlign='left';
+        ctx.fillText('🛍 Katalog Produk', x0, y0+fs(0.075));
+        // divider
+        ctx.strokeStyle='rgba(143,184,122,0.2)'; ctx.lineWidth=0.5;
+        ctx.beginPath(); ctx.moveTo(x0,y0+H*0.13); ctx.lineTo(x0+W,y0+H*0.13); ctx.stroke();
+        // 2×2 product cards
+        const prods=[['👕','Batik','Rp 299k'],['👜','Tas Rotan','Rp 189k'],['🧤','Sarung Tangan','Rp 89k'],['👗','Kebaya Modern','Rp 450k']];
+        const cw=(W-pad*0.5)/2, ch=(H*0.85-pad*0.5)/2;
+        prods.forEach(([icon,name,price],i)=>{
+          const col=i%2, row=Math.floor(i/2);
+          const bx=x0+col*(cw+pad*0.5), by=y0+H*0.15+row*(ch+pad*0.5);
+          ctx.fillStyle='rgba(143,184,122,0.06)';
+          ctx.strokeStyle='rgba(143,184,122,0.22)'; ctx.lineWidth=0.8;
+          ctx.beginPath(); ctx.roundRect(bx,by,cw,ch,4); ctx.fill(); ctx.stroke();
+          ctx.font=`${fs(0.12)}px sans-serif`; ctx.textAlign='center';
+          ctx.fillText(icon, bx+cw/2, by+ch*0.52);
+          ctx.fillStyle='rgba(255,255,255,0.55)'; ctx.font=`${fs(0.058)}px Inter,sans-serif`;
+          ctx.fillText(name, bx+cw/2, by+ch*0.74);
+          ctx.fillStyle='rgba(143,184,122,0.95)'; ctx.font=`bold ${fs(0.062)}px Inter,sans-serif`;
+          ctx.fillText(price, bx+cw/2, by+ch*0.91);
+        });
+
+      } else if (label==='right') {
+        // Analytics panel
+        ctx.fillStyle='rgba(143,184,122,0.75)'; ctx.font=`bold ${fs(0.07)}px Inter,sans-serif`; ctx.textAlign='left';
+        ctx.fillText('📊 Analitik', x0, y0+fs(0.07));
+        ctx.strokeStyle='rgba(143,184,122,0.18)'; ctx.lineWidth=0.5;
+        ctx.beginPath(); ctx.moveTo(x0,y0+H*0.13); ctx.lineTo(x0+W,y0+H*0.13); ctx.stroke();
+        ctx.fillStyle='rgba(255,255,255,0.9)'; ctx.font=`bold ${fs(0.16)}px Geist,Inter,sans-serif`;
+        ctx.fillText('Rp 8.4jt', x0, y0+H*0.32);
+        ctx.fillStyle='rgba(143,184,122,0.8)'; ctx.font=`${fs(0.065)}px Inter,sans-serif`;
+        ctx.fillText('↑ 32% bulan ini', x0, y0+H*0.43);
+        sparkline(x0, y0+H*0.5, W, H*0.3, [20,35,28,50,42,65,58,78,70,91],'rgb(143,184,122)');
+        barChart(x0, y0+H*0.83, W, H*0.15, [40,65,50,80,70,90]);
+
+      } else if (label==='top') {
+        ctx.fillStyle='rgba(143,184,122,0.9)'; ctx.font=`bold ${fs(0.18)}px Inter,sans-serif`; ctx.textAlign='center';
+        ctx.fillText('🏪 TOKO SAYA', cx, cy);
+        ctx.fillStyle='rgba(255,255,255,0.3)'; ctx.font=`${fs(0.12)}px Inter,sans-serif`;
+        ctx.fillText('amora.id/toko', cx, cy+fh*0.28);
+
+      } else if (label==='left') {
+        ctx.fillStyle='rgba(143,184,122,0.75)'; ctx.font=`bold ${fs(0.075)}px Inter,sans-serif`; ctx.textAlign='left';
+        ctx.fillText('📋 Pesanan Masuk', x0, y0+fs(0.075));
+        ctx.strokeStyle='rgba(143,184,122,0.18)'; ctx.lineWidth=0.5;
+        ctx.beginPath(); ctx.moveTo(x0,y0+H*0.14); ctx.lineTo(x0+W,y0+H*0.14); ctx.stroke();
+        const orders=[['#1042','Rp 299k','✓ Selesai'],['#1041','Rp 189k','✓ Selesai'],['#1040','Rp 89k','⏳ Proses']];
+        orders.forEach(([id,amt,st],i)=>{
+          const oy=y0+H*0.22+i*H*0.26;
+          ctx.fillStyle='rgba(255,255,255,0.04)'; ctx.strokeStyle='rgba(143,184,122,0.12)'; ctx.lineWidth=0.5;
+          ctx.beginPath(); ctx.roundRect(x0,oy,W,H*0.22,3); ctx.fill(); ctx.stroke();
+          ctx.fillStyle='rgba(255,255,255,0.6)'; ctx.font=`bold ${fs(0.065)}px Inter,sans-serif`;
+          ctx.fillText(id, x0+4, oy+H*0.14);
+          ctx.fillStyle='rgba(143,184,122,0.9)'; ctx.textAlign='right';
+          ctx.fillText(amt, x0+W-2, oy+H*0.14);
+          ctx.fillStyle=st.startsWith('✓')?'rgba(143,184,122,0.7)':'rgba(255,180,60,0.7)';
+          ctx.font=`${fs(0.055)}px Inter,sans-serif`; ctx.textAlign='left';
+          ctx.fillText(st, x0+4, oy+H*0.21);
         });
       }
+
+      // top accent line
+      ctx.strokeStyle='rgba(143,184,122,0.6)'; ctx.lineWidth=1.5;
+      ctx.beginPath(); ctx.moveTo(pts[0].x,pts[0].y); ctx.lineTo(pts[1].x,pts[1].y); ctx.stroke();
+
+      ctx.restore();
     }
 
-    // Floating particles
-    const PARTICLES = Array.from({ length: 32 }, () => ({
-      x: (Math.random() - 0.5) * 460,
-      y: (Math.random() - 0.5) * 460,
-      z: (Math.random() - 0.5) * 260,
-      r: Math.random() * 1.4 + 0.4,
-      speed: Math.random() * 0.008 + 0.003,
-      phase: Math.random() * Math.PI * 2,
-    }));
-
-    let lastT = 0;
-    function draw(ts) {
-      const t = ts / 1000;
-      const dt = t - lastT;
-      lastT = t;
-
-      const rect = canvas.getBoundingClientRect();
-      ctx.clearRect(0, 0, rect.width, rect.height);
-
-      // Inertia + auto-rotation when not dragging
-      if (!dragging) {
-        rotX_ += (targetX - rotX_) * 0.04;
-        rotY_ += (targetY - rotY_) * 0.04;
-        velX *= 0.92; velY *= 0.92;
-        targetX += velX;
-        targetY += velY;
-        if (!reducedMotion) {
-          autoX = Math.sin(t * 0.18) * 0.08;
-          autoY = t * 0.1;
-        }
-      } else {
-        rotX_ = targetX;
-        rotY_ = targetY;
-      }
-
-      const rx = rotX_ + autoX;
-      const ry = rotY_ + autoY;
-
-      // Draw cubes
+    // Floating UI card (orbiting panel)
+    function drawCard(x3,y3,z3, w,h, tx,ty, drawFn) {
+      const r=canvas.getBoundingClientRect();
+      const cx=r.width/2, cy=r.height/2;
+      const corners=[[-w/2,-h/2,0],[w/2,-h/2,0],[w/2,h/2,0],[-w/2,h/2,0]];
+      const pts=corners.map(c=>{ let p=rotX(rotY(c,ty),tx); return proj(p[0]+x3,p[1]+y3,p[2]+z3,cx,cy); });
       ctx.save();
-      CUBES.forEach(c => drawCube(c, rx, ry, t));
+      ctx.shadowColor='rgba(107,142,90,0.4)'; ctx.shadowBlur=18;
+      clipPoly(pts); ctx.fillStyle='rgba(8,12,18,0.9)'; ctx.fill();
       ctx.restore();
+      ctx.strokeStyle='rgba(143,184,122,0.45)'; ctx.lineWidth=1;
+      clipPoly(pts); ctx.stroke();
+      // top accent
+      ctx.save(); ctx.beginPath(); ctx.moveTo(pts[0].x,pts[0].y); ctx.lineTo(pts[1].x,pts[1].y);
+      ctx.strokeStyle='rgba(143,184,122,0.85)'; ctx.lineWidth=1.5; ctx.stroke(); ctx.restore();
+      // content
+      ctx.save(); clipPoly(pts); ctx.clip();
+      const fw=Math.hypot(pts[1].x-pts[0].x,pts[1].y-pts[0].y);
+      const fh=Math.hypot(pts[3].x-pts[0].x,pts[3].y-pts[0].y);
+      const pcx=(pts[0].x+pts[2].x)/2, pcy=(pts[0].y+pts[2].y)/2;
+      drawFn(pcx,pcy,fw,fh); ctx.restore();
+    }
+
+    function draw(ts) {
+      const t=ts/1000;
+      const r=canvas.getBoundingClientRect();
+      const W=r.width, H=r.height, cx=W/2, cy=H/2;
+      ctx.clearRect(0,0,W,H);
+
+      if(!drag) {
+        rX+=(tX-rX)*0.05; rY+=(tY-rY)*0.05;
+        vX*=0.92; vY*=0.92; tX+=vX; tY+=vY;
+        if(!rm) tY-=0.004;
+      } else { rX=tX; rY=tY; }
+
+      const S=Math.min(W,H)*0.3;
+      const verts=cubeVerts(S).map(v=>{ let p=rotX(rotY(v,rY),rX); return {...proj(p[0],p[1],p[2],cx,cy),z:p[2]}; });
+
+      const sorted=FACES.map((f,i)=>({...f,z:f.v.reduce((s,vi)=>s+verts[vi].z,0)/4})).sort((a,b)=>a.z-b.z);
+
+      // Draw faces (back-to-front)
+      sorted.forEach(({v,label,z})=>{
+        const pts=v.map(vi=>verts[vi]);
+        const norm=(pts[1].x-pts[0].x)*(pts[2].y-pts[0].y)-(pts[1].y-pts[0].y)*(pts[2].x-pts[0].x);
+        if (norm>=0) {
+          // back faces: faint glass only
+          ctx.save(); clipPoly(pts);
+          ctx.fillStyle='rgba(107,142,90,0.03)'; ctx.fill();
+          ctx.strokeStyle='rgba(143,184,122,0.1)'; ctx.lineWidth=0.8; ctx.stroke();
+          ctx.restore();
+        } else {
+          drawFaceContent(pts, label, t);
+        }
+      });
+
+      // Glowing edges
+      EDGES.forEach(([a,b])=>{
+        const za=(verts[a].z+verts[b].z)/2;
+        const dA=Math.max(0.25,Math.min(1,(za+S*1.5)/(S*3)));
+        ctx.save();
+        ctx.shadowColor='rgba(143,184,122,0.75)'; ctx.shadowBlur=12;
+        ctx.beginPath(); ctx.moveTo(verts[a].x,verts[a].y); ctx.lineTo(verts[b].x,verts[b].y);
+        ctx.strokeStyle=`rgba(143,184,122,${dA})`; ctx.lineWidth=2.2; ctx.stroke();
+        ctx.shadowBlur=0;
+        ctx.strokeStyle=`rgba(210,240,180,${dA*0.35})`; ctx.lineWidth=0.8; ctx.stroke();
+        ctx.restore();
+      });
+
+      // Vertex dots
+      verts.forEach(v=>{
+        const dA=Math.max(0.15,(v.z+S*1.5)/(S*3));
+        ctx.save(); ctx.shadowColor='rgba(143,184,122,0.9)'; ctx.shadowBlur=10;
+        ctx.beginPath(); ctx.arc(v.x,v.y,3.8*v.s,0,Math.PI*2);
+        ctx.fillStyle=`rgba(190,230,160,${dA})`; ctx.fill(); ctx.restore();
+      });
+
+      // Floating cards
+      const sinT=Math.sin(t*0.38), cosT=Math.cos(t*0.31);
+      const fs = n => Math.max(6, n);
+
+      // Card 1: Sales (top-right)
+      drawCard(S*1.52+sinT*10,-S*0.88+cosT*7,-S*0.1,118,74,rX*0.35,rY*0.35,(px,py,fw,fh)=>{
+        const x0=px-fw/2+6, y0=py-fh/2+6;
+        ctx.textAlign='left';
+        ctx.fillStyle='rgba(143,184,122,0.6)'; ctx.font=`${Math.max(6,fw*0.075)}px Inter,sans-serif`;
+        ctx.fillText('PENJUALAN HARI INI', x0, y0+fw*0.075);
+        ctx.fillStyle='rgba(255,255,255,0.92)'; ctx.font=`bold ${Math.max(8,fw*0.14)}px Geist,Inter,sans-serif`;
+        ctx.fillText('Rp 2.4jt', x0, y0+fh*0.35);
+        ctx.fillStyle='rgba(143,184,122,0.85)'; ctx.font=`${Math.max(5,fw*0.068)}px Inter,sans-serif`;
+        ctx.fillText('↑ 24% vs kemarin', x0, y0+fh*0.48);
+        sparkline(x0,y0+fh*0.56,fw-12,fh*0.32,[30,45,38,60,52,75,68,91],'rgb(143,184,122)');
+      });
+
+      // Card 2: New order notification (top-left)
+      drawCard(-S*0.5+cosT*6,-S*1.48+sinT*5,S*0.3,112,48,rX*0.2,rY*0.2,(px,py,fw,fh)=>{
+        const x0=px-fw/2+8;
+        ctx.beginPath(); ctx.arc(x0+6,py,4,0,Math.PI*2);
+        ctx.fillStyle=`rgba(143,184,122,${0.55+0.45*Math.sin(t*3)})`; ctx.fill();
+        ctx.fillStyle='rgba(143,184,122,0.95)'; ctx.font=`bold ${Math.max(6,fw*0.075)}px Inter,sans-serif`; ctx.textAlign='left';
+        ctx.fillText('Pesanan Baru!', x0+16, py-2);
+        ctx.fillStyle='rgba(255,255,255,0.4)'; ctx.font=`${Math.max(5,fw*0.062)}px Inter,sans-serif`;
+        ctx.fillText('#AMR-9021 · Rp 299.000', x0, py+fh*0.3);
+      });
+
+      // Card 3: Product highlight (left)
+      drawCard(-S*1.52+cosT*8,sinT*12,S*0.2,96,76,rX*0.25,rY*0.25,(px,py,fw,fh)=>{
+        ctx.textAlign='center';
+        ctx.fillStyle='rgba(107,142,90,0.15)'; ctx.strokeStyle='rgba(143,184,122,0.2)'; ctx.lineWidth=0.8;
+        const iW=fw*0.68,iH=fh*0.44;
+        ctx.beginPath(); ctx.roundRect(px-iW/2,py-fh*0.44,iW,iH,5); ctx.fill(); ctx.stroke();
+        ctx.font=`${Math.max(12,fw*0.24)}px sans-serif`; ctx.fillText('👕',px,py-fh*0.1);
+        ctx.fillStyle='rgba(255,255,255,0.72)'; ctx.font=`bold ${Math.max(6,fw*0.075)}px Inter,sans-serif`;
+        ctx.fillText('Batik Kontemporer',px,py+fh*0.18);
+        ctx.fillStyle='rgba(143,184,122,1)'; ctx.font=`bold ${Math.max(7,fw*0.09)}px Inter,sans-serif`;
+        ctx.fillText('Rp 299.000',px,py+fh*0.36);
+        ctx.fillStyle='rgba(255,200,60,0.85)'; ctx.font=`${Math.max(7,fw*0.09)}px sans-serif`;
+        ctx.fillText('★★★★★',px,py+fh*0.52);
+      });
+
+      // Card 4: Visitors (bottom)
+      drawCard(S*0.38+sinT*8,S*1.52+cosT*5,S*0.1,94,42,rX*0.3,rY*0.3,(px,py,fw,fh)=>{
+        const x0=px-fw/2+7;
+        ctx.textAlign='left';
+        ctx.fillStyle='rgba(255,255,255,0.3)'; ctx.font=`${Math.max(5,fw*0.062)}px Inter,sans-serif`;
+        ctx.fillText('PENGUNJUNG HARI INI', x0, py-fh*0.18);
+        ctx.fillStyle='rgba(255,255,255,0.92)'; ctx.font=`bold ${Math.max(9,fw*0.16)}px Geist,Inter,sans-serif`;
+        ctx.fillText('1.284', x0, py+fh*0.28);
+        ctx.fillStyle='rgba(143,184,122,0.9)'; ctx.font=`bold ${Math.max(7,fw*0.088)}px Inter,sans-serif`;
+        ctx.textAlign='right'; ctx.fillText('↑18%', px+fw/2-7, py+fh*0.28);
+      });
 
       // Particles
-      const fov = 520;
-      const cx = rect.width / 2, cy = rect.height / 2;
-      PARTICLES.forEach(p => {
-        const angle = t * p.speed + p.phase;
-        const px3 = p.x + Math.sin(angle) * 12;
-        const py3 = p.y + Math.cos(angle * 0.7) * 10;
-        const pz3 = p.z + Math.sin(angle * 0.5) * 15;
-        const proj = project(px3, py3, pz3, cx, cy, fov);
-        const alpha = Math.max(0.05, Math.min(0.45, (pz3 + 180) / 320)) * 0.6;
-        ctx.beginPath();
-        ctx.arc(proj.x, proj.y, p.r * proj.s * 0.7, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(143,184,122,${alpha})`;
-        ctx.fill();
-      });
+      for(let i=0;i<24;i++){
+        const ph=(i/24)*Math.PI*2;
+        const px3=Math.cos(ph+t*0.04)*S*1.9*(0.5+Math.sin(ph*3)*0.5);
+        const py3=Math.sin(ph*1.7+t*0.035)*S*1.7;
+        const pz3=Math.cos(ph*2.3)*S*0.9;
+        const pp=proj(px3,py3,pz3,cx,cy);
+        const a=Math.max(0.03,Math.min(0.22,(pz3+S*1.5)/(S*3)));
+        ctx.beginPath(); ctx.arc(pp.x,pp.y,1.4*pp.s,0,Math.PI*2);
+        ctx.fillStyle=`rgba(143,184,122,${a})`; ctx.fill();
+      }
 
       requestAnimationFrame(draw);
     }
@@ -3635,6 +3781,47 @@
     } else {
       initShowcase();
     }
+  })();
+
+  // ── Widget interactivity ──
+  (function() {
+    // Dashboard: click bars to highlight
+    document.querySelectorAll('.sv-bar').forEach(bar => {
+      bar.addEventListener('click', () => {
+        document.querySelectorAll('.sv-bar').forEach(b => b.classList.remove('bar-selected'));
+        bar.classList.add('bar-selected');
+      });
+    });
+    // Dashboard sidebar: click to change active
+    document.querySelectorAll('.sv-sidebar-item').forEach(item => {
+      item.addEventListener('click', () => {
+        item.closest('.sv-sidebar').querySelectorAll('.sv-sidebar-item').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+      });
+    });
+    // Website Toko: click product to toggle cart
+    document.querySelectorAll('.sv-product').forEach(prod => {
+      prod.addEventListener('click', () => prod.classList.toggle('in-cart'));
+    });
+    // Promo: click toggle to switch on/off
+    document.querySelectorAll('.sv-promo-toggle').forEach(toggle => {
+      toggle.style.cursor = 'pointer';
+      toggle.addEventListener('click', () => {
+        if (toggle.classList.contains('on')) {
+          toggle.classList.replace('on','off');
+        } else {
+          toggle.classList.replace('off','on');
+        }
+      });
+    });
+    // Promo: "+ Promo Baru" flash
+    document.querySelectorAll('.sv-promo-add, .sv-promo-create').forEach(btn => {
+      btn.style.cursor = 'pointer';
+      btn.addEventListener('click', () => {
+        btn.style.background = 'rgba(107,142,90,0.35)';
+        setTimeout(() => btn.style.background = '', 400);
+      });
+    });
   })();
 
   // ── FAQ ──
@@ -3876,6 +4063,435 @@
     setInterval(playOutline,4200);
   })();
 
+</script>
+
+<script type="module">
+// ── Hero 3D — Skeleton glassmorphic cards filling all cube faces ──
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+(async()=>{ try{
+  const canvasEl = document.getElementById('heroCanvas');
+  if(!canvasEl) return;
+
+  const renderer = new THREE.WebGLRenderer({canvas:canvasEl, alpha:true, antialias:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 0.95;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 60);
+  camera.position.set(3.8, 2.2, 5.8);
+
+  function setSize(){
+    const w=canvasEl.clientWidth, h=canvasEl.clientHeight;
+    renderer.setSize(w,h,false);
+    camera.aspect=w/h; camera.updateProjectionMatrix();
+  }
+
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  scene.environment = pmrem.fromScene(new RoomEnvironment()).texture;
+
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping=true; controls.dampingFactor=0.06;
+  controls.enableZoom=false; controls.enablePan=false;
+  controls.autoRotate=true; controls.autoRotateSpeed=0.35;
+  controls.minPolarAngle=Math.PI*0.25; controls.maxPolarAngle=Math.PI*0.6;
+  controls.target.set(0,0.1,0);
+
+  // Lighting
+  scene.add(new THREE.AmbientLight(0xffffff,0.55));
+  const dl=new THREE.DirectionalLight(0xffffff,0.55); dl.position.set(5,8,6); scene.add(dl);
+  const p1=new THREE.PointLight(0x8fb87a,12,10); p1.position.set(0,0.5,2.5); scene.add(p1);
+  const p2=new THREE.PointLight(0xaad89a,7,8); p2.position.set(-2.5,1.5,0); scene.add(p2);
+  const p3=new THREE.PointLight(0x6ba85a,5,6); p3.position.set(2.5,-1,0); scene.add(p3);
+
+  const G='#8fb87a', GR='rgba(143,184,122,';
+  const CR=24;
+
+  function mkTex(w,h,fn){
+    const c=document.createElement('canvas'); c.width=w; c.height=h;
+    fn(c.getContext('2d'),w,h);
+    const t=new THREE.CanvasTexture(c); t.colorSpace=THREE.SRGBColorSpace; return t;
+  }
+
+  // ── Card background with rounded clip, dark glass fill, glow border ──
+  function bgCard(ctx,w,h,r){
+    r=r||CR;
+    ctx.clearRect(0,0,w,h);
+    // Rounded clip
+    ctx.save(); ctx.beginPath(); ctx.roundRect(0,0,w,h,r); ctx.clip();
+    // Fill
+    const bg=ctx.createLinearGradient(0,0,0,h);
+    bg.addColorStop(0,'rgba(12,22,14,0.98)'); bg.addColorStop(1,'rgba(5,12,8,0.99)');
+    ctx.fillStyle=bg; ctx.fillRect(0,0,w,h);
+    // Subtle radial glow top
+    const grd=ctx.createRadialGradient(w/2,0,0,w/2,h*0.5,w*0.7);
+    grd.addColorStop(0,'rgba(107,142,90,0.18)'); grd.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=grd; ctx.fillRect(0,0,w,h);
+    // Dot grid
+    ctx.fillStyle='rgba(143,184,122,0.03)';
+    for(let x=0;x<w;x+=20) for(let y=0;y<h;y+=20) ctx.fillRect(x,y,1,1);
+    // Chrome dots (top-left)
+    ctx.fillStyle='#ff5f57'; ctx.beginPath(); ctx.arc(20,16,4,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle='#febc2e'; ctx.beginPath(); ctx.arc(34,16,4,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle='#28c840'; ctx.beginPath(); ctx.arc(48,16,4,0,Math.PI*2); ctx.fill();
+    ctx.restore();
+    // Glow layers outside clip
+    for(let i=3;i>=1;i--){
+      ctx.strokeStyle=GR+(0.06*i)+')'; ctx.lineWidth=i*5;
+      ctx.beginPath(); ctx.roundRect(i*2.5,i*2.5,w-i*5,h-i*5,r); ctx.stroke();
+    }
+    // Crisp border
+    ctx.strokeStyle=GR+'0.85)'; ctx.lineWidth=1.2;
+    ctx.beginPath(); ctx.roundRect(1,1,w-2,h-2,r-1); ctx.stroke();
+    // Top accent glow line
+    ctx.save(); ctx.beginPath(); ctx.roundRect(0,0,w,h,r); ctx.clip();
+    const tg=ctx.createLinearGradient(0,0,w,0);
+    tg.addColorStop(0,'rgba(143,184,122,0)'); tg.addColorStop(0.3,'rgba(143,184,122,0.7)');
+    tg.addColorStop(0.7,'rgba(143,184,122,0.7)'); tg.addColorStop(1,'rgba(143,184,122,0)');
+    ctx.fillStyle=tg; ctx.fillRect(0,0,w,2.5);
+    ctx.restore();
+  }
+
+  function rr(ctx,x,y,w,h,r){r=r||8;ctx.beginPath();ctx.roundRect(x,y,w,h,r);}
+  function div(ctx,w,y){ctx.strokeStyle=GR+'0.12)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(16,y);ctx.lineTo(w-16,y);ctx.stroke();}
+
+  function spark(ctx,x0,y0,W,H,data){
+    const mx=Math.max(...data),mn=Math.min(...data);
+    ctx.beginPath();
+    data.forEach((v,i)=>{const px=x0+i/(data.length-1)*W,py=y0+H-(v-mn)/(mx-mn||1)*H;i?ctx.lineTo(px,py):ctx.moveTo(px,py);});
+    ctx.lineTo(x0+W,y0+H);ctx.lineTo(x0,y0+H);ctx.closePath();
+    const fg=ctx.createLinearGradient(x0,y0,x0,y0+H);
+    fg.addColorStop(0,GR+'0.2)');fg.addColorStop(1,GR+'0.01)');
+    ctx.fillStyle=fg;ctx.fill();
+    ctx.beginPath();
+    data.forEach((v,i)=>{const px=x0+i/(data.length-1)*W,py=y0+H-(v-mn)/(mx-mn||1)*H;i?ctx.lineTo(px,py):ctx.moveTo(px,py);});
+    ctx.strokeStyle=G;ctx.lineWidth=2.5;ctx.lineJoin='round';ctx.stroke();
+  }
+
+  function bars(ctx,x0,y0,W,H,data){
+    const mx=Math.max(...data),gap=W/data.length,bw=gap*0.55;
+    data.forEach((v,i)=>{
+      const bh=(v/mx)*H,bx=x0+i*gap+(gap-bw)/2,by=y0+H-bh;
+      const g=ctx.createLinearGradient(bx,by,bx,y0+H);
+      g.addColorStop(0,GR+'0.9)');g.addColorStop(1,GR+'0.08)');
+      ctx.fillStyle=g;rr(ctx,bx,by,bw,bh,3);ctx.fill();
+    });
+  }
+
+  function donut(ctx,cx,cy,R,r,segs){
+    let a=-Math.PI/2;
+    segs.forEach(([p,c])=>{const e=a+p*Math.PI*2;ctx.beginPath();ctx.arc(cx,cy,R,a,e);ctx.arc(cx,cy,r,e,a,true);ctx.closePath();ctx.fillStyle=c;ctx.fill();a=e;});
+    ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle='rgba(8,16,10,0.98)';ctx.fill();
+  }
+
+  // ═══════════════════════════════════════════
+  // FRONT FACE — 4 product cards in 2×2 grid
+  // Each product is its own card
+  // ═══════════════════════════════════════════
+  const prods=[['👕','Batik Kontemporer','Rp 299k'],['👜','Tas Rotan','Rp 189k'],['🧤','Sarung Tangan','Rp 89k'],['👗','Kebaya Modern','Rp 450k']];
+  const tProds = prods.map(([icon,name,price])=> mkTex(280,340,(ctx,w,h)=>{
+    bgCard(ctx,w,h,18);
+    // Product image area
+    rr(ctx,16,36,w-32,h*0.45,12);
+    const ig=ctx.createLinearGradient(16,36,16,36+h*0.45);
+    ig.addColorStop(0,'rgba(107,142,90,0.15)');ig.addColorStop(1,'rgba(40,70,28,0.05)');
+    ctx.fillStyle=ig;ctx.fill();
+    ctx.strokeStyle=GR+'0.2)';ctx.lineWidth=1;ctx.stroke();
+    ctx.font=`${Math.round(h*0.18)}px sans-serif`;ctx.textAlign='center';
+    ctx.fillStyle='#fff';ctx.fillText(icon,w/2,36+h*0.32);
+    // Name
+    ctx.fillStyle='rgba(255,255,255,0.65)';ctx.font='bold 16px Inter,sans-serif';
+    ctx.fillText(name,w/2,h*0.68);
+    // Price
+    ctx.fillStyle=G;ctx.font='bold 20px Inter,sans-serif';
+    ctx.fillText(price,w/2,h*0.78);
+    // Button
+    rr(ctx,w*0.15,h*0.83,w*0.7,28,8);
+    ctx.fillStyle='rgba(107,142,90,0.5)';ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='bold 13px Inter,sans-serif';
+    ctx.fillText('Lihat',w/2,h*0.83+19);
+    ctx.textAlign='left';
+  }));
+
+  // ═══════════════════════════════════════════
+  // FRONT FACE — Header bar "SHOP"
+  // ═══════════════════════════════════════════
+  const tShopBar = mkTex(580,80,(ctx,w,h)=>{
+    bgCard(ctx,w,h,16);
+    ctx.fillStyle=G;ctx.font='bold 32px Inter,sans-serif';ctx.textAlign='center';
+    ctx.fillText('🏪  SHOP',w/2,52);
+    ctx.textAlign='left';
+  });
+
+  // ═══════════════════════════════════════════
+  // RIGHT FACE — Analytics chart card
+  // ═══════════════════════════════════════════
+  const tChart = mkTex(440,480,(ctx,w,h)=>{
+    bgCard(ctx,w,h);
+    ctx.fillStyle=G;ctx.font='bold 18px Inter,sans-serif';ctx.textAlign='left';
+    ctx.fillText('📊  Pendapatan',18,44);div(ctx,w,56);
+    ctx.fillStyle='rgba(255,255,255,0.9)';ctx.font='bold 36px Inter,sans-serif';
+    ctx.fillText('Rp 8.4jt',18,104);
+    ctx.fillStyle=G;ctx.font='14px Inter,sans-serif';ctx.fillText('↑ 32% bulan ini',18,128);
+    spark(ctx,14,145,w-28,140,[18,35,28,52,44,68,58,80,70,94,88]);
+    ['S','S','R','K','J','S','M'].forEach((d,i)=>{
+      ctx.fillStyle='rgba(255,255,255,0.2)';ctx.font='10px Inter,sans-serif';ctx.textAlign='center';
+      ctx.fillText(d,14+i*(w-28)/6,298);
+    });ctx.textAlign='left';
+    div(ctx,w,310);
+    [['Pesanan','124'],['Rata-rata','Rp 67.7k'],['Konversi','3.8%']].forEach(([k,v],i)=>{
+      const oy=324+i*50;
+      ctx.fillStyle='rgba(255,255,255,0.3)';ctx.font='12px Inter,sans-serif';ctx.fillText(k,18,oy+16);
+      ctx.fillStyle='rgba(255,255,255,0.85)';ctx.font='bold 13px Inter,sans-serif';ctx.textAlign='right';ctx.fillText(v,w-18,oy+16);ctx.textAlign='left';
+      if(i<2) div(ctx,w,oy+30);
+    });
+  });
+
+  // RIGHT FACE — Donut card
+  const tDonut = mkTex(200,250,(ctx,w,h)=>{
+    bgCard(ctx,w,h,18);
+    ctx.fillStyle=G;ctx.font='bold 14px Inter,sans-serif';ctx.textAlign='center';
+    ctx.fillText('Konversi',w/2,38);
+    donut(ctx,w/2,110,50,30,[[0.38,GR+'0.95)'],[0.28,'rgba(107,142,90,0.55)'],[0.34,'rgba(40,70,30,0.4)']]);
+    ctx.fillStyle=G;ctx.font='bold 16px Inter,sans-serif';ctx.fillText('3.8%',w/2,116);
+    ctx.fillStyle='rgba(255,255,255,0.35)';ctx.font='11px Inter,sans-serif';
+    ctx.fillText('22% Web · 16% App',w/2,178);
+    bars(ctx,20,195,w-40,42,[55,80,65,90,75]);
+  });
+
+  // ═══════════════════════════════════════════
+  // LEFT FACE — Orders list
+  // ═══════════════════════════════════════════
+  const tOrders = mkTex(440,480,(ctx,w,h)=>{
+    bgCard(ctx,w,h);
+    ctx.fillStyle=G;ctx.font='bold 18px Inter,sans-serif';ctx.textAlign='left';
+    ctx.fillText('📋  Pesanan Masuk',18,44);div(ctx,w,56);
+    [['124','Total'],['89','Selesai'],['35','Proses']].forEach(([n,l],i)=>{
+      const x=w/6+i*(w/3);
+      ctx.fillStyle='rgba(255,255,255,0.9)';ctx.font='bold 24px Inter,sans-serif';ctx.textAlign='center';ctx.fillText(n,x,88);
+      ctx.fillStyle=GR+'0.5)';ctx.font='11px Inter,sans-serif';ctx.fillText(l,x,105);
+    });ctx.textAlign='left';div(ctx,w,115);
+    [['#AMR-1042','Batik Kontemporer','Rp 299.000',true],['#AMR-1041','Tas Rotan','Rp 189.000',true],['#AMR-1040','Kebaya Modern','Rp 450.000',false],['#AMR-1039','Sarung Tangan','Rp 89.000',false]].forEach(([id,nm,amt,ok],i)=>{
+      const oy=125+i*86;
+      rr(ctx,12,oy,w-24,76,10);ctx.fillStyle='rgba(255,255,255,0.02)';ctx.fill();
+      ctx.strokeStyle=ok?GR+'0.18)':'rgba(255,165,50,0.14)';ctx.lineWidth=1;ctx.stroke();
+      ctx.beginPath();ctx.arc(26,oy+22,4,0,Math.PI*2);ctx.fillStyle=ok?GR+'0.9)':'rgba(255,165,50,0.9)';ctx.fill();
+      ctx.fillStyle='rgba(255,255,255,0.85)';ctx.font='bold 13px Inter,sans-serif';ctx.fillText(id,38,oy+26);
+      ctx.fillStyle='rgba(255,255,255,0.3)';ctx.font='11px Inter,sans-serif';ctx.fillText(nm,18,oy+46);
+      ctx.fillStyle=G;ctx.font='bold 13px Inter,sans-serif';ctx.textAlign='right';ctx.fillText(amt,w-16,oy+26);
+      ctx.fillStyle=ok?GR+'0.6)':'rgba(255,165,50,0.6)';ctx.font='11px Inter,sans-serif';
+      ctx.fillText(ok?'✓ Selesai':'⏳ Proses',w-16,oy+46);ctx.textAlign='left';
+    });
+  });
+
+  // LEFT FACE — Bar chart card
+  const tBarCard = mkTex(200,250,(ctx,w,h)=>{
+    bgCard(ctx,w,h,18);
+    ctx.fillStyle=G;ctx.font='bold 14px Inter,sans-serif';ctx.textAlign='center';
+    ctx.fillText('Penjualan',w/2,38);
+    bars(ctx,16,52,w-32,80,[40,65,50,80,72,90,85]);
+    div(ctx,w,142);
+    spark(ctx,16,155,w-32,60,[30,52,40,68,55,80,70]);
+    ctx.fillStyle='rgba(255,255,255,0.3)';ctx.font='11px Inter,sans-serif';
+    ctx.fillText('7 hari terakhir',w/2,235);
+  });
+
+  // ═══════════════════════════════════════════
+  // TOP — Search bar + stats
+  // ═══════════════════════════════════════════
+  const tSearch = mkTex(500,60,(ctx,w,h)=>{
+    bgCard(ctx,w,h,14);
+    rr(ctx,14,12,w-28,36,18);ctx.fillStyle='rgba(107,142,90,0.08)';ctx.fill();
+    ctx.strokeStyle=GR+'0.2)';ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,0.2)';ctx.font='13px Inter,sans-serif';ctx.textAlign='left';
+    ctx.fillText('🔍  Cari produk...',36,36);
+  });
+
+  const tStats = mkTex(500,70,(ctx,w,h)=>{
+    bgCard(ctx,w,h,14);
+    [['1.284','Pengunjung'],['Rp 8.4jt','Pendapatan'],['47','Produk']].forEach(([v,l],i)=>{
+      const x=w/6+i*(w/3);
+      if(i>0){ctx.strokeStyle=GR+'0.1)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x-w/6,10);ctx.lineTo(x-w/6,h-10);ctx.stroke();}
+      ctx.fillStyle='rgba(255,255,255,0.9)';ctx.font='bold 20px Inter,sans-serif';ctx.textAlign='center';ctx.fillText(v,x,35);
+      ctx.fillStyle=GR+'0.5)';ctx.font='10px Inter,sans-serif';ctx.fillText(l,x,52);
+    });
+  });
+
+  // ═══════════════════════════════════════════
+  // FLOATING — Visitor sparkline, notification, mini cards
+  // ═══════════════════════════════════════════
+  const tVisitor = mkTex(260,160,(ctx,w,h)=>{
+    bgCard(ctx,w,h,16);
+    ctx.fillStyle=G;ctx.font='bold 14px Inter,sans-serif';ctx.textAlign='left';
+    ctx.fillText('👥 Pengunjung',16,34);
+    ctx.fillStyle='rgba(255,255,255,0.9)';ctx.font='bold 28px Inter,sans-serif';ctx.fillText('1.284',16,70);
+    ctx.fillStyle=G;ctx.font='12px Inter,sans-serif';ctx.fillText('↑ 18% hari ini',16,88);
+    spark(ctx,12,100,w-24,48,[20,38,30,52,45,70,60,85,78]);
+  });
+
+  const tNotif = mkTex(340,70,(ctx,w,h)=>{
+    bgCard(ctx,w,h,14);
+    ctx.fillStyle=GR+'0.5)';ctx.fillRect(6,10,3,h-20);
+    ctx.beginPath();ctx.arc(22,h/2,5,0,Math.PI*2);ctx.fillStyle=GR+'0.95)';ctx.fill();
+    ctx.fillStyle=GR+'0.95)';ctx.font='bold 14px Inter,sans-serif';ctx.textAlign='left';ctx.fillText('Pesanan Baru!',36,28);
+    ctx.fillStyle='rgba(255,255,255,0.35)';ctx.font='11px Inter,sans-serif';ctx.fillText('#AMR-1042 · Rp 299k · Batik',36,48);
+  });
+
+  const tMiniChart = mkTex(180,120,(ctx,w,h)=>{
+    bgCard(ctx,w,h,14);
+    ctx.fillStyle=G;ctx.font='bold 12px Inter,sans-serif';ctx.textAlign='left';ctx.fillText('🛒 Cart',14,30);
+    bars(ctx,12,42,w-24,60,[55,80,65,90,75,85]);
+  });
+
+  const tMiniSpark = mkTex(180,120,(ctx,w,h)=>{
+    bgCard(ctx,w,h,14);
+    ctx.fillStyle=G;ctx.font='bold 12px Inter,sans-serif';ctx.textAlign='left';ctx.fillText('📈 Traffic',14,30);
+    spark(ctx,12,42,w-24,60,[18,35,55,42,68,52,80]);
+  });
+
+  // ═══════════════════════════════════════════
+  // Material: glass card (PlaneGeometry, proper ratio)
+  // ═══════════════════════════════════════════
+  function cardMat(tex, op){
+    op=op==null?0.94:op;
+    return new THREE.MeshPhysicalMaterial({
+      map:tex, color:0xffffff,
+      roughness:0.06, metalness:0,
+      clearcoat:1.0, clearcoatRoughness:0.03,
+      transparent:true, opacity:op,
+      side:THREE.FrontSide,
+      emissive:new THREE.Color(0x1a4010),
+      emissiveIntensity:0.15,
+      envMapIntensity:1.4,
+    });
+  }
+
+  // ═══════════════════════════════════════════
+  // Card builder — PlaneGeometry, aspect ratio from texture
+  // ═══════════════════════════════════════════
+  const cards=[], allMeshes=[];
+  const SCALE=0.0032; // pixels → world units
+
+  function card(tex, pos, rot, op, isFloat){
+    rot=rot||[0,0,0]; isFloat=isFloat||false;
+    const tw=tex.image.width, th=tex.image.height;
+    const w=tw*SCALE, h=th*SCALE;
+    const grp=new THREE.Group();
+    const mesh=new THREE.Mesh(new THREE.PlaneGeometry(w,h), cardMat(tex,op));
+    grp.add(mesh);
+    grp.position.set(...pos);
+    grp.rotation.set(...rot.map(d=>d*Math.PI/180));
+    scene.add(grp);
+    cards.push({grp,mesh,isFloat,baseY:pos[1]});
+    allMeshes.push(mesh);
+    return grp;
+  }
+
+  // ═══════════════════════════════════════════
+  // SCENE — cube half-size ~1.1, cards placed on faces
+  // ═══════════════════════════════════════════
+  const S=1.15;
+
+  // ── FRONT FACE (Z+) — 2×2 product grid + header ──
+  const pw=280*SCALE, ph=340*SCALE, gx=pw*0.06, gy=ph*0.04;
+  const ox=-(pw+gx)/2, oy=(ph+gy)/2;
+  const fz=S+0.01;
+  // Shop header bar
+  card(tShopBar, [0, oy+ph/2+80*SCALE*0.55, fz], [0,0,0], 0.96);
+  // 4 product cards
+  for(let r=0;r<2;r++) for(let c=0;c<2;c++){
+    card(tProds[r*2+c], [ox+c*(pw+gx)+pw/2, oy-r*(ph+gy)-ph/2-80*SCALE*0.3, fz], [0,0,0], 0.95);
+  }
+  // Stats bar below products
+  card(tStats, [0, oy-2*(ph+gy)+ph/2-70*SCALE*0.6, fz], [0,0,0], 0.92);
+
+  // ── RIGHT FACE (X+) ── chart + donut
+  const rx=S+0.01;
+  card(tChart, [rx, 0.15, 0], [0,-90,0], 0.94);
+  card(tDonut, [rx, -0.55, -0.5], [0,-90,0], 0.9);
+
+  // ── LEFT FACE (X-) ── orders + bar chart
+  const lx=-S-0.01;
+  card(tOrders, [lx, 0.15, 0], [0,90,0], 0.94);
+  card(tBarCard,[lx, -0.55, 0.5], [0,90,0], 0.9);
+
+  // ── TOP FACE (Y+) ── search bar
+  card(tSearch, [0, S+0.01, 0], [-90,0,0], 0.9);
+
+  // ── BOTTOM FACE (Y-) ── stats
+  card(tStats, [0, -S-0.01, 0], [90,0,0], 0.88);
+
+  // ── BACK FACE (Z-) ── reuse orders
+  card(tOrders, [0, 0.15, -S-0.01], [0,180,0], 0.92);
+
+  // ═══════════════════════════════════════════
+  // FLOATING CARDS around the cube
+  // ═══════════════════════════════════════════
+  // Right outer — visitor + mini chart
+  card(tVisitor,   [S+1.3, 0.5, -0.15], [0,-12,0], 0.88, true);
+  card(tMiniChart,  [S+1.85, -0.35, -0.25], [0,-8,0], 0.82, true);
+
+  // Left outer — mini spark + notification
+  card(tMiniSpark, [-S-1.85, 0.3, -0.2], [0,8,0], 0.82, true);
+  card(tNotif,     [-S-1.2, -0.55, 0.1], [0,12,0], 0.88, true);
+
+  // Top floating notification
+  card(tNotif,     [-0.35, S+0.7, S*0.5], [0,0,0], 0.9, true);
+
+  // Bottom floating mini
+  card(tMiniChart, [0.6, -S-0.6, S*0.4], [8,0,0], 0.84, true);
+  card(tMiniSpark, [-0.8, -S-0.5, -S*0.2], [6,0,0], 0.82, true);
+
+  // Far floating small cards
+  card(tDonut,     [S+2.4, 0.6, -0.4], [0,-6,0], 0.76, true);
+  card(tBarCard,   [-S-2.4, -0.1, -0.3], [0,6,0], 0.76, true);
+
+  // ═══════════════════════════════════════════
+  // Subtle cube wireframe edges
+  // ═══════════════════════════════════════════
+  const lm=new THREE.LineBasicMaterial({color:0x8fb87a,blending:THREE.AdditiveBlending,transparent:true,opacity:0.25,depthWrite:false});
+  const E=S;
+  [[-E,-E,E],[E,-E,E],[E,-E,E],[E,E,E],[E,E,E],[-E,E,E],[-E,E,E],[-E,-E,E],
+   [-E,-E,-E],[E,-E,-E],[E,-E,-E],[E,E,-E],[E,E,-E],[-E,E,-E],[-E,E,-E],[-E,-E,-E],
+   [-E,-E,E],[-E,-E,-E],[E,-E,E],[E,-E,-E],[E,E,E],[E,E,-E],[-E,E,E],[-E,E,-E]
+  ].forEach((v,i,a)=>{if(i%2===0){scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(...v),new THREE.Vector3(...a[i+1])]),lm.clone()));}});
+
+  // ═══════════════════════════════════════════
+  // Raycasting + animation
+  // ═══════════════════════════════════════════
+  const rc=new THREE.Raycaster(), mouse=new THREE.Vector2(-9,-9);
+  renderer.domElement.addEventListener('mousemove',e=>{
+    const b=renderer.domElement.getBoundingClientRect();
+    mouse.x=((e.clientX-b.left)/b.width)*2-1;
+    mouse.y=-((e.clientY-b.top)/b.height)*2+1;
+  });
+
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.016;
+    controls.update();
+    rc.setFromCamera(mouse,camera);
+    const hits=rc.intersectObjects(allMeshes,true);
+    const hov=hits.length?hits[0].object:null;
+    cards.forEach(({mesh})=>{
+      const hot=mesh===hov;
+      mesh.material.emissiveIntensity=hot?0.4:0.15;
+    });
+    renderer.domElement.style.cursor=hov?'pointer':'grab';
+    cards.forEach((c,i)=>{
+      if(!c.isFloat) return;
+      c.grp.position.y=c.baseY+Math.sin(t*0.7+i*1.2)*0.06;
+    });
+    p1.intensity=8+Math.sin(t*1.1)*2.5;
+    renderer.render(scene,camera);
+  }
+
+  requestAnimationFrame(()=>{setSize();animate();});
+  window.addEventListener('resize',setSize,{passive:true});
+}catch(e){console.error('[Hero3D]',e);}})();
 </script>
 
 </body>
