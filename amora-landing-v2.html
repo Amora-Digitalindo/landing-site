@@ -1803,7 +1803,7 @@
     function lerp() {
       currentRx += (targetRx - currentRx) * 0.08;
       currentRy += (targetRy - currentRy) * 0.08;
-      card.style.transform = \`rotateX(\${currentRx.toFixed(3)}deg) rotateY(\${currentRy.toFixed(3)}deg)\`;
+      card.style.transform = `rotateX(${currentRx.toFixed(3)}deg) rotateY(${currentRy.toFixed(3)}deg)`;
       const delta = Math.abs(targetRx - currentRx) + Math.abs(targetRy - currentRy);
       rafId = delta > 0.01 ? requestAnimationFrame(lerp) : null;
     }
