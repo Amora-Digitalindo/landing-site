@@ -1597,6 +1597,52 @@
     .sv-feed-status.paid { background:rgba(80,200,100,0.15); color:rgba(100,220,120,0.9); }
     .sv-feed-status.proc { background:rgba(200,160,60,0.15); color:rgba(220,180,80,0.9); }
 
+    /* Panel 3: Pembayaran */
+    .sv-checkout-wrap {
+      display:flex; flex-direction:column; gap:16px; padding:32px;
+      max-width:420px; margin:0 auto; height:100%; box-sizing:border-box; justify-content:center;
+    }
+    .sv-checkout-title { font-size:14px; font-weight:600; color:rgba(255,255,255,0.85); margin-bottom:4px; }
+    .sv-checkout-card {
+      border-radius:12px; border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.03); overflow:hidden;
+    }
+    .sv-checkout-item-row {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:12px 16px; border-bottom:1px solid rgba(255,255,255,0.06);
+      font-size:12px; color:rgba(255,255,255,0.7);
+    }
+    .sv-checkout-item-row:last-child { border-bottom:none; }
+    .sv-checkout-total-row {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:12px 16px; font-size:13px; font-weight:700;
+      color:rgba(255,255,255,0.92);
+      border-top:1px solid rgba(255,255,255,0.1);
+    }
+    .sv-checkout-total-row span { color:var(--accent-light); }
+    .sv-pay-option {
+      display:flex; align-items:center; gap:12px; padding:12px 16px;
+      cursor:pointer; border-bottom:1px solid rgba(255,255,255,0.06);
+      transition:background 0.2s;
+    }
+    .sv-pay-option:last-child { border-bottom:none; }
+    .sv-pay-option:hover { background:rgba(255,255,255,0.03); }
+    .sv-pay-radio {
+      width:16px; height:16px; border-radius:50%;
+      border:2px solid rgba(255,255,255,0.25); flex-shrink:0;
+      transition:border-color 0.2s, box-shadow 0.2s;
+    }
+    .sv-pay-option.active .sv-pay-radio {
+      border-color:var(--accent); box-shadow:0 0 0 3px rgba(100,210,180,0.2);
+    }
+    .sv-pay-icon { font-size:18px; }
+    .sv-pay-name { font-size:12.5px; color:rgba(255,255,255,0.8); font-weight:500; }
+    .sv-pay-now-btn {
+      width:100%; padding:13px; border-radius:12px; border:none; cursor:pointer;
+      background:linear-gradient(135deg,var(--accent) 0%,rgba(80,180,140,1) 100%);
+      color:#071410; font-size:13px; font-weight:700; letter-spacing:0.01em;
+    }
+
     /* ── Panel 0: Website Toko ── */
     .sv-browser {
       border: 1px solid rgba(255,255,255,0.08); border-radius: 10px;
@@ -3266,51 +3312,36 @@
 
         <!-- View 2: Pembayaran -->
         <div class="showcase-view" data-view="2">
-          <div class="sv-split">
-            <div class="sv-copy">
-              <div class="sv-copy-eyebrow"><span class="sv-copy-eyebrow-dot"></span>Pembayaran</div>
-              <h3>Terima semua metode, dana langsung masuk</h3>
-              <p class="sv-copy-desc">Payment gateway lokal terintegrasi penuh. Pelanggan bayar pakai apapun, uang langsung ke rekening Anda.</p>
-              <div class="sv-copy-bullets">
-                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Kartu, e-wallet, bank, QRIS</div>
-                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Dana cair H+1 ke rekening</div>
-                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Tanpa biaya setup awal</div>
+          <div class="sv-checkout-wrap">
+            <div class="sv-checkout-title">Ringkasan Pesanan</div>
+            <div class="sv-checkout-card">
+              <div class="sv-checkout-item-row">
+                <span>T-Shirt Oversize × 1</span>
+                <span>Rp 185.000</span>
+              </div>
+              <div class="sv-checkout-item-row">
+                <span>Ongkir</span>
+                <span style="color:var(--accent-light)">Gratis</span>
+              </div>
+              <div class="sv-checkout-total-row">
+                <span>Total</span>
+                <span>Rp 185.000</span>
               </div>
             </div>
-            <div class="sv-visual">
-              <div class="sv-pay-wrap">
-                <div class="sv-pay-title">Pilih Metode Pembayaran</div>
-                <div class="sv-pay-sub">Semua metode pembayaran populer tersedia</div>
-                <div class="sv-pay-method selected">
-                  <div class="sv-pay-method-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
-                  <span class="sv-pay-method-name">Kartu Kredit / Debit</span>
-                  <span class="sv-pay-fee">Visa · Mastercard</span>
-                  <div class="sv-radio"><div class="sv-radio-dot"></div></div>
-                </div>
-                <div class="sv-pay-method">
-                  <div class="sv-pay-method-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
-                  <span class="sv-pay-method-name">E-Wallet</span>
-                  <span class="sv-pay-fee">GoPay · OVO · Dana</span>
-                  <div class="sv-radio"><div class="sv-radio-dot"></div></div>
-                </div>
-                <div class="sv-pay-method">
-                  <div class="sv-pay-method-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></div>
-                  <span class="sv-pay-method-name">Transfer Bank</span>
-                  <span class="sv-pay-fee">BCA · Mandiri · BNI</span>
-                  <div class="sv-radio"><div class="sv-radio-dot"></div></div>
-                </div>
-                <div class="sv-pay-method">
-                  <div class="sv-pay-method-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
-                  <span class="sv-pay-method-name">QRIS</span>
-                  <span class="sv-pay-fee">Semua dompet digital</span>
-                  <div class="sv-radio"><div class="sv-radio-dot"></div></div>
-                </div>
-                <div class="sv-pay-footer">
-                  <div><div class="sv-pay-total-label">Total Pembayaran</div><div class="sv-pay-total-amount">Rp 249.000</div></div>
-                  <div class="sv-pay-btn">Bayar Sekarang</div>
-                </div>
+            <div class="sv-checkout-title">Metode Pembayaran</div>
+            <div class="sv-checkout-card">
+              <div class="sv-pay-option active">
+                <div class="sv-pay-radio"></div>
+                <div class="sv-pay-icon">⬛</div>
+                <div class="sv-pay-name">QRIS</div>
+              </div>
+              <div class="sv-pay-option">
+                <div class="sv-pay-radio"></div>
+                <div class="sv-pay-icon">🏦</div>
+                <div class="sv-pay-name">Transfer BCA</div>
               </div>
             </div>
+            <button class="sv-pay-now-btn">Bayar Sekarang →</button>
           </div>
         </div>
 
