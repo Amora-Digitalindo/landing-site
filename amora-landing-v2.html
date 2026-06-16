@@ -816,8 +816,23 @@
       .gc-stats { display:none !important; }
       #hero { min-height: auto !important; padding: 80px 0 48px; }
       .hero-right { min-height: auto !important; }
+      .gc-mobile-cards { display:flex; flex-direction:column; gap:6px; margin-top:8px; width:90%; margin-left:5%; }
+      .gc-mobile-card {
+        display:flex; align-items:center; gap:10px; padding:10px 14px;
+        border-radius:12px;
+        background:rgba(12,22,16,0.78);
+        backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+        border:1px solid rgba(100,210,180,0.18);
+        box-shadow:0 4px 16px rgba(0,0,0,0.3);
+        opacity:0.9;
+      }
+      .gc-mobile-card-icon { font-size:14px; flex-shrink:0; }
+      .gc-mobile-card-label { font-size:10px; color:rgba(255,255,255,0.45); }
+      .gc-mobile-card-value { font-size:12px; font-weight:600; color:rgba(255,255,255,0.85); }
+      .gc-mobile-card-price { font-size:11px; color:var(--accent-light); font-weight:600; margin-left:auto; flex-shrink:0; }
     }
 
+    .gc-mobile-cards { display:none; }
     .scroll-indicator {
       position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
       color: var(--text-30); animation: bounce-subtle 2.2s ease-in-out infinite; transition: color 0.2s;
@@ -3078,6 +3093,24 @@
 
           </div><!-- .hscene -->
         </div>
+              <!-- Mobile-only compact floating cards -->
+              <div class="gc-mobile-cards">
+                <div class="gc-mobile-card">
+                  <span class="gc-mobile-card-icon">🛍</span>
+                  <div>
+                    <div class="gc-mobile-card-label">Pesanan Baru</div>
+                    <div class="gc-mobile-card-value">T-Shirt Oversize</div>
+                  </div>
+                  <div class="gc-mobile-card-price">Rp 185.000</div>
+                </div>
+                <div class="gc-mobile-card">
+                  <span class="gc-mobile-card-icon">📍</span>
+                  <div>
+                    <div class="gc-mobile-card-label">Sedang Dikirim</div>
+                    <div class="gc-mobile-card-value">Jakarta Selatan</div>
+                  </div>
+                </div>
+              </div>
       </div>
 
     </div>
