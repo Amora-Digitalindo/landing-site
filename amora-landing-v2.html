@@ -1509,6 +1509,57 @@
       pointer-events: none;
     }
     .showcase-view.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    /* Panel 1: Website Toko */
+    .sv-browser { display:flex; flex-direction:column; height:100%; }
+    .sv-browser-bar {
+      display:flex; align-items:center; gap:6px; padding:10px 14px;
+      background:rgba(255,255,255,0.03); border-bottom:1px solid rgba(255,255,255,0.07);
+      flex-shrink:0;
+    }
+    .sv-browser-dot { width:9px; height:9px; border-radius:50%; }
+    .sv-browser-dot.red    { background:rgba(255,90,90,0.7); }
+    .sv-browser-dot.yellow { background:rgba(255,180,50,0.6); }
+    .sv-browser-dot.green  { background:rgba(80,200,80,0.6); }
+    .sv-browser-url {
+      flex:1; margin:0 10px; padding:4px 10px; border-radius:6px;
+      background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08);
+      font-size:11px; color:rgba(255,255,255,0.4); text-align:center;
+    }
+    .sv-store-wrap {
+      flex:1; overflow:hidden;
+      background:linear-gradient(160deg,rgba(12,22,14,0.95),rgba(8,14,10,0.98));
+    }
+    .sv-store-nav-bar {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:10px 16px; border-bottom:1px solid rgba(100,210,180,0.12);
+    }
+    .sv-store-logo { font-size:12px; font-weight:700; color:rgba(255,255,255,0.9); letter-spacing:0.08em; }
+    .sv-store-links { display:flex; gap:12px; }
+    .sv-store-link { font-size:10px; color:rgba(255,255,255,0.45); }
+    .sv-store-cta-btn {
+      padding:4px 12px; border-radius:6px; font-size:10px; font-weight:600;
+      background:var(--accent); color:#0a1a0e; border:none; cursor:pointer;
+    }
+    .sv-product-row {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:10px; padding:14px 16px;
+    }
+    .sv-product-card {
+      border-radius:10px; overflow:hidden;
+      background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07);
+    }
+    .sv-product-thumb {
+      height:80px;
+      background:linear-gradient(145deg,rgba(30,45,35,0.8),rgba(20,30,22,0.6));
+      display:flex; align-items:center; justify-content:center; overflow:hidden;
+    }
+    .sv-product-thumb img { width:60px; height:60px; object-fit:contain; opacity:0.9; }
+    .sv-product-info { padding:8px; }
+    .sv-product-name-sm { font-size:9.5px; color:rgba(255,255,255,0.7); margin-bottom:4px; }
+    .sv-product-price-sm { font-size:11px; font-weight:700; color:var(--accent-light); margin-bottom:6px; }
+    .sv-product-add {
+      width:100%; padding:5px; border-radius:6px; border:none; cursor:pointer;
+      background:var(--accent); color:#0a1a0e; font-size:9px; font-weight:600;
+    }
 
     /* ── Panel 0: Website Toko ── */
     .sv-browser {
@@ -3083,64 +3134,46 @@
 
         <!-- View 0: Website Toko -->
         <div class="showcase-view active" data-view="0">
-          <div class="sv-split">
-            <div class="sv-copy">
-              <div class="sv-copy-eyebrow"><span class="sv-copy-eyebrow-dot"></span>Website Toko</div>
-              <h3>Toko online siap buka dalam hitungan menit</h3>
-              <p class="sv-copy-desc">Pilih template, isi produk, dan langsung terima pesanan — tanpa coding, tanpa developer, tanpa pusing.</p>
-              <div class="sv-copy-bullets">
-                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Domain gratis (nama.amora.id)</div>
-                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Tampilan mobile-friendly otomatis</div>
-                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>SEO-ready sejak hari pertama</div>
-              </div>
+          <div class="sv-browser">
+            <div class="sv-browser-bar">
+              <span class="sv-browser-dot red"></span>
+              <span class="sv-browser-dot yellow"></span>
+              <span class="sv-browser-dot green"></span>
+              <div class="sv-browser-url">tokosaya.amora.id</div>
             </div>
-            <div class="sv-visual">
-              <div class="sv-browser">
-                <div class="sv-browser-bar">
-                  <div class="sv-browser-dots"><span></span><span></span><span></span></div>
-                  <div class="sv-url-bar">
-                    <svg class="sv-url-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                    <span>tokosaya.amora.id</span>
+            <div class="sv-store-wrap">
+              <div class="sv-store-nav-bar">
+                <span class="sv-store-logo">TOKO SAYA</span>
+                <div class="sv-store-links">
+                  <span class="sv-store-link">Produk</span>
+                  <span class="sv-store-link">Tentang</span>
+                  <span class="sv-store-link">Promo</span>
+                </div>
+                <button class="sv-store-cta-btn">Belanja</button>
+              </div>
+              <div class="sv-product-row">
+                <div class="sv-product-card">
+                  <div class="sv-product-thumb"><img src="asset/shirt.png" alt=""></div>
+                  <div class="sv-product-info">
+                    <div class="sv-product-name-sm">T-Shirt Oversize</div>
+                    <div class="sv-product-price-sm">Rp 185.000</div>
+                    <button class="sv-product-add">+ Keranjang</button>
                   </div>
                 </div>
-                <div class="sv-store-nav">
-                  <div class="sv-store-logo">TOKO SAYA</div>
-                  <div class="sv-store-links"><span>Produk</span><span>Tentang</span><span>Kontak</span></div>
-                  <div class="sv-store-btn">Beli Sekarang</div>
+                <div class="sv-product-card">
+                  <div class="sv-product-thumb"><img src="asset/shirt.png" alt=""></div>
+                  <div class="sv-product-info">
+                    <div class="sv-product-name-sm">Hoodie Crop Navy</div>
+                    <div class="sv-product-price-sm">Rp 320.000</div>
+                    <button class="sv-product-add">+ Keranjang</button>
+                  </div>
                 </div>
-                <div class="sv-hero-banner">
-                  <div class="sv-hero-text">
-                    <h4>Koleksi Terbaru</h4>
-                    <p>Temukan produk pilihan dengan kualitas terjamin</p>
-                  </div>
-                  <div class="sv-hero-cta">Lihat Koleksi</div>
-                </div>
-                <div class="sv-products">
-                  <div class="sv-product">
-                    <div class="sv-product-img" style="background:linear-gradient(135deg,rgba(107,142,90,0.18),rgba(107,142,90,0.04))">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-                      <span class="sv-product-badge">Terlaris</span>
-                    </div>
-                    <div class="sv-product-info"><div class="sv-product-name">Sneakers Classic</div><div class="sv-product-price">Rp 249.000</div></div>
-                  </div>
-                  <div class="sv-product">
-                    <div class="sv-product-img" style="background:linear-gradient(135deg,rgba(90,125,184,0.18),rgba(90,125,184,0.04))">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
-                    </div>
-                    <div class="sv-product-info"><div class="sv-product-name">Tas Minimalis</div><div class="sv-product-price">Rp 189.000</div></div>
-                  </div>
-                  <div class="sv-product">
-                    <div class="sv-product-img" style="background:linear-gradient(135deg,rgba(193,97,74,0.18),rgba(193,97,74,0.04))">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-                      <span class="sv-product-badge">Baru</span>
-                    </div>
-                    <div class="sv-product-info"><div class="sv-product-name">Kaos Premium</div><div class="sv-product-price">Rp 129.000</div></div>
-                  </div>
-                  <div class="sv-product">
-                    <div class="sv-product-img" style="background:linear-gradient(135deg,rgba(184,150,62,0.18),rgba(184,150,62,0.04))">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    </div>
-                    <div class="sv-product-info"><div class="sv-product-name">Aksesoris Jam</div><div class="sv-product-price">Rp 349.000</div></div>
+                <div class="sv-product-card">
+                  <div class="sv-product-thumb"><img src="asset/shirt.png" alt=""></div>
+                  <div class="sv-product-info">
+                    <div class="sv-product-name-sm">Celana Cargo Olive</div>
+                    <div class="sv-product-price-sm">Rp 245.000</div>
+                    <button class="sv-product-add">+ Keranjang</button>
                   </div>
                 </div>
               </div>
