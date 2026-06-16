@@ -621,23 +621,21 @@
     }
 
     /* ── glass card base — true glassmorphic ── */
+    /* NOTE: backdrop-filter is incompatible with transform-style:preserve-3d,
+       so we keep .gc as a plain positioned container and apply blur on .gc-pad */
     .gc {
       position: absolute;
       border-radius: 16px;
       overflow: hidden;
-      transform-style: preserve-3d;
       transition: box-shadow 0.45s ease, border-color 0.45s ease, transform 0.45s cubic-bezier(0.22,1,0.36,1);
-      background: rgba(13,24,18,0.52);
+      background: transparent;
       border: 1px solid rgba(255,255,255,0.14);
-      backdrop-filter: blur(36px) saturate(2) brightness(1.06);
-      -webkit-backdrop-filter: blur(36px) saturate(2) brightness(1.06);
       box-shadow:
         0 0 0 1px rgba(100,210,180,0.08),
         0 8px 36px rgba(0,0,0,0.38),
         inset 0 1px 0 rgba(255,255,255,0.1);
     }
     .gc:hover {
-      background: rgba(16,30,22,0.68);
       border-color: rgba(100,210,180,0.4);
       box-shadow:
         0 0 0 1px rgba(100,210,180,0.22),
@@ -673,67 +671,44 @@
     }
 
     /* ── 3 DEPTH TIERS (blue-green gradient) ── */
-    /* T1 CYAN — front floaters: brightest, most glass */
+    /* T1 CYAN — front floaters */
     .gc-t1 {
-      background: rgba(14,32,30,0.42);
       border-color: rgba(100,210,180,0.28);
-      backdrop-filter: blur(40px) saturate(2.2) brightness(1.1);
-      -webkit-backdrop-filter: blur(40px) saturate(2.2) brightness(1.1);
       box-shadow:
         0 0 0 1px rgba(80,210,180,0.14),
         0 0 32px rgba(60,190,165,0.2),
         0 10px 44px rgba(0,0,0,0.35),
         inset 0 1px 0 rgba(255,255,255,0.18);
     }
-    .gc-t1:hover {
-      background: rgba(14,32,30,0.62);
-      border-color: rgba(80,220,190,0.45);
-      box-shadow:
-        0 0 0 1px rgba(80,220,190,0.22),
-        0 0 28px rgba(60,200,175,0.25),
-        0 10px 40px rgba(0,0,0,0.42),
-        inset 0 1px 0 rgba(255,255,255,0.15);
-    }
+    .gc-t1 .gc-pad { background: rgba(14,32,30,0.42); }
+    .gc-t1:hover { border-color: rgba(80,220,190,0.45); }
+    .gc-t1:hover .gc-pad { background: rgba(14,32,30,0.58); }
     .gc-t1::before {
       background: linear-gradient(90deg, transparent, rgba(80,220,185,0.95), transparent);
       height: 1.5px;
     }
-    /* T2 FOREST — mid center: semi-transparent green */
+    /* T2 FOREST — mid center */
     .gc-t2 {
-      background: rgba(13,26,18,0.46);
       border-color: rgba(255,255,255,0.13);
       box-shadow:
         0 0 0 1px rgba(100,185,140,0.07),
         0 10px 48px rgba(0,0,0,0.42),
         inset 0 1px 0 rgba(255,255,255,0.1);
     }
-    .gc-t2:hover {
-      background: rgba(13,26,18,0.64);
-      border-color: rgba(100,200,150,0.3);
-      box-shadow:
-        0 0 0 1px rgba(100,200,150,0.15),
-        0 10px 45px rgba(0,0,0,0.48),
-        inset 0 1px 0 rgba(255,255,255,0.12);
-    }
-    /* T3 DEEP — back panels: blue-tinted glass */
+    .gc-t2 .gc-pad { background: rgba(13,26,18,0.46); }
+    .gc-t2:hover { border-color: rgba(100,200,150,0.3); }
+    .gc-t2:hover .gc-pad { background: rgba(13,26,18,0.6); }
+    /* T3 DEEP — back panels */
     .gc-t3 {
-      background: rgba(10,16,22,0.44);
       border-color: rgba(255,255,255,0.1);
-      backdrop-filter: blur(36px) saturate(1.8) brightness(1.04);
-      -webkit-backdrop-filter: blur(36px) saturate(1.8) brightness(1.04);
       box-shadow:
         0 0 0 1px rgba(65,135,155,0.06),
         0 8px 40px rgba(0,0,0,0.45),
         inset 0 1px 0 rgba(255,255,255,0.07);
     }
-    .gc-t3:hover {
-      background: rgba(10,16,22,0.62);
-      border-color: rgba(70,155,170,0.28);
-      box-shadow:
-        0 0 0 1px rgba(70,155,170,0.15),
-        0 12px 50px rgba(0,0,0,0.5),
-        inset 0 1px 0 rgba(255,255,255,0.1);
-    }
+    .gc-t3 .gc-pad { background: rgba(10,16,22,0.44); }
+    .gc-t3:hover { border-color: rgba(70,155,170,0.28); }
+    .gc-t3:hover .gc-pad { background: rgba(10,16,22,0.58); }
     .gc-t3::before {
       background: linear-gradient(90deg, transparent, rgba(70,165,165,0.4), transparent);
     }
@@ -774,7 +749,7 @@
     .gc-br    { width:27%; right:0%; bottom:1%; height:21%; z-index:5; transform:translateZ(30px) rotateY(-6deg) translate(var(--float-x,0),var(--float-y,0)); }
 
     /* inner layout */
-    .gc-pad   { padding:11px; height:100%; box-sizing:border-box; display:flex;flex-direction:column;gap:7px; }
+    .gc-pad   { padding:11px; height:100%; box-sizing:border-box; display:flex;flex-direction:column;gap:7px; backdrop-filter:blur(36px) saturate(2) brightness(1.08); -webkit-backdrop-filter:blur(36px) saturate(2) brightness(1.08); }
     .gc-title { display:flex;align-items:center;gap:7px;margin-bottom:1px; }
     .gc-grid  { display:grid;grid-template-columns:1fr 1fr;gap:7px;flex:1; }
 
