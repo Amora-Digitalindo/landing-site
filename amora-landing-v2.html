@@ -617,19 +617,18 @@
     .hscene {
       width: 100%; height: 100%;
       position: relative; z-index: 1;
-      transform-style: preserve-3d;
     }
 
     /* ── glass card base — true glassmorphic ── */
-    /* NOTE: backdrop-filter is incompatible with transform-style:preserve-3d,
-       so we keep .gc as a plain positioned container and apply blur on .gc-pad */
     .gc {
       position: absolute;
       border-radius: 16px;
       overflow: hidden;
       transition: box-shadow 0.45s ease, border-color 0.45s ease, transform 0.45s cubic-bezier(0.22,1,0.36,1);
-      background: transparent;
+      background: rgba(13,24,18,0.52);
       border: 1px solid rgba(255,255,255,0.14);
+      backdrop-filter: blur(36px) saturate(2) brightness(1.08);
+      -webkit-backdrop-filter: blur(36px) saturate(2) brightness(1.08);
       box-shadow:
         0 0 0 1px rgba(100,210,180,0.08),
         0 8px 36px rgba(0,0,0,0.38),
@@ -673,6 +672,7 @@
     /* ── 3 DEPTH TIERS (blue-green gradient) ── */
     /* T1 CYAN — front floaters */
     .gc-t1 {
+      background: rgba(14,36,32,0.58);
       border-color: rgba(100,210,180,0.28);
       box-shadow:
         0 0 0 1px rgba(80,210,180,0.14),
@@ -680,35 +680,31 @@
         0 10px 44px rgba(0,0,0,0.35),
         inset 0 1px 0 rgba(255,255,255,0.18);
     }
-    .gc-t1 .gc-pad { background: rgba(14,32,30,0.42); }
-    .gc-t1:hover { border-color: rgba(80,220,190,0.45); }
-    .gc-t1:hover .gc-pad { background: rgba(14,32,30,0.58); }
+    .gc-t1:hover { background: rgba(14,36,32,0.72); border-color: rgba(80,220,190,0.45); }
     .gc-t1::before {
       background: linear-gradient(90deg, transparent, rgba(80,220,185,0.95), transparent);
       height: 1.5px;
     }
     /* T2 FOREST — mid center */
     .gc-t2 {
+      background: rgba(13,26,18,0.60);
       border-color: rgba(255,255,255,0.13);
       box-shadow:
         0 0 0 1px rgba(100,185,140,0.07),
         0 10px 48px rgba(0,0,0,0.42),
         inset 0 1px 0 rgba(255,255,255,0.1);
     }
-    .gc-t2 .gc-pad { background: rgba(13,26,18,0.46); }
-    .gc-t2:hover { border-color: rgba(100,200,150,0.3); }
-    .gc-t2:hover .gc-pad { background: rgba(13,26,18,0.6); }
+    .gc-t2:hover { background: rgba(13,26,18,0.74); border-color: rgba(100,200,150,0.3); }
     /* T3 DEEP — back panels */
     .gc-t3 {
+      background: rgba(10,16,22,0.58);
       border-color: rgba(255,255,255,0.1);
       box-shadow:
         0 0 0 1px rgba(65,135,155,0.06),
         0 8px 40px rgba(0,0,0,0.45),
         inset 0 1px 0 rgba(255,255,255,0.07);
     }
-    .gc-t3 .gc-pad { background: rgba(10,16,22,0.44); }
-    .gc-t3:hover { border-color: rgba(70,155,170,0.28); }
-    .gc-t3:hover .gc-pad { background: rgba(10,16,22,0.58); }
+    .gc-t3:hover { background: rgba(10,16,22,0.72); border-color: rgba(70,155,170,0.28); }
     .gc-t3::before {
       background: linear-gradient(90deg, transparent, rgba(70,165,165,0.4), transparent);
     }
@@ -749,7 +745,7 @@
     .gc-br    { width:27%; right:0%; bottom:1%; height:21%; z-index:5; transform:translateZ(30px) rotateY(-6deg) translate(var(--float-x,0),var(--float-y,0)); }
 
     /* inner layout */
-    .gc-pad   { padding:11px; height:100%; box-sizing:border-box; display:flex;flex-direction:column;gap:7px; backdrop-filter:blur(36px) saturate(2) brightness(1.08); -webkit-backdrop-filter:blur(36px) saturate(2) brightness(1.08); }
+    .gc-pad   { padding:11px; height:100%; box-sizing:border-box; display:flex;flex-direction:column;gap:7px; }
     .gc-title { display:flex;align-items:center;gap:7px;margin-bottom:1px; }
     .gc-grid  { display:grid;grid-template-columns:1fr 1fr;gap:7px;flex:1; }
 
