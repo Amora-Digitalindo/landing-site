@@ -807,32 +807,18 @@
 
     @media (max-width: 900px) {
       .hero-canvas-wrap { max-width: 320px; margin:0 auto; perspective:800px; aspect-ratio: 2/3; }
-      .gc-left,.gc-bl,.gc-right,.gc-br { display:none; }
-      .gc-main  { width:90%; left:5%; top:8%; height:86%; }
-      .gc-tr    { width:42%; right:0%; top:0%; height:14%; display:flex; }
-      .gc-pad   { padding:8px; gap:4px; }
+      .gc-left,.gc-right { display:none; }
+      .gc-main  { width:80%; left:10%; top:6%; height:82%; }
+      .gc-tr    { width:36%; right:-2%; top:-2%; height:14%; display:flex; }
+      .gc-bl    { display:flex !important; width:34%; left:-2%; bottom:5%; height:auto; min-height:44px; transform:translateZ(0) rotateY(0); }
+      .gc-br    { display:flex !important; width:36%; right:-2%; bottom:2%; height:auto; min-height:44px; transform:translateZ(0) rotateY(0); }
+      .gc-pad   { padding:7px 8px; gap:3px; }
       .gc-grid  { gap:4px; grid-template-columns:1fr 1fr; }
       .gc-cell  { padding:4px; gap:2px; }
       .gc-stats { display:none !important; }
       #hero { min-height: auto !important; padding: 80px 0 48px; }
       .hero-right { min-height: auto !important; }
-      .gc-mobile-cards { display:flex; flex-direction:column; gap:6px; margin-top:8px; width:90%; margin-left:5%; }
-      .gc-mobile-card {
-        display:flex; align-items:center; gap:10px; padding:10px 14px;
-        border-radius:12px;
-        background:rgba(12,22,16,0.78);
-        backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
-        border:1px solid rgba(100,210,180,0.18);
-        box-shadow:0 4px 16px rgba(0,0,0,0.3);
-        opacity:0.9;
-      }
-      .gc-mobile-card-icon { font-size:14px; flex-shrink:0; }
-      .gc-mobile-card-label { font-size:10px; color:rgba(255,255,255,0.45); }
-      .gc-mobile-card-value { font-size:12px; font-weight:600; color:rgba(255,255,255,0.85); }
-      .gc-mobile-card-price { font-size:11px; color:var(--accent-light); font-weight:600; margin-left:auto; flex-shrink:0; }
     }
-
-    @media (min-width: 901px) { .gc-mobile-cards { display:none; } }
     .scroll-indicator {
       position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
       color: var(--text-30); animation: bounce-subtle 2.2s ease-in-out infinite; transition: color 0.2s;
@@ -3222,41 +3208,6 @@
 
           </div><!-- .hscene -->
         </div>
-              <!-- Mobile-only compact floating cards -->
-              <div class="gc-mobile-cards">
-                <div class="gc-mobile-card">
-                  <span class="gc-mobile-card-icon">🛍</span>
-                  <div>
-                    <div class="gc-mobile-card-label">Pesanan Baru</div>
-                    <div class="gc-mobile-card-value">T-Shirt Oversize</div>
-                  </div>
-                  <div class="gc-mobile-card-price">Rp 185.000</div>
-                </div>
-                <div class="gc-mobile-card">
-                  <span class="gc-mobile-card-icon">📍</span>
-                  <div>
-                    <div class="gc-mobile-card-label">Sedang Dikirim</div>
-                    <div class="gc-mobile-card-value">Jakarta Selatan</div>
-                  </div>
-                  <div class="gc-mobile-card-price">+24 hari ini</div>
-                </div>
-                <div class="gc-mobile-card">
-                  <span class="gc-mobile-card-icon">💰</span>
-                  <div>
-                    <div class="gc-mobile-card-label">Revenue Hari Ini</div>
-                    <div class="gc-mobile-card-value">Rp 2.4 juta</div>
-                  </div>
-                  <div class="gc-mobile-card-price">↑ 18%</div>
-                </div>
-                <div class="gc-mobile-card">
-                  <span class="gc-mobile-card-icon">📊</span>
-                  <div>
-                    <div class="gc-mobile-card-label">Konversi</div>
-                    <div class="gc-mobile-card-value">67% minggu ini</div>
-                  </div>
-                  <div class="gc-mobile-card-price">24 Online</div>
-                </div>
-              </div>
       </div>
 
     </div>
