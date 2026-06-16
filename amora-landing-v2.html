@@ -570,19 +570,99 @@
       animation: fadeInUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.3s both;
       min-height: 480px;
     }
+    /* ── Glassmorphic 2D Hero Scene ── */
     .hero-canvas-wrap {
       position: relative; width: 100%; aspect-ratio: 1 / 1;
+      perspective: 900px; perspective-origin: 50% 45%;
+      cursor: grab;
     }
-    #heroCanvas {
-      width: 100%; height: 100%;
-      display: block; cursor: grab;
-    }
-    #heroCanvas:active { cursor: grabbing; }
+    .hero-canvas-wrap:active { cursor: grabbing; }
     .hero-canvas-glow {
-      position: absolute; inset: -15%;
-      background: radial-gradient(ellipse at 50% 50%, rgba(107,142,90,0.22) 0%, transparent 60%);
+      position: absolute; inset: -20%;
+      background:
+        radial-gradient(ellipse at 50% 45%, rgba(107,142,90,0.38) 0%, transparent 55%),
+        radial-gradient(ellipse at 30% 60%, rgba(40,80,200,0.12) 0%, transparent 45%);
       pointer-events: none; z-index: -1;
-      filter: blur(48px);
+      filter: blur(52px);
+    }
+    .hscene {
+      width: 100%; height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.08s linear;
+    }
+    /* glass card base */
+    .gc {
+      position: absolute;
+      background: linear-gradient(145deg, rgba(34,58,42,0.94) 0%, rgba(20,36,26,0.97) 100%);
+      border: 1px solid rgba(143,184,122,0.5);
+      border-radius: 14px;
+      backdrop-filter: blur(20px) saturate(1.8) brightness(1.1);
+      -webkit-backdrop-filter: blur(20px) saturate(1.8) brightness(1.1);
+      box-shadow:
+        0 0 0 1px rgba(143,184,122,0.22),
+        0 0 30px rgba(143,184,122,0.28),
+        0 8px 48px rgba(0,0,0,0.65),
+        inset 0 1px 0 rgba(255,255,255,0.1),
+        inset 0 0 30px rgba(143,184,122,0.04);
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: box-shadow 0.25s ease, transform 0.3s cubic-bezier(0.22,1,0.36,1);
+    }
+    .gc::before {
+      content: '';
+      position: absolute; top: 0; left: 8%; right: 8%; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(143,184,122,0.85), transparent);
+      border-radius: 2px;
+    }
+    .gc:hover {
+      box-shadow:
+        0 0 0 1px rgba(143,184,122,0.6),
+        0 0 36px rgba(143,184,122,0.4),
+        0 12px 56px rgba(0,0,0,0.75),
+        inset 0 1px 0 rgba(255,255,255,0.12);
+      z-index: 10;
+    }
+    /* skeleton helpers */
+    .sk { border-radius: 6px; background: rgba(255,255,255,0.16); }
+    .sk-g { border-radius: 6px; background: rgba(143,184,122,0.38); }
+    .sk-img { border-radius: 10px; background: rgba(255,255,255,0.08); display:flex;align-items:center;justify-content:center; }
+    .sk-img svg { opacity: 0.45; color: rgba(143,184,122,0.9); }
+    .sk-div { height: 1px; background: rgba(255,255,255,0.07); margin: 0 12px; }
+    .sk-row { display:flex; gap:8px; align-items:center; }
+    .sk-dot { width:8px;height:8px;border-radius:50%;background:rgba(143,184,122,0.7);flex-shrink:0;box-shadow:0 0 6px rgba(143,184,122,0.5); }
+    .sk-dot-r { width:8px;height:8px;border-radius:50%;background:rgba(255,150,80,0.55);flex-shrink:0; }
+    /* bar chart */
+    .sk-bars { display:flex;align-items:flex-end;gap:4px; }
+    .sk-bar { border-radius:3px 3px 0 0; background:linear-gradient(to top,rgba(143,184,122,0.1),rgba(143,184,122,0.55)); }
+    /* spark line via svg */
+    .sk-spark line,.sk-spark polyline { stroke:rgba(143,184,122,0.7);stroke-width:2;fill:none;stroke-linejoin:round; }
+    /* donut via svg */
+    .sk-donut { transform:rotate(-90deg); }
+    /* cards positioning — scene-relative % */
+    /* MAIN center card */
+    .gc-main { width:55%; left:20%; top:4%; height:86%; z-index:3; transform:translateZ(0px); }
+    /* LEFT panel — angled back-left */
+    .gc-left { width:28%; left:-2%; top:15%; height:62%; z-index:2; transform:translateZ(-20px) rotateY(14deg); }
+    /* RIGHT panel — angled back-right */
+    .gc-right { width:30%; right:-2%; top:8%; height:70%; z-index:2; transform:translateZ(-16px) rotateY(-12deg); }
+    /* TOP right floating */
+    .gc-tr { width:30%; right:2%; top:1%; height:18%; z-index:4; transform:translateZ(30px) rotateY(-4deg); }
+    /* BOTTOM left floating */
+    .gc-bl { width:22%; left:0%; bottom:2%; height:18%; z-index:4; transform:translateZ(24px) rotateY(8deg); }
+    /* BOTTOM right floating */
+    .gc-br { width:26%; right:1%; bottom:1%; height:22%; z-index:4; transform:translateZ(26px) rotateY(-5deg); }
+    /* inner layout helpers */
+    .gc-pad { padding:12px; height:100%; box-sizing:border-box; display:flex;flex-direction:column;gap:8px; }
+    .gc-title { display:flex;align-items:center;gap:8px;margin-bottom:2px; }
+    .gc-grid { display:grid;grid-template-columns:1fr 1fr;gap:8px;flex:1; }
+    .gc-cell { border-radius:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(143,184,122,0.14);padding:8px;display:flex;flex-direction:column;gap:6px; }
+
+    @media (max-width: 900px) {
+      .hero-canvas-wrap { max-width: 340px; perspective: 600px; }
+      .gc-left,.gc-bl { display:none; }
+      .gc-main { width:65%; left:18%; }
+      .gc-right { width:34%; right:-1%; }
     }
 
     .scroll-indicator {
@@ -2417,11 +2497,203 @@
         </div>
       </div>
 
-      <!-- Right: abstract 3D canvas -->
+      <!-- Right: glassmorphic 2D hero scene -->
       <div class="hero-right">
-        <div class="hero-canvas-wrap">
+        <div class="hero-canvas-wrap" id="heroWrap" aria-hidden="true">
           <div class="hero-canvas-glow"></div>
-          <canvas id="heroCanvas" aria-hidden="true"></canvas>
+          <div class="hscene" id="hscene">
+
+            <!-- MAIN center card: 2x2 product grid + header -->
+            <div class="gc gc-main">
+              <div class="gc-pad">
+                <!-- header bar -->
+                <div class="gc-title">
+                  <div class="sk" style="width:22px;height:22px;border-radius:6px;"></div>
+                  <div class="sk" style="width:52px;height:10px;"></div>
+                  <div style="flex:1"></div>
+                  <div class="sk" style="width:60px;height:24px;border-radius:20px;background:rgba(143,184,122,0.18)"></div>
+                </div>
+                <!-- search pill -->
+                <div style="border:1px solid rgba(255,255,255,0.08);border-radius:20px;height:28px;display:flex;align-items:center;padding:0 10px;gap:6px;">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(143,184,122,0.5)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <div class="sk" style="flex:1;height:8px;border-radius:4px;"></div>
+                </div>
+                <!-- 2x2 grid -->
+                <div class="gc-grid" style="flex:1;">
+                  <!-- cell 1 -->
+                  <div class="gc-cell">
+                    <div class="sk-img" style="flex:1;min-height:0;">
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.25"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H19.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/><path d="M17 21v-8H7v8"/></svg>
+                    </div>
+                    <div class="sk" style="width:70%;height:8px;"></div>
+                    <div class="sk-g" style="width:50%;height:10px;border-radius:4px;"></div>
+                  </div>
+                  <!-- cell 2 -->
+                  <div class="gc-cell">
+                    <div style="display:flex;gap:4px;justify-content:center;margin-bottom:2px;">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(143,184,122,0.4)" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 001.96-1.56L23 6H6"/></svg>
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(143,184,122,0.3)" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                    </div>
+                    <div class="sk" style="width:80%;height:8px;margin:0 auto;"></div>
+                    <div class="sk-bars" style="height:28px;align-items:flex-end;padding:0 4px;">
+                      <div class="sk-bar" style="height:60%;flex:1;"></div>
+                      <div class="sk-bar" style="height:85%;flex:1;"></div>
+                      <div class="sk-bar" style="height:45%;flex:1;"></div>
+                      <div class="sk-bar" style="height:95%;flex:1;"></div>
+                      <div class="sk-bar" style="height:70%;flex:1;"></div>
+                    </div>
+                  </div>
+                  <!-- cell 3 -->
+                  <div class="gc-cell">
+                    <div class="sk-img" style="flex:1;min-height:0;">
+                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.22"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                    </div>
+                    <div class="sk" style="width:65%;height:8px;"></div>
+                    <div class="sk-g" style="width:45%;height:10px;border-radius:4px;"></div>
+                  </div>
+                  <!-- cell 4: donut + mini stats -->
+                  <div class="gc-cell" style="align-items:center;">
+                    <svg class="sk-donut" width="48" height="48" viewBox="0 0 36 36">
+                      <circle cx="18" cy="18" r="14" fill="none" stroke="rgba(143,184,122,0.08)" stroke-width="6"/>
+                      <circle cx="18" cy="18" r="14" fill="none" stroke="rgba(143,184,122,0.45)" stroke-width="6" stroke-dasharray="35 53" stroke-linecap="round"/>
+                      <circle cx="18" cy="18" r="14" fill="none" stroke="rgba(143,184,122,0.22)" stroke-width="6" stroke-dasharray="20 68" stroke-dashoffset="-35" stroke-linecap="round"/>
+                    </svg>
+                    <div class="sk" style="width:60%;height:7px;"></div>
+                    <div class="sk-g" style="width:40%;height:7px;"></div>
+                  </div>
+                </div>
+                <!-- bottom stat bar -->
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;">
+                  <div style="text-align:center;padding:4px 0;">
+                    <div class="sk-g" style="width:60%;height:10px;margin:0 auto 4px;border-radius:3px;"></div>
+                    <div class="sk" style="width:50%;height:7px;margin:0 auto;border-radius:3px;"></div>
+                  </div>
+                  <div style="text-align:center;padding:4px 0;border-left:1px solid rgba(255,255,255,0.05);border-right:1px solid rgba(255,255,255,0.05);">
+                    <div class="sk-g" style="width:60%;height:10px;margin:0 auto 4px;border-radius:3px;"></div>
+                    <div class="sk" style="width:50%;height:7px;margin:0 auto;border-radius:3px;"></div>
+                  </div>
+                  <div style="text-align:center;padding:4px 0;">
+                    <div class="sk-g" style="width:60%;height:10px;margin:0 auto 4px;border-radius:3px;"></div>
+                    <div class="sk" style="width:50%;height:7px;margin:0 auto;border-radius:3px;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- LEFT panel: analytics chart -->
+            <div class="gc gc-left">
+              <div class="gc-pad">
+                <div class="sk" style="width:55%;height:9px;"></div>
+                <div class="sk-div"></div>
+                <div class="sk" style="width:70%;height:14px;border-radius:5px;"></div>
+                <div class="sk-g" style="width:40%;height:8px;border-radius:4px;"></div>
+                <!-- sparkline -->
+                <svg class="sk-spark" width="100%" height="40" viewBox="0 0 100 40" preserveAspectRatio="none">
+                  <polyline points="0,35 14,28 28,18 42,22 56,10 70,14 84,8 100,12"/>
+                  <polygon points="0,35 14,28 28,18 42,22 56,10 70,14 84,8 100,12 100,40 0,40" fill="rgba(143,184,122,0.07)" stroke="none"/>
+                </svg>
+                <div class="sk-div"></div>
+                <div style="flex:1;display:flex;flex-direction:column;justify-content:space-evenly;">
+                  <div class="sk-row"><div class="sk-dot"></div><div class="sk" style="flex:1;height:7px;"></div><div class="sk" style="width:25%;height:7px;"></div></div>
+                  <div class="sk-row"><div class="sk-dot-r"></div><div class="sk" style="flex:1;height:7px;"></div><div class="sk" style="width:25%;height:7px;"></div></div>
+                  <div class="sk-row"><div class="sk-dot"></div><div class="sk" style="flex:1;height:7px;"></div><div class="sk" style="width:25%;height:7px;"></div></div>
+                </div>
+                <!-- bar chart -->
+                <div class="sk-bars" style="height:36px;align-items:flex-end;gap:3px;">
+                  <div class="sk-bar" style="height:55%;flex:1;"></div>
+                  <div class="sk-bar" style="height:80%;flex:1;"></div>
+                  <div class="sk-bar" style="height:40%;flex:1;"></div>
+                  <div class="sk-bar" style="height:90%;flex:1;"></div>
+                  <div class="sk-bar" style="height:65%;flex:1;"></div>
+                  <div class="sk-bar" style="height:50%;flex:1;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- RIGHT panel: orders / dashboard -->
+            <div class="gc gc-right">
+              <div class="gc-pad">
+                <div class="sk" style="width:50%;height:9px;"></div>
+                <div class="sk-div"></div>
+                <!-- large area chart -->
+                <svg class="sk-spark" width="100%" height="60" viewBox="0 0 100 60" preserveAspectRatio="none" style="flex-shrink:0;">
+                  <polyline points="0,55 12,45 24,30 36,38 48,20 60,25 72,12 84,18 100,10"/>
+                  <polygon points="0,55 12,45 24,30 36,38 48,20 60,25 72,12 84,18 100,10 100,60 0,60" fill="rgba(143,184,122,0.07)" stroke="none"/>
+                </svg>
+                <!-- x-axis labels row -->
+                <div style="display:flex;justify-content:space-between;padding:0 2px;">
+                  <div class="sk" style="width:12%;height:6px;border-radius:2px;"></div>
+                  <div class="sk" style="width:12%;height:6px;border-radius:2px;"></div>
+                  <div class="sk" style="width:12%;height:6px;border-radius:2px;"></div>
+                  <div class="sk" style="width:12%;height:6px;border-radius:2px;"></div>
+                </div>
+                <div class="sk-div"></div>
+                <!-- 3 stat pills -->
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;">
+                  <div style="text-align:center"><div class="sk-g" style="height:10px;border-radius:3px;margin-bottom:3px;"></div><div class="sk" style="height:7px;border-radius:3px;"></div></div>
+                  <div style="text-align:center"><div class="sk-g" style="height:10px;border-radius:3px;margin-bottom:3px;"></div><div class="sk" style="height:7px;border-radius:3px;"></div></div>
+                  <div style="text-align:center"><div class="sk-g" style="height:10px;border-radius:3px;margin-bottom:3px;"></div><div class="sk" style="height:7px;border-radius:3px;"></div></div>
+                </div>
+                <div class="sk-div"></div>
+                <!-- order rows -->
+                <div style="flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:5px;">
+                  <div class="sk-row"><div class="sk" style="width:28px;height:28px;border-radius:8px;flex-shrink:0;"></div><div style="flex:1;display:flex;flex-direction:column;gap:4px;"><div class="sk" style="width:65%;height:8px;"></div><div class="sk" style="width:45%;height:7px;"></div></div><div class="sk-g" style="width:22%;height:8px;border-radius:4px;"></div></div>
+                  <div class="sk-row"><div class="sk" style="width:28px;height:28px;border-radius:8px;flex-shrink:0;"></div><div style="flex:1;display:flex;flex-direction:column;gap:4px;"><div class="sk" style="width:55%;height:8px;"></div><div class="sk" style="width:40%;height:7px;"></div></div><div class="sk-g" style="width:22%;height:8px;border-radius:4px;"></div></div>
+                  <div class="sk-row"><div class="sk" style="width:28px;height:28px;border-radius:8px;flex-shrink:0;"></div><div style="flex:1;display:flex;flex-direction:column;gap:4px;"><div class="sk" style="width:70%;height:8px;"></div><div class="sk" style="width:35%;height:7px;"></div></div><div class="sk-g" style="width:22%;height:8px;border-radius:4px;"></div></div>
+                </div>
+                <!-- export button skeleton -->
+                <div class="sk-g" style="height:26px;border-radius:8px;opacity:0.7;"></div>
+              </div>
+            </div>
+
+            <!-- TOP-RIGHT floating: mini donut stats -->
+            <div class="gc gc-tr">
+              <div class="gc-pad" style="flex-direction:row;align-items:center;gap:8px;">
+                <svg class="sk-donut" width="38" height="38" viewBox="0 0 36 36" style="flex-shrink:0;">
+                  <circle cx="18" cy="18" r="13" fill="none" stroke="rgba(143,184,122,0.08)" stroke-width="6"/>
+                  <circle cx="18" cy="18" r="13" fill="none" stroke="rgba(143,184,122,0.5)" stroke-width="6" stroke-dasharray="30 52" stroke-linecap="round"/>
+                  <circle cx="18" cy="18" r="13" fill="none" stroke="rgba(143,184,122,0.22)" stroke-width="6" stroke-dasharray="18 64" stroke-dashoffset="-30" stroke-linecap="round"/>
+                </svg>
+                <svg class="sk-donut" width="38" height="38" viewBox="0 0 36 36" style="flex-shrink:0;">
+                  <circle cx="18" cy="18" r="13" fill="none" stroke="rgba(143,184,122,0.08)" stroke-width="6"/>
+                  <circle cx="18" cy="18" r="13" fill="none" stroke="rgba(143,184,122,0.38)" stroke-width="6" stroke-dasharray="44 38" stroke-linecap="round"/>
+                </svg>
+                <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
+                  <div class="sk-g" style="height:9px;width:70%;border-radius:3px;"></div>
+                  <div class="sk" style="height:7px;width:55%;border-radius:3px;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- BOTTOM-LEFT floating: notification pill -->
+            <div class="gc gc-bl">
+              <div class="gc-pad" style="flex-direction:row;align-items:center;gap:8px;">
+                <div class="sk-dot" style="width:10px;height:10px;flex-shrink:0;box-shadow:0 0 8px rgba(143,184,122,0.6);"></div>
+                <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
+                  <div class="sk" style="height:8px;width:75%;border-radius:3px;"></div>
+                  <div class="sk" style="height:7px;width:55%;border-radius:3px;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- BOTTOM-RIGHT floating: mini sparkline -->
+            <div class="gc gc-br">
+              <div class="gc-pad">
+                <div class="sk-row">
+                  <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
+                    <div class="sk" style="height:8px;width:60%;border-radius:3px;"></div>
+                    <div class="sk-g" style="height:10px;width:45%;border-radius:3px;"></div>
+                  </div>
+                  <div class="sk" style="width:18px;height:18px;border-radius:50%;"></div>
+                </div>
+                <svg class="sk-spark" width="100%" height="35" viewBox="0 0 100 35" preserveAspectRatio="none" style="flex:1;">
+                  <polyline points="0,28 20,20 40,24 60,10 80,14 100,6"/>
+                  <polygon points="0,28 20,20 40,24 60,10 80,14 100,6 100,35 0,35" fill="rgba(143,184,122,0.07)" stroke="none"/>
+                </svg>
+              </div>
+            </div>
+
+          </div><!-- .hscene -->
         </div>
       </div>
 
@@ -4065,433 +4337,61 @@
 
 </script>
 
-<script type="module">
-// ── Hero 3D — Skeleton glassmorphic cards filling all cube faces ──
-import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+<script>
+// ── Hero glassmorphic parallax — pure CSS 3D, no WebGL ──
 
-(async()=>{ try{
-  const canvasEl = document.getElementById('heroCanvas');
-  if(!canvasEl) return;
+(function(){
+  const wrap = document.getElementById('heroWrap');
+  const sc   = document.getElementById('hscene');
+  if(!wrap || !sc) return;
 
-  const renderer = new THREE.WebGLRenderer({canvas:canvasEl, alpha:true, antialias:true});
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 0.95;
+  const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let tx=0, ty=0, cx=0, cy=0; // target & current tilt
 
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 60);
-  camera.position.set(3.8, 2.2, 5.8);
+  // Mouse parallax on the wrap
+  wrap.addEventListener('mousemove', e => {
+    const r = wrap.getBoundingClientRect();
+    tx = ((e.clientX - r.left) / r.width  - 0.5) * 22;  // ±11°
+    ty = ((e.clientY - r.top)  / r.height - 0.5) * -16; // ±8°
+  });
+  wrap.addEventListener('mouseleave', () => { tx=0; ty=0; });
 
-  function setSize(){
-    const w=canvasEl.clientWidth, h=canvasEl.clientHeight;
-    renderer.setSize(w,h,false);
-    camera.aspect=w/h; camera.updateProjectionMatrix();
-  }
+  // Floating cards bob animation
+  const floats = wrap.querySelectorAll('.gc-tr,.gc-bl,.gc-br');
+  let t = 0;
 
-  const pmrem = new THREE.PMREMGenerator(renderer);
-  scene.environment = pmrem.fromScene(new RoomEnvironment()).texture;
+  function tick(){
+    if(!rm){
+      // Smooth lerp
+      cx += (tx - cx) * 0.08;
+      cy += (ty - cy) * 0.08;
+      sc.style.transform = `rotateX(${cy}deg) rotateY(${cx}deg)`;
 
-  const controls = new OrbitControls(camera, renderer.domElement);
-  controls.enableDamping=true; controls.dampingFactor=0.06;
-  controls.enableZoom=false; controls.enablePan=false;
-  controls.autoRotate=true; controls.autoRotateSpeed=0.35;
-  controls.minPolarAngle=Math.PI*0.25; controls.maxPolarAngle=Math.PI*0.6;
-  controls.target.set(0,0.1,0);
-
-  // Lighting
-  scene.add(new THREE.AmbientLight(0xffffff,0.55));
-  const dl=new THREE.DirectionalLight(0xffffff,0.55); dl.position.set(5,8,6); scene.add(dl);
-  const p1=new THREE.PointLight(0x8fb87a,12,10); p1.position.set(0,0.5,2.5); scene.add(p1);
-  const p2=new THREE.PointLight(0xaad89a,7,8); p2.position.set(-2.5,1.5,0); scene.add(p2);
-  const p3=new THREE.PointLight(0x6ba85a,5,6); p3.position.set(2.5,-1,0); scene.add(p3);
-
-  const G='#8fb87a', GR='rgba(143,184,122,';
-  const CR=24;
-
-  function mkTex(w,h,fn){
-    const c=document.createElement('canvas'); c.width=w; c.height=h;
-    fn(c.getContext('2d'),w,h);
-    const t=new THREE.CanvasTexture(c); t.colorSpace=THREE.SRGBColorSpace; return t;
-  }
-
-  // ── Card background with rounded clip, dark glass fill, glow border ──
-  function bgCard(ctx,w,h,r){
-    r=r||CR;
-    ctx.clearRect(0,0,w,h);
-    // Rounded clip
-    ctx.save(); ctx.beginPath(); ctx.roundRect(0,0,w,h,r); ctx.clip();
-    // Fill
-    const bg=ctx.createLinearGradient(0,0,0,h);
-    bg.addColorStop(0,'rgba(12,22,14,0.98)'); bg.addColorStop(1,'rgba(5,12,8,0.99)');
-    ctx.fillStyle=bg; ctx.fillRect(0,0,w,h);
-    // Subtle radial glow top
-    const grd=ctx.createRadialGradient(w/2,0,0,w/2,h*0.5,w*0.7);
-    grd.addColorStop(0,'rgba(107,142,90,0.18)'); grd.addColorStop(1,'rgba(0,0,0,0)');
-    ctx.fillStyle=grd; ctx.fillRect(0,0,w,h);
-    // Dot grid
-    ctx.fillStyle='rgba(143,184,122,0.03)';
-    for(let x=0;x<w;x+=20) for(let y=0;y<h;y+=20) ctx.fillRect(x,y,1,1);
-    // Chrome dots (top-left)
-    ctx.fillStyle='#ff5f57'; ctx.beginPath(); ctx.arc(20,16,4,0,Math.PI*2); ctx.fill();
-    ctx.fillStyle='#febc2e'; ctx.beginPath(); ctx.arc(34,16,4,0,Math.PI*2); ctx.fill();
-    ctx.fillStyle='#28c840'; ctx.beginPath(); ctx.arc(48,16,4,0,Math.PI*2); ctx.fill();
-    ctx.restore();
-    // Glow layers outside clip
-    for(let i=3;i>=1;i--){
-      ctx.strokeStyle=GR+(0.06*i)+')'; ctx.lineWidth=i*5;
-      ctx.beginPath(); ctx.roundRect(i*2.5,i*2.5,w-i*5,h-i*5,r); ctx.stroke();
+      // Bob floating cards
+      t += 0.018;
+      floats.forEach((el, i) => {
+        const dy = Math.sin(t + i * 1.3) * 5;
+        const base = el.style.getPropertyValue('--base-y') || '0';
+        el.style.transform = el.style.transform.replace(/translateY\([^)]*\)/,'') + ` translateY(${dy}px)`;
+      });
     }
-    // Crisp border
-    ctx.strokeStyle=GR+'0.85)'; ctx.lineWidth=1.2;
-    ctx.beginPath(); ctx.roundRect(1,1,w-2,h-2,r-1); ctx.stroke();
-    // Top accent glow line
-    ctx.save(); ctx.beginPath(); ctx.roundRect(0,0,w,h,r); ctx.clip();
-    const tg=ctx.createLinearGradient(0,0,w,0);
-    tg.addColorStop(0,'rgba(143,184,122,0)'); tg.addColorStop(0.3,'rgba(143,184,122,0.7)');
-    tg.addColorStop(0.7,'rgba(143,184,122,0.7)'); tg.addColorStop(1,'rgba(143,184,122,0)');
-    ctx.fillStyle=tg; ctx.fillRect(0,0,w,2.5);
-    ctx.restore();
+    requestAnimationFrame(tick);
   }
 
-  function rr(ctx,x,y,w,h,r){r=r||8;ctx.beginPath();ctx.roundRect(x,y,w,h,r);}
-  function div(ctx,w,y){ctx.strokeStyle=GR+'0.12)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(16,y);ctx.lineTo(w-16,y);ctx.stroke();}
-
-  function spark(ctx,x0,y0,W,H,data){
-    const mx=Math.max(...data),mn=Math.min(...data);
-    ctx.beginPath();
-    data.forEach((v,i)=>{const px=x0+i/(data.length-1)*W,py=y0+H-(v-mn)/(mx-mn||1)*H;i?ctx.lineTo(px,py):ctx.moveTo(px,py);});
-    ctx.lineTo(x0+W,y0+H);ctx.lineTo(x0,y0+H);ctx.closePath();
-    const fg=ctx.createLinearGradient(x0,y0,x0,y0+H);
-    fg.addColorStop(0,GR+'0.2)');fg.addColorStop(1,GR+'0.01)');
-    ctx.fillStyle=fg;ctx.fill();
-    ctx.beginPath();
-    data.forEach((v,i)=>{const px=x0+i/(data.length-1)*W,py=y0+H-(v-mn)/(mx-mn||1)*H;i?ctx.lineTo(px,py):ctx.moveTo(px,py);});
-    ctx.strokeStyle=G;ctx.lineWidth=2.5;ctx.lineJoin='round';ctx.stroke();
+  // Gentle idle oscillation when no mouse
+  let idleT = 0;
+  function idleTick(){
+    if(Math.abs(tx)<0.5 && Math.abs(ty)<0.5 && !rm){
+      idleT += 0.008;
+      tx = Math.sin(idleT * 0.7) * 6;
+      ty = Math.sin(idleT * 0.5) * 3;
+    }
+    requestAnimationFrame(idleTick);
   }
 
-  function bars(ctx,x0,y0,W,H,data){
-    const mx=Math.max(...data),gap=W/data.length,bw=gap*0.55;
-    data.forEach((v,i)=>{
-      const bh=(v/mx)*H,bx=x0+i*gap+(gap-bw)/2,by=y0+H-bh;
-      const g=ctx.createLinearGradient(bx,by,bx,y0+H);
-      g.addColorStop(0,GR+'0.9)');g.addColorStop(1,GR+'0.08)');
-      ctx.fillStyle=g;rr(ctx,bx,by,bw,bh,3);ctx.fill();
-    });
-  }
-
-  function donut(ctx,cx,cy,R,r,segs){
-    let a=-Math.PI/2;
-    segs.forEach(([p,c])=>{const e=a+p*Math.PI*2;ctx.beginPath();ctx.arc(cx,cy,R,a,e);ctx.arc(cx,cy,r,e,a,true);ctx.closePath();ctx.fillStyle=c;ctx.fill();a=e;});
-    ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle='rgba(8,16,10,0.98)';ctx.fill();
-  }
-
-  // ═══════════════════════════════════════════
-  // FRONT FACE — 4 product cards in 2×2 grid
-  // Each product is its own card
-  // ═══════════════════════════════════════════
-  const prods=[['👕','Batik Kontemporer','Rp 299k'],['👜','Tas Rotan','Rp 189k'],['🧤','Sarung Tangan','Rp 89k'],['👗','Kebaya Modern','Rp 450k']];
-  const tProds = prods.map(([icon,name,price])=> mkTex(280,340,(ctx,w,h)=>{
-    bgCard(ctx,w,h,18);
-    // Product image area
-    rr(ctx,16,36,w-32,h*0.45,12);
-    const ig=ctx.createLinearGradient(16,36,16,36+h*0.45);
-    ig.addColorStop(0,'rgba(107,142,90,0.15)');ig.addColorStop(1,'rgba(40,70,28,0.05)');
-    ctx.fillStyle=ig;ctx.fill();
-    ctx.strokeStyle=GR+'0.2)';ctx.lineWidth=1;ctx.stroke();
-    ctx.font=`${Math.round(h*0.18)}px sans-serif`;ctx.textAlign='center';
-    ctx.fillStyle='#fff';ctx.fillText(icon,w/2,36+h*0.32);
-    // Name
-    ctx.fillStyle='rgba(255,255,255,0.65)';ctx.font='bold 16px Inter,sans-serif';
-    ctx.fillText(name,w/2,h*0.68);
-    // Price
-    ctx.fillStyle=G;ctx.font='bold 20px Inter,sans-serif';
-    ctx.fillText(price,w/2,h*0.78);
-    // Button
-    rr(ctx,w*0.15,h*0.83,w*0.7,28,8);
-    ctx.fillStyle='rgba(107,142,90,0.5)';ctx.fill();
-    ctx.fillStyle='#fff';ctx.font='bold 13px Inter,sans-serif';
-    ctx.fillText('Lihat',w/2,h*0.83+19);
-    ctx.textAlign='left';
-  }));
-
-  // ═══════════════════════════════════════════
-  // FRONT FACE — Header bar "SHOP"
-  // ═══════════════════════════════════════════
-  const tShopBar = mkTex(580,80,(ctx,w,h)=>{
-    bgCard(ctx,w,h,16);
-    ctx.fillStyle=G;ctx.font='bold 32px Inter,sans-serif';ctx.textAlign='center';
-    ctx.fillText('🏪  SHOP',w/2,52);
-    ctx.textAlign='left';
-  });
-
-  // ═══════════════════════════════════════════
-  // RIGHT FACE — Analytics chart card
-  // ═══════════════════════════════════════════
-  const tChart = mkTex(440,480,(ctx,w,h)=>{
-    bgCard(ctx,w,h);
-    ctx.fillStyle=G;ctx.font='bold 18px Inter,sans-serif';ctx.textAlign='left';
-    ctx.fillText('📊  Pendapatan',18,44);div(ctx,w,56);
-    ctx.fillStyle='rgba(255,255,255,0.9)';ctx.font='bold 36px Inter,sans-serif';
-    ctx.fillText('Rp 8.4jt',18,104);
-    ctx.fillStyle=G;ctx.font='14px Inter,sans-serif';ctx.fillText('↑ 32% bulan ini',18,128);
-    spark(ctx,14,145,w-28,140,[18,35,28,52,44,68,58,80,70,94,88]);
-    ['S','S','R','K','J','S','M'].forEach((d,i)=>{
-      ctx.fillStyle='rgba(255,255,255,0.2)';ctx.font='10px Inter,sans-serif';ctx.textAlign='center';
-      ctx.fillText(d,14+i*(w-28)/6,298);
-    });ctx.textAlign='left';
-    div(ctx,w,310);
-    [['Pesanan','124'],['Rata-rata','Rp 67.7k'],['Konversi','3.8%']].forEach(([k,v],i)=>{
-      const oy=324+i*50;
-      ctx.fillStyle='rgba(255,255,255,0.3)';ctx.font='12px Inter,sans-serif';ctx.fillText(k,18,oy+16);
-      ctx.fillStyle='rgba(255,255,255,0.85)';ctx.font='bold 13px Inter,sans-serif';ctx.textAlign='right';ctx.fillText(v,w-18,oy+16);ctx.textAlign='left';
-      if(i<2) div(ctx,w,oy+30);
-    });
-  });
-
-  // RIGHT FACE — Donut card
-  const tDonut = mkTex(200,250,(ctx,w,h)=>{
-    bgCard(ctx,w,h,18);
-    ctx.fillStyle=G;ctx.font='bold 14px Inter,sans-serif';ctx.textAlign='center';
-    ctx.fillText('Konversi',w/2,38);
-    donut(ctx,w/2,110,50,30,[[0.38,GR+'0.95)'],[0.28,'rgba(107,142,90,0.55)'],[0.34,'rgba(40,70,30,0.4)']]);
-    ctx.fillStyle=G;ctx.font='bold 16px Inter,sans-serif';ctx.fillText('3.8%',w/2,116);
-    ctx.fillStyle='rgba(255,255,255,0.35)';ctx.font='11px Inter,sans-serif';
-    ctx.fillText('22% Web · 16% App',w/2,178);
-    bars(ctx,20,195,w-40,42,[55,80,65,90,75]);
-  });
-
-  // ═══════════════════════════════════════════
-  // LEFT FACE — Orders list
-  // ═══════════════════════════════════════════
-  const tOrders = mkTex(440,480,(ctx,w,h)=>{
-    bgCard(ctx,w,h);
-    ctx.fillStyle=G;ctx.font='bold 18px Inter,sans-serif';ctx.textAlign='left';
-    ctx.fillText('📋  Pesanan Masuk',18,44);div(ctx,w,56);
-    [['124','Total'],['89','Selesai'],['35','Proses']].forEach(([n,l],i)=>{
-      const x=w/6+i*(w/3);
-      ctx.fillStyle='rgba(255,255,255,0.9)';ctx.font='bold 24px Inter,sans-serif';ctx.textAlign='center';ctx.fillText(n,x,88);
-      ctx.fillStyle=GR+'0.5)';ctx.font='11px Inter,sans-serif';ctx.fillText(l,x,105);
-    });ctx.textAlign='left';div(ctx,w,115);
-    [['#AMR-1042','Batik Kontemporer','Rp 299.000',true],['#AMR-1041','Tas Rotan','Rp 189.000',true],['#AMR-1040','Kebaya Modern','Rp 450.000',false],['#AMR-1039','Sarung Tangan','Rp 89.000',false]].forEach(([id,nm,amt,ok],i)=>{
-      const oy=125+i*86;
-      rr(ctx,12,oy,w-24,76,10);ctx.fillStyle='rgba(255,255,255,0.02)';ctx.fill();
-      ctx.strokeStyle=ok?GR+'0.18)':'rgba(255,165,50,0.14)';ctx.lineWidth=1;ctx.stroke();
-      ctx.beginPath();ctx.arc(26,oy+22,4,0,Math.PI*2);ctx.fillStyle=ok?GR+'0.9)':'rgba(255,165,50,0.9)';ctx.fill();
-      ctx.fillStyle='rgba(255,255,255,0.85)';ctx.font='bold 13px Inter,sans-serif';ctx.fillText(id,38,oy+26);
-      ctx.fillStyle='rgba(255,255,255,0.3)';ctx.font='11px Inter,sans-serif';ctx.fillText(nm,18,oy+46);
-      ctx.fillStyle=G;ctx.font='bold 13px Inter,sans-serif';ctx.textAlign='right';ctx.fillText(amt,w-16,oy+26);
-      ctx.fillStyle=ok?GR+'0.6)':'rgba(255,165,50,0.6)';ctx.font='11px Inter,sans-serif';
-      ctx.fillText(ok?'✓ Selesai':'⏳ Proses',w-16,oy+46);ctx.textAlign='left';
-    });
-  });
-
-  // LEFT FACE — Bar chart card
-  const tBarCard = mkTex(200,250,(ctx,w,h)=>{
-    bgCard(ctx,w,h,18);
-    ctx.fillStyle=G;ctx.font='bold 14px Inter,sans-serif';ctx.textAlign='center';
-    ctx.fillText('Penjualan',w/2,38);
-    bars(ctx,16,52,w-32,80,[40,65,50,80,72,90,85]);
-    div(ctx,w,142);
-    spark(ctx,16,155,w-32,60,[30,52,40,68,55,80,70]);
-    ctx.fillStyle='rgba(255,255,255,0.3)';ctx.font='11px Inter,sans-serif';
-    ctx.fillText('7 hari terakhir',w/2,235);
-  });
-
-  // ═══════════════════════════════════════════
-  // TOP — Search bar + stats
-  // ═══════════════════════════════════════════
-  const tSearch = mkTex(500,60,(ctx,w,h)=>{
-    bgCard(ctx,w,h,14);
-    rr(ctx,14,12,w-28,36,18);ctx.fillStyle='rgba(107,142,90,0.08)';ctx.fill();
-    ctx.strokeStyle=GR+'0.2)';ctx.lineWidth=1;ctx.stroke();
-    ctx.fillStyle='rgba(255,255,255,0.2)';ctx.font='13px Inter,sans-serif';ctx.textAlign='left';
-    ctx.fillText('🔍  Cari produk...',36,36);
-  });
-
-  const tStats = mkTex(500,70,(ctx,w,h)=>{
-    bgCard(ctx,w,h,14);
-    [['1.284','Pengunjung'],['Rp 8.4jt','Pendapatan'],['47','Produk']].forEach(([v,l],i)=>{
-      const x=w/6+i*(w/3);
-      if(i>0){ctx.strokeStyle=GR+'0.1)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x-w/6,10);ctx.lineTo(x-w/6,h-10);ctx.stroke();}
-      ctx.fillStyle='rgba(255,255,255,0.9)';ctx.font='bold 20px Inter,sans-serif';ctx.textAlign='center';ctx.fillText(v,x,35);
-      ctx.fillStyle=GR+'0.5)';ctx.font='10px Inter,sans-serif';ctx.fillText(l,x,52);
-    });
-  });
-
-  // ═══════════════════════════════════════════
-  // FLOATING — Visitor sparkline, notification, mini cards
-  // ═══════════════════════════════════════════
-  const tVisitor = mkTex(260,160,(ctx,w,h)=>{
-    bgCard(ctx,w,h,16);
-    ctx.fillStyle=G;ctx.font='bold 14px Inter,sans-serif';ctx.textAlign='left';
-    ctx.fillText('👥 Pengunjung',16,34);
-    ctx.fillStyle='rgba(255,255,255,0.9)';ctx.font='bold 28px Inter,sans-serif';ctx.fillText('1.284',16,70);
-    ctx.fillStyle=G;ctx.font='12px Inter,sans-serif';ctx.fillText('↑ 18% hari ini',16,88);
-    spark(ctx,12,100,w-24,48,[20,38,30,52,45,70,60,85,78]);
-  });
-
-  const tNotif = mkTex(340,70,(ctx,w,h)=>{
-    bgCard(ctx,w,h,14);
-    ctx.fillStyle=GR+'0.5)';ctx.fillRect(6,10,3,h-20);
-    ctx.beginPath();ctx.arc(22,h/2,5,0,Math.PI*2);ctx.fillStyle=GR+'0.95)';ctx.fill();
-    ctx.fillStyle=GR+'0.95)';ctx.font='bold 14px Inter,sans-serif';ctx.textAlign='left';ctx.fillText('Pesanan Baru!',36,28);
-    ctx.fillStyle='rgba(255,255,255,0.35)';ctx.font='11px Inter,sans-serif';ctx.fillText('#AMR-1042 · Rp 299k · Batik',36,48);
-  });
-
-  const tMiniChart = mkTex(180,120,(ctx,w,h)=>{
-    bgCard(ctx,w,h,14);
-    ctx.fillStyle=G;ctx.font='bold 12px Inter,sans-serif';ctx.textAlign='left';ctx.fillText('🛒 Cart',14,30);
-    bars(ctx,12,42,w-24,60,[55,80,65,90,75,85]);
-  });
-
-  const tMiniSpark = mkTex(180,120,(ctx,w,h)=>{
-    bgCard(ctx,w,h,14);
-    ctx.fillStyle=G;ctx.font='bold 12px Inter,sans-serif';ctx.textAlign='left';ctx.fillText('📈 Traffic',14,30);
-    spark(ctx,12,42,w-24,60,[18,35,55,42,68,52,80]);
-  });
-
-  // ═══════════════════════════════════════════
-  // Material: glass card (PlaneGeometry, proper ratio)
-  // ═══════════════════════════════════════════
-  function cardMat(tex, op){
-    op=op==null?0.94:op;
-    return new THREE.MeshPhysicalMaterial({
-      map:tex, color:0xffffff,
-      roughness:0.06, metalness:0,
-      clearcoat:1.0, clearcoatRoughness:0.03,
-      transparent:true, opacity:op,
-      side:THREE.FrontSide,
-      emissive:new THREE.Color(0x1a4010),
-      emissiveIntensity:0.15,
-      envMapIntensity:1.4,
-    });
-  }
-
-  // ═══════════════════════════════════════════
-  // Card builder — PlaneGeometry, aspect ratio from texture
-  // ═══════════════════════════════════════════
-  const cards=[], allMeshes=[];
-  const SCALE=0.0032; // pixels → world units
-
-  function card(tex, pos, rot, op, isFloat){
-    rot=rot||[0,0,0]; isFloat=isFloat||false;
-    const tw=tex.image.width, th=tex.image.height;
-    const w=tw*SCALE, h=th*SCALE;
-    const grp=new THREE.Group();
-    const mesh=new THREE.Mesh(new THREE.PlaneGeometry(w,h), cardMat(tex,op));
-    grp.add(mesh);
-    grp.position.set(...pos);
-    grp.rotation.set(...rot.map(d=>d*Math.PI/180));
-    scene.add(grp);
-    cards.push({grp,mesh,isFloat,baseY:pos[1]});
-    allMeshes.push(mesh);
-    return grp;
-  }
-
-  // ═══════════════════════════════════════════
-  // SCENE — cube half-size ~1.1, cards placed on faces
-  // ═══════════════════════════════════════════
-  const S=1.15;
-
-  // ── FRONT FACE (Z+) — 2×2 product grid + header ──
-  const pw=280*SCALE, ph=340*SCALE, gx=pw*0.06, gy=ph*0.04;
-  const ox=-(pw+gx)/2, oy=(ph+gy)/2;
-  const fz=S+0.01;
-  // Shop header bar
-  card(tShopBar, [0, oy+ph/2+80*SCALE*0.55, fz], [0,0,0], 0.96);
-  // 4 product cards
-  for(let r=0;r<2;r++) for(let c=0;c<2;c++){
-    card(tProds[r*2+c], [ox+c*(pw+gx)+pw/2, oy-r*(ph+gy)-ph/2-80*SCALE*0.3, fz], [0,0,0], 0.95);
-  }
-  // Stats bar below products
-  card(tStats, [0, oy-2*(ph+gy)+ph/2-70*SCALE*0.6, fz], [0,0,0], 0.92);
-
-  // ── RIGHT FACE (X+) ── chart + donut
-  const rx=S+0.01;
-  card(tChart, [rx, 0.15, 0], [0,-90,0], 0.94);
-  card(tDonut, [rx, -0.55, -0.5], [0,-90,0], 0.9);
-
-  // ── LEFT FACE (X-) ── orders + bar chart
-  const lx=-S-0.01;
-  card(tOrders, [lx, 0.15, 0], [0,90,0], 0.94);
-  card(tBarCard,[lx, -0.55, 0.5], [0,90,0], 0.9);
-
-  // ── TOP FACE (Y+) ── search bar
-  card(tSearch, [0, S+0.01, 0], [-90,0,0], 0.9);
-
-  // ── BOTTOM FACE (Y-) ── stats
-  card(tStats, [0, -S-0.01, 0], [90,0,0], 0.88);
-
-  // ── BACK FACE (Z-) ── reuse orders
-  card(tOrders, [0, 0.15, -S-0.01], [0,180,0], 0.92);
-
-  // ═══════════════════════════════════════════
-  // FLOATING CARDS around the cube
-  // ═══════════════════════════════════════════
-  // Right outer — visitor + mini chart
-  card(tVisitor,   [S+1.3, 0.5, -0.15], [0,-12,0], 0.88, true);
-  card(tMiniChart,  [S+1.85, -0.35, -0.25], [0,-8,0], 0.82, true);
-
-  // Left outer — mini spark + notification
-  card(tMiniSpark, [-S-1.85, 0.3, -0.2], [0,8,0], 0.82, true);
-  card(tNotif,     [-S-1.2, -0.55, 0.1], [0,12,0], 0.88, true);
-
-  // Top floating notification
-  card(tNotif,     [-0.35, S+0.7, S*0.5], [0,0,0], 0.9, true);
-
-  // Bottom floating mini
-  card(tMiniChart, [0.6, -S-0.6, S*0.4], [8,0,0], 0.84, true);
-  card(tMiniSpark, [-0.8, -S-0.5, -S*0.2], [6,0,0], 0.82, true);
-
-  // Far floating small cards
-  card(tDonut,     [S+2.4, 0.6, -0.4], [0,-6,0], 0.76, true);
-  card(tBarCard,   [-S-2.4, -0.1, -0.3], [0,6,0], 0.76, true);
-
-  // ═══════════════════════════════════════════
-  // Subtle cube wireframe edges
-  // ═══════════════════════════════════════════
-  const lm=new THREE.LineBasicMaterial({color:0x8fb87a,blending:THREE.AdditiveBlending,transparent:true,opacity:0.25,depthWrite:false});
-  const E=S;
-  [[-E,-E,E],[E,-E,E],[E,-E,E],[E,E,E],[E,E,E],[-E,E,E],[-E,E,E],[-E,-E,E],
-   [-E,-E,-E],[E,-E,-E],[E,-E,-E],[E,E,-E],[E,E,-E],[-E,E,-E],[-E,E,-E],[-E,-E,-E],
-   [-E,-E,E],[-E,-E,-E],[E,-E,E],[E,-E,-E],[E,E,E],[E,E,-E],[-E,E,E],[-E,E,-E]
-  ].forEach((v,i,a)=>{if(i%2===0){scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(...v),new THREE.Vector3(...a[i+1])]),lm.clone()));}});
-
-  // ═══════════════════════════════════════════
-  // Raycasting + animation
-  // ═══════════════════════════════════════════
-  const rc=new THREE.Raycaster(), mouse=new THREE.Vector2(-9,-9);
-  renderer.domElement.addEventListener('mousemove',e=>{
-    const b=renderer.domElement.getBoundingClientRect();
-    mouse.x=((e.clientX-b.left)/b.width)*2-1;
-    mouse.y=-((e.clientY-b.top)/b.height)*2+1;
-  });
-
-  let t=0;
-  function animate(){
-    requestAnimationFrame(animate); t+=0.016;
-    controls.update();
-    rc.setFromCamera(mouse,camera);
-    const hits=rc.intersectObjects(allMeshes,true);
-    const hov=hits.length?hits[0].object:null;
-    cards.forEach(({mesh})=>{
-      const hot=mesh===hov;
-      mesh.material.emissiveIntensity=hot?0.4:0.15;
-    });
-    renderer.domElement.style.cursor=hov?'pointer':'grab';
-    cards.forEach((c,i)=>{
-      if(!c.isFloat) return;
-      c.grp.position.y=c.baseY+Math.sin(t*0.7+i*1.2)*0.06;
-    });
-    p1.intensity=8+Math.sin(t*1.1)*2.5;
-    renderer.render(scene,camera);
-  }
-
-  requestAnimationFrame(()=>{setSize();animate();});
-  window.addEventListener('resize',setSize,{passive:true});
-}catch(e){console.error('[Hero3D]',e);}})();
+  requestAnimationFrame(tick);
+  requestAnimationFrame(idleTick);
+})();
 </script>
 
 </body>
