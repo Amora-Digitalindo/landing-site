@@ -945,7 +945,15 @@
     .bento-widget::before {
       content: '';
       position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.025) 0%, transparent 50%);
+      background:
+        radial-gradient(ellipse at 20% 0%, rgba(100,210,180,0.08) 0%, transparent 55%),
+        linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .bento-widget::after {
+      content: '';
+      position: absolute; bottom: 0; left: 20%; right: 20%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(100,210,180,0.2), transparent);
       pointer-events: none;
     }
 
@@ -991,11 +999,11 @@
     }
     .order-card {
       display: flex; align-items: center; gap: 12px;
-      padding: 12px 14px;
-      background: linear-gradient(135deg, rgba(100,210,180,0.05) 0%, rgba(12,22,16,0.6) 100%);
-      border: 1px solid rgba(100,210,180,0.1);
-      border-radius: var(--r-lg);
-      backdrop-filter: blur(8px);
+      padding: 11px 13px;
+      background: linear-gradient(135deg, rgba(100,210,180,0.06) 0%, rgba(8,16,12,0.85) 100%);
+      border: 1px solid rgba(100,210,180,0.12);
+      border-radius: 12px;
+      backdrop-filter: blur(12px);
       transition: opacity 0.45s cubic-bezier(0.22,1,0.36,1),
                   transform 0.45s cubic-bezier(0.22,1,0.36,1);
     }
@@ -1012,12 +1020,12 @@
     }
     .order-card-icon {
       flex-shrink: 0;
-      width: 36px; height: 36px; border-radius: var(--r-md);
-      background: linear-gradient(135deg, rgba(107,142,90,0.25) 0%, rgba(107,142,90,0.08) 100%);
-      border: 1px solid var(--accent-border);
+      width: 38px; height: 38px; border-radius: 10px;
+      background: linear-gradient(135deg, rgba(100,210,180,0.14) 0%, rgba(100,210,180,0.05) 100%);
+      border: 1px solid rgba(100,210,180,0.2);
+      box-shadow: 0 0 12px rgba(100,210,180,0.08);
       display: flex; align-items: center; justify-content: center;
     }
-    .order-card-icon svg { width: 16px; height: 16px; color: var(--accent-light); }
     .order-card-info { flex: 1; min-width: 0; }
     .order-card-top {
       display: flex; align-items: center; justify-content: space-between; gap: 8px;
@@ -1693,8 +1701,10 @@
     .sv-dash-wrap { padding:24px; display:flex; flex-direction:column; gap:16px; height:100%; box-sizing:border-box; }
     .sv-dash-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
     .sv-dash-card {
-      padding:14px; border-radius:12px;
-      background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07);
+      padding: 14px; border-radius: 12px;
+      background: linear-gradient(135deg, rgba(100,210,180,0.07) 0%, rgba(8,16,12,0.9) 100%);
+      border: 1px solid rgba(100,210,180,0.12);
+      display: flex; flex-direction: column; gap: 4px;
     }
     .sv-dash-card-label { font-size:10px; color:rgba(255,255,255,0.4); margin-bottom:6px; }
     .sv-dash-card-value { font-size:20px; font-weight:700; color:rgba(255,255,255,0.92); letter-spacing:-0.03em; }
@@ -1717,8 +1727,9 @@
     .sv-feed { display:flex; flex-direction:column; gap:6px; }
     .sv-feed-row {
       display:flex; align-items:center; justify-content:space-between;
-      padding:8px 12px; border-radius:8px;
-      background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);
+      padding:9px 12px; border-radius:10px;
+      background: linear-gradient(135deg, rgba(100,210,180,0.05) 0%, rgba(8,16,12,0.8) 100%);
+      border:1px solid rgba(100,210,180,0.1);
       font-size:11px;
     }
     .sv-feed-name { color:rgba(255,255,255,0.7); }
@@ -1734,8 +1745,9 @@
     }
     .sv-checkout-title { font-size:14px; font-weight:600; color:rgba(255,255,255,0.85); margin-bottom:4px; }
     .sv-checkout-card {
-      border-radius:12px; border:1px solid rgba(255,255,255,0.08);
-      background:rgba(255,255,255,0.03); overflow:hidden;
+      border-radius:12px; border:1px solid rgba(100,210,180,0.15);
+      background: linear-gradient(145deg, rgba(10,22,15,0.97) 0%, rgba(6,12,8,0.99) 100%);
+      overflow:hidden;
     }
     .sv-checkout-item-row {
       display:flex; justify-content:space-between; align-items:center;
@@ -1779,7 +1791,8 @@
     .sv-promo-item {
       display:grid; grid-template-columns:120px 1fr auto auto;
       align-items:center; gap:16px; padding:14px 18px; border-radius:12px;
-      background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07);
+      background: linear-gradient(135deg, rgba(100,210,180,0.06) 0%, rgba(8,16,12,0.88) 100%);
+      border:1px solid rgba(100,210,180,0.14);
     }
     .sv-promo-code { font-family:monospace; font-size:12px; font-weight:700; color:rgba(255,255,255,0.9); letter-spacing:0.05em; }
     .sv-promo-desc { font-size:11px; color:rgba(255,255,255,0.45); }
@@ -1981,10 +1994,9 @@
     .sv-pay-method {
       display: flex; align-items: center; gap: 12px;
       padding: 12px 16px; border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.07);
-      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(100,210,180,0.15);
+      background: linear-gradient(135deg, rgba(100,210,180,0.06) 0%, rgba(8,16,12,0.88) 100%);
       margin-bottom: 8px; cursor: default;
-      transition: border-color 0.25s, background 0.25s;
       opacity: 0; transform: translateX(-10px);
       transition: opacity 0.3s, transform 0.3s, border-color 0.25s, background 0.25s;
     }
@@ -2181,8 +2193,9 @@
     .sv-promo-add { font-size: 10px; padding: 5px 14px; border-radius: 6px; background: rgba(107,142,90,0.15); border: 1px solid rgba(107,142,90,0.3); color: var(--accent-light); font-weight: 600; }
     .sv-promo-row {
       display: flex; align-items: center; gap: 12px;
-      padding: 11px 14px; border-radius: 8px;
-      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+      padding: 11px 14px; border-radius: 10px;
+      background: linear-gradient(135deg, rgba(100,210,180,0.06) 0%, rgba(8,16,12,0.88) 100%);
+      border: 1px solid rgba(100,210,180,0.14);
       margin-bottom: 8px;
       opacity: 0; transform: translateX(-8px);
       transition: opacity 0.3s, transform 0.3s;
@@ -4557,19 +4570,23 @@
       return '#AMR-' + Math.floor(1000 + Math.random() * 9000);
     }
 
+    var EMOJIS = ['👕','🧥','👗','👟','👜','🎒','🧢','⌚'];
+    var emojiIdx = 0;
     function buildCard(data, animate) {
       var card = document.createElement('div');
       card.className = 'order-card' + (animate ? ' entering' : '');
-      card.innerHTML =
-        '<div class="order-card-icon">' + BAG_ICON + '</div>' +
-        '<div class="order-card-info">' +
-          '<div class="order-card-top">' +
-            '<span class="order-card-label">Pesanan Baru</span>' +
-            '<span class="order-card-id">' + randomOrderId() + '</span>' +
-          '</div>' +
-          '<div class="order-card-item">' + data.item + '</div>' +
-        '</div>' +
-        '<div class="order-card-price">' + data.price + '</div>';
+      var emoji = EMOJIS[emojiIdx % EMOJIS.length]; emojiIdx++;
+      card.innerHTML = [
+        '<div class="order-card-icon"><span style="font-size:16px;line-height:1;">' + emoji + '</span></div>',
+        '<div class="order-card-info">',
+          '<div class="order-card-top">',
+            '<span class="order-card-label">Pesanan Baru</span>',
+            '<span class="order-card-id">#AMR-' + (7000 + Math.floor(Math.random()*999)) + '</span>',
+          '</div>',
+          '<div class="order-card-item">' + data.item + '</div>',
+        '</div>',
+        '<div class="order-card-price">' + data.price + '</div>'
+      ].join('');
       return card;
     }
 
