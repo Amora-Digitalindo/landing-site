@@ -625,14 +625,14 @@
       border-radius: 16px;
       overflow: hidden;
       transition: box-shadow 0.45s ease, border-color 0.45s ease, transform 0.45s cubic-bezier(0.22,1,0.36,1);
-      background: rgba(13,24,18,0.52);
-      border: 1px solid rgba(255,255,255,0.14);
-      backdrop-filter: blur(72px) saturate(2.4) brightness(1.12);
-      -webkit-backdrop-filter: blur(72px) saturate(2.4) brightness(1.12);
+      background: rgba(10,20,14,0.80);
+      border: 1px solid rgba(255,255,255,0.15);
+      backdrop-filter: blur(48px) saturate(2) brightness(1.08);
+      -webkit-backdrop-filter: blur(48px) saturate(2) brightness(1.08);
       box-shadow:
-        0 0 0 1px rgba(100,210,180,0.08),
-        0 8px 36px rgba(0,0,0,0.38),
-        inset 0 1px 0 rgba(255,255,255,0.1);
+        0 0 0 1px rgba(100,210,180,0.1),
+        0 8px 36px rgba(0,0,0,0.42),
+        inset 0 1px 0 rgba(255,255,255,0.12);
     }
     .gc:hover {
       border-color: rgba(100,210,180,0.4);
@@ -672,7 +672,7 @@
     /* ── 3 DEPTH TIERS (blue-green gradient) ── */
     /* T1 CYAN — front floaters */
     .gc-t1 {
-      background: rgba(14,36,32,0.58);
+      background: rgba(12,30,26,0.82);
       border-color: rgba(100,210,180,0.28);
       box-shadow:
         0 0 0 1px rgba(80,210,180,0.14),
@@ -680,31 +680,31 @@
         0 10px 44px rgba(0,0,0,0.35),
         inset 0 1px 0 rgba(255,255,255,0.18);
     }
-    .gc-t1:hover { background: rgba(14,36,32,0.72); border-color: rgba(80,220,190,0.45); }
+    .gc-t1:hover { background: rgba(12,30,26,0.90); border-color: rgba(80,220,190,0.45); }
     .gc-t1::before {
       background: linear-gradient(90deg, transparent, rgba(80,220,185,0.95), transparent);
       height: 1.5px;
     }
     /* T2 FOREST — mid center */
     .gc-t2 {
-      background: rgba(13,26,18,0.60);
+      background: rgba(11,22,15,0.80);
       border-color: rgba(255,255,255,0.13);
       box-shadow:
         0 0 0 1px rgba(100,185,140,0.07),
         0 10px 48px rgba(0,0,0,0.42),
         inset 0 1px 0 rgba(255,255,255,0.1);
     }
-    .gc-t2:hover { background: rgba(13,26,18,0.74); border-color: rgba(100,200,150,0.3); }
+    .gc-t2:hover { background: rgba(11,22,15,0.90); border-color: rgba(100,200,150,0.3); }
     /* T3 DEEP — back panels */
     .gc-t3 {
-      background: rgba(10,16,22,0.58);
+      background: rgba(9,14,20,0.80);
       border-color: rgba(255,255,255,0.1);
       box-shadow:
         0 0 0 1px rgba(65,135,155,0.06),
         0 8px 40px rgba(0,0,0,0.45),
         inset 0 1px 0 rgba(255,255,255,0.07);
     }
-    .gc-t3:hover { background: rgba(10,16,22,0.72); border-color: rgba(70,155,170,0.28); }
+    .gc-t3:hover { background: rgba(9,14,20,0.90); border-color: rgba(70,155,170,0.28); }
     .gc-t3::before {
       background: linear-gradient(90deg, transparent, rgba(70,165,165,0.4), transparent);
     }
