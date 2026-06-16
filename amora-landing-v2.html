@@ -4096,50 +4096,27 @@
   }
 
   // ── Feature card mockup animations ──
-  // ── Feature Showcase (resend-style) ──
+  // ── Feature Showcase — sidebar + pills tab switcher ──
   (function() {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const INTERVAL = 5000;
-
-    const tabs = Array.from(document.querySelectorAll('#showcaseTabs .showcase-tab'));
-    const views = Array.from(document.querySelectorAll('.showcase-panel .showcase-view'));
-    const progressFill = document.getElementById('showcaseProgress');
+    const sidebarTabs = Array.from(document.querySelectorAll('#featureSidebar .feature-sidebar-tab'));
+    const pillTabs    = Array.from(document.querySelectorAll('#featurePills .feature-pill'));
+    const views       = Array.from(document.querySelectorAll('.showcase-panel .showcase-view'));
     let current = 0;
-    let timer = null;
-    let started = false;
 
-    // Kustomisasi live color cycling + font/layout switching in view 3
+    // ── Kustomisasi: live color cycling ──
     const kustSwatchWraps = Array.from(document.querySelectorAll('#svKustSwatches .sv-kust-swatch-wrap'));
-    const kustSwatches = Array.from(document.querySelectorAll('#svKustSwatches .sv-kust-swatch'));
-    const kustNav = document.getElementById('svKustNav');
-    const kustCta = document.getElementById('svKustCta');
-    const kustGrid = document.getElementById('svKustGrid');
-    const kustThumbs = [
-      document.getElementById('svKustThumb1'),
-      document.getElementById('svKustThumb2'),
-      document.getElementById('svKustThumb3'),
-    ];
-    const kustPrices = [
-      document.getElementById('svKustPrice1'),
-      document.getElementById('svKustPrice2'),
-      document.getElementById('svKustPrice3'),
-    ];
-    const kustBtns = [
-      document.getElementById('svKustBtn1'),
-      document.getElementById('svKustBtn2'),
-      document.getElementById('svKustBtn3'),
-    ];
-    const kustNames = [
-      document.getElementById('svKustName1'),
-      document.getElementById('svKustName2'),
-      document.getElementById('svKustName3'),
-    ];
-    let kustIdx = 0;
-    let kustTimer = null;
+    const kustSwatches    = Array.from(document.querySelectorAll('#svKustSwatches .sv-kust-swatch'));
+    const kustNav   = document.getElementById('svKustNav');
+    const kustCta   = document.getElementById('svKustCta');
+    const kustGrid  = document.getElementById('svKustGrid');
+    const kustThumbs  = [document.getElementById('svKustThumb1'), document.getElementById('svKustThumb2'), document.getElementById('svKustThumb3')];
+    const kustPrices  = [document.getElementById('svKustPrice1'), document.getElementById('svKustPrice2'), document.getElementById('svKustPrice3')];
+    const kustBtns    = [document.getElementById('svKustBtn1'),   document.getElementById('svKustBtn2'),   document.getElementById('svKustBtn3')];
+    const kustNames   = [document.getElementById('svKustName1'),  document.getElementById('svKustName2'),  document.getElementById('svKustName3')];
+    let kustIdx = 0, kustTimer = null;
 
-    // Tab switching
     const kustTabBtns = Array.from(document.querySelectorAll('#svKustTabs .sv-kust-tab'));
-    const kustPanes = Array.from(document.querySelectorAll('.sv-kust-controls .sv-kust-pane'));
+    const kustPanes   = Array.from(document.querySelectorAll('.sv-kust-controls .sv-kust-pane'));
     kustTabBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         kustTabBtns.forEach(b => b.classList.remove('active'));
@@ -4147,12 +4124,10 @@
         btn.classList.add('active');
         const pane = document.querySelector(`.sv-kust-controls .sv-kust-pane[data-pane="${btn.dataset.tab}"]`);
         if (pane) pane.classList.add('active');
-        // stop auto-cycle when user manually interacts with font/layout tabs
         if (btn.dataset.tab !== 'warna') stopKustCycle();
       });
     });
 
-    // Font options
     document.querySelectorAll('.sv-kust-font-opt').forEach(opt => {
       opt.addEventListener('click', () => {
         document.querySelectorAll('.sv-kust-font-opt').forEach(o => o.classList.remove('active'));
@@ -4164,7 +4139,6 @@
       });
     });
 
-    // Layout options
     document.querySelectorAll('.sv-kust-layout-opt').forEach(opt => {
       opt.addEventListener('click', () => {
         document.querySelectorAll('.sv-kust-layout-opt').forEach(o => o.classList.remove('active'));
@@ -4182,23 +4156,19 @@
       kustSwatches.forEach((s, i) => s.classList.toggle('active', i === idx));
       kustSwatchWraps.forEach((w, i) => w.classList.toggle('active', i === idx));
       const solid = swatch.dataset.solid || '#6B8E5A';
-      const nav = swatch.dataset.nav || 'rgba(107,142,90,0.3)';
+      const nav   = swatch.dataset.nav   || 'rgba(107,142,90,0.3)';
       if (kustNav) kustNav.style.background = nav;
       if (kustCta) kustCta.style.background = solid;
       kustPrices.forEach(p => { if (p) p.style.color = solid; });
       kustBtns.forEach(b => { if (b) b.style.background = solid; });
+      const h = solid.replace('#','');
+      const r = parseInt(h.slice(0,2),16), g = parseInt(h.slice(2,4),16), b = parseInt(h.slice(4,6),16);
       const opacities = [0.2, 0.13, 0.08];
-      kustThumbs.forEach((t, i) => {
-        if (!t) return;
-        const h = solid.replace('#','');
-        const r = parseInt(h.slice(0,2),16), g = parseInt(h.slice(2,4),16), b = parseInt(h.slice(4,6),16);
-        t.style.background = `rgba(${r},${g},${b},${opacities[i]})`;
-      });
+      kustThumbs.forEach((t, i) => { if (t) t.style.background = `rgba(${r},${g},${b},${opacities[i]})`; });
     }
 
     function startKustCycle() {
-      if (reduced || kustTimer) return;
-      // only cycle if on warna tab
+      if (kustTimer) return;
       kustTimer = setInterval(() => {
         const activeTab = document.querySelector('#svKustTabs .sv-kust-tab.active');
         if (activeTab && activeTab.dataset.tab !== 'warna') return;
@@ -4206,70 +4176,30 @@
         applyKustColor(kustIdx);
       }, 2200);
     }
+    function stopKustCycle() { clearInterval(kustTimer); kustTimer = null; }
 
-    function stopKustCycle() {
-      clearInterval(kustTimer);
-      kustTimer = null;
-    }
-
-    function restartProgress() {
-      if (!progressFill) return;
-      progressFill.classList.remove('animating');
-      void progressFill.offsetWidth; // reflow
-      progressFill.classList.add('animating');
-      progressFill.style.animationDuration = INTERVAL + 'ms';
-    }
-
-    function goTo(idx, manual) {
-      if (idx === current && !manual) return;
-      tabs[current].classList.remove('active');
-      views[current].classList.remove('active');
+    // ── Main tab switcher ──
+    function goTo(idx) {
+      if (idx === current) return;
+      sidebarTabs[current]?.classList.remove('active');
+      pillTabs[current]?.classList.remove('active');
+      views[current]?.classList.remove('active');
       current = idx;
-      tabs[current].classList.add('active');
-      views[current].classList.add('active');
-      restartProgress();
-
-      // Start/stop kust cycle when entering/leaving view 3
+      sidebarTabs[current]?.classList.add('active');
+      pillTabs[current]?.classList.add('active');
+      views[current]?.classList.add('active');
       if (current === 3) startKustCycle();
       else stopKustCycle();
     }
 
-    function startAuto() {
-      if (reduced) return;
-      timer = setInterval(() => {
-        goTo((current + 1) % tabs.length, false);
-      }, INTERVAL);
-    }
-
-    function resetAuto() {
-      clearInterval(timer);
-      startAuto();
-    }
-
-    tabs.forEach((tab, i) => {
-      tab.addEventListener('click', () => {
-        goTo(i, true);
-        resetAuto();
-      });
+    [...sidebarTabs, ...pillTabs].forEach(tab => {
+      tab.addEventListener('click', () => goTo(parseInt(tab.dataset.idx)));
     });
 
-    function initShowcase() {
-      if (started) return;
-      started = true;
-      restartProgress();
-      startAuto();
-    }
-
-    const fgSection = document.getElementById('features-grid');
-    if (fgSection && 'IntersectionObserver' in window) {
-      const obs = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) { initShowcase(); obs.unobserve(fgSection); }
-      }, { threshold: 0.15 });
-      obs.observe(fgSection);
-      setTimeout(initShowcase, 2500);
-    } else {
-      initShowcase();
-    }
+    // Init kust swatches click
+    kustSwatches.forEach((s, i) => {
+      s.addEventListener('click', () => { kustIdx = i; applyKustColor(i); stopKustCycle(); });
+    });
   })();
 
   // ── Widget interactivity ──
