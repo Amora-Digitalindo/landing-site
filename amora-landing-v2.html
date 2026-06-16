@@ -573,96 +573,249 @@
     /* ── Glassmorphic 2D Hero Scene ── */
     .hero-canvas-wrap {
       position: relative; width: 100%; aspect-ratio: 1 / 1;
-      perspective: 900px; perspective-origin: 50% 45%;
+      perspective: 1000px; perspective-origin: 52% 42%;
       cursor: grab;
     }
     .hero-canvas-wrap:active { cursor: grabbing; }
     .hero-canvas-glow {
-      position: absolute; inset: -20%;
+      position: absolute; inset: -25%;
       background:
-        radial-gradient(ellipse at 50% 45%, rgba(107,142,90,0.38) 0%, transparent 55%),
-        radial-gradient(ellipse at 30% 60%, rgba(40,80,200,0.12) 0%, transparent 45%);
-      pointer-events: none; z-index: -1;
-      filter: blur(52px);
+        radial-gradient(ellipse at 45% 40%, rgba(107,142,90,0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 60%, rgba(56,140,180,0.3) 0%, transparent 45%),
+        radial-gradient(ellipse at 20% 75%, rgba(60,160,140,0.2) 0%, transparent 40%),
+        radial-gradient(ellipse at 85% 20%, rgba(80,180,160,0.15) 0%, transparent 35%);
+      pointer-events: none; z-index: 0;
+      filter: blur(60px);
+      animation: glowPulse 8s ease-in-out infinite alternate;
+    }
+    @keyframes glowPulse {
+      0%   { opacity: 0.85; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.04); }
+    }
+    /* tech grid background */
+    .hero-canvas-wrap::before {
+      content: '';
+      position: absolute; inset: -10%; z-index: 0;
+      background-image:
+        linear-gradient(rgba(100,180,160,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(100,180,160,0.03) 1px, transparent 1px);
+      background-size: 36px 36px;
+      mask-image: radial-gradient(ellipse at 50% 48%, black 20%, transparent 60%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 48%, black 20%, transparent 60%);
+      pointer-events: none;
+    }
+    /* radial depth rings */
+    .hero-canvas-wrap::after {
+      content: '';
+      position: absolute; inset: -5%; z-index: 0;
+      background:
+        radial-gradient(circle at 50% 48%, transparent 28%, rgba(80,170,150,0.025) 29%, transparent 30%),
+        radial-gradient(circle at 50% 48%, transparent 48%, rgba(80,170,150,0.018) 49%, transparent 50%),
+        radial-gradient(circle at 50% 48%, transparent 68%, rgba(80,170,150,0.012) 69%, transparent 70%);
+      pointer-events: none;
     }
     .hscene {
       width: 100%; height: 100%;
-      position: relative;
+      position: relative; z-index: 1;
       transform-style: preserve-3d;
-      transition: transform 0.08s linear;
     }
-    /* glass card base */
+
+    /* ── glass card base — true glassmorphic ── */
     .gc {
       position: absolute;
-      background: linear-gradient(145deg, rgba(34,58,42,0.94) 0%, rgba(20,36,26,0.97) 100%);
-      border: 1px solid rgba(143,184,122,0.5);
-      border-radius: 14px;
-      backdrop-filter: blur(20px) saturate(1.8) brightness(1.1);
-      -webkit-backdrop-filter: blur(20px) saturate(1.8) brightness(1.1);
-      box-shadow:
-        0 0 0 1px rgba(143,184,122,0.22),
-        0 0 30px rgba(143,184,122,0.28),
-        0 8px 48px rgba(0,0,0,0.65),
-        inset 0 1px 0 rgba(255,255,255,0.1),
-        inset 0 0 30px rgba(143,184,122,0.04);
+      border-radius: 16px;
       overflow: hidden;
       transform-style: preserve-3d;
-      transition: box-shadow 0.25s ease, transform 0.3s cubic-bezier(0.22,1,0.36,1);
-    }
-    .gc::before {
-      content: '';
-      position: absolute; top: 0; left: 8%; right: 8%; height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(143,184,122,0.85), transparent);
-      border-radius: 2px;
+      transition: box-shadow 0.45s ease, border-color 0.45s ease, transform 0.45s cubic-bezier(0.22,1,0.36,1);
+      background: linear-gradient(160deg,
+        rgba(16,30,22,0.55) 0%,
+        rgba(10,20,16,0.65) 100%);
+      border: 1px solid rgba(100,190,160,0.18);
+      backdrop-filter: blur(28px) saturate(1.8);
+      -webkit-backdrop-filter: blur(28px) saturate(1.8);
+      box-shadow:
+        0 0 0 1px rgba(100,190,160,0.08),
+        0 0 18px rgba(80,170,150,0.1),
+        0 8px 36px rgba(0,0,0,0.45),
+        inset 0 1px 0 rgba(255,255,255,0.08);
     }
     .gc:hover {
+      background: linear-gradient(160deg,
+        rgba(16,30,22,0.88) 0%,
+        rgba(10,20,16,0.92) 100%);
+      border-color: rgba(100,210,180,0.5);
       box-shadow:
-        0 0 0 1px rgba(143,184,122,0.6),
-        0 0 36px rgba(143,184,122,0.4),
-        0 12px 56px rgba(0,0,0,0.75),
+        0 0 0 1px rgba(100,210,180,0.3),
+        0 0 30px rgba(80,200,170,0.25),
+        0 0 12px rgba(100,220,185,0.15),
+        0 12px 48px rgba(0,0,0,0.5),
         inset 0 1px 0 rgba(255,255,255,0.12);
-      z-index: 10;
     }
-    /* skeleton helpers */
-    .sk { border-radius: 6px; background: rgba(255,255,255,0.16); }
-    .sk-g { border-radius: 6px; background: rgba(143,184,122,0.38); }
-    .sk-img { border-radius: 10px; background: rgba(255,255,255,0.08); display:flex;align-items:center;justify-content:center; }
-    .sk-img svg { opacity: 0.45; color: rgba(143,184,122,0.9); }
-    .sk-div { height: 1px; background: rgba(255,255,255,0.07); margin: 0 12px; }
-    .sk-row { display:flex; gap:8px; align-items:center; }
-    .sk-dot { width:8px;height:8px;border-radius:50%;background:rgba(143,184,122,0.7);flex-shrink:0;box-shadow:0 0 6px rgba(143,184,122,0.5); }
-    .sk-dot-r { width:8px;height:8px;border-radius:50%;background:rgba(255,150,80,0.55);flex-shrink:0; }
-    /* bar chart */
-    .sk-bars { display:flex;align-items:flex-end;gap:4px; }
-    .sk-bar { border-radius:3px 3px 0 0; background:linear-gradient(to top,rgba(143,184,122,0.1),rgba(143,184,122,0.55)); }
-    /* spark line via svg */
-    .sk-spark line,.sk-spark polyline { stroke:rgba(143,184,122,0.7);stroke-width:2;fill:none;stroke-linejoin:round; }
-    /* donut via svg */
+    /* glass specular highlight + scan lines */
+    .gc::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(145deg,
+          rgba(255,255,255,0.1) 0%,
+          rgba(255,255,255,0.03) 35%,
+          transparent 55%),
+        repeating-linear-gradient(0deg,
+          transparent, transparent 3px,
+          rgba(255,255,255,0.006) 3px, rgba(255,255,255,0.006) 4px);
+      border-radius: inherit;
+      pointer-events: none;
+    }
+    /* top accent glow line */
+    .gc::before {
+      content: '';
+      position: absolute; top: 0; left: 8%; right: 8%; height: 1.5px; z-index: 2;
+      background: linear-gradient(90deg, transparent, rgba(100,210,180,0.6), transparent);
+      border-radius: 2px;
+      transition: opacity 0.4s ease;
+    }
+    .gc:hover::before {
+      background: linear-gradient(90deg, transparent, rgba(100,220,185,0.95), transparent);
+    }
+
+    /* ── 3 DEPTH TIERS (blue-green gradient) ── */
+    /* T1 CYAN — front floaters: brightest, most glass */
+    .gc-t1 {
+      background: linear-gradient(155deg,
+        rgba(18,46,48,0.45) 0%,
+        rgba(12,30,34,0.58) 100%);
+      border-color: rgba(80,210,180,0.4);
+      backdrop-filter: blur(32px) saturate(2);
+      -webkit-backdrop-filter: blur(32px) saturate(2);
+      box-shadow:
+        0 0 0 1px rgba(80,210,180,0.2),
+        0 0 40px rgba(60,190,165,0.35),
+        0 0 14px rgba(80,210,180,0.18),
+        0 10px 44px rgba(0,0,0,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.15);
+    }
+    .gc-t1:hover {
+      background: linear-gradient(155deg,
+        rgba(18,46,48,0.85) 0%,
+        rgba(12,30,34,0.92) 100%);
+      border-color: rgba(80,220,190,0.5);
+      box-shadow:
+        0 0 0 1px rgba(80,220,190,0.25),
+        0 0 30px rgba(60,200,175,0.3),
+        0 0 12px rgba(80,220,190,0.15),
+        0 10px 40px rgba(0,0,0,0.45),
+        inset 0 1px 0 rgba(255,255,255,0.15);
+    }
+    .gc-t1::before {
+      background: linear-gradient(90deg, transparent, rgba(80,220,185,0.95), transparent);
+      height: 1.5px;
+    }
+    /* T2 FOREST — mid center: semi-transparent green */
+    .gc-t2 {
+      background: linear-gradient(155deg,
+        rgba(14,32,22,0.5) 0%,
+        rgba(10,22,16,0.65) 100%);
+      border-color: rgba(100,185,140,0.25);
+      box-shadow:
+        0 0 0 1px rgba(100,185,140,0.1),
+        0 0 24px rgba(80,165,120,0.18),
+        0 0 8px rgba(100,185,140,0.08),
+        0 10px 48px rgba(0,0,0,0.5),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+    .gc-t2:hover {
+      background: linear-gradient(155deg,
+        rgba(14,32,22,0.88) 0%,
+        rgba(10,22,16,0.93) 100%);
+      border-color: rgba(100,200,150,0.35);
+      box-shadow:
+        0 0 0 1px rgba(100,200,150,0.18),
+        0 0 25px rgba(80,180,130,0.2),
+        0 0 10px rgba(100,200,150,0.1),
+        0 10px 45px rgba(0,0,0,0.5),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    /* T3 DEEP — back panels: blue-tinted glass */
+    .gc-t3 {
+      background: linear-gradient(155deg,
+        rgba(10,18,26,0.55) 0%,
+        rgba(6,12,18,0.7) 100%);
+      border-color: rgba(65,135,155,0.18);
+      backdrop-filter: blur(22px) saturate(1.5);
+      -webkit-backdrop-filter: blur(22px) saturate(1.5);
+      box-shadow:
+        0 0 0 1px rgba(65,135,155,0.06),
+        0 0 16px rgba(50,120,140,0.1),
+        0 8px 40px rgba(0,0,0,0.55),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+    .gc-t3:hover {
+      background: linear-gradient(155deg,
+        rgba(10,18,26,0.88) 0%,
+        rgba(6,12,18,0.93) 100%);
+      border-color: rgba(70,155,170,0.35);
+      box-shadow:
+        0 0 0 1px rgba(70,155,170,0.2),
+        0 0 40px rgba(55,140,155,0.28),
+        0 0 12px rgba(70,160,170,0.12),
+        0 12px 50px rgba(0,0,0,0.55),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+    .gc-t3::before {
+      background: linear-gradient(90deg, transparent, rgba(70,165,165,0.4), transparent);
+    }
+
+    /* ── skeleton / mockup helpers ── */
+    .sk  { border-radius:4px; background:rgba(255,255,255,0.1); }
+    .sk-g { border-radius:4px; background:rgba(100,190,155,0.3); }
+    .sk-img { border-radius:8px; background:rgba(143,184,122,0.05); border:1px solid rgba(143,184,122,0.08); display:flex;align-items:center;justify-content:center; overflow:hidden; }
+    .sk-div { height:1px; background:rgba(143,184,122,0.07); flex-shrink:0; }
+    .sk-row { display:flex; gap:6px; align-items:center; }
+    .sk-dot { width:7px;height:7px;border-radius:50%;background:rgba(80,200,170,0.8);flex-shrink:0;box-shadow:0 0 8px rgba(80,200,170,0.5); }
+    .sk-bars { display:flex;align-items:flex-end;gap:2px; }
+    .sk-bar  { border-radius:3px 3px 0 0; background:linear-gradient(to top,rgba(80,180,150,0.06),rgba(100,200,170,0.45)); }
+    .sk-bar-d { border-radius:3px 3px 0 0; background:linear-gradient(to top,rgba(60,140,130,0.04),rgba(80,170,150,0.22)); }
+    .sk-spark polyline { stroke-width:1.8;fill:none;stroke-linejoin:round;stroke:rgba(80,200,170,0.6); }
+    .sk-spark line { stroke-width:1.8;fill:none; }
     .sk-donut { transform:rotate(-90deg); }
-    /* cards positioning — scene-relative % */
-    /* MAIN center card */
-    .gc-main { width:55%; left:20%; top:4%; height:86%; z-index:3; transform:translateZ(0px); }
-    /* LEFT panel — angled back-left */
-    .gc-left { width:28%; left:-2%; top:15%; height:62%; z-index:2; transform:translateZ(-20px) rotateY(14deg); }
-    /* RIGHT panel — angled back-right */
-    .gc-right { width:30%; right:-2%; top:8%; height:70%; z-index:2; transform:translateZ(-16px) rotateY(-12deg); }
-    /* TOP right floating */
-    .gc-tr { width:30%; right:2%; top:1%; height:18%; z-index:4; transform:translateZ(30px) rotateY(-4deg); }
-    /* BOTTOM left floating */
-    .gc-bl { width:22%; left:0%; bottom:2%; height:18%; z-index:4; transform:translateZ(24px) rotateY(8deg); }
-    /* BOTTOM right floating */
-    .gc-br { width:26%; right:1%; bottom:1%; height:22%; z-index:4; transform:translateZ(26px) rotateY(-5deg); }
-    /* inner layout helpers */
-    .gc-pad { padding:12px; height:100%; box-sizing:border-box; display:flex;flex-direction:column;gap:8px; }
-    .gc-title { display:flex;align-items:center;gap:8px;margin-bottom:2px; }
-    .gc-grid { display:grid;grid-template-columns:1fr 1fr;gap:8px;flex:1; }
-    .gc-cell { border-radius:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(143,184,122,0.14);padding:8px;display:flex;flex-direction:column;gap:6px; }
+    /* product card cell */
+    .gc-cell { border-radius:10px;background:rgba(143,184,122,0.04);border:1px solid rgba(143,184,122,0.08);padding:7px;display:flex;flex-direction:column;gap:4px; }
+    /* mock text helpers */
+    .m-price { font-size:10px;font-weight:700;color:rgba(100,200,170,0.9);font-family:var(--font-body);letter-spacing:-0.02em; }
+    .m-label { font-size:7px;color:rgba(255,255,255,0.4);font-family:var(--font-body);letter-spacing:0.02em; }
+    .m-value { font-size:11px;font-weight:700;color:rgba(255,255,255,0.75);font-family:var(--font-body);letter-spacing:-0.02em; }
+    .m-badge { display:inline-flex;padding:2px 6px;border-radius:10px;font-size:6px;font-weight:600;font-family:var(--font-body); }
+    .m-badge-g { background:rgba(80,190,160,0.15);color:rgba(100,210,180,0.9);border:1px solid rgba(80,190,160,0.25); }
+    .m-badge-w { background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.55);border:1px solid rgba(255,255,255,0.1); }
+    .m-stars { display:flex;gap:1px; }
+    .m-star { width:6px;height:6px; }
+    .m-star-on { fill:rgba(100,200,170,0.8); }
+    .m-star-off { fill:rgba(255,255,255,0.12); }
+
+    /* ── card positions ── */
+    .gc-main  { width:54%; left:21%; top:5%; height:84%; z-index:3; transform:translateZ(0px) rotateY(-2deg); }
+    .gc-left  { width:27%; left:-1%; top:14%; height:60%; z-index:2; transform:translateZ(-28px) rotateY(16deg) scale(0.97); }
+    .gc-right { width:29%; right:-1%; top:7%; height:68%; z-index:2; transform:translateZ(-22px) rotateY(-14deg) scale(0.97); }
+    .gc-tr    { width:29%; right:3%; top:2%; height:17%; z-index:5; transform:translateZ(32px) rotateY(-5deg) translate(var(--float-x,0),var(--float-y,0)); }
+    .gc-bl    { width:24%; left:0%; bottom:3%; height:17%; z-index:5; transform:translateZ(28px) rotateY(9deg) translate(var(--float-x,0),var(--float-y,0)); }
+    .gc-br    { width:27%; right:0%; bottom:1%; height:21%; z-index:5; transform:translateZ(30px) rotateY(-6deg) translate(var(--float-x,0),var(--float-y,0)); }
+
+    /* inner layout */
+    .gc-pad   { padding:11px; height:100%; box-sizing:border-box; display:flex;flex-direction:column;gap:7px; }
+    .gc-title { display:flex;align-items:center;gap:7px;margin-bottom:1px; }
+    .gc-grid  { display:grid;grid-template-columns:1fr 1fr;gap:7px;flex:1; }
 
     @media (max-width: 900px) {
-      .hero-canvas-wrap { max-width: 340px; perspective: 600px; }
-      .gc-left,.gc-bl { display:none; }
-      .gc-main { width:65%; left:18%; }
-      .gc-right { width:34%; right:-1%; }
+      .hero-canvas-wrap { max-width: 320px; margin:0 auto; perspective:800px; aspect-ratio: 2/3; }
+      .gc-left,.gc-bl,.gc-right,.gc-br { display:none; }
+      .gc-main  { width:90%; left:5%; top:8%; height:86%; }
+      .gc-tr    { width:42%; right:0%; top:0%; height:14%; display:flex; }
+      .gc-pad   { padding:8px; gap:4px; }
+      .gc-grid  { gap:4px; grid-template-columns:1fr 1fr; }
+      .gc-cell  { padding:4px; gap:2px; }
+      .gc-stats { display:none !important; }
+      #hero { min-height: auto !important; padding: 80px 0 48px; }
+      .hero-right { min-height: auto !important; }
     }
 
     .scroll-indicator {
@@ -674,17 +827,17 @@
     @media (max-width: 900px) {
       .hero-split {
         grid-template-columns: 1fr;
-        gap: 48px;
-        padding: 0 24px;
+        gap: 32px;
+        padding: 0 20px;
       }
-      .hero-left { align-items: center; }
-      .hero-title { text-align: center; font-size: clamp(2.5rem, 8vw, 3.5rem); }
-      .hero-subtitle { text-align: center; margin: 0 auto 36px; }
+      .hero-left { align-items: center; order: 2; }
+      .hero-title { text-align: center; font-size: clamp(2rem, 7vw, 3rem); margin-bottom: 16px; }
+      .hero-subtitle { text-align: center; margin: 0 auto 24px; font-size: 0.9rem; }
       .hero-cta { justify-content: center; }
-      .hero-stats { justify-content: center; }
-      .hero-stat { align-items: center; }
-      .hero-right { order: -1; }
-      .hero-canvas-wrap { max-width: 340px; }
+      .hero-eyebrow { margin-bottom: 20px; }
+      .hero-stats-wrap { display: none; }
+      .hero-right { order: 1; }
+      .hero-canvas-wrap { max-width: 300px; margin: 0 auto; aspect-ratio: 2/3; }
     }
 
     /* ═══════════════════════════════════════
@@ -784,6 +937,8 @@
         0 12px 40px rgba(0,0,0,0.5),
         0 4px 12px rgba(0,0,0,0.3);
       overflow: hidden;
+      will-change: transform; transform-origin: center center;
+      transition: box-shadow 0.4s ease, border-color 0.4s ease;
     }
     .bento-widget::before {
       content: '';
@@ -1060,6 +1215,12 @@
       overflow: hidden; height: 220px;
       display: flex; flex-direction: column;
       position: relative;
+      will-change: transform; transform-origin: center center;
+      transition: box-shadow 0.4s ease, border-color 0.4s ease;
+    }
+    .feature-mockup:hover, .bento-widget:hover {
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 30px rgba(80,200,170,0.1);
+      border-color: rgba(100,210,180,0.2);
     }
     .bento-chrome {
       display: flex; align-items: center; gap: 5px;
@@ -1254,67 +1415,72 @@
     }
 
     /* ═══════════════════════════════════════
-       FEATURE SHOWCASE (resend-style)
+       FEATURE SHOWCASE — sidebar layout
     ═══════════════════════════════════════ */
     .feature-showcase { margin-top: 48px; }
 
-    /* Tab selector row — icons like resend.com tech stack */
-    .showcase-tabs-wrap {
-      background: rgba(255,255,255,0.025);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-bottom: none;
-      border-radius: var(--r-xl) var(--r-xl) 0 0;
-      padding: 16px 20px 0;
-      display: flex; gap: 4px;
+    /* Mobile pills (shown on mobile, hidden on desktop) */
+    .feature-pills {
+      display: none;
       overflow-x: auto; -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
+      gap: 8px; padding-bottom: 4px;
+      scrollbar-width: none; -ms-overflow-style: none;
+      margin-bottom: 20px;
     }
-    .showcase-tabs-wrap::-webkit-scrollbar { display: none; }
+    .feature-pills::-webkit-scrollbar { display: none; }
+    .feature-pill {
+      flex-shrink: 0; padding: 8px 16px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.5);
+      font-size: 12.5px; font-weight: 500; white-space: nowrap;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .feature-pill.active {
+      background: rgba(100,210,180,0.12);
+      border-color: rgba(100,210,180,0.4);
+      color: var(--accent-light);
+    }
 
-    .showcase-tab {
-      display: flex; flex-direction: column; align-items: center; gap: 6px;
-      padding: 10px 16px 14px;
-      border-radius: var(--r-md) var(--r-md) 0 0;
-      cursor: pointer; flex-shrink: 0;
-      background: none; border: none;
-      color: rgba(255,255,255,0.35);
-      transition: color 0.2s, background 0.2s;
-      position: relative;
+    /* Desktop split: sidebar + panel */
+    .feature-showcase-split {
+      display: flex; gap: 32px; align-items: flex-start;
     }
-    .showcase-tab::after {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-      height: 2px; border-radius: 2px 2px 0 0;
-      background: var(--accent-light);
-      transform: scaleX(0); transition: transform 0.25s;
-    }
-    .showcase-tab:hover { color: rgba(255,255,255,0.65); background: rgba(255,255,255,0.03); }
-    .showcase-tab.active { color: var(--accent-light); }
-    .showcase-tab.active::after { transform: scaleX(1); }
 
-    .showcase-tab-icon {
-      width: 38px; height: 38px; border-radius: var(--r-md);
-      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.25s;
+    /* Sidebar */
+    .feature-sidebar {
+      width: 180px; flex-shrink: 0;
+      display: flex; flex-direction: column; gap: 2px;
+      position: sticky; top: 100px;
     }
-    .showcase-tab-icon svg { width: 17px; height: 17px; stroke: currentColor; }
-    .showcase-tab.active .showcase-tab-icon {
-      background: rgba(107,142,90,0.15); border-color: rgba(107,142,90,0.35);
+    .feature-sidebar-tab {
+      display: flex; align-items: center; gap: 10px;
+      padding: 11px 14px; border-radius: 10px;
+      border: none; border-left: 2px solid transparent;
+      background: transparent; color: rgba(255,255,255,0.42);
+      cursor: pointer; text-align: left; width: 100%;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      font-size: 13px; font-weight: 500;
     }
-    .showcase-tab-label { font-size: 10.5px; font-weight: 500; white-space: nowrap; letter-spacing: 0.01em; }
+    .feature-sidebar-tab:hover {
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.72);
+    }
+    .feature-sidebar-tab.active {
+      background: rgba(100,210,180,0.08);
+      border-left-color: var(--accent);
+      color: rgba(255,255,255,0.92);
+    }
+    .feature-sidebar-tab svg {
+      width: 16px; height: 16px; flex-shrink: 0;
+      stroke: currentColor; fill: none; stroke-width: 1.75;
+    }
+    .feature-sidebar-label { white-space: nowrap; }
 
-    /* Progress bar connecting tabs to panel */
-    .showcase-progress {
-      height: 2px; background: rgba(255,255,255,0.06);
-      position: relative; overflow: hidden;
-    }
-    .showcase-progress-fill {
-      position: absolute; left: 0; top: 0; height: 100%; width: 0%;
-      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
-    }
-    @keyframes prog-run { from { width: 0% } to { width: 100% } }
-    .showcase-progress-fill.animating {
-      animation: prog-run 5s linear forwards;
+    @media (max-width: 900px) {
+      .feature-showcase-split { flex-direction: column; gap: 0; }
+      .feature-sidebar { display: none; }
+      .feature-pills { display: flex; }
     }
 
     /* Large panel */
@@ -1322,10 +1488,16 @@
       position: relative; height: 500px;
       background: rgba(8,10,16,0.97);
       border: 1px solid rgba(255,255,255,0.09);
-      border-top: none;
-      border-radius: 0 0 var(--r-xl) var(--r-xl);
+      border-radius: var(--r-xl);
       overflow: hidden;
+      flex: 1;
       box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 8px 24px rgba(0,0,0,0.4), inset 0 -1px 0 rgba(0,0,0,0.5);
+      will-change: transform; transform-origin: center center;
+      transition: box-shadow 0.4s ease, border-color 0.4s ease;
+    }
+    .showcase-panel:hover {
+      box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 50px rgba(80,200,170,0.12), 0 8px 24px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
+      border-color: rgba(100,210,180,0.18);
     }
     @media (min-width: 1100px) { .showcase-panel { height: 520px; } }
 
@@ -2503,192 +2675,244 @@
           <div class="hero-canvas-glow"></div>
           <div class="hscene" id="hscene">
 
-            <!-- MAIN center card: 2x2 product grid + header -->
-            <div class="gc gc-main">
+            <!-- ═══ MAIN: T2 storefront product catalog ═══ -->
+            <div class="gc gc-t2 gc-main">
               <div class="gc-pad">
-                <!-- header bar -->
+                <!-- nav bar -->
                 <div class="gc-title">
-                  <div class="sk" style="width:22px;height:22px;border-radius:6px;"></div>
-                  <div class="sk" style="width:52px;height:10px;"></div>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(143,184,122,0.7)" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+                  <span class="m-label" style="font-size:8px;color:rgba(255,255,255,0.5);">Toko Saya</span>
                   <div style="flex:1"></div>
-                  <div class="sk" style="width:60px;height:24px;border-radius:20px;background:rgba(143,184,122,0.18)"></div>
-                </div>
-                <!-- search pill -->
-                <div style="border:1px solid rgba(255,255,255,0.08);border-radius:20px;height:28px;display:flex;align-items:center;padding:0 10px;gap:6px;">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(143,184,122,0.5)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                  <div class="sk" style="flex:1;height:8px;border-radius:4px;"></div>
-                </div>
-                <!-- 2x2 grid -->
-                <div class="gc-grid" style="flex:1;">
-                  <!-- cell 1 -->
-                  <div class="gc-cell">
-                    <div class="sk-img" style="flex:1;min-height:0;">
-                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.25"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H19.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/><path d="M17 21v-8H7v8"/></svg>
-                    </div>
-                    <div class="sk" style="width:70%;height:8px;"></div>
-                    <div class="sk-g" style="width:50%;height:10px;border-radius:4px;"></div>
-                  </div>
-                  <!-- cell 2 -->
-                  <div class="gc-cell">
-                    <div style="display:flex;gap:4px;justify-content:center;margin-bottom:2px;">
-                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(143,184,122,0.4)" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 001.96-1.56L23 6H6"/></svg>
-                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(143,184,122,0.3)" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-                    </div>
-                    <div class="sk" style="width:80%;height:8px;margin:0 auto;"></div>
-                    <div class="sk-bars" style="height:28px;align-items:flex-end;padding:0 4px;">
-                      <div class="sk-bar" style="height:60%;flex:1;"></div>
-                      <div class="sk-bar" style="height:85%;flex:1;"></div>
-                      <div class="sk-bar" style="height:45%;flex:1;"></div>
-                      <div class="sk-bar" style="height:95%;flex:1;"></div>
-                      <div class="sk-bar" style="height:70%;flex:1;"></div>
-                    </div>
-                  </div>
-                  <!-- cell 3 -->
-                  <div class="gc-cell">
-                    <div class="sk-img" style="flex:1;min-height:0;">
-                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.22"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-                    </div>
-                    <div class="sk" style="width:65%;height:8px;"></div>
-                    <div class="sk-g" style="width:45%;height:10px;border-radius:4px;"></div>
-                  </div>
-                  <!-- cell 4: donut + mini stats -->
-                  <div class="gc-cell" style="align-items:center;">
-                    <svg class="sk-donut" width="48" height="48" viewBox="0 0 36 36">
-                      <circle cx="18" cy="18" r="14" fill="none" stroke="rgba(143,184,122,0.08)" stroke-width="6"/>
-                      <circle cx="18" cy="18" r="14" fill="none" stroke="rgba(143,184,122,0.45)" stroke-width="6" stroke-dasharray="35 53" stroke-linecap="round"/>
-                      <circle cx="18" cy="18" r="14" fill="none" stroke="rgba(143,184,122,0.22)" stroke-width="6" stroke-dasharray="20 68" stroke-dashoffset="-35" stroke-linecap="round"/>
-                    </svg>
-                    <div class="sk" style="width:60%;height:7px;"></div>
-                    <div class="sk-g" style="width:40%;height:7px;"></div>
+                  <div style="padding:3px 8px;border-radius:12px;background:rgba(143,184,122,0.15);border:1px solid rgba(143,184,122,0.3);">
+                    <span class="m-label" style="font-size:7px;color:rgba(143,184,122,0.9);">+ Produk Baru</span>
                   </div>
                 </div>
-                <!-- bottom stat bar -->
-                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;">
-                  <div style="text-align:center;padding:4px 0;">
-                    <div class="sk-g" style="width:60%;height:10px;margin:0 auto 4px;border-radius:3px;"></div>
-                    <div class="sk" style="width:50%;height:7px;margin:0 auto;border-radius:3px;"></div>
+                <!-- search -->
+                <div style="border:1px solid rgba(143,184,122,0.1);border-radius:14px;height:22px;display:flex;align-items:center;padding:0 8px;gap:5px;background:rgba(143,184,122,0.03);">
+                  <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="rgba(143,184,122,0.4)" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <span class="m-label" style="font-size:6.5px;">Cari produk...</span>
+                </div>
+                <!-- product grid -->
+                <div class="gc-grid" style="flex:1;min-height:0;">
+                  <!-- Product 1: T-Shirt -->
+                  <div class="gc-cell">
+                    <div class="sk-img" style="flex:1;min-height:0;position:relative;background:linear-gradient(145deg,rgba(30,40,35,0.6),rgba(20,28,22,0.4));">
+                      <img src="asset/shirt.png" style="width:100%;height:100%;object-fit:contain;opacity:0.9;border-radius:inherit;padding:4px;" alt="T-Shirt">
+                      <div style="position:absolute;top:4px;right:4px;" class="m-badge m-badge-g">BEST</div>
+                    </div>
+                    <span class="m-label">T-Shirt Oversize</span>
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                      <span class="m-price">Rp 185.000</span>
+                      <div class="m-stars"><svg class="m-star" viewBox="0 0 10 10"><polygon points="5,1 6.2,3.8 9,4 7,6.2 7.6,9 5,7.5 2.4,9 3,6.2 1,4 3.8,3.8" class="m-star-on"/></svg><svg class="m-star" viewBox="0 0 10 10"><polygon points="5,1 6.2,3.8 9,4 7,6.2 7.6,9 5,7.5 2.4,9 3,6.2 1,4 3.8,3.8" class="m-star-on"/></svg><svg class="m-star" viewBox="0 0 10 10"><polygon points="5,1 6.2,3.8 9,4 7,6.2 7.6,9 5,7.5 2.4,9 3,6.2 1,4 3.8,3.8" class="m-star-on"/></svg><svg class="m-star" viewBox="0 0 10 10"><polygon points="5,1 6.2,3.8 9,4 7,6.2 7.6,9 5,7.5 2.4,9 3,6.2 1,4 3.8,3.8" class="m-star-on"/></svg><svg class="m-star" viewBox="0 0 10 10"><polygon points="5,1 6.2,3.8 9,4 7,6.2 7.6,9 5,7.5 2.4,9 3,6.2 1,4 3.8,3.8" class="m-star-off"/></svg></div>
+                    </div>
                   </div>
-                  <div style="text-align:center;padding:4px 0;border-left:1px solid rgba(255,255,255,0.05);border-right:1px solid rgba(255,255,255,0.05);">
-                    <div class="sk-g" style="width:60%;height:10px;margin:0 auto 4px;border-radius:3px;"></div>
-                    <div class="sk" style="width:50%;height:7px;margin:0 auto;border-radius:3px;"></div>
+                  <!-- Product 2: Hoodie -->
+                  <div class="gc-cell">
+                    <div class="sk-img" style="flex:1;min-height:0;position:relative;background:linear-gradient(145deg,rgba(25,35,45,0.6),rgba(15,22,30,0.4));">
+                      <img src="asset/shirt.png" style="width:100%;height:100%;object-fit:contain;opacity:0.9;border-radius:inherit;padding:4px;" alt="Hoodie">
+                      <div style="position:absolute;top:4px;right:4px;" class="m-badge m-badge-w">NEW</div>
+                    </div>
+                    <span class="m-label">Hoodie Crop Navy</span>
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                      <span class="m-price">Rp 320.000</span>
+                      <div class="m-stars"><svg class="m-star" viewBox="0 0 10 10"><polygon points="5,1 6.2,3.8 9,4 7,6.2 7.6,9 5,7.5 2.4,9 3,6.2 1,4 3.8,3.8" class="m-star-on"/></svg><svg class="m-star" viewBox="0 0 10 10"><polygon points="5,1 6.2,3.8 9,4 7,6.2 7.6,9 5,7.5 2.4,9 3,6.2 1,4 3.8,3.8" class="m-star-on"/></svg><svg class="m-star" viewBox="0 0 10 10"><polygon points="5,1 6.2,3.8 9,4 7,6.2 7.6,9 5,7.5 2.4,9 3,6.2 1,4 3.8,3.8" class="m-star-on"/></svg><svg class="m-star" viewBox="0 0 10 10"><polygon points="5,1 6.2,3.8 9,4 7,6.2 7.6,9 5,7.5 2.4,9 3,6.2 1,4 3.8,3.8" class="m-star-on"/></svg><svg class="m-star" viewBox="0 0 10 10"><polygon points="5,1 6.2,3.8 9,4 7,6.2 7.6,9 5,7.5 2.4,9 3,6.2 1,4 3.8,3.8" class="m-star-on"/></svg></div>
+                    </div>
                   </div>
-                  <div style="text-align:center;padding:4px 0;">
-                    <div class="sk-g" style="width:60%;height:10px;margin:0 auto 4px;border-radius:3px;"></div>
-                    <div class="sk" style="width:50%;height:7px;margin:0 auto;border-radius:3px;"></div>
+                  <!-- Product 3: Celana -->
+                  <div class="gc-cell gc-cell-hide-mobile">
+                    <div class="sk-img" style="flex:1;min-height:0;background:linear-gradient(145deg,rgba(35,30,20,0.6),rgba(25,20,14,0.4));">
+                      <img src="asset/shirt.png" style="width:100%;height:100%;object-fit:contain;opacity:0.9;border-radius:inherit;padding:4px;" alt="Celana">
+                    </div>
+                    <span class="m-label">Celana Cargo Olive</span>
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                      <span class="m-price">Rp 245.000</span>
+                      <span class="m-badge m-badge-g">Laris</span>
+                    </div>
+                  </div>
+                  <!-- Product 4: Jaket -->
+                  <div class="gc-cell gc-cell-hide-mobile">
+                    <div class="sk-img" style="flex:1;min-height:0;background:linear-gradient(145deg,rgba(20,25,40,0.6),rgba(12,16,28,0.4));">
+                      <img src="asset/shirt.png" style="width:100%;height:100%;object-fit:contain;opacity:0.9;border-radius:inherit;padding:4px;" alt="Jaket">
+                    </div>
+                    <span class="m-label">Jaket Denim Klasik</span>
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                      <span class="m-price">Rp 459.000</span>
+                      <span class="m-badge m-badge-g">Laris</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- bottom stats -->
+                <div class="gc-stats" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;">
+                  <div style="text-align:center;padding:3px 0;">
+                    <div class="m-value">128</div>
+                    <div class="m-label">Produk</div>
+                  </div>
+                  <div style="text-align:center;padding:3px 0;border-left:1px solid rgba(143,184,122,0.08);border-right:1px solid rgba(143,184,122,0.08);">
+                    <div class="m-value">4.8<span style="font-size:7px;opacity:0.5;">/5</span></div>
+                    <div class="m-label">Rating</div>
+                  </div>
+                  <div style="text-align:center;padding:3px 0;">
+                    <div class="m-value" style="color:rgba(143,184,122,0.9);">Online</div>
+                    <div class="m-label">Status</div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- LEFT panel: analytics chart -->
-            <div class="gc gc-left">
+            <!-- ═══ LEFT: T3 revenue analytics ═══ -->
+            <div class="gc gc-t3 gc-left">
               <div class="gc-pad">
-                <div class="sk" style="width:55%;height:9px;"></div>
+                <div style="display:flex;align-items:center;gap:4px;">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="rgba(143,184,122,0.45)" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+                  <span class="m-label" style="font-size:7px;">Analitik</span>
+                </div>
                 <div class="sk-div"></div>
-                <div class="sk" style="width:70%;height:14px;border-radius:5px;"></div>
-                <div class="sk-g" style="width:40%;height:8px;border-radius:4px;"></div>
-                <!-- sparkline -->
-                <svg class="sk-spark" width="100%" height="40" viewBox="0 0 100 40" preserveAspectRatio="none">
-                  <polyline points="0,35 14,28 28,18 42,22 56,10 70,14 84,8 100,12"/>
-                  <polygon points="0,35 14,28 28,18 42,22 56,10 70,14 84,8 100,12 100,40 0,40" fill="rgba(143,184,122,0.07)" stroke="none"/>
+                <div class="m-value" style="font-size:13px;">Rp 12.4jt</div>
+                <div style="display:flex;align-items:center;gap:3px;">
+                  <span class="m-label" style="font-size:6px;color:rgba(143,184,122,0.8);">▲ 24.5%</span>
+                  <span class="m-label" style="font-size:6px;">vs bulan lalu</span>
+                </div>
+                <!-- revenue chart -->
+                <svg class="sk-spark" width="100%" height="36" viewBox="0 0 100 36" preserveAspectRatio="none" style="flex-shrink:0;">
+                  <polyline points="0,32 10,28 20,24 30,20 40,26 50,18 60,14 70,16 80,8 90,10 100,5"/>
+                  <polygon points="0,32 10,28 20,24 30,20 40,26 50,18 60,14 70,16 80,8 90,10 100,5 100,36 0,36" fill="rgba(143,184,122,0.06)" stroke="none"/>
                 </svg>
                 <div class="sk-div"></div>
+                <!-- metric rows -->
                 <div style="flex:1;display:flex;flex-direction:column;justify-content:space-evenly;">
-                  <div class="sk-row"><div class="sk-dot"></div><div class="sk" style="flex:1;height:7px;"></div><div class="sk" style="width:25%;height:7px;"></div></div>
-                  <div class="sk-row"><div class="sk-dot-r"></div><div class="sk" style="flex:1;height:7px;"></div><div class="sk" style="width:25%;height:7px;"></div></div>
-                  <div class="sk-row"><div class="sk-dot"></div><div class="sk" style="flex:1;height:7px;"></div><div class="sk" style="width:25%;height:7px;"></div></div>
+                  <div class="sk-row"><div class="sk-dot"></div><div style="flex:1"><div class="m-label">Pesanan</div></div><div class="m-label" style="color:rgba(255,255,255,0.6);">347</div></div>
+                  <div class="sk-row"><div class="sk-dot" style="background:rgba(143,184,122,0.5);box-shadow:0 0 5px rgba(143,184,122,0.3);"></div><div style="flex:1"><div class="m-label">Pengunjung</div></div><div class="m-label" style="color:rgba(255,255,255,0.6);">2.1k</div></div>
+                  <div class="sk-row"><div class="sk-dot" style="background:rgba(143,184,122,0.3);box-shadow:0 0 4px rgba(143,184,122,0.15);"></div><div style="flex:1"><div class="m-label">Konversi</div></div><div class="m-label" style="color:rgba(255,255,255,0.6);">16.5%</div></div>
                 </div>
-                <!-- bar chart -->
-                <div class="sk-bars" style="height:36px;align-items:flex-end;gap:3px;">
-                  <div class="sk-bar" style="height:55%;flex:1;"></div>
-                  <div class="sk-bar" style="height:80%;flex:1;"></div>
-                  <div class="sk-bar" style="height:40%;flex:1;"></div>
-                  <div class="sk-bar" style="height:90%;flex:1;"></div>
+                <!-- mini bar chart -->
+                <div class="sk-bars" style="height:30px;align-items:flex-end;gap:2px;">
+                  <div class="sk-bar-d" style="height:45%;flex:1;"></div>
+                  <div class="sk-bar" style="height:72%;flex:1;"></div>
+                  <div class="sk-bar-d" style="height:35%;flex:1;"></div>
+                  <div class="sk-bar" style="height:85%;flex:1;"></div>
+                  <div class="sk-bar" style="height:92%;flex:1;"></div>
+                  <div class="sk-bar-d" style="height:55%;flex:1;"></div>
                   <div class="sk-bar" style="height:65%;flex:1;"></div>
-                  <div class="sk-bar" style="height:50%;flex:1;"></div>
                 </div>
               </div>
             </div>
 
-            <!-- RIGHT panel: orders / dashboard -->
-            <div class="gc gc-right">
+            <!-- ═══ RIGHT: T3 recent orders ═══ -->
+            <div class="gc gc-t3 gc-right">
               <div class="gc-pad">
-                <div class="sk" style="width:50%;height:9px;"></div>
-                <div class="sk-div"></div>
-                <!-- large area chart -->
-                <svg class="sk-spark" width="100%" height="60" viewBox="0 0 100 60" preserveAspectRatio="none" style="flex-shrink:0;">
-                  <polyline points="0,55 12,45 24,30 36,38 48,20 60,25 72,12 84,18 100,10"/>
-                  <polygon points="0,55 12,45 24,30 36,38 48,20 60,25 72,12 84,18 100,10 100,60 0,60" fill="rgba(143,184,122,0.07)" stroke="none"/>
-                </svg>
-                <!-- x-axis labels row -->
-                <div style="display:flex;justify-content:space-between;padding:0 2px;">
-                  <div class="sk" style="width:12%;height:6px;border-radius:2px;"></div>
-                  <div class="sk" style="width:12%;height:6px;border-radius:2px;"></div>
-                  <div class="sk" style="width:12%;height:6px;border-radius:2px;"></div>
-                  <div class="sk" style="width:12%;height:6px;border-radius:2px;"></div>
+                <div style="display:flex;align-items:center;gap:4px;">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="rgba(143,184,122,0.45)" stroke-width="2"><rect x="2" y="3" width="20" height="18" rx="2"/><line x1="2" y1="9" x2="22" y2="9"/></svg>
+                  <span class="m-label" style="font-size:7px;">Pesanan Terbaru</span>
+                  <div style="flex:1"></div>
+                  <span class="m-badge m-badge-g">3 Baru</span>
                 </div>
                 <div class="sk-div"></div>
-                <!-- 3 stat pills -->
-                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;">
-                  <div style="text-align:center"><div class="sk-g" style="height:10px;border-radius:3px;margin-bottom:3px;"></div><div class="sk" style="height:7px;border-radius:3px;"></div></div>
-                  <div style="text-align:center"><div class="sk-g" style="height:10px;border-radius:3px;margin-bottom:3px;"></div><div class="sk" style="height:7px;border-radius:3px;"></div></div>
-                  <div style="text-align:center"><div class="sk-g" style="height:10px;border-radius:3px;margin-bottom:3px;"></div><div class="sk" style="height:7px;border-radius:3px;"></div></div>
+                <!-- order rows with real data -->
+                <div style="flex:1;display:flex;flex-direction:column;gap:6px;justify-content:start;">
+                  <!-- order 1 -->
+                  <div class="sk-row" style="padding:4px;border-radius:8px;background:rgba(143,184,122,0.04);border:1px solid rgba(143,184,122,0.06);">
+                    <div style="width:24px;height:24px;border-radius:6px;background:rgba(143,184,122,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                      <span style="font-size:10px;">👕</span>
+                    </div>
+                    <div style="flex:1;min-width:0;">
+                      <div class="m-label" style="color:rgba(255,255,255,0.55);">T-Shirt Oversize ×2</div>
+                      <div class="m-price" style="font-size:8px;">Rp 370.000</div>
+                    </div>
+                    <span class="m-badge m-badge-g" style="font-size:5px;">Dibayar</span>
+                  </div>
+                  <!-- order 2 -->
+                  <div class="sk-row" style="padding:4px;border-radius:8px;background:rgba(143,184,122,0.04);border:1px solid rgba(143,184,122,0.06);">
+                    <div style="width:24px;height:24px;border-radius:6px;background:rgba(143,184,122,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                      <span style="font-size:10px;">🧥</span>
+                    </div>
+                    <div style="flex:1;min-width:0;">
+                      <div class="m-label" style="color:rgba(255,255,255,0.55);">Hoodie Crop ×1</div>
+                      <div class="m-price" style="font-size:8px;">Rp 320.000</div>
+                    </div>
+                    <span class="m-badge m-badge-w" style="font-size:5px;">Proses</span>
+                  </div>
+                  <!-- order 3 -->
+                  <div class="sk-row" style="padding:4px;border-radius:8px;background:rgba(143,184,122,0.04);border:1px solid rgba(143,184,122,0.06);">
+                    <div style="width:24px;height:24px;border-radius:6px;background:rgba(143,184,122,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                      <span style="font-size:10px;">👖</span>
+                    </div>
+                    <div style="flex:1;min-width:0;">
+                      <div class="m-label" style="color:rgba(255,255,255,0.55);">Celana Cargo ×1</div>
+                      <div class="m-price" style="font-size:8px;">Rp 245.000</div>
+                    </div>
+                    <span class="m-badge m-badge-g" style="font-size:5px;">Dikirim</span>
+                  </div>
+                  <!-- order 4 -->
+                  <div class="sk-row" style="padding:4px;border-radius:8px;background:rgba(143,184,122,0.04);border:1px solid rgba(143,184,122,0.06);">
+                    <div style="width:24px;height:24px;border-radius:6px;background:rgba(143,184,122,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                      <span style="font-size:10px;">🧣</span>
+                    </div>
+                    <div style="flex:1;min-width:0;">
+                      <div class="m-label" style="color:rgba(255,255,255,0.55);">Jaket Denim ×1</div>
+                      <div class="m-price" style="font-size:8px;">Rp 459.000</div>
+                    </div>
+                    <span class="m-badge m-badge-g" style="font-size:5px;">Dibayar</span>
+                  </div>
                 </div>
                 <div class="sk-div"></div>
-                <!-- order rows -->
-                <div style="flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:5px;">
-                  <div class="sk-row"><div class="sk" style="width:28px;height:28px;border-radius:8px;flex-shrink:0;"></div><div style="flex:1;display:flex;flex-direction:column;gap:4px;"><div class="sk" style="width:65%;height:8px;"></div><div class="sk" style="width:45%;height:7px;"></div></div><div class="sk-g" style="width:22%;height:8px;border-radius:4px;"></div></div>
-                  <div class="sk-row"><div class="sk" style="width:28px;height:28px;border-radius:8px;flex-shrink:0;"></div><div style="flex:1;display:flex;flex-direction:column;gap:4px;"><div class="sk" style="width:55%;height:8px;"></div><div class="sk" style="width:40%;height:7px;"></div></div><div class="sk-g" style="width:22%;height:8px;border-radius:4px;"></div></div>
-                  <div class="sk-row"><div class="sk" style="width:28px;height:28px;border-radius:8px;flex-shrink:0;"></div><div style="flex:1;display:flex;flex-direction:column;gap:4px;"><div class="sk" style="width:70%;height:8px;"></div><div class="sk" style="width:35%;height:7px;"></div></div><div class="sk-g" style="width:22%;height:8px;border-radius:4px;"></div></div>
+                <!-- total -->
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <span class="m-label">Total hari ini</span>
+                  <span class="m-value" style="color:rgba(143,184,122,0.9);font-size:10px;">Rp 1.39jt</span>
                 </div>
-                <!-- export button skeleton -->
-                <div class="sk-g" style="height:26px;border-radius:8px;opacity:0.7;"></div>
               </div>
             </div>
 
-            <!-- TOP-RIGHT floating: mini donut stats -->
-            <div class="gc gc-tr">
+            <!-- ═══ TOP-RIGHT: T1 live visitors ═══ -->
+            <div class="gc gc-t1 gc-tr">
               <div class="gc-pad" style="flex-direction:row;align-items:center;gap:8px;">
-                <svg class="sk-donut" width="38" height="38" viewBox="0 0 36 36" style="flex-shrink:0;">
-                  <circle cx="18" cy="18" r="13" fill="none" stroke="rgba(143,184,122,0.08)" stroke-width="6"/>
-                  <circle cx="18" cy="18" r="13" fill="none" stroke="rgba(143,184,122,0.5)" stroke-width="6" stroke-dasharray="30 52" stroke-linecap="round"/>
-                  <circle cx="18" cy="18" r="13" fill="none" stroke="rgba(143,184,122,0.22)" stroke-width="6" stroke-dasharray="18 64" stroke-dashoffset="-30" stroke-linecap="round"/>
-                </svg>
-                <svg class="sk-donut" width="38" height="38" viewBox="0 0 36 36" style="flex-shrink:0;">
-                  <circle cx="18" cy="18" r="13" fill="none" stroke="rgba(143,184,122,0.08)" stroke-width="6"/>
-                  <circle cx="18" cy="18" r="13" fill="none" stroke="rgba(143,184,122,0.38)" stroke-width="6" stroke-dasharray="44 38" stroke-linecap="round"/>
-                </svg>
-                <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
-                  <div class="sk-g" style="height:9px;width:70%;border-radius:3px;"></div>
-                  <div class="sk" style="height:7px;width:55%;border-radius:3px;"></div>
+                <div style="position:relative;width:38px;height:38px;flex-shrink:0;">
+                  <svg class="sk-donut" width="38" height="38" viewBox="0 0 36 36">
+                    <circle cx="18" cy="18" r="13" fill="none" stroke="rgba(80,200,170,0.1)" stroke-width="5"/>
+                    <circle cx="18" cy="18" r="13" fill="none" stroke="rgba(80,200,170,0.7)" stroke-width="5" stroke-dasharray="55 27" stroke-linecap="round"/>
+                  </svg>
+                  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+                    <span style="font-size:8px;font-weight:700;color:rgba(100,210,180,0.9);font-family:var(--font-body);">67%</span>
+                  </div>
+                </div>
+                <div style="flex:1;display:flex;flex-direction:column;gap:3px;">
+                  <div style="display:flex;align-items:center;gap:4px;">
+                    <div class="sk-dot" style="width:5px;height:5px;animation:pulse-dot 2s infinite;"></div>
+                    <span class="m-label" style="color:rgba(143,184,122,0.85);font-size:7px;">24 Online</span>
+                  </div>
+                  <span class="m-label" style="font-size:6px;">Konversi minggu ini</span>
                 </div>
               </div>
             </div>
 
-            <!-- BOTTOM-LEFT floating: notification pill -->
-            <div class="gc gc-bl">
+            <!-- ═══ BOTTOM-LEFT: T1 new order notif ═══ -->
+            <div class="gc gc-t1 gc-bl">
               <div class="gc-pad" style="flex-direction:row;align-items:center;gap:8px;">
-                <div class="sk-dot" style="width:10px;height:10px;flex-shrink:0;box-shadow:0 0 8px rgba(143,184,122,0.6);"></div>
-                <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
-                  <div class="sk" style="height:8px;width:75%;border-radius:3px;"></div>
-                  <div class="sk" style="height:7px;width:55%;border-radius:3px;"></div>
+                <div style="width:28px;height:28px;border-radius:8px;background:rgba(143,184,122,0.15);border:1px solid rgba(143,184,122,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 12px rgba(143,184,122,0.2);">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(143,184,122,0.8)" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <div style="flex:1;display:flex;flex-direction:column;gap:2px;">
+                  <span class="m-label" style="color:rgba(255,255,255,0.6);font-size:7px;">Pesanan baru masuk!</span>
+                  <span class="m-price" style="font-size:8px;">+Rp 285.000</span>
                 </div>
               </div>
             </div>
 
-            <!-- BOTTOM-RIGHT floating: mini sparkline -->
-            <div class="gc gc-br">
+            <!-- ═══ BOTTOM-RIGHT: T1 revenue trend ═══ -->
+            <div class="gc gc-t1 gc-br">
               <div class="gc-pad">
                 <div class="sk-row">
-                  <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
-                    <div class="sk" style="height:8px;width:60%;border-radius:3px;"></div>
-                    <div class="sk-g" style="height:10px;width:45%;border-radius:3px;"></div>
+                  <div style="flex:1;">
+                    <div class="m-label" style="font-size:6px;margin-bottom:2px;">Revenue 7 hari</div>
+                    <div style="display:flex;align-items:baseline;gap:3px;">
+                      <span class="m-value" style="font-size:12px;">Rp 8.2jt</span>
+                      <span class="m-label" style="color:rgba(143,184,122,0.8);font-size:6px;">▲ 18%</span>
+                    </div>
                   </div>
-                  <div class="sk" style="width:18px;height:18px;border-radius:50%;"></div>
                 </div>
-                <svg class="sk-spark" width="100%" height="35" viewBox="0 0 100 35" preserveAspectRatio="none" style="flex:1;">
-                  <polyline points="0,28 20,20 40,24 60,10 80,14 100,6"/>
-                  <polygon points="0,28 20,20 40,24 60,10 80,14 100,6 100,35 0,35" fill="rgba(143,184,122,0.07)" stroke="none"/>
+                <svg class="sk-spark" width="100%" height="28" viewBox="0 0 100 28" preserveAspectRatio="none" style="flex:1;">
+                  <polyline points="0,24 12,20 24,22 36,16 48,14 60,8 72,10 84,6 100,3"/>
+                  <polygon points="0,24 12,20 24,22 36,16 48,14 60,8 72,10 84,6 100,3 100,28 0,28" fill="rgba(143,184,122,0.08)" stroke="none"/>
                 </svg>
               </div>
             </div>
@@ -4346,51 +4570,154 @@
   if(!wrap || !sc) return;
 
   const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let tx=0, ty=0, cx=0, cy=0; // target & current tilt
+  let tx=0, ty=0, cx=0, cy=0;
+  let mouseIn = false;
 
-  // Mouse parallax on the wrap
+  const MAX_ROT_Y = 18;
+  const MAX_ROT_X = 10;
+
   wrap.addEventListener('mousemove', e => {
+    mouseIn = true;
     const r = wrap.getBoundingClientRect();
-    tx = ((e.clientX - r.left) / r.width  - 0.5) * 22;  // ±11°
-    ty = ((e.clientY - r.top)  / r.height - 0.5) * -16; // ±8°
+    tx = ((e.clientX - r.left) / r.width  - 0.5) * MAX_ROT_Y * 2;
+    ty = ((e.clientY - r.top)  / r.height - 0.5) * -MAX_ROT_X * 2;
   });
-  wrap.addEventListener('mouseleave', () => { tx=0; ty=0; });
+  wrap.addEventListener('mouseleave', () => { mouseIn = false; tx=0; ty=0; });
 
-  // Floating cards bob animation
+  const allCards = wrap.querySelectorAll('.gc');
+  const depths = [];
+  allCards.forEach(el => {
+    const cs = getComputedStyle(el);
+    const m = cs.transform;
+    depths.push({ el, factor: el.classList.contains('gc-t1') ? 1.5 : el.classList.contains('gc-t3') ? 0.6 : 1 });
+  });
+
   const floats = wrap.querySelectorAll('.gc-tr,.gc-bl,.gc-br');
   let t = 0;
 
   function tick(){
     if(!rm){
-      // Smooth lerp
-      cx += (tx - cx) * 0.08;
-      cy += (ty - cy) * 0.08;
+      cx += (tx - cx) * 0.06;
+      cy += (ty - cy) * 0.06;
+      cx = Math.max(-MAX_ROT_Y, Math.min(MAX_ROT_Y, cx));
+      cy = Math.max(-MAX_ROT_X, Math.min(MAX_ROT_X, cy));
       sc.style.transform = `rotateX(${cy}deg) rotateY(${cx}deg)`;
 
-      // Bob floating cards
-      t += 0.018;
+      t += 0.014;
       floats.forEach((el, i) => {
-        const dy = Math.sin(t + i * 1.3) * 5;
-        const base = el.style.getPropertyValue('--base-y') || '0';
-        el.style.transform = el.style.transform.replace(/translateY\([^)]*\)/,'') + ` translateY(${dy}px)`;
+        const dy = Math.sin(t + i * 1.5) * 7;
+        const dx = Math.cos(t * 0.6 + i * 2.2) * 4;
+        el.style.setProperty('--float-x', dx + 'px');
+        el.style.setProperty('--float-y', dy + 'px');
       });
     }
     requestAnimationFrame(tick);
   }
 
-  // Gentle idle oscillation when no mouse
   let idleT = 0;
   function idleTick(){
-    if(Math.abs(tx)<0.5 && Math.abs(ty)<0.5 && !rm){
-      idleT += 0.008;
-      tx = Math.sin(idleT * 0.7) * 6;
-      ty = Math.sin(idleT * 0.5) * 3;
+    if(!mouseIn && !rm){
+      idleT += 0.005;
+      tx = Math.sin(idleT * 0.5) * 5;
+      ty = Math.cos(idleT * 0.35) * 3;
     }
     requestAnimationFrame(idleTick);
   }
 
   requestAnimationFrame(tick);
   requestAnimationFrame(idleTick);
+
+  // ── Floating particles ──
+  const pCanvas = document.createElement('canvas');
+  pCanvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;';
+  wrap.appendChild(pCanvas);
+  const ctx = pCanvas.getContext('2d');
+  const particles = [];
+  const PCOUNT = 28;
+
+  function initParticles() {
+    pCanvas.width = wrap.offsetWidth * devicePixelRatio;
+    pCanvas.height = wrap.offsetHeight * devicePixelRatio;
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+    particles.length = 0;
+    const w = wrap.offsetWidth, h = wrap.offsetHeight;
+    for (let i = 0; i < PCOUNT; i++) {
+      particles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.8 + 0.5,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: -Math.random() * 0.4 - 0.1,
+        o: Math.random() * 0.4 + 0.1,
+        hue: Math.random() > 0.5 ? '143,184,122' : '80,190,170'
+      });
+    }
+  }
+  initParticles();
+  window.addEventListener('resize', initParticles);
+
+  function drawParticles() {
+    const w = wrap.offsetWidth, h = wrap.offsetHeight;
+    ctx.clearRect(0, 0, w, h);
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.y < -10) { p.y = h + 10; p.x = Math.random() * w; }
+      if (p.x < -10) p.x = w + 10;
+      if (p.x > w + 10) p.x = -10;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${p.hue},${p.o})`;
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2);
+      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 3);
+      g.addColorStop(0, `rgba(${p.hue},${p.o * 0.4})`);
+      g.addColorStop(1, `rgba(${p.hue},0)`);
+      ctx.fillStyle = g;
+      ctx.fill();
+    });
+    requestAnimationFrame(drawParticles);
+  }
+  if (!rm) requestAnimationFrame(drawParticles);
+})();
+</script>
+
+<script>
+(function(){
+  // 3D tilt for showcase panels and feature mockups — skip on touch devices
+  if (window.matchMedia('(hover: none)').matches) return;
+
+  const tiltTargets = [];
+
+  function init3DTilt(el, maxY, maxX) {
+    const state = { tx: 0, ty: 0, cx: 0, cy: 0 };
+    // Give direct parent perspective
+    const wrap = el.parentElement;
+    if (!wrap.style.perspective) wrap.style.perspective = '1400px';
+    el.addEventListener('mousemove', e => {
+      const r = el.getBoundingClientRect();
+      state.tx = ((e.clientX - r.left) / r.width  - 0.5) * maxY * 2;
+      state.ty = ((e.clientY - r.top)  / r.height - 0.5) * -maxX * 2;
+    });
+    el.addEventListener('mouseleave', () => { state.tx = 0; state.ty = 0; });
+    tiltTargets.push({ el, state });
+  }
+
+  document.querySelectorAll('.showcase-panel').forEach(el => init3DTilt(el, 10, 6));
+  document.querySelectorAll('.bento-widget, .feature-mockup').forEach(el => init3DTilt(el, 8, 5));
+
+  function tiltTick() {
+    tiltTargets.forEach(({ el, state: s }) => {
+      s.cx += (s.tx - s.cx) * 0.07;
+      s.cy += (s.ty - s.cy) * 0.07;
+      if (Math.abs(s.cx) > 0.01 || Math.abs(s.cy) > 0.01 || s.tx !== 0 || s.ty !== 0) {
+        el.style.transform = `rotateX(${s.cy.toFixed(2)}deg) rotateY(${s.cx.toFixed(2)}deg)`;
+      }
+    });
+    requestAnimationFrame(tiltTick);
+  }
+  requestAnimationFrame(tiltTick);
 })();
 </script>
 
