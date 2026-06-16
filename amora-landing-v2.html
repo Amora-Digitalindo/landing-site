@@ -832,7 +832,7 @@
       .gc-mobile-card-price { font-size:11px; color:var(--accent-light); font-weight:600; margin-left:auto; flex-shrink:0; }
     }
 
-    .gc-mobile-cards { display:none; }
+    @media (min-width: 901px) { .gc-mobile-cards { display:none; } }
     .scroll-indicator {
       position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
       color: var(--text-30); animation: bounce-subtle 2.2s ease-in-out infinite; transition: color 0.2s;
@@ -1076,6 +1076,7 @@
       background: rgba(255,255,255,0.08);
       border-radius: 1px;
       overflow: hidden;
+      z-index: 0;
     }
     .tracking-line-fill {
       position: absolute; top: 0; left: 0; right: 0;
@@ -1098,7 +1099,7 @@
       opacity: 1;
     }
     .tracking-step {
-      position: relative;
+      position: relative; z-index: 1;
       display: flex; align-items: flex-start; gap: 14px;
       padding-bottom: 28px;
     }
@@ -1106,22 +1107,22 @@
     .tracking-node {
       flex-shrink: 0;
       width: 36px; height: 36px; border-radius: 50%;
-      background: rgba(255,255,255,0.04);
+      background: rgba(8,16,11,0.98);
       border: 1px solid rgba(255,255,255,0.09);
       display: flex; align-items: center; justify-content: center;
-      position: relative; z-index: 1;
+      position: relative; z-index: 2;
       transition: background 0.4s, border-color 0.4s, box-shadow 0.4s;
     }
     .tracking-node svg { width: 15px; height: 15px; color: rgba(255,255,255,0.25); transition: color 0.4s; }
     .tracking-step.done .tracking-node {
-      background: linear-gradient(135deg, rgba(100,210,180,0.2) 0%, rgba(100,210,180,0.07) 100%);
-      border-color: rgba(100,210,180,0.3);
-      box-shadow: 0 0 10px rgba(100,210,180,0.1);
+      background: linear-gradient(135deg, rgba(8,22,14,0.98) 0%, rgba(8,20,12,0.98) 100%);
+      border-color: rgba(100,210,180,0.35);
+      box-shadow: 0 0 0 1px rgba(100,210,180,0.15), 0 0 10px rgba(100,210,180,0.12);
     }
     .tracking-step.active .tracking-node {
-      background: linear-gradient(135deg, rgba(100,210,180,0.28) 0%, rgba(100,210,180,0.1) 100%);
-      border-color: rgba(100,210,180,0.5);
-      box-shadow: 0 0 16px rgba(100,210,180,0.2), 0 0 4px rgba(100,210,180,0.3);
+      background: linear-gradient(135deg, rgba(10,26,16,0.98) 0%, rgba(8,20,12,0.98) 100%);
+      border-color: rgba(100,210,180,0.6);
+      box-shadow: 0 0 0 2px rgba(100,210,180,0.15), 0 0 20px rgba(100,210,180,0.25);
     }
     .tracking-step.done .tracking-node svg,
     .tracking-step.active .tracking-node svg { color: var(--accent-light); }
@@ -1141,6 +1142,9 @@
     .tracking-step.done .tracking-step-text strong { color: rgba(255,255,255,0.75); }
     .tracking-step.active .tracking-step-text strong { color: rgba(255,255,255,0.95); }
     .tracking-step-text span { font-size: 0.75rem; color: var(--text-40); }
+    .tracking-step:not(.done):not(.active) .tracking-step-text span { opacity: 0; }
+    .tracking-step.done .tracking-step-text span,
+    .tracking-step.active .tracking-step-text span { opacity: 1; transition: opacity 0.5s ease; }
 
     @media (prefers-reduced-motion: reduce) {
       .tracking-line-fill { transition: none; height: 75%; }
@@ -1712,14 +1716,16 @@
     .sv-chart-wrap { flex:1; display:flex; flex-direction:column; gap:8px; min-height:0; }
     .sv-chart-label { font-size:10px; color:rgba(255,255,255,0.35); }
     .sv-chart-bars {
-      flex:1; display:flex; align-items:flex-end; gap:6px; min-height:0;
+      height: 110px; display:flex; align-items:flex-end; gap:5px;
       padding:0 0 4px;
     }
-    .sv-chart-bar-wrap { flex:1; display:flex; flex-direction:column; align-items:center; gap:4px; }
+    .sv-chart-bar-wrap { flex:1; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; gap:4px; height:100%; }
     .sv-chart-bar {
       width:100%; border-radius:4px 4px 0 0;
-      background:linear-gradient(180deg,rgba(100,210,180,0.8) 0%,rgba(60,160,120,0.6) 100%);
+      background:linear-gradient(180deg,rgba(100,210,180,0.85) 0%,rgba(60,160,120,0.55) 100%);
+      box-shadow: 0 0 8px rgba(100,210,180,0.15);
       transition:height 0.6s cubic-bezier(0.22,1,0.36,1);
+      min-height: 4px;
     }
     .sv-chart-bar-day { font-size:8.5px; color:rgba(255,255,255,0.3); }
     .sv-feed { display:flex; flex-direction:column; gap:6px; }
