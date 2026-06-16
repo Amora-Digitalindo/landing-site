@@ -1561,6 +1561,42 @@
       background:var(--accent); color:#0a1a0e; font-size:9px; font-weight:600;
     }
 
+    /* Panel 2: Dashboard */
+    .sv-dash-wrap { padding:24px; display:flex; flex-direction:column; gap:16px; height:100%; box-sizing:border-box; }
+    .sv-dash-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+    .sv-dash-card {
+      padding:14px; border-radius:12px;
+      background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07);
+    }
+    .sv-dash-card-label { font-size:10px; color:rgba(255,255,255,0.4); margin-bottom:6px; }
+    .sv-dash-card-value { font-size:20px; font-weight:700; color:rgba(255,255,255,0.92); letter-spacing:-0.03em; }
+    .sv-dash-card-trend { font-size:10px; color:var(--accent-light); margin-top:4px; }
+    .sv-chart-wrap { flex:1; display:flex; flex-direction:column; gap:8px; min-height:0; }
+    .sv-chart-label { font-size:10px; color:rgba(255,255,255,0.35); }
+    .sv-chart-bars {
+      flex:1; display:flex; align-items:flex-end; gap:6px; min-height:0;
+      padding:0 0 4px;
+    }
+    .sv-chart-bar-wrap { flex:1; display:flex; flex-direction:column; align-items:center; gap:4px; }
+    .sv-chart-bar {
+      width:100%; border-radius:4px 4px 0 0;
+      background:linear-gradient(180deg,rgba(100,210,180,0.8) 0%,rgba(60,160,120,0.6) 100%);
+      transition:height 0.6s cubic-bezier(0.22,1,0.36,1);
+    }
+    .sv-chart-bar-day { font-size:8.5px; color:rgba(255,255,255,0.3); }
+    .sv-feed { display:flex; flex-direction:column; gap:6px; }
+    .sv-feed-row {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:8px 12px; border-radius:8px;
+      background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);
+      font-size:11px;
+    }
+    .sv-feed-name { color:rgba(255,255,255,0.7); }
+    .sv-feed-price { color:var(--accent-light); font-weight:600; }
+    .sv-feed-status { font-size:9.5px; padding:2px 7px; border-radius:999px; }
+    .sv-feed-status.paid { background:rgba(80,200,100,0.15); color:rgba(100,220,120,0.9); }
+    .sv-feed-status.proc { background:rgba(200,160,60,0.15); color:rgba(220,180,80,0.9); }
+
     /* ── Panel 0: Website Toko ── */
     .sv-browser {
       border: 1px solid rgba(255,255,255,0.08); border-radius: 10px;
@@ -3183,91 +3219,46 @@
 
         <!-- View 1: Dashboard -->
         <div class="showcase-view" data-view="1">
-          <div class="sv-split">
-            <div class="sv-copy">
-              <div class="sv-copy-eyebrow"><span class="sv-copy-eyebrow-dot"></span>Dashboard</div>
-              <h3>Semua data toko dalam satu layar</h3>
-              <p class="sv-copy-desc">Pantau penjualan, pesanan masuk, dan performa produk secara real-time tanpa perlu buka banyak aplikasi.</p>
-              <div class="sv-copy-bullets">
-                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Update data real-time</div>
-                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Laporan harian &amp; bulanan</div>
-                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Akses dari HP atau laptop</div>
+          <div class="sv-dash-wrap">
+            <div class="sv-dash-cards">
+              <div class="sv-dash-card">
+                <div class="sv-dash-card-label">Total Pesanan</div>
+                <div class="sv-dash-card-value">247</div>
+                <div class="sv-dash-card-trend">↑ 12% minggu ini</div>
+              </div>
+              <div class="sv-dash-card">
+                <div class="sv-dash-card-label">Revenue Bulan Ini</div>
+                <div class="sv-dash-card-value">Rp 18.4jt</div>
+                <div class="sv-dash-card-trend">↑ 8% vs bulan lalu</div>
+              </div>
+              <div class="sv-dash-card">
+                <div class="sv-dash-card-label">Pengunjung</div>
+                <div class="sv-dash-card-value">1.2rb</div>
+                <div class="sv-dash-card-trend">↑ 23% organik</div>
               </div>
             </div>
-            <div class="sv-visual" style="padding:0">
-              <div class="sv-app">
-                <div class="sv-sidebar">
-                  <div class="sv-sidebar-logo">amora</div>
-                  <div class="sv-sidebar-item active">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Ringkasan
-                  </div>
-                  <div class="sv-sidebar-item">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/></svg>Pesanan
-                  </div>
-                  <div class="sv-sidebar-item">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Produk
-                  </div>
-                  <div class="sv-sidebar-item">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Pelanggan
-                  </div>
-                </div>
-                <div class="sv-main">
-                  <div class="sv-stats">
-                    <div class="sv-stat">
-                      <div class="sv-stat-label">Total Pesanan</div>
-                      <div class="sv-stat-value">1.842</div>
-                      <div class="sv-stat-sub">↑ 12% bulan ini</div>
-                    </div>
-                    <div class="sv-stat">
-                      <div class="sv-stat-label">Pendapatan</div>
-                      <div class="sv-stat-value">48.6jt</div>
-                      <div class="sv-stat-sub">↑ 8% bulan ini</div>
-                    </div>
-                    <div class="sv-stat">
-                      <div class="sv-stat-label">Pengunjung</div>
-                      <div class="sv-stat-value">9.241</div>
-                      <div class="sv-stat-sub">↑ 24% bulan ini</div>
-                    </div>
-                  </div>
-                  <div class="sv-chart-hdr">
-                    <span class="sv-chart-label">Penjualan 7 Hari Terakhir</span>
-                    <span class="sv-chart-growth">↑ 24%</span>
-                  </div>
-                  <div class="sv-chart">
-                    <div class="sv-bar" data-v="3.2jt"><span class="sv-bar-tooltip">Rp 3.2jt</span></div>
-                    <div class="sv-bar" data-v="4.5jt"><span class="sv-bar-tooltip">Rp 4.5jt</span></div>
-                    <div class="sv-bar" data-v="2.8jt"><span class="sv-bar-tooltip">Rp 2.8jt</span></div>
-                    <div class="sv-bar" data-v="5.9jt"><span class="sv-bar-tooltip">Rp 5.9jt</span></div>
-                    <div class="sv-bar" data-v="4.0jt"><span class="sv-bar-tooltip">Rp 4.0jt</span></div>
-                    <div class="sv-bar" data-v="5.1jt"><span class="sv-bar-tooltip">Rp 5.1jt</span></div>
-                    <div class="sv-bar" data-v="6.7jt"><span class="sv-bar-tooltip">Rp 6.7jt</span></div>
-                  </div>
-                  <div class="sv-chart-days">
-                    <span class="sv-bar-day">Sen</span><span class="sv-bar-day">Sel</span>
-                    <span class="sv-bar-day">Rab</span><span class="sv-bar-day">Kam</span>
-                    <span class="sv-bar-day">Jum</span><span class="sv-bar-day">Sab</span>
-                    <span class="sv-bar-day">Min</span>
-                  </div>
-                  <div class="sv-orders-label">Pesanan Terbaru</div>
-                  <div class="sv-order-row">
-                    <span class="sv-order-id">#AMR-8821</span>
-                    <span class="sv-order-name">Budi Santoso</span>
-                    <span class="sv-order-amount">Rp 249.000</span>
-                    <span class="sv-order-badge new">Baru</span>
-                  </div>
-                  <div class="sv-order-row">
-                    <span class="sv-order-id">#AMR-8820</span>
-                    <span class="sv-order-name">Siti Rahayu</span>
-                    <span class="sv-order-amount">Rp 518.000</span>
-                    <span class="sv-order-badge proc">Diproses</span>
-                  </div>
-                  <div class="sv-order-row">
-                    <span class="sv-order-id">#AMR-8819</span>
-                    <span class="sv-order-name">Agus Priyadi</span>
-                    <span class="sv-order-amount">Rp 189.000</span>
-                    <span class="sv-order-badge ship">Dikirim</span>
-                  </div>
-                </div>
+            <div class="sv-chart-wrap">
+              <div class="sv-chart-label">Pesanan 7 hari terakhir</div>
+              <div class="sv-chart-bars">
+                <div class="sv-chart-bar-wrap"><div class="sv-chart-bar" style="height:55%"></div><div class="sv-chart-bar-day">Sen</div></div>
+                <div class="sv-chart-bar-wrap"><div class="sv-chart-bar" style="height:72%"></div><div class="sv-chart-bar-day">Sel</div></div>
+                <div class="sv-chart-bar-wrap"><div class="sv-chart-bar" style="height:48%"></div><div class="sv-chart-bar-day">Rab</div></div>
+                <div class="sv-chart-bar-wrap"><div class="sv-chart-bar" style="height:85%"></div><div class="sv-chart-bar-day">Kam</div></div>
+                <div class="sv-chart-bar-wrap"><div class="sv-chart-bar" style="height:63%"></div><div class="sv-chart-bar-day">Jum</div></div>
+                <div class="sv-chart-bar-wrap"><div class="sv-chart-bar" style="height:91%"></div><div class="sv-chart-bar-day">Sab</div></div>
+                <div class="sv-chart-bar-wrap"><div class="sv-chart-bar" style="height:78%"></div><div class="sv-chart-bar-day">Min</div></div>
+              </div>
+            </div>
+            <div class="sv-feed">
+              <div class="sv-feed-row">
+                <span class="sv-feed-name">T-Shirt Oversize ×2</span>
+                <span class="sv-feed-price">Rp 370.000</span>
+                <span class="sv-feed-status paid">Dibayar</span>
+              </div>
+              <div class="sv-feed-row">
+                <span class="sv-feed-name">Hoodie Crop Navy ×1</span>
+                <span class="sv-feed-price">Rp 320.000</span>
+                <span class="sv-feed-status proc">Diproses</span>
               </div>
             </div>
           </div>
