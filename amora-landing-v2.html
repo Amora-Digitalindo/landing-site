@@ -1643,6 +1643,32 @@
       color:#071410; font-size:13px; font-weight:700; letter-spacing:0.01em;
     }
 
+    /* Panel 5: Promo */
+    .sv-promo-wrap { padding:28px; display:flex; flex-direction:column; gap:12px; height:100%; box-sizing:border-box; justify-content:center; }
+    .sv-promo-heading { font-size:14px; font-weight:600; color:rgba(255,255,255,0.8); margin-bottom:4px; }
+    .sv-promo-item {
+      display:grid; grid-template-columns:120px 1fr auto auto;
+      align-items:center; gap:16px; padding:14px 18px; border-radius:12px;
+      background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07);
+    }
+    .sv-promo-code { font-family:monospace; font-size:12px; font-weight:700; color:rgba(255,255,255,0.9); letter-spacing:0.05em; }
+    .sv-promo-desc { font-size:11px; color:rgba(255,255,255,0.45); }
+    .sv-promo-usage { display:flex; flex-direction:column; gap:4px; min-width:120px; }
+    .sv-promo-usage-bar { height:4px; border-radius:2px; background:rgba(255,255,255,0.08); overflow:hidden; }
+    .sv-promo-usage-fill { height:100%; border-radius:2px; background:linear-gradient(90deg,var(--accent),var(--accent-light)); }
+    .sv-promo-usage-count { font-size:9.5px; color:rgba(255,255,255,0.35); }
+    .sv-promo-toggle {
+      width:36px; height:20px; border-radius:10px; position:relative; cursor:pointer;
+      background:rgba(255,255,255,0.12); transition:background 0.2s; flex-shrink:0;
+    }
+    .sv-promo-toggle.on { background:var(--accent); }
+    .sv-promo-toggle::after {
+      content:''; position:absolute; top:3px; left:3px;
+      width:14px; height:14px; border-radius:50%; background:#fff;
+      transition:transform 0.2s;
+    }
+    .sv-promo-toggle.on::after { transform:translateX(16px); }
+
     /* ── Panel 0: Website Toko ── */
     .sv-browser {
       border: 1px solid rgba(255,255,255,0.08); border-radius: 10px;
@@ -3473,56 +3499,34 @@
 
         <!-- View 4: Promo -->
         <div class="showcase-view" data-view="4">
-          <div class="sv-split">
-            <div class="sv-copy">
-              <div class="sv-copy-eyebrow"><span class="sv-copy-eyebrow-dot"></span>Promo &amp; Diskon</div>
-              <h3>Tingkatkan penjualan dengan promo fleksibel</h3>
-              <p class="sv-copy-desc">Buat kode diskon, flash sale, atau gratis ongkir dalam 30 detik — dan pantau kinerjanya langsung dari dashboard.</p>
-              <div class="sv-copy-bullets">
-                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Voucher, kupon &amp; flash sale</div>
-                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Jadwal aktif otomatis</div>
-                <div class="sv-copy-bullet"><span class="sv-copy-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Pantau penggunaan real-time</div>
+          <div class="sv-promo-wrap">
+            <div class="sv-promo-heading">Kode Promo Aktif</div>
+            <div class="sv-promo-item">
+              <div class="sv-promo-code">AMORA20</div>
+              <div class="sv-promo-desc">Diskon 20% semua produk</div>
+              <div class="sv-promo-usage">
+                <div class="sv-promo-usage-bar"><div class="sv-promo-usage-fill" style="width:85%"></div></div>
+                <div class="sv-promo-usage-count">142× digunakan</div>
               </div>
+              <div class="sv-promo-toggle on"></div>
             </div>
-            <div class="sv-visual">
-              <div>
-                <div class="sv-promo-header">
-                  <div class="sv-promo-title">Kelola Promo</div>
-                  <div class="sv-promo-add">+ Promo Baru</div>
-                </div>
-                <div class="sv-promo-row">
-                  <span class="sv-promo-code">AMORA20</span>
-                  <span class="sv-promo-name">Diskon 20% semua produk</span>
-                  <div class="sv-promo-bar"><div class="sv-promo-bar-fill" style="--pw:78%"></div></div>
-                  <span class="sv-promo-usage">142×</span>
-                  <div class="sv-promo-toggle on"><div class="sv-promo-thumb"></div></div>
-                </div>
-                <div class="sv-promo-row">
-                  <span class="sv-promo-code">ONGKIR0</span>
-                  <span class="sv-promo-name">Gratis ongkir min. Rp 100rb</span>
-                  <div class="sv-promo-bar"><div class="sv-promo-bar-fill" style="--pw:55%"></div></div>
-                  <span class="sv-promo-usage">89×</span>
-                  <div class="sv-promo-toggle on"><div class="sv-promo-thumb"></div></div>
-                </div>
-                <div class="sv-promo-row">
-                  <span class="sv-promo-code">BELI2</span>
-                  <span class="sv-promo-name">Beli 2 gratis 1 item pilihan</span>
-                  <div class="sv-promo-bar"><div class="sv-promo-bar-fill" style="--pw:22%"></div></div>
-                  <span class="sv-promo-usage">34×</span>
-                  <div class="sv-promo-toggle off"><div class="sv-promo-thumb"></div></div>
-                </div>
-                <div class="sv-promo-row">
-                  <span class="sv-promo-code">FLASH50</span>
-                  <span class="sv-promo-name">Flash sale 50% — weekend</span>
-                  <div class="sv-promo-bar"><div class="sv-promo-bar-fill" style="--pw:0%"></div></div>
-                  <span class="sv-promo-usage">0×</span>
-                  <div class="sv-promo-toggle off"><div class="sv-promo-thumb"></div></div>
-                </div>
-                <div class="sv-promo-new">
-                  <div class="sv-promo-input">KODE_BARU</div>
-                  <div class="sv-promo-create">Buat Promo</div>
-                </div>
+            <div class="sv-promo-item">
+              <div class="sv-promo-code">ONGKIR0</div>
+              <div class="sv-promo-desc">Gratis ongkir min. Rp 100rb</div>
+              <div class="sv-promo-usage">
+                <div class="sv-promo-usage-bar"><div class="sv-promo-usage-fill" style="width:58%"></div></div>
+                <div class="sv-promo-usage-count">89× digunakan</div>
               </div>
+              <div class="sv-promo-toggle on"></div>
+            </div>
+            <div class="sv-promo-item">
+              <div class="sv-promo-code">BELI2</div>
+              <div class="sv-promo-desc">Beli 2 gratis 1 item pilihan</div>
+              <div class="sv-promo-usage">
+                <div class="sv-promo-usage-bar"><div class="sv-promo-usage-fill" style="width:22%"></div></div>
+                <div class="sv-promo-usage-count">34× digunakan</div>
+              </div>
+              <div class="sv-promo-toggle"></div>
             </div>
           </div>
         </div>
