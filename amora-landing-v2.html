@@ -3036,56 +3036,47 @@
 <section id="features-grid" class="py-section">
   <div class="section-inner">
     <div class="features-header reveal">
-      <div class="section-eyebrow"><span class="section-eyebrow-dot"></span>Semua Fitur</div>
-      <h2>Sistem toko online sesuai <span class="accent">kebutuhan Anda</span></h2>
+      <div class="section-eyebrow"><span class="section-eyebrow-dot"></span>Fitur Lengkap</div>
+      <h2>Semua yang kamu butuhkan untuk <span class="accent">jualan online</span></h2>
     </div>
-    <!-- Showcase: resend-style tab selector + large panel -->
+    <!-- Showcase: sidebar + panel -->
     <div class="feature-showcase reveal">
 
-      <!-- Tab selector row -->
-      <div class="showcase-tabs-wrap" id="showcaseTabs">
-
-        <button class="showcase-tab active" data-idx="0">
-          <div class="showcase-tab-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          </div>
-          <span class="showcase-tab-label">Website Toko</span>
-        </button>
-
-        <button class="showcase-tab" data-idx="1">
-          <div class="showcase-tab-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          </div>
-          <span class="showcase-tab-label">Dashboard</span>
-        </button>
-
-        <button class="showcase-tab" data-idx="2">
-          <div class="showcase-tab-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-          </div>
-          <span class="showcase-tab-label">Pembayaran</span>
-        </button>
-
-        <button class="showcase-tab" data-idx="3">
-          <div class="showcase-tab-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-          </div>
-          <span class="showcase-tab-label">Kustomisasi</span>
-        </button>
-
-        <button class="showcase-tab" data-idx="4">
-          <div class="showcase-tab-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
-          </div>
-          <span class="showcase-tab-label">Promo</span>
-        </button>
-
+      <!-- Mobile pills -->
+      <div class="feature-pills" id="featurePills">
+        <button class="feature-pill active" data-idx="0">Website Toko</button>
+        <button class="feature-pill" data-idx="1">Dashboard</button>
+        <button class="feature-pill" data-idx="2">Pembayaran</button>
+        <button class="feature-pill" data-idx="3">Kustomisasi</button>
+        <button class="feature-pill" data-idx="4">Promo</button>
       </div>
 
-      <!-- Progress bar -->
-      <div class="showcase-progress">
-        <div class="showcase-progress-fill animating" id="showcaseProgress"></div>
-      </div>
+      <!-- Desktop sidebar + panel split -->
+      <div class="feature-showcase-split">
+
+      <!-- Sidebar (desktop only) -->
+      <nav class="feature-sidebar" id="featureSidebar">
+        <button class="feature-sidebar-tab active" data-idx="0">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span class="feature-sidebar-label">Website Toko</span>
+        </button>
+        <button class="feature-sidebar-tab" data-idx="1">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          <span class="feature-sidebar-label">Dashboard</span>
+        </button>
+        <button class="feature-sidebar-tab" data-idx="2">
+          <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          <span class="feature-sidebar-label">Pembayaran</span>
+        </button>
+        <button class="feature-sidebar-tab" data-idx="3">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+          <span class="feature-sidebar-label">Kustomisasi</span>
+        </button>
+        <button class="feature-sidebar-tab" data-idx="4">
+          <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+          <span class="feature-sidebar-label">Promo</span>
+        </button>
+      </nav>
 
       <!-- Large showcase panel -->
       <div class="showcase-panel">
@@ -3493,8 +3484,10 @@
           </div>
         </div>
 
-      </div>
-    </div>
+      </div><!-- /.showcase-panel -->
+
+      </div><!-- /.feature-showcase-split -->
+    </div><!-- /.feature-showcase -->
   </div>
 </section>
 
