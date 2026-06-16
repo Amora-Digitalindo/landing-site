@@ -1512,6 +1512,106 @@
       pointer-events: none;
     }
     .showcase-view.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    /* Panel 0: Website Toko — storefront sim */
+    .sv-store-sim {
+      display: flex; flex-direction: column; height: 100%;
+    }
+    .sv-store-sim-bar {
+      display: flex; align-items: center; gap: 6px; padding: 10px 14px;
+      background: rgba(255,255,255,0.03); border-bottom: 1px solid rgba(255,255,255,0.07);
+      flex-shrink: 0;
+    }
+    .sv-store-sim-dot { width: 9px; height: 9px; border-radius: 50%; }
+    .sv-store-sim-dot.r { background: rgba(255,90,90,0.65); }
+    .sv-store-sim-dot.y { background: rgba(255,180,50,0.55); }
+    .sv-store-sim-dot.g { background: rgba(80,200,80,0.55); }
+    .sv-store-sim-url {
+      flex: 1; margin: 0 10px; padding: 3px 10px; border-radius: 6px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+      font-size: 10px; color: rgba(255,255,255,0.38); text-align: center;
+      display: flex; align-items: center; justify-content: center; gap: 5px;
+    }
+    .sv-store-sim-url-lock { width: 9px; height: 9px; opacity: 0.5; }
+    .sv-store-sim-body {
+      flex: 1; overflow: hidden;
+      background: linear-gradient(160deg, rgba(10,20,14,0.98) 0%, rgba(6,12,8,1) 100%);
+      display: flex; flex-direction: column;
+    }
+    .sv-store-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 16px; border-bottom: 1px solid rgba(100,210,180,0.1);
+      flex-shrink: 0;
+    }
+    .sv-store-nav-logo {
+      font-size: 13px; font-weight: 800; color: rgba(255,255,255,0.92);
+      letter-spacing: 0.06em;
+    }
+    .sv-store-nav-links { display: flex; gap: 14px; }
+    .sv-store-nav-link { font-size: 9.5px; color: rgba(255,255,255,0.4); }
+    .sv-store-nav-cart {
+      padding: 4px 10px; border-radius: 6px; font-size: 9.5px; font-weight: 600;
+      background: var(--accent); color: #0a1a0e; border: none;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .sv-store-hero-banner {
+      padding: 10px 16px 8px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .sv-store-hero-text { }
+    .sv-store-hero-label { font-size: 8.5px; color: var(--accent-light); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+    .sv-store-hero-title { font-size: 15px; font-weight: 800; color: rgba(255,255,255,0.92); line-height: 1.2; }
+    .sv-store-hero-badge {
+      padding: 4px 10px; border-radius: 999px; font-size: 9px; font-weight: 600;
+      background: rgba(100,210,180,0.12); border: 1px solid rgba(100,210,180,0.25);
+      color: var(--accent-light); white-space: nowrap;
+    }
+    .sv-store-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+      padding: 0 14px 14px; flex: 1; overflow: hidden;
+    }
+    .sv-store-product {
+      border-radius: 10px; overflow: hidden;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+      display: flex; flex-direction: column;
+      transition: border-color 0.2s;
+    }
+    .sv-store-product:hover { border-color: rgba(100,210,180,0.2); }
+    .sv-store-product-img {
+      height: 80px; display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(145deg, rgba(20,40,25,0.8), rgba(12,22,14,0.6));
+      overflow: hidden;
+    }
+    .sv-store-product-img img { width: 56px; height: 56px; object-fit: contain; opacity: 0.88; }
+    .sv-store-product-body { padding: 8px; display: flex; flex-direction: column; gap: 4px; }
+    .sv-store-product-badge {
+      font-size: 7.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 2px 5px; border-radius: 4px; width: fit-content;
+      background: rgba(100,210,180,0.15); color: var(--accent-light);
+    }
+    .sv-store-product-name { font-size: 9.5px; color: rgba(255,255,255,0.75); line-height: 1.3; }
+    .sv-store-product-price { font-size: 11px; font-weight: 700; color: var(--accent-light); }
+    .sv-store-product-btn {
+      width: 100%; padding: 5px; border-radius: 6px; border: none; cursor: pointer;
+      background: rgba(100,210,180,0.12); color: var(--accent-light);
+      font-size: 8.5px; font-weight: 600; margin-top: 2px;
+      border: 1px solid rgba(100,210,180,0.2);
+    }
+    .sv-store-product-btn:hover { background: var(--accent); color: #0a1a0e; }
+    .sv-store-floating-notif {
+      position: absolute; top: 80px; right: 12px;
+      background: rgba(12,22,16,0.92); backdrop-filter: blur(12px);
+      border: 1px solid rgba(100,210,180,0.3); border-radius: 10px;
+      padding: 8px 10px; display: flex; align-items: center; gap: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      animation: notif-float 3s ease-in-out infinite;
+    }
+    @keyframes notif-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    .sv-store-notif-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 6px var(--accent); flex-shrink: 0; }
+    .sv-store-notif-text { font-size: 9px; color: rgba(255,255,255,0.8); }
+    .sv-store-notif-strong { font-weight: 700; color: var(--accent-light); }
     /* Panel 0: Website Toko feature cards */
     .sv-toko-grid {
       display:grid; grid-template-columns:1fr 1fr; gap:12px;
@@ -3278,38 +3378,75 @@
 
         <!-- View 0: Website Toko -->
         <div class="showcase-view active" data-view="0">
-          <div class="sv-toko-grid">
-            <div class="sv-toko-card">
-              <div class="sv-toko-card-icon">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <div class="sv-store-sim">
+            <!-- Browser bar -->
+            <div class="sv-store-sim-bar">
+              <span class="sv-store-sim-dot r"></span>
+              <span class="sv-store-sim-dot y"></span>
+              <span class="sv-store-sim-dot g"></span>
+              <div class="sv-store-sim-url">
+                <svg class="sv-store-sim-url-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                tokosaya.amora.id
               </div>
-              <div class="sv-toko-card-title">Custom Domain</div>
-              <div class="sv-toko-card-desc">Pakai domain sendiri atau sub-domain gratis yang kamu inginkan</div>
-              <div class="sv-toko-card-badge">tokosaya.amora.id</div>
             </div>
-            <div class="sv-toko-card">
-              <div class="sv-toko-card-icon">
-                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            <!-- Store content -->
+            <div class="sv-store-body" style="flex:1;overflow:hidden;background:linear-gradient(160deg,rgba(10,20,14,0.98),rgba(6,12,8,1));display:flex;flex-direction:column;position:relative;">
+              <!-- Floating order notification -->
+              <div class="sv-store-floating-notif">
+                <div class="sv-store-notif-dot"></div>
+                <div class="sv-store-notif-text"><span class="sv-store-notif-strong">Pesanan Baru!</span> T-Shirt Oversize</div>
               </div>
-              <div class="sv-toko-card-title">Tampilan Profesional</div>
-              <div class="sv-toko-card-desc">Tema modern siap pakai, mudah dikustomisasi tanpa coding</div>
-              <div class="sv-toko-card-badge">10+ tema</div>
-            </div>
-            <div class="sv-toko-card">
-              <div class="sv-toko-card-icon">
-                <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              <!-- Nav -->
+              <div class="sv-store-nav">
+                <div class="sv-store-nav-logo">TOKO SAYA</div>
+                <div class="sv-store-nav-links">
+                  <span class="sv-store-nav-link">Produk</span>
+                  <span class="sv-store-nav-link">Tentang</span>
+                  <span class="sv-store-nav-link">Kontak</span>
+                </div>
+                <button class="sv-store-nav-cart">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                  Keranjang
+                </button>
               </div>
-              <div class="sv-toko-card-title">SEO Otomatis</div>
-              <div class="sv-toko-card-desc">Meta tag, sitemap & struktur URL yang dioptimalkan untuk Google</div>
-              <div class="sv-toko-card-badge">Google-ready</div>
-            </div>
-            <div class="sv-toko-card">
-              <div class="sv-toko-card-icon">
-                <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              <!-- Hero banner -->
+              <div class="sv-store-hero-banner">
+                <div class="sv-store-hero-text">
+                  <div class="sv-store-hero-label">Koleksi Terbaru</div>
+                  <div class="sv-store-hero-title">Fashion<br>Lokal</div>
+                </div>
+                <div class="sv-store-hero-badge">Gratis Ongkir 🎉</div>
               </div>
-              <div class="sv-toko-card-title">Mobile-First</div>
-              <div class="sv-toko-card-desc">Tampilan sempurna di semua perangkat tanpa konfigurasi extra</div>
-              <div class="sv-toko-card-badge">Responsive</div>
+              <!-- Product grid -->
+              <div class="sv-store-grid">
+                <div class="sv-store-product">
+                  <div class="sv-store-product-img"><img src="asset/shirt.png" alt=""></div>
+                  <div class="sv-store-product-body">
+                    <div class="sv-store-product-badge">Terlaris</div>
+                    <div class="sv-store-product-name">T-Shirt Oversize</div>
+                    <div class="sv-store-product-price">Rp 185.000</div>
+                    <button class="sv-store-product-btn">+ Keranjang</button>
+                  </div>
+                </div>
+                <div class="sv-store-product">
+                  <div class="sv-store-product-img"><img src="asset/shirt.png" alt="" style="filter:hue-rotate(200deg);"></div>
+                  <div class="sv-store-product-body">
+                    <div class="sv-store-product-badge">Baru</div>
+                    <div class="sv-store-product-name">Hoodie Crop Navy</div>
+                    <div class="sv-store-product-price">Rp 320.000</div>
+                    <button class="sv-store-product-btn">+ Keranjang</button>
+                  </div>
+                </div>
+                <div class="sv-store-product">
+                  <div class="sv-store-product-img"><img src="asset/shirt.png" alt="" style="filter:hue-rotate(100deg) saturate(0.6);"></div>
+                  <div class="sv-store-product-body">
+                    <div class="sv-store-product-badge">Promo</div>
+                    <div class="sv-store-product-name">Jaket Denim</div>
+                    <div class="sv-store-product-price">Rp 459.000</div>
+                    <button class="sv-store-product-btn">+ Keranjang</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
