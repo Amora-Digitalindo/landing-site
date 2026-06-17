@@ -790,6 +790,15 @@
     ═══════════════════════════════════════ */
     #fitur { overflow: hidden; }
     .feature-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
+    @media (max-width: 1023px) {
+      /* On single-column layout, cap widget width and center it */
+      .feature-image .bento-widget,
+      .feature-image .feature-image-frame {
+        max-width: 480px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
     @media (min-width: 1024px) {
       .feature-grid.margin-grid { grid-template-columns: 52% 48%; }
       .feature-grid.setup-grid  { grid-template-columns: 48% 52%; }
@@ -2322,7 +2331,7 @@
       .feature-tabs-row { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; gap: 6px; }
       .feature-tab { flex-shrink: 0; min-width: 90px; padding: 10px 12px; }
       /* Feature section widgets — consistent mobile margin */
-      .feature-image { margin: 0 4px; }
+      .feature-image { margin: 0; }
       .bento-widget { padding: 18px; }
     }
 
