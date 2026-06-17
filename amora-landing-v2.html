@@ -1474,15 +1474,14 @@
       padding: 40px 52px;
       display: none;
       opacity: 0;
-      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.22,1,0.36,1);
-      transform: translateY(8px);
+      transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.22,1,0.36,1);
       overflow: hidden;
     }
     .showcase-view.active {
       display: flex;
       flex-direction: column;
       opacity: 1;
-      transform: translateY(0);
+      transform: translateX(0) !important;
     }
     /* Scrollbar — store view */
     #sv0scroll::-webkit-scrollbar { width: 4px; }
@@ -2307,6 +2306,27 @@
       .sv-copy h3 { font-size: 15px; }
       .sv-copy-desc { display: none; }
     }
+    /* Showcase dot indicator (mobile only) */
+    .showcase-dots {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 0 2px;
+    }
+    .showcase-dot {
+      width: 6px; height: 6px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.18);
+      transition: width 0.3s cubic-bezier(0.22,1,0.36,1), background 0.3s ease;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .showcase-dot.active {
+      width: 20px;
+      background: #9BE8C9;
+    }
+
     @media (max-width: 767px) {
       .sv-split { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
       .sv-copy {
@@ -2333,6 +2353,35 @@
       /* Feature section widgets — consistent mobile margin */
       .feature-image { margin: 0; }
       .bento-widget { padding: 18px; }
+      /* View 0: fix bleed margin to match mobile padding, hide sidebar, 2-col grid */
+      .sv0-bleed { margin: -20px -18px !important; }
+      .sv0-layout { grid-template-columns: 1fr !important; }
+      .sv0-sidebar { display: none !important; }
+      /* Flatten both sv0-row divs into parent 2-col grid */
+      .sv0-products-panel { display: grid !important; grid-template-columns: repeat(2,1fr) !important; gap: 9px !important; padding: 10px !important; flex-direction: unset !important; align-content: start; overflow-y: auto; }
+      .sv0-products-panel > *:first-child { grid-column: 1 / -1; display: none; } /* hide toolbar */
+      .sv0-row { display: contents !important; }
+
+      /* View 1: Dashboard — stack bottom section, hide chart */
+      .sv1-bottom { grid-template-columns: 1fr !important; }
+      .sv1-chart { display: none !important; }
+
+      /* View 2: Pembayaran — single column */
+      .sv2-wrap { grid-template-columns: 1fr !important; height: auto !important; overflow-y: auto !important; }
+
+      /* View 3: Kustomisasi — hide controls panel, full-width preview */
+      .sv3-wrap { grid-template-columns: 1fr !important; height: auto !important; }
+      .sv3-controls { display: none !important; }
+
+      /* View 4: Promo — reduce gap on promo rows to prevent overflow */
+      .sv4-promo-row { gap: 8px !important; }
+      .sv4-stats { gap: 6px !important; }
+
+      /* Swipe dot indicator — show on mobile */
+      .showcase-dots { display: flex !important; }
+    }
+    @media (max-width: 600px) {
+      .sv0-bleed { margin: -18px -16px !important; }
     }
 
     @media (max-width: 600px) {
@@ -3358,13 +3407,22 @@
         </button>
       </div>
 
+      <!-- Swipe dot indicator (mobile only) -->
+      <div class="showcase-dots" id="showcaseDots">
+        <span class="showcase-dot active" data-idx="0"></span>
+        <span class="showcase-dot" data-idx="1"></span>
+        <span class="showcase-dot" data-idx="2"></span>
+        <span class="showcase-dot" data-idx="3"></span>
+        <span class="showcase-dot" data-idx="4"></span>
+      </div>
+
       <!-- Large showcase panel -->
       <div class="showcase-panel">
 
         <!-- View 0: Website Toko -->
         <div class="showcase-view active" data-view="0">
-<div style="display:flex;flex-direction:column;height:100%;gap:0;margin:-40px -52px;flex:1;overflow:hidden;">
-  <!-- Browser chrome — full bleed -->
+<div class="sv0-bleed" style="display:flex;flex-direction:column;height:100%;gap:0;margin:-40px -52px;flex:1;overflow:hidden;">
+  <!-- Browser chrome -->
   <div style="display:flex;align-items:center;gap:10px;padding:9px 18px;background:rgba(0,0,0,0.18);border-bottom:1px solid rgba(255,255,255,0.06);flex-shrink:0;">
     <div style="display:flex;gap:5px;flex-shrink:0;">
       <div style="width:10px;height:10px;border-radius:50%;background:#FF5F57;"></div>
@@ -3377,116 +3435,165 @@
     </div>
     <div style="width:60px;"></div>
   </div>
-  <!-- Store nav — full bleed -->
-  <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 22px;border-bottom:1px solid rgba(255,255,255,0.05);flex-shrink:0;background:rgba(255,255,255,0.01);">
-    <div style="display:flex;align-items:center;gap:8px;">
-      <div style="width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,rgba(100,210,180,0.22),rgba(60,140,110,0.12));border:1px solid rgba(100,210,180,0.2);display:flex;align-items:center;justify-content:center;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#9BE8C9" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-      <span style="font-size:12px;font-weight:800;color:rgba(255,255,255,0.92);letter-spacing:0.06em;">TOKO SAYA</span>
+  <!-- Store nav -->
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 20px;border-bottom:1px solid rgba(255,255,255,0.05);flex-shrink:0;">
+    <div style="display:flex;align-items:center;gap:7px;">
+      <div style="width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,rgba(100,210,180,0.22),rgba(60,140,110,0.12));border:1px solid rgba(100,210,180,0.2);display:flex;align-items:center;justify-content:center;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#9BE8C9" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <span style="font-size:11px;font-weight:800;color:rgba(255,255,255,0.92);letter-spacing:0.06em;">TOKO SAYA</span>
     </div>
-    <div style="display:flex;gap:16px;align-items:center;">
-      <span style="font-size:10px;color:rgba(255,255,255,0.32);">Beranda</span>
-      <span style="font-size:10px;color:rgba(255,255,255,0.32);">Produk</span>
-      <span style="font-size:10px;color:rgba(255,255,255,0.32);">Tentang</span>
-      <div style="display:flex;align-items:center;gap:5px;padding:5px 11px;border-radius:999px;background:rgba(100,210,180,0.1);border:1px solid rgba(100,210,180,0.24);">
-        <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#9BE8C9" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+    <div style="display:flex;gap:14px;align-items:center;">
+      <span style="font-size:9.5px;color:rgba(255,255,255,0.3);">Beranda</span>
+      <span style="font-size:9.5px;color:rgba(255,255,255,0.3);">Produk</span>
+      <span style="font-size:9.5px;color:rgba(255,255,255,0.3);">Tentang</span>
+      <div style="display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;background:rgba(100,210,180,0.1);border:1px solid rgba(100,210,180,0.22);">
+        <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#9BE8C9" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         <span style="font-size:9px;color:#9BE8C9;font-weight:700;">Keranjang</span>
-        <div style="width:14px;height:14px;border-radius:50%;background:#9BE8C9;display:flex;align-items:center;justify-content:center;"><span style="font-size:7px;font-weight:800;color:rgba(6,14,10,0.95);">2</span></div>
+        <div style="width:13px;height:13px;border-radius:50%;background:#9BE8C9;display:flex;align-items:center;justify-content:center;"><span style="font-size:7px;font-weight:800;color:rgba(6,14,10,0.95);">2</span></div>
       </div>
     </div>
   </div>
-  <!-- Content — asymmetric bento, no scroll -->
-  <div style="flex:1;display:grid;grid-template-columns:2fr 3fr;gap:12px;padding:14px 18px;min-height:0;overflow:hidden;">
-    <!-- LEFT: Featured product card (full height) -->
-    <div style="border-radius:14px;background:linear-gradient(170deg,rgba(100,210,180,0.07),rgba(6,12,8,0.97));border:1px solid rgba(100,210,180,0.14);display:flex;flex-direction:column;overflow:hidden;cursor:pointer;transition:border-color 0.2s,box-shadow 0.2s;" onmouseenter="this.style.borderColor='rgba(100,210,180,0.38)';this.style.boxShadow='0 16px 40px rgba(0,0,0,0.45)'" onmouseleave="this.style.borderColor='rgba(100,210,180,0.14)';this.style.boxShadow=''">
-      <!-- Badge -->
-      <div style="position:absolute;left:0;top:0;"></div>
-      <div style="padding:10px 12px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
-        <div style="padding:3px 9px;border-radius:999px;background:rgba(100,210,180,0.16);border:1px solid rgba(100,210,180,0.28);font-size:8px;color:#9BE8C9;font-weight:700;letter-spacing:0.06em;">⭐ TERLARIS</div>
-        <div style="padding:3px 8px;border-radius:6px;background:rgba(255,255,255,0.05);font-size:8px;color:rgba(255,255,255,0.4);">4 warna</div>
+  <!-- Main layout: filter sidebar + product grid -->
+  <div class="sv0-layout" style="flex:1;display:grid;grid-template-columns:150px 1fr;min-height:0;overflow:hidden;">
+    <!-- SIDEBAR: Filters -->
+    <div class="sv0-sidebar" style="padding:14px 12px;border-right:1px solid rgba(255,255,255,0.05);display:flex;flex-direction:column;gap:14px;overflow:hidden;">
+      <!-- Search -->
+      <div style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:6px 9px;">
+        <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span style="font-size:9px;color:rgba(255,255,255,0.25);">Cari produk...</span>
       </div>
-      <!-- Product image — fills remaining space -->
-      <div style="flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:0 8px;">
-        <img src="asset/shirt.png" style="width:88%;max-height:100%;object-fit:contain;filter:drop-shadow(0 8px 24px rgba(0,0,0,0.5));">
+      <!-- Category -->
+      <div>
+        <div style="font-size:8px;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.28);font-weight:700;margin-bottom:6px;">Kategori</div>
+        <div style="display:flex;flex-direction:column;gap:2px;">
+          <div style="padding:5px 8px;border-radius:7px;background:rgba(100,210,180,0.12);border:1px solid rgba(100,210,180,0.22);font-size:9px;color:#9BE8C9;font-weight:600;display:flex;justify-content:space-between;cursor:pointer;">Semua <span style="opacity:0.7;">128</span></div>
+          <div style="padding:5px 8px;border-radius:7px;font-size:9px;color:rgba(255,255,255,0.45);display:flex;justify-content:space-between;cursor:pointer;" onmouseenter="this.style.background='rgba(255,255,255,0.04)'" onmouseleave="this.style.background=''">Kaos <span style="opacity:0.5;">48</span></div>
+          <div style="padding:5px 8px;border-radius:7px;font-size:9px;color:rgba(255,255,255,0.45);display:flex;justify-content:space-between;cursor:pointer;" onmouseenter="this.style.background='rgba(255,255,255,0.04)'" onmouseleave="this.style.background=''">Hoodie <span style="opacity:0.5;">31</span></div>
+          <div style="padding:5px 8px;border-radius:7px;font-size:9px;color:rgba(255,255,255,0.45);display:flex;justify-content:space-between;cursor:pointer;" onmouseenter="this.style.background='rgba(255,255,255,0.04)'" onmouseleave="this.style.background=''">Jaket <span style="opacity:0.5;">22</span></div>
+          <div style="padding:5px 8px;border-radius:7px;font-size:9px;color:rgba(255,255,255,0.45);display:flex;justify-content:space-between;cursor:pointer;" onmouseenter="this.style.background='rgba(255,255,255,0.04)'" onmouseleave="this.style.background=''">Celana <span style="opacity:0.5;">27</span></div>
+        </div>
       </div>
-      <!-- Product info -->
-      <div style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.05);flex-shrink:0;">
-        <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.92);margin-bottom:2px;">T-Shirt Oversize</div>
-        <div style="font-size:9px;color:rgba(255,255,255,0.35);margin-bottom:10px;">Unisex · S–XXL · Katun Premium</div>
-        <div style="display:flex;align-items:center;justify-content:space-between;">
-          <div>
-            <div style="font-size:15px;font-weight:900;color:#9BE8C9;letter-spacing:-0.02em;">Rp 185.000</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:10px;background:rgba(100,210,180,0.14);border:1px solid rgba(100,210,180,0.28);">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#9BE8C9" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            <span style="font-size:9px;color:#9BE8C9;font-weight:700;">Tambah</span>
-          </div>
+      <!-- Sort -->
+      <div>
+        <div style="font-size:8px;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.28);font-weight:700;margin-bottom:6px;">Urutkan</div>
+        <div style="display:flex;flex-direction:column;gap:2px;">
+          <div style="padding:5px 8px;border-radius:7px;background:rgba(100,210,180,0.08);font-size:9px;color:rgba(155,232,201,0.85);display:flex;align-items:center;gap:5px;cursor:pointer;"><div style="width:5px;height:5px;border-radius:50%;background:#9BE8C9;flex-shrink:0;"></div>Terlaris</div>
+          <div style="padding:5px 8px;border-radius:7px;font-size:9px;color:rgba(255,255,255,0.38);display:flex;align-items:center;gap:5px;cursor:pointer;"><div style="width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.15);flex-shrink:0;"></div>Terbaru</div>
+          <div style="padding:5px 8px;border-radius:7px;font-size:9px;color:rgba(255,255,255,0.38);display:flex;align-items:center;gap:5px;cursor:pointer;"><div style="width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.15);flex-shrink:0;"></div>Harga ↑</div>
+          <div style="padding:5px 8px;border-radius:7px;font-size:9px;color:rgba(255,255,255,0.38);display:flex;align-items:center;gap:5px;cursor:pointer;"><div style="width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.15);flex-shrink:0;"></div>Harga ↓</div>
+        </div>
+      </div>
+      <!-- Price range -->
+      <div>
+        <div style="font-size:8px;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.28);font-weight:700;margin-bottom:6px;">Harga</div>
+        <div style="height:3px;border-radius:99px;background:rgba(255,255,255,0.08);position:relative;margin:0 4px;">
+          <div style="position:absolute;left:0;right:40%;height:100%;border-radius:99px;background:linear-gradient(90deg,rgba(100,210,180,0.4),#9BE8C9);"></div>
+          <div style="position:absolute;left:60%;width:10px;height:10px;border-radius:50%;background:#9BE8C9;top:50%;transform:translate(-50%,-50%);box-shadow:0 0 6px rgba(155,232,201,0.5);cursor:pointer;"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:5px;">
+          <span style="font-size:8px;color:rgba(255,255,255,0.3);">Rp 0</span>
+          <span style="font-size:8px;color:rgba(255,255,255,0.3);">Rp 500rb</span>
+        </div>
+      </div>
+      <!-- Active filters -->
+      <div style="margin-top:auto;">
+        <div style="display:flex;align-items:center;gap:5px;padding:5px 8px;border-radius:7px;background:rgba(100,210,180,0.06);border:1px solid rgba(100,210,180,0.12);">
+          <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#9BE8C9" stroke-width="2.5"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+          <span style="font-size:8px;color:#9BE8C9;font-weight:600;">Filter Aktif: 1</span>
         </div>
       </div>
     </div>
-    <!-- RIGHT: 2×2 mini grid -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:10px;min-height:0;overflow:hidden;">
-      <!-- Mini card 1 -->
-      <div style="border-radius:12px;background:linear-gradient(150deg,rgba(96,165,250,0.06),rgba(6,12,8,0.96));border:1px solid rgba(96,165,250,0.12);padding:10px;display:flex;flex-direction:column;gap:6px;overflow:hidden;cursor:pointer;transition:border-color 0.2s;" onmouseenter="this.style.borderColor='rgba(96,165,250,0.34)'" onmouseleave="this.style.borderColor='rgba(96,165,250,0.12)'">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-shrink:0;">
-          <div style="padding:2px 7px;border-radius:999px;background:rgba(96,165,250,0.16);font-size:7px;color:rgba(147,197,253,0.9);font-weight:700;">BARU</div>
+    <!-- PRODUCT GRID: 3 col × 2 row -->
+    <div class="sv0-products-panel" style="padding:12px;display:flex;flex-direction:column;gap:10px;overflow:hidden;">
+      <!-- Toolbar -->
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+        <span style="font-size:9px;color:rgba(255,255,255,0.35);">128 produk ditemukan</span>
+        <div style="display:flex;gap:4px;">
+          <div style="padding:4px 8px;border-radius:6px;background:rgba(100,210,180,0.1);border:1px solid rgba(100,210,180,0.2);font-size:8px;color:#9BE8C9;cursor:pointer;">Grid</div>
+          <div style="padding:4px 8px;border-radius:6px;background:rgba(255,255,255,0.04);font-size:8px;color:rgba(255,255,255,0.3);cursor:pointer;">List</div>
         </div>
-        <div style="flex:1;display:flex;align-items:center;justify-content:center;min-height:0;overflow:hidden;">
-          <img src="asset/shirt.png" style="max-width:75%;max-height:100%;object-fit:contain;filter:hue-rotate(195deg) drop-shadow(0 4px 12px rgba(0,0,0,0.4));">
+      </div>
+      <!-- Row 1 -->
+      <div class="sv0-row" style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px;flex:1;min-height:0;">
+        <div style="border-radius:11px;background:linear-gradient(155deg,rgba(100,210,180,0.07),rgba(6,12,8,0.96));border:1px solid rgba(100,210,180,0.13);padding:10px;display:flex;flex-direction:column;gap:7px;overflow:hidden;cursor:pointer;transition:border-color 0.18s,transform 0.18s;" onmouseenter="this.style.borderColor='rgba(100,210,180,0.38)';this.style.transform='translateY(-1px)'" onmouseleave="this.style.borderColor='rgba(100,210,180,0.13)';this.style.transform=''">
+          <div style="position:relative;flex:1;min-height:0;border-radius:8px;background:rgba(255,255,255,0.025);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+            <img src="asset/shirt.png" style="max-width:80%;max-height:100%;object-fit:contain;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.5));">
+            <div style="position:absolute;top:5px;left:5px;padding:2px 6px;border-radius:999px;background:rgba(100,210,180,0.18);font-size:7px;color:#9BE8C9;font-weight:700;">TERLARIS</div>
+          </div>
+          <div style="flex-shrink:0;">
+            <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.9);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">T-Shirt Oversize</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <span style="font-size:11px;font-weight:800;color:#9BE8C9;">Rp 185.000</span>
+              <div style="width:20px;height:20px;border-radius:6px;background:rgba(100,210,180,0.14);border:1px solid rgba(100,210,180,0.24);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#9BE8C9" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            </div>
+          </div>
         </div>
-        <div style="flex-shrink:0;">
-          <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.88);margin-bottom:4px;">Hoodie Crop Navy</div>
-          <div style="display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-size:11px;font-weight:800;color:rgba(147,197,253,0.95);">Rp 320.000</span>
-            <div style="width:22px;height:22px;border-radius:7px;background:rgba(96,165,250,0.12);border:1px solid rgba(96,165,250,0.22);display:flex;align-items:center;justify-content:center;"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="rgba(147,197,253,0.9)" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        <div style="border-radius:11px;background:linear-gradient(155deg,rgba(96,165,250,0.06),rgba(6,12,8,0.96));border:1px solid rgba(96,165,250,0.12);padding:10px;display:flex;flex-direction:column;gap:7px;overflow:hidden;cursor:pointer;transition:border-color 0.18s,transform 0.18s;" onmouseenter="this.style.borderColor='rgba(96,165,250,0.36)';this.style.transform='translateY(-1px)'" onmouseleave="this.style.borderColor='rgba(96,165,250,0.12)';this.style.transform=''">
+          <div style="position:relative;flex:1;min-height:0;border-radius:8px;background:rgba(255,255,255,0.025);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+            <img src="asset/shirt.png" style="max-width:80%;max-height:100%;object-fit:contain;filter:hue-rotate(195deg) drop-shadow(0 4px 10px rgba(0,0,0,0.5));">
+            <div style="position:absolute;top:5px;left:5px;padding:2px 6px;border-radius:999px;background:rgba(96,165,250,0.18);font-size:7px;color:rgba(147,197,253,0.95);font-weight:700;">BARU</div>
+          </div>
+          <div style="flex-shrink:0;">
+            <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.9);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Hoodie Crop Navy</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <span style="font-size:11px;font-weight:800;color:rgba(147,197,253,0.95);">Rp 320.000</span>
+              <div style="width:20px;height:20px;border-radius:6px;background:rgba(96,165,250,0.12);border:1px solid rgba(96,165,250,0.22);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="rgba(147,197,253,0.9)" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            </div>
+          </div>
+        </div>
+        <div style="border-radius:11px;background:linear-gradient(155deg,rgba(167,139,250,0.06),rgba(6,12,8,0.96));border:1px solid rgba(167,139,250,0.12);padding:10px;display:flex;flex-direction:column;gap:7px;overflow:hidden;cursor:pointer;transition:border-color 0.18s,transform 0.18s;" onmouseenter="this.style.borderColor='rgba(167,139,250,0.36)';this.style.transform='translateY(-1px)'" onmouseleave="this.style.borderColor='rgba(167,139,250,0.12)';this.style.transform=''">
+          <div style="position:relative;flex:1;min-height:0;border-radius:8px;background:rgba(255,255,255,0.025);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+            <img src="asset/shirt.png" style="max-width:80%;max-height:100%;object-fit:contain;filter:hue-rotate(280deg) drop-shadow(0 4px 10px rgba(0,0,0,0.5));">
+            <div style="position:absolute;top:5px;left:5px;padding:2px 6px;border-radius:999px;background:rgba(167,139,250,0.18);font-size:7px;color:rgba(196,181,253,0.95);font-weight:700;">PROMO</div>
+            <div style="position:absolute;top:5px;right:5px;padding:2px 5px;border-radius:5px;background:rgba(239,68,68,0.2);font-size:7px;color:rgba(252,165,165,0.9);font-weight:700;">-20%</div>
+          </div>
+          <div style="flex-shrink:0;">
+            <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.9);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Jaket Denim Klasik</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <div><span style="font-size:11px;font-weight:800;color:rgba(196,181,253,0.95);">Rp 367.000</span><span style="font-size:7px;text-decoration:line-through;color:rgba(255,255,255,0.22);margin-left:3px;">459rb</span></div>
+              <div style="width:20px;height:20px;border-radius:6px;background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.22);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="rgba(196,181,253,0.9)" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            </div>
           </div>
         </div>
       </div>
-      <!-- Mini card 2 -->
-      <div style="border-radius:12px;background:linear-gradient(150deg,rgba(167,139,250,0.06),rgba(6,12,8,0.96));border:1px solid rgba(167,139,250,0.12);padding:10px;display:flex;flex-direction:column;gap:6px;overflow:hidden;cursor:pointer;transition:border-color 0.2s;" onmouseenter="this.style.borderColor='rgba(167,139,250,0.34)'" onmouseleave="this.style.borderColor='rgba(167,139,250,0.12)'">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-shrink:0;">
-          <div style="padding:2px 7px;border-radius:999px;background:rgba(167,139,250,0.16);font-size:7px;color:rgba(196,181,253,0.9);font-weight:700;">PROMO</div>
-          <div style="padding:2px 6px;border-radius:5px;background:rgba(239,68,68,0.18);font-size:7px;color:rgba(252,165,165,0.9);font-weight:700;">-20%</div>
-        </div>
-        <div style="flex:1;display:flex;align-items:center;justify-content:center;min-height:0;overflow:hidden;">
-          <img src="asset/shirt.png" style="max-width:75%;max-height:100%;object-fit:contain;filter:hue-rotate(280deg) drop-shadow(0 4px 12px rgba(0,0,0,0.4));">
-        </div>
-        <div style="flex-shrink:0;">
-          <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.88);margin-bottom:4px;">Jaket Denim Klasik</div>
-          <div style="display:flex;align-items:center;justify-content:space-between;">
-            <div><span style="font-size:11px;font-weight:800;color:rgba(196,181,253,0.95);">Rp 367.000</span><span style="font-size:8px;text-decoration:line-through;color:rgba(255,255,255,0.22);margin-left:4px;">459rb</span></div>
-            <div style="width:22px;height:22px;border-radius:7px;background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.22);display:flex;align-items:center;justify-content:center;"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="rgba(196,181,253,0.9)" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      <!-- Row 2 -->
+      <div class="sv0-row" style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px;flex:1;min-height:0;">
+        <div style="border-radius:11px;background:linear-gradient(155deg,rgba(251,146,60,0.06),rgba(6,12,8,0.96));border:1px solid rgba(251,146,60,0.12);padding:10px;display:flex;flex-direction:column;gap:7px;overflow:hidden;cursor:pointer;transition:border-color 0.18s,transform 0.18s;" onmouseenter="this.style.borderColor='rgba(251,146,60,0.36)';this.style.transform='translateY(-1px)'" onmouseleave="this.style.borderColor='rgba(251,146,60,0.12)';this.style.transform=''">
+          <div style="position:relative;flex:1;min-height:0;border-radius:8px;background:rgba(255,255,255,0.025);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+            <img src="asset/shirt.png" style="max-width:80%;max-height:100%;object-fit:contain;filter:hue-rotate(30deg) saturate(1.4) drop-shadow(0 4px 10px rgba(0,0,0,0.5));">
+            <div style="position:absolute;top:5px;left:5px;padding:2px 6px;border-radius:999px;background:rgba(251,146,60,0.18);font-size:7px;color:rgba(253,186,116,0.95);font-weight:700;">EKSKLUSIF</div>
+          </div>
+          <div style="flex-shrink:0;">
+            <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.9);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Polo Shirt Premium</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <span style="font-size:11px;font-weight:800;color:rgba(253,186,116,0.95);">Rp 245.000</span>
+              <div style="width:20px;height:20px;border-radius:6px;background:rgba(251,146,60,0.12);border:1px solid rgba(251,146,60,0.22);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="rgba(253,186,116,0.9)" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- Mini card 3 -->
-      <div style="border-radius:12px;background:linear-gradient(150deg,rgba(251,146,60,0.06),rgba(6,12,8,0.96));border:1px solid rgba(251,146,60,0.12);padding:10px;display:flex;flex-direction:column;gap:6px;overflow:hidden;cursor:pointer;transition:border-color 0.2s;" onmouseenter="this.style.borderColor='rgba(251,146,60,0.34)'" onmouseleave="this.style.borderColor='rgba(251,146,60,0.12)'">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-shrink:0;">
-          <div style="padding:2px 7px;border-radius:999px;background:rgba(251,146,60,0.16);font-size:7px;color:rgba(253,186,116,0.9);font-weight:700;">EKSKLUSIF</div>
-        </div>
-        <div style="flex:1;display:flex;align-items:center;justify-content:center;min-height:0;overflow:hidden;">
-          <img src="asset/shirt.png" style="max-width:75%;max-height:100%;object-fit:contain;filter:hue-rotate(30deg) saturate(1.4) drop-shadow(0 4px 12px rgba(0,0,0,0.4));">
-        </div>
-        <div style="flex-shrink:0;">
-          <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.88);margin-bottom:4px;">Polo Shirt Premium</div>
-          <div style="display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-size:11px;font-weight:800;color:rgba(253,186,116,0.95);">Rp 245.000</span>
-            <div style="width:22px;height:22px;border-radius:7px;background:rgba(251,146,60,0.12);border:1px solid rgba(251,146,60,0.22);display:flex;align-items:center;justify-content:center;"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="rgba(253,186,116,0.9)" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        <div style="border-radius:11px;background:linear-gradient(155deg,rgba(244,114,182,0.06),rgba(6,12,8,0.96));border:1px solid rgba(244,114,182,0.12);padding:10px;display:flex;flex-direction:column;gap:7px;overflow:hidden;cursor:pointer;transition:border-color 0.18s,transform 0.18s;" onmouseenter="this.style.borderColor='rgba(244,114,182,0.36)';this.style.transform='translateY(-1px)'" onmouseleave="this.style.borderColor='rgba(244,114,182,0.12)';this.style.transform=''">
+          <div style="position:relative;flex:1;min-height:0;border-radius:8px;background:rgba(255,255,255,0.025);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+            <img src="asset/shirt.png" style="max-width:80%;max-height:100%;object-fit:contain;filter:hue-rotate(310deg) saturate(1.2) drop-shadow(0 4px 10px rgba(0,0,0,0.5));">
+            <div style="position:absolute;top:5px;left:5px;padding:2px 6px;border-radius:999px;background:rgba(244,114,182,0.18);font-size:7px;color:rgba(249,168,212,0.95);font-weight:700;">FAVORIT</div>
+          </div>
+          <div style="flex-shrink:0;">
+            <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.9);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Crop Top Linen</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <span style="font-size:11px;font-weight:800;color:rgba(249,168,212,0.95);">Rp 165.000</span>
+              <div style="width:20px;height:20px;border-radius:6px;background:rgba(244,114,182,0.12);border:1px solid rgba(244,114,182,0.22);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="rgba(249,168,212,0.9)" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- Mini card 4 -->
-      <div style="border-radius:12px;background:linear-gradient(150deg,rgba(244,114,182,0.06),rgba(6,12,8,0.96));border:1px solid rgba(244,114,182,0.12);padding:10px;display:flex;flex-direction:column;gap:6px;overflow:hidden;cursor:pointer;transition:border-color 0.2s;" onmouseenter="this.style.borderColor='rgba(244,114,182,0.34)'" onmouseleave="this.style.borderColor='rgba(244,114,182,0.12)'">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-shrink:0;">
-          <div style="padding:2px 7px;border-radius:999px;background:rgba(244,114,182,0.16);font-size:7px;color:rgba(249,168,212,0.9);font-weight:700;">FAVORIT</div>
-        </div>
-        <div style="flex:1;display:flex;align-items:center;justify-content:center;min-height:0;overflow:hidden;">
-          <img src="asset/shirt.png" style="max-width:75%;max-height:100%;object-fit:contain;filter:hue-rotate(310deg) saturate(1.2) drop-shadow(0 4px 12px rgba(0,0,0,0.4));">
-        </div>
-        <div style="flex-shrink:0;">
-          <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.88);margin-bottom:4px;">Crop Top Linen</div>
-          <div style="display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-size:11px;font-weight:800;color:rgba(249,168,212,0.95);">Rp 165.000</span>
-            <div style="width:22px;height:22px;border-radius:7px;background:rgba(244,114,182,0.12);border:1px solid rgba(244,114,182,0.22);display:flex;align-items:center;justify-content:center;"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="rgba(249,168,212,0.9)" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        <div style="border-radius:11px;background:linear-gradient(155deg,rgba(100,210,180,0.05),rgba(6,12,8,0.96));border:1px solid rgba(100,210,180,0.1);padding:10px;display:flex;flex-direction:column;gap:7px;overflow:hidden;cursor:pointer;transition:border-color 0.18s,transform 0.18s;" onmouseenter="this.style.borderColor='rgba(100,210,180,0.3)';this.style.transform='translateY(-1px)'" onmouseleave="this.style.borderColor='rgba(100,210,180,0.1)';this.style.transform=''">
+          <div style="position:relative;flex:1;min-height:0;border-radius:8px;background:rgba(255,255,255,0.025);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+            <img src="asset/shirt.png" style="max-width:80%;max-height:100%;object-fit:contain;filter:grayscale(0.3) brightness(0.9) drop-shadow(0 4px 10px rgba(0,0,0,0.5));">
+            <div style="position:absolute;top:5px;left:5px;padding:2px 6px;border-radius:999px;background:rgba(255,255,255,0.1);font-size:7px;color:rgba(255,255,255,0.5);font-weight:700;">CLASSIC</div>
+          </div>
+          <div style="flex-shrink:0;">
+            <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.9);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Kemeja Oxford</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <span style="font-size:11px;font-weight:800;color:#9BE8C9;">Rp 295.000</span>
+              <div style="width:20px;height:20px;border-radius:6px;background:rgba(100,210,180,0.12);border:1px solid rgba(100,210,180,0.22);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#9BE8C9" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            </div>
           </div>
         </div>
       </div>
@@ -3502,7 +3609,7 @@
     <div><div style="font-size:15px;font-weight:700;color:rgba(255,255,255,0.92);">Dashboard</div><div style="font-size:10px;color:rgba(255,255,255,0.35);margin-top:2px;">Performa toko hari ini</div></div>
     <div style="display:flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;background:rgba(100,210,180,0.1);border:1px solid rgba(100,210,180,0.2);"><div style="width:6px;height:6px;border-radius:50%;background:#9BE8C9;"></div><span style="font-size:10px;color:#9BE8C9;font-weight:600;">Live</span></div>
   </div>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;flex-shrink:0;">
+  <div class="sv1-stats" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;flex-shrink:0;">
     <div style="padding:14px;border-radius:14px;background:linear-gradient(145deg,rgba(100,210,180,0.09),rgba(6,12,8,0.96));border:1px solid rgba(100,210,180,0.16);">
       <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.38);margin-bottom:8px;">Total Pesanan</div>
       <div style="font-size:28px;font-weight:900;color:rgba(255,255,255,0.95);line-height:1;letter-spacing:-0.03em;">247</div>
@@ -3519,8 +3626,8 @@
       <div style="margin-top:6px;font-size:10px;font-weight:600;color:#9BE8C9;">↑ 23% organik</div>
     </div>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:1;min-height:0;">
-    <div style="padding:14px;border-radius:14px;background:linear-gradient(145deg,rgba(100,210,180,0.05),rgba(6,12,8,0.94));border:1px solid rgba(100,210,180,0.1);display:flex;flex-direction:column;">
+  <div class="sv1-bottom" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:1;min-height:0;">
+    <div class="sv1-chart" style="padding:14px;border-radius:14px;background:linear-gradient(145deg,rgba(100,210,180,0.05),rgba(6,12,8,0.94));border:1px solid rgba(100,210,180,0.1);display:flex;flex-direction:column;">
       <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.35);margin-bottom:12px;">Pesanan 7 Hari</div>
       <div style="display:flex;align-items:flex-end;gap:6px;flex:1;">
         <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;height:100%;"><div style="width:100%;border-radius:4px 4px 0 0;height:52%;background:linear-gradient(180deg,rgba(100,210,180,0.65),rgba(60,140,110,0.35));"></div><span style="font-size:8px;color:rgba(255,255,255,0.22);">S</span></div>
@@ -3553,8 +3660,8 @@
 
         <!-- View 2: Pembayaran -->
         <div class="showcase-view" data-view="2">
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;height:100%;">
-  <div style="display:flex;flex-direction:column;gap:12px;">
+<div class="sv2-wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;height:100%;">
+  <div class="sv2-left" style="display:flex;flex-direction:column;gap:12px;">
     <div style="font-size:15px;font-weight:700;color:rgba(255,255,255,0.92);">Ringkasan Pesanan</div>
     <div style="border-radius:14px;background:linear-gradient(145deg,rgba(100,210,180,0.06),rgba(6,12,8,0.95));border:1px solid rgba(100,210,180,0.13);overflow:hidden;">
       <div style="padding:12px 14px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
@@ -3571,7 +3678,7 @@
       <div style="padding:9px 14px;border-radius:10px;background:rgba(100,210,180,0.1);border:1px solid rgba(100,210,180,0.2);font-size:10px;font-weight:600;color:#9BE8C9;cursor:pointer;">Pakai</div>
     </div>
   </div>
-  <div style="display:flex;flex-direction:column;gap:12px;">
+  <div class="sv2-right" style="display:flex;flex-direction:column;gap:12px;">
     <div style="font-size:15px;font-weight:700;color:rgba(255,255,255,0.92);">Metode Pembayaran</div>
     <div style="display:flex;flex-direction:column;gap:8px;flex:1;">
       <div style="padding:13px 14px;border-radius:12px;background:linear-gradient(135deg,rgba(100,210,180,0.1),rgba(6,12,8,0.95));border:2px solid rgba(100,210,180,0.3);display:flex;align-items:center;gap:12px;cursor:pointer;">
@@ -3596,7 +3703,7 @@
 
         <!-- View 3: Kustomisasi -->
         <div class="showcase-view" data-view="3">
-<div style="display:grid;grid-template-columns:1fr 190px;gap:16px;height:100%;">
+<div class="sv3-wrap" style="display:grid;grid-template-columns:1fr 190px;gap:16px;height:100%;">
   <!-- Left: live preview -->
   <div style="border-radius:14px;background:rgba(6,12,8,0.96);border:1px solid rgba(100,210,180,0.12);overflow:hidden;display:flex;flex-direction:column;" id="kustPreviewPanel">
     <div style="padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:8px;flex-shrink:0;background:rgba(255,255,255,0.02);">
@@ -3633,7 +3740,7 @@
     </div>
   </div>
   <!-- Right: controls -->
-  <div style="display:flex;flex-direction:column;gap:10px;">
+  <div class="sv3-controls" style="display:flex;flex-direction:column;gap:10px;">
     <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.88);">Kustomisasi Toko</div>
     <div style="border-radius:12px;background:linear-gradient(145deg,rgba(100,210,180,0.06),rgba(6,12,8,0.95));border:1px solid rgba(100,210,180,0.12);padding:12px;">
       <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.38);margin-bottom:10px;">Warna Tema</div>
@@ -3675,7 +3782,7 @@
       <div style="padding:6px 12px;border-radius:8px;background:linear-gradient(135deg,rgba(100,210,180,0.12),rgba(6,12,8,0.95));border:1px solid rgba(100,210,180,0.2);font-size:10px;color:#9BE8C9;font-weight:600;cursor:pointer;">+ Buat Promo</div>
     </div>
   </div>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;flex-shrink:0;">
+  <div class="sv4-stats" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;flex-shrink:0;">
     <div style="padding:10px 12px;border-radius:10px;background:linear-gradient(135deg,rgba(100,210,180,0.07),rgba(6,12,8,0.94));border:1px solid rgba(100,210,180,0.12);text-align:center;">
       <div style="font-size:20px;font-weight:800;color:#9BE8C9;">265</div>
       <div style="font-size:8px;color:rgba(255,255,255,0.38);margin-top:2px;">Total Penggunaan</div>
@@ -3690,17 +3797,17 @@
     </div>
   </div>
   <div style="display:flex;flex-direction:column;gap:8px;flex:1;min-height:0;overflow:hidden;">
-    <div style="padding:14px 16px;border-radius:12px;background:linear-gradient(135deg,rgba(100,210,180,0.08),rgba(6,12,8,0.95));border:1px solid rgba(100,210,180,0.18);display:flex;align-items:center;gap:14px;flex-shrink:0;">
+    <div class="sv4-promo-row" style="padding:14px 16px;border-radius:12px;background:linear-gradient(135deg,rgba(100,210,180,0.08),rgba(6,12,8,0.95));border:1px solid rgba(100,210,180,0.18);display:flex;align-items:center;gap:14px;flex-shrink:0;">
       <div style="flex:0 0 auto;"><div style="font-family:monospace;font-size:14px;font-weight:900;color:rgba(255,255,255,0.95);letter-spacing:0.05em;">AMORA20</div><div style="font-size:9px;color:rgba(255,255,255,0.4);margin-top:3px;">Diskon 20% · Semua produk</div></div>
       <div style="flex:1;min-width:0;"><div style="display:flex;justify-content:space-between;margin-bottom:5px;"><span style="font-size:9px;color:rgba(255,255,255,0.35);">142 penggunaan</span><span style="font-size:9px;color:#9BE8C9;font-weight:700;">85%</span></div><div style="height:5px;border-radius:3px;background:rgba(255,255,255,0.06);overflow:hidden;"><div style="height:100%;width:85%;border-radius:3px;background:linear-gradient(90deg,#9BE8C9,rgba(100,210,180,0.5));"></div></div></div>
       <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="font-size:8px;color:#9BE8C9;padding:2px 7px;border-radius:999px;background:rgba(100,210,180,0.1);border:1px solid rgba(100,210,180,0.2);">Aktif</span><div style="width:36px;height:20px;border-radius:10px;background:rgba(107,142,90,0.8);position:relative;cursor:pointer;"><div style="width:16px;height:16px;border-radius:50%;background:white;position:absolute;right:2px;top:2px;box-shadow:0 1px 4px rgba(0,0,0,0.3);"></div></div></div>
     </div>
-    <div style="padding:14px 16px;border-radius:12px;background:linear-gradient(135deg,rgba(100,210,180,0.06),rgba(6,12,8,0.93));border:1px solid rgba(100,210,180,0.13);display:flex;align-items:center;gap:14px;flex-shrink:0;">
+    <div class="sv4-promo-row" style="padding:14px 16px;border-radius:12px;background:linear-gradient(135deg,rgba(100,210,180,0.06),rgba(6,12,8,0.93));border:1px solid rgba(100,210,180,0.13);display:flex;align-items:center;gap:14px;flex-shrink:0;">
       <div style="flex:0 0 auto;"><div style="font-family:monospace;font-size:14px;font-weight:900;color:rgba(255,255,255,0.9);letter-spacing:0.05em;">ONGKIR0</div><div style="font-size:9px;color:rgba(255,255,255,0.4);margin-top:3px;">Gratis ongkir · Min. Rp 100rb</div></div>
       <div style="flex:1;min-width:0;"><div style="display:flex;justify-content:space-between;margin-bottom:5px;"><span style="font-size:9px;color:rgba(255,255,255,0.35);">89 penggunaan</span><span style="font-size:9px;color:#9BE8C9;font-weight:700;">58%</span></div><div style="height:5px;border-radius:3px;background:rgba(255,255,255,0.06);overflow:hidden;"><div style="height:100%;width:58%;border-radius:3px;background:linear-gradient(90deg,rgba(100,210,180,0.85),rgba(100,210,180,0.4));"></div></div></div>
       <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="font-size:8px;color:#9BE8C9;padding:2px 7px;border-radius:999px;background:rgba(100,210,180,0.1);border:1px solid rgba(100,210,180,0.2);">Aktif</span><div style="width:36px;height:20px;border-radius:10px;background:rgba(107,142,90,0.8);position:relative;cursor:pointer;"><div style="width:16px;height:16px;border-radius:50%;background:white;position:absolute;right:2px;top:2px;box-shadow:0 1px 4px rgba(0,0,0,0.3);"></div></div></div>
     </div>
-    <div style="padding:14px 16px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:14px;flex-shrink:0;">
+    <div class="sv4-promo-row" style="padding:14px 16px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:14px;flex-shrink:0;">
       <div style="flex:0 0 auto;"><div style="font-family:monospace;font-size:14px;font-weight:900;color:rgba(255,255,255,0.5);letter-spacing:0.05em;">BELI2</div><div style="font-size:9px;color:rgba(255,255,255,0.3);margin-top:3px;">Beli 2 gratis 1 item pilihan</div></div>
       <div style="flex:1;min-width:0;"><div style="display:flex;justify-content:space-between;margin-bottom:5px;"><span style="font-size:9px;color:rgba(255,255,255,0.25);">34 penggunaan</span><span style="font-size:9px;color:rgba(255,255,255,0.35);">22%</span></div><div style="height:5px;border-radius:3px;background:rgba(255,255,255,0.06);overflow:hidden;"><div style="height:100%;width:22%;border-radius:3px;background:rgba(100,210,180,0.3);"></div></div></div>
       <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span style="font-size:8px;color:rgba(255,255,255,0.35);padding:2px 7px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);">Nonaktif</span><div style="width:36px;height:20px;border-radius:10px;background:rgba(255,255,255,0.1);position:relative;cursor:pointer;"><div style="width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,0.4);position:absolute;left:2px;top:2px;"></div></div></div>
@@ -4402,23 +4509,91 @@
     }
     function stopKustCycle() { clearInterval(kustTimer); kustTimer = null; }
 
-    // ── Main tab switcher ──
+    // ── Main tab switcher — directional slide animation ──
+    const dots = Array.from(document.querySelectorAll('#showcaseDots .showcase-dot'));
+    let isAnimating = false;
+
+    function updateDots(idx) {
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    }
+
     function goTo(idx) {
-      if (idx === current) return;
-      sidebarTabs[current]?.classList.remove('active');
-      pillTabs[current]?.classList.remove('active');
-      views[current]?.classList.remove('active');
+      if (idx === current || isAnimating) return;
+      const dir = idx > current ? 1 : -1;
+      const prevIdx = current;
       current = idx;
+      isAnimating = true;
+
+      // Update tab buttons and dots immediately
+      sidebarTabs[prevIdx]?.classList.remove('active');
+      pillTabs[prevIdx]?.classList.remove('active');
       sidebarTabs[current]?.classList.add('active');
       pillTabs[current]?.classList.add('active');
-      views[current]?.classList.add('active');
-      if (current === 3) startKustCycle();
-      else stopKustCycle();
+      updateDots(current);
+
+      const outView = views[prevIdx];
+      const inView  = views[current];
+
+      // Animate out current view
+      outView.style.transition = 'opacity 0.22s ease, transform 0.22s cubic-bezier(0.4,0,0.6,1)';
+      outView.style.opacity    = '0';
+      outView.style.transform  = `translateX(${dir > 0 ? -28 : 28}px)`;
+
+      // Prepare incoming view off-screen
+      inView.style.transition   = 'none';
+      inView.style.display      = 'flex';
+      inView.style.flexDirection = 'column';
+      inView.style.opacity      = '0';
+      inView.style.transform    = `translateX(${dir > 0 ? 28 : -28}px)`;
+
+      // Trigger slide-in on next paint
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          inView.style.transition = 'opacity 0.32s ease, transform 0.32s cubic-bezier(0.22,1,0.36,1)';
+          inView.style.opacity    = '1';
+          inView.style.transform  = 'translateX(0)';
+        });
+      });
+
+      // Cleanup after animation completes
+      setTimeout(() => {
+        outView.classList.remove('active');
+        outView.style.cssText   = '';
+        inView.classList.add('active');
+        inView.style.cssText    = '';
+        isAnimating = false;
+        if (current === 3) startKustCycle();
+        else stopKustCycle();
+      }, 360);
     }
 
     [...sidebarTabs, ...pillTabs].forEach(tab => {
       tab.addEventListener('click', () => goTo(parseInt(tab.dataset.idx)));
     });
+
+    // Dots click
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => goTo(parseInt(dot.dataset.idx)));
+    });
+
+    // Touch swipe support
+    (function() {
+      const panel = document.querySelector('.showcase-panel');
+      if (!panel) return;
+      let tx = 0, ty = 0;
+      panel.addEventListener('touchstart', e => {
+        tx = e.touches[0].clientX;
+        ty = e.touches[0].clientY;
+      }, { passive: true });
+      panel.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - tx;
+        const dy = e.changedTouches[0].clientY - ty;
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 48) {
+          if (dx < 0 && current < views.length - 1) goTo(current + 1);
+          else if (dx > 0 && current > 0) goTo(current - 1);
+        }
+      }, { passive: true });
+    })();
 
     // Init kust swatches click
     kustSwatches.forEach((s, i) => {
