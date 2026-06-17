@@ -1441,19 +1441,19 @@
     .showcase-panel {
       position: relative;
       width: 100%;
-      height: 540px;
-      border-radius: 20px;
+      height: 580px;
+      border-radius: 24px;
       background: linear-gradient(145deg, rgba(10,22,15,0.94) 0%, rgba(6,14,10,0.98) 100%);
       border: 1px solid rgba(100,210,180,0.14);
-      border-top: 1px solid rgba(100,210,180,0.22);
+      border-top: 1px solid rgba(100,210,180,0.24);
       overflow: hidden;
-      box-shadow: 0 0 0 1px rgba(100,210,180,0.04), 0 24px 64px rgba(0,0,0,0.5);
+      box-shadow: 0 0 0 1px rgba(100,210,180,0.05), 0 32px 80px rgba(0,0,0,0.55), 0 8px 32px rgba(0,0,0,0.4);
     }
     .showcase-panel:hover {
       box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 50px rgba(80,200,170,0.12), 0 8px 24px rgba(0,0,0,0.5);
       border-color: rgba(100,210,180,0.22);
     }
-    @media (min-width: 1100px) { .showcase-panel { height: 520px; } }
+    @media (min-width: 1100px) { .showcase-panel { height: 600px; } }
 
     /* Individual panel views */
     .showcase-view {
@@ -1462,7 +1462,7 @@
       width: 100%;
       height: 100%;
       box-sizing: border-box;
-      padding: 32px 36px;
+      padding: 40px 52px;
       display: none;
       opacity: 0;
       transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.22,1,0.36,1);
@@ -1475,6 +1475,12 @@
       opacity: 1;
       transform: translateY(0);
     }
+    /* Scrollbar — store view */
+    #sv0scroll::-webkit-scrollbar { width: 4px; }
+    #sv0scroll::-webkit-scrollbar-track { background: transparent; }
+    #sv0scroll::-webkit-scrollbar-thumb { background: rgba(100,210,180,0.2); border-radius: 99px; }
+    #sv0scroll::-webkit-scrollbar-thumb:hover { background: rgba(100,210,180,0.38); }
+
     /* Panel 0: Website Toko — storefront sim */
     .sv-store-sim {
       display: flex; flex-direction: column; height: 100%;
@@ -3345,83 +3351,167 @@
 
         <!-- View 0: Website Toko -->
         <div class="showcase-view active" data-view="0">
-<div style="display:flex;flex-direction:column;height:100%;gap:0;margin:-32px -36px;flex:1;">
-  <!-- Browser chrome -->
-  <div style="display:flex;align-items:center;gap:10px;padding:10px 18px;background:rgba(255,255,255,0.025);border-bottom:1px solid rgba(255,255,255,0.07);flex-shrink:0;">
-    <div style="display:flex;gap:5px;flex-shrink:0;">
-      <div style="width:10px;height:10px;border-radius:50%;background:#FF5F57;"></div>
-      <div style="width:10px;height:10px;border-radius:50%;background:#FFBD2E;"></div>
-      <div style="width:10px;height:10px;border-radius:50%;background:#28CA41;"></div>
+<div style="display:flex;flex-direction:column;height:100%;gap:0;margin:-40px -52px;flex:1;">
+  <!-- Browser chrome bar -->
+  <div style="display:flex;align-items:center;gap:12px;padding:11px 20px;background:rgba(255,255,255,0.018);border-bottom:1px solid rgba(255,255,255,0.06);flex-shrink:0;">
+    <div style="display:flex;gap:6px;flex-shrink:0;">
+      <div style="width:11px;height:11px;border-radius:50%;background:#FF5F57;box-shadow:0 0 6px rgba(255,95,87,0.4);"></div>
+      <div style="width:11px;height:11px;border-radius:50%;background:#FFBD2E;box-shadow:0 0 6px rgba(255,189,46,0.3);"></div>
+      <div style="width:11px;height:11px;border-radius:50%;background:#28CA41;box-shadow:0 0 6px rgba(40,202,65,0.3);"></div>
     </div>
-    <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:7px;padding:5px 12px;display:flex;align-items:center;gap:6px;max-width:300px;margin:0 auto;">
-      <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-      <span style="font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:0.01em;">tokosaya.amora.id</span>
+    <div style="flex:1;background:rgba(255,255,255,0.055);border-radius:8px;padding:6px 14px;display:flex;align-items:center;gap:7px;max-width:340px;margin:0 auto;border:1px solid rgba(255,255,255,0.07);">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="rgba(155,232,201,0.4)" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span style="font-size:10.5px;color:rgba(255,255,255,0.38);letter-spacing:0.01em;flex:1;">tokosaya.amora.id</span>
+      <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.27"/></svg>
     </div>
-    <div style="width:50px;"></div>
+    <div style="display:flex;gap:8px;flex-shrink:0;">
+      <div style="width:24px;height:24px;border-radius:6px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></div>
+      <div style="width:24px;height:24px;border-radius:6px;background:rgba(100,210,180,0.08);border:1px solid rgba(100,210,180,0.18);display:flex;align-items:center;justify-content:center;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#9BE8C9" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div>
+    </div>
   </div>
-  <!-- Store content with proper padding -->
-  <div style="flex:1;overflow:hidden;padding:14px 20px;display:flex;flex-direction:column;gap:10px;min-height:0;">
-    <!-- Store nav -->
-    <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.05);flex-shrink:0;">
-      <span style="font-size:13px;font-weight:800;color:rgba(255,255,255,0.92);letter-spacing:0.08em;">TOKO SAYA</span>
-      <div style="display:flex;gap:12px;align-items:center;">
-        <span style="font-size:10px;color:rgba(255,255,255,0.4);">Produk</span>
-        <span style="font-size:10px;color:rgba(255,255,255,0.4);">Tentang</span>
-        <div style="padding:5px 11px;border-radius:999px;background:rgba(100,210,180,0.14);border:1px solid rgba(100,210,180,0.28);font-size:9px;color:#9BE8C9;font-weight:700;">🛒 Keranjang</div>
+  <!-- Store nav bar -->
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 28px;background:rgba(255,255,255,0.012);border-bottom:1px solid rgba(255,255,255,0.05);flex-shrink:0;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,rgba(100,210,180,0.25),rgba(60,140,110,0.15));border:1px solid rgba(100,210,180,0.22);display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9BE8C9" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <span style="font-size:13px;font-weight:800;color:rgba(255,255,255,0.95);letter-spacing:0.05em;">TOKO SAYA</span>
+    </div>
+    <div style="display:flex;gap:20px;align-items:center;">
+      <span style="font-size:11px;color:rgba(255,255,255,0.38);font-weight:500;">Beranda</span>
+      <span style="font-size:11px;color:rgba(255,255,255,0.38);font-weight:500;">Produk</span>
+      <span style="font-size:11px;color:rgba(255,255,255,0.38);font-weight:500;">Tentang</span>
+      <div style="display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:999px;background:rgba(100,210,180,0.12);border:1px solid rgba(100,210,180,0.28);cursor:pointer;transition:all 0.2s;" onmouseenter="this.style.background='rgba(100,210,180,0.2)'" onmouseleave="this.style.background='rgba(100,210,180,0.12)'">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#9BE8C9" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span style="font-size:10px;color:#9BE8C9;font-weight:700;">Keranjang</span>
+        <div style="width:16px;height:16px;border-radius:50%;background:#9BE8C9;display:flex;align-items:center;justify-content:center;"><span style="font-size:8px;font-weight:800;color:rgba(6,14,10,0.95);">2</span></div>
       </div>
     </div>
+  </div>
+  <!-- Scrollable store content -->
+  <div style="flex:1;overflow-y:auto;padding:20px 28px 24px;display:flex;flex-direction:column;gap:16px;scrollbar-width:thin;scrollbar-color:rgba(100,210,180,0.2) transparent;" id="sv0scroll">
     <!-- Hero banner -->
-    <div style="padding:12px 16px;border-radius:12px;background:linear-gradient(135deg,rgba(100,210,180,0.09),rgba(8,14,10,0.92));border:1px solid rgba(100,210,180,0.13);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+    <div style="padding:18px 22px;border-radius:14px;background:linear-gradient(135deg,rgba(100,210,180,0.08) 0%,rgba(6,14,10,0.95) 60%);border:1px solid rgba(100,210,180,0.12);display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden;">
+      <div style="position:absolute;right:-20px;top:-20px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(100,210,180,0.08),transparent 70%);pointer-events:none;"></div>
       <div>
-        <div style="font-size:9px;color:#9BE8C9;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:3px;">Koleksi Terbaru</div>
-        <div style="font-size:16px;font-weight:800;color:rgba(255,255,255,0.95);letter-spacing:-0.02em;">Fashion Lokal</div>
+        <div style="font-size:10px;color:#9BE8C9;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;margin-bottom:5px;">Koleksi Terbaru 2024</div>
+        <div style="font-size:20px;font-weight:900;color:rgba(255,255,255,0.97);letter-spacing:-0.03em;line-height:1.1;">Fashion Lokal<br><span style="color:#9BE8C9;">Premium</span></div>
+        <div style="margin-top:8px;font-size:10px;color:rgba(255,255,255,0.38);">128 produk tersedia · Pengiriman ke seluruh Indonesia</div>
       </div>
-      <div style="display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:999px;background:rgba(100,210,180,0.12);border:1px solid rgba(100,210,180,0.22);">
-        <div style="width:6px;height:6px;border-radius:50%;background:#9BE8C9;"></div>
-        <span style="font-size:9px;color:#9BE8C9;font-weight:600;">Gratis Ongkir</span>
-      </div>
-    </div>
-    <!-- Product grid — 3 cols, compact cards -->
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;flex:1;min-height:0;">
-      <div style="border-radius:12px;background:linear-gradient(160deg,rgba(100,210,180,0.07),rgba(6,12,8,0.95));border:1px solid rgba(100,210,180,0.13);padding:10px;display:flex;flex-direction:column;gap:6px;min-height:0;overflow:hidden;" onmouseenter="this.style.borderColor='rgba(100,210,180,0.35)'" onmouseleave="this.style.borderColor='rgba(100,210,180,0.13)'">
-        <div style="position:relative;border-radius:8px;background:rgba(255,255,255,0.03);flex:1;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden;">
-          <img src="asset/shirt.png" style="width:80%;height:80%;object-fit:contain;">
-          <div style="position:absolute;top:5px;left:5px;padding:2px 6px;border-radius:999px;background:rgba(100,210,180,0.18);font-size:8px;color:#9BE8C9;font-weight:700;">TERLARIS</div>
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;flex-shrink:0;">
+        <div style="display:flex;align-items:center;gap:5px;padding:6px 13px;border-radius:999px;background:rgba(100,210,180,0.12);border:1px solid rgba(100,210,180,0.24);">
+          <div style="width:6px;height:6px;border-radius:50%;background:#9BE8C9;box-shadow:0 0 6px rgba(155,232,201,0.6);"></div>
+          <span style="font-size:10px;color:#9BE8C9;font-weight:600;">Gratis Ongkir</span>
         </div>
-        <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.88);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0;">T-Shirt Oversize</div>
-        <div style="display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
-          <span style="font-size:11px;font-weight:800;color:#9BE8C9;">Rp 185.000</span>
-          <div style="width:20px;height:20px;border-radius:6px;background:rgba(100,210,180,0.12);border:1px solid rgba(100,210,180,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#9BE8C9" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        </div>
-      </div>
-      <div style="border-radius:12px;background:linear-gradient(160deg,rgba(100,210,180,0.05),rgba(6,12,8,0.95));border:1px solid rgba(100,210,180,0.1);padding:10px;display:flex;flex-direction:column;gap:6px;min-height:0;overflow:hidden;" onmouseenter="this.style.borderColor='rgba(100,210,180,0.3)'" onmouseleave="this.style.borderColor='rgba(100,210,180,0.1)'">
-        <div style="position:relative;border-radius:8px;background:rgba(255,255,255,0.03);flex:1;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden;">
-          <img src="asset/shirt.png" style="width:80%;height:80%;object-fit:contain;filter:hue-rotate(195deg);">
-          <div style="position:absolute;top:5px;left:5px;padding:2px 6px;border-radius:999px;background:rgba(96,165,250,0.18);font-size:8px;color:rgba(147,197,253,0.95);font-weight:700;">BARU</div>
-        </div>
-        <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.88);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0;">Hoodie Crop Navy</div>
-        <div style="display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
-          <span style="font-size:11px;font-weight:800;color:#9BE8C9;">Rp 320.000</span>
-          <div style="width:20px;height:20px;border-radius:6px;background:rgba(100,210,180,0.12);border:1px solid rgba(100,210,180,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#9BE8C9" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        </div>
-      </div>
-      <div style="border-radius:12px;background:linear-gradient(160deg,rgba(100,210,180,0.05),rgba(6,12,8,0.95));border:1px solid rgba(100,210,180,0.1);padding:10px;display:flex;flex-direction:column;gap:6px;min-height:0;overflow:hidden;" onmouseenter="this.style.borderColor='rgba(100,210,180,0.3)'" onmouseleave="this.style.borderColor='rgba(100,210,180,0.1)'">
-        <div style="position:relative;border-radius:8px;background:rgba(255,255,255,0.03);flex:1;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden;">
-          <img src="asset/shirt.png" style="width:80%;height:80%;object-fit:contain;filter:hue-rotate(280deg);">
-          <div style="position:absolute;top:5px;left:5px;padding:2px 6px;border-radius:999px;background:rgba(167,139,250,0.18);font-size:8px;color:rgba(196,181,253,0.95);font-weight:700;">PROMO</div>
-        </div>
-        <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.88);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0;">Jaket Denim Klasik</div>
-        <div style="display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
-          <span style="font-size:11px;font-weight:800;color:#9BE8C9;">Rp 459.000</span>
-          <div style="width:20px;height:20px;border-radius:6px;background:rgba(100,210,180,0.12);border:1px solid rgba(100,210,180,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#9BE8C9" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        </div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.3);">Min. pembelian Rp 150rb</div>
       </div>
     </div>
-    <!-- Footer stats -->
-    <div style="display:flex;align-items:center;gap:20px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.05);flex-shrink:0;">
-      <span style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.7);">128 <span style="font-weight:400;font-size:9px;color:rgba(255,255,255,0.35);">Produk</span></span>
-      <span style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.7);">4.8★ <span style="font-weight:400;font-size:9px;color:rgba(255,255,255,0.35);">Rating</span></span>
-      <div style="margin-left:auto;display:flex;align-items:center;gap:5px;"><div style="width:7px;height:7px;border-radius:50%;background:#28CA41;box-shadow:0 0 6px rgba(40,202,65,0.6);"></div><span style="font-size:9px;color:rgba(255,255,255,0.45);">Online</span></div>
+    <!-- Category pills -->
+    <div style="display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px;scrollbar-width:none;">
+      <div style="padding:6px 14px;border-radius:999px;background:rgba(100,210,180,0.14);border:1px solid rgba(100,210,180,0.28);font-size:10px;color:#9BE8C9;font-weight:700;white-space:nowrap;cursor:pointer;">Semua</div>
+      <div style="padding:6px 14px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);font-size:10px;color:rgba(255,255,255,0.45);white-space:nowrap;cursor:pointer;">Kaos</div>
+      <div style="padding:6px 14px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);font-size:10px;color:rgba(255,255,255,0.45);white-space:nowrap;cursor:pointer;">Hoodie</div>
+      <div style="padding:6px 14px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);font-size:10px;color:rgba(255,255,255,0.45);white-space:nowrap;cursor:pointer;">Jaket</div>
+      <div style="padding:6px 14px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);font-size:10px;color:rgba(255,255,255,0.45);white-space:nowrap;cursor:pointer;">Celana</div>
+      <div style="padding:6px 14px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);font-size:10px;color:rgba(255,255,255,0.45);white-space:nowrap;cursor:pointer;">Aksesori</div>
+    </div>
+    <!-- Product grid — 3 cols, 2 rows = 6 products (scrollable) -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+      <!-- Card 1 -->
+      <div style="border-radius:14px;background:linear-gradient(160deg,rgba(100,210,180,0.07),rgba(6,12,8,0.96));border:1px solid rgba(100,210,180,0.13);padding:14px;display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:all 0.22s;" onmouseenter="this.style.borderColor='rgba(100,210,180,0.36)';this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 32px rgba(0,0,0,0.4)'" onmouseleave="this.style.borderColor='rgba(100,210,180,0.13)';this.style.transform='';this.style.boxShadow=''">
+        <div style="position:relative;border-radius:10px;background:rgba(255,255,255,0.03);aspect-ratio:1;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+          <img src="asset/shirt.png" style="width:82%;height:82%;object-fit:contain;">
+          <div style="position:absolute;top:8px;left:8px;padding:3px 8px;border-radius:999px;background:rgba(100,210,180,0.18);font-size:8px;color:#9BE8C9;font-weight:700;letter-spacing:0.04em;">TERLARIS</div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.9);margin-bottom:3px;">T-Shirt Oversize</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.32);">Tersedia 4 warna</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <span style="font-size:13px;font-weight:800;color:#9BE8C9;">Rp 185.000</span>
+          <div style="width:26px;height:26px;border-radius:8px;background:rgba(100,210,180,0.14);border:1px solid rgba(100,210,180,0.24);display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#9BE8C9" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div style="border-radius:14px;background:linear-gradient(160deg,rgba(96,165,250,0.06),rgba(6,12,8,0.96));border:1px solid rgba(96,165,250,0.12);padding:14px;display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:all 0.22s;" onmouseenter="this.style.borderColor='rgba(96,165,250,0.32)';this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 32px rgba(0,0,0,0.4)'" onmouseleave="this.style.borderColor='rgba(96,165,250,0.12)';this.style.transform='';this.style.boxShadow=''">
+        <div style="position:relative;border-radius:10px;background:rgba(255,255,255,0.03);aspect-ratio:1;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+          <img src="asset/shirt.png" style="width:82%;height:82%;object-fit:contain;filter:hue-rotate(195deg);">
+          <div style="position:absolute;top:8px;left:8px;padding:3px 8px;border-radius:999px;background:rgba(96,165,250,0.18);font-size:8px;color:rgba(147,197,253,0.95);font-weight:700;letter-spacing:0.04em;">BARU</div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.9);margin-bottom:3px;">Hoodie Crop Navy</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.32);">Unisex · S–XL</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <span style="font-size:13px;font-weight:800;color:rgba(147,197,253,0.95);">Rp 320.000</span>
+          <div style="width:26px;height:26px;border-radius:8px;background:rgba(96,165,250,0.12);border:1px solid rgba(96,165,250,0.24);display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(147,197,253,0.9)" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div style="border-radius:14px;background:linear-gradient(160deg,rgba(167,139,250,0.06),rgba(6,12,8,0.96));border:1px solid rgba(167,139,250,0.12);padding:14px;display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:all 0.22s;" onmouseenter="this.style.borderColor='rgba(167,139,250,0.32)';this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 32px rgba(0,0,0,0.4)'" onmouseleave="this.style.borderColor='rgba(167,139,250,0.12)';this.style.transform='';this.style.boxShadow=''">
+        <div style="position:relative;border-radius:10px;background:rgba(255,255,255,0.03);aspect-ratio:1;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+          <img src="asset/shirt.png" style="width:82%;height:82%;object-fit:contain;filter:hue-rotate(280deg);">
+          <div style="position:absolute;top:8px;left:8px;padding:3px 8px;border-radius:999px;background:rgba(167,139,250,0.18);font-size:8px;color:rgba(196,181,253,0.95);font-weight:700;letter-spacing:0.04em;">PROMO</div>
+          <div style="position:absolute;top:8px;right:8px;padding:2px 6px;border-radius:6px;background:rgba(239,68,68,0.2);font-size:8px;color:rgba(252,165,165,0.9);font-weight:700;">-20%</div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.9);margin-bottom:3px;">Jaket Denim Klasik</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.32);">Limited stock</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div><span style="font-size:13px;font-weight:800;color:rgba(196,181,253,0.95);">Rp 367.000</span><span style="font-size:9px;text-decoration:line-through;color:rgba(255,255,255,0.25);margin-left:5px;">459rb</span></div>
+          <div style="width:26px;height:26px;border-radius:8px;background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.24);display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(196,181,253,0.9)" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div style="border-radius:14px;background:linear-gradient(160deg,rgba(251,146,60,0.06),rgba(6,12,8,0.96));border:1px solid rgba(251,146,60,0.12);padding:14px;display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:all 0.22s;" onmouseenter="this.style.borderColor='rgba(251,146,60,0.32)';this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 32px rgba(0,0,0,0.4)'" onmouseleave="this.style.borderColor='rgba(251,146,60,0.12)';this.style.transform='';this.style.boxShadow=''">
+        <div style="position:relative;border-radius:10px;background:rgba(255,255,255,0.03);aspect-ratio:1;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+          <img src="asset/shirt.png" style="width:82%;height:82%;object-fit:contain;filter:hue-rotate(30deg) saturate(1.4);">
+          <div style="position:absolute;top:8px;left:8px;padding:3px 8px;border-radius:999px;background:rgba(251,146,60,0.18);font-size:8px;color:rgba(253,186,116,0.95);font-weight:700;letter-spacing:0.04em;">EKSKLUSIF</div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.9);margin-bottom:3px;">Polo Shirt Premium</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.32);">Bahan katun 100%</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <span style="font-size:13px;font-weight:800;color:rgba(253,186,116,0.95);">Rp 245.000</span>
+          <div style="width:26px;height:26px;border-radius:8px;background:rgba(251,146,60,0.12);border:1px solid rgba(251,146,60,0.24);display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(253,186,116,0.9)" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </div>
+      </div>
+      <!-- Card 5 -->
+      <div style="border-radius:14px;background:linear-gradient(160deg,rgba(244,114,182,0.06),rgba(6,12,8,0.96));border:1px solid rgba(244,114,182,0.12);padding:14px;display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:all 0.22s;" onmouseenter="this.style.borderColor='rgba(244,114,182,0.32)';this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 32px rgba(0,0,0,0.4)'" onmouseleave="this.style.borderColor='rgba(244,114,182,0.12)';this.style.transform='';this.style.boxShadow=''">
+        <div style="position:relative;border-radius:10px;background:rgba(255,255,255,0.03);aspect-ratio:1;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+          <img src="asset/shirt.png" style="width:82%;height:82%;object-fit:contain;filter:hue-rotate(310deg) saturate(1.2);">
+          <div style="position:absolute;top:8px;left:8px;padding:3px 8px;border-radius:999px;background:rgba(244,114,182,0.18);font-size:8px;color:rgba(249,168,212,0.95);font-weight:700;letter-spacing:0.04em;">FAVORIT</div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.9);margin-bottom:3px;">Crop Top Linen</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.32);">Wanita · XS–L</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <span style="font-size:13px;font-weight:800;color:rgba(249,168,212,0.95);">Rp 165.000</span>
+          <div style="width:26px;height:26px;border-radius:8px;background:rgba(244,114,182,0.12);border:1px solid rgba(244,114,182,0.24);display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(249,168,212,0.9)" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </div>
+      </div>
+      <!-- Card 6 -->
+      <div style="border-radius:14px;background:linear-gradient(160deg,rgba(100,210,180,0.05),rgba(6,12,8,0.96));border:1px solid rgba(100,210,180,0.1);padding:14px;display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:all 0.22s;" onmouseenter="this.style.borderColor='rgba(100,210,180,0.28)';this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 32px rgba(0,0,0,0.4)'" onmouseleave="this.style.borderColor='rgba(100,210,180,0.1)';this.style.transform='';this.style.boxShadow=''">
+        <div style="position:relative;border-radius:10px;background:rgba(255,255,255,0.03);aspect-ratio:1;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+          <img src="asset/shirt.png" style="width:82%;height:82%;object-fit:contain;filter:grayscale(0.3) brightness(0.85);">
+          <div style="position:absolute;top:8px;left:8px;padding:3px 8px;border-radius:999px;background:rgba(255,255,255,0.1);font-size:8px;color:rgba(255,255,255,0.55);font-weight:700;letter-spacing:0.04em;">CLASSIC</div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.9);margin-bottom:3px;">Kemeja Oxford</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.32);">Formal · M–XXL</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <span style="font-size:13px;font-weight:800;color:#9BE8C9;">Rp 295.000</span>
+          <div style="width:26px;height:26px;border-radius:8px;background:rgba(100,210,180,0.12);border:1px solid rgba(100,210,180,0.22);display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#9BE8C9" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer stats bar -->
+    <div style="display:flex;align-items:center;gap:24px;padding:12px 16px;border-radius:12px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.05);">
+      <div style="display:flex;align-items:center;gap:6px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(155,232,201,0.5)" stroke-width="2.5"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><circle cx="12" cy="12" r="2"/></svg><span style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.6);">128 Produk</span></div>
+      <div style="display:flex;align-items:center;gap:5px;"><span style="font-size:11px;color:#FFBD2E;">★★★★★</span><span style="font-size:10px;color:rgba(255,255,255,0.4);">4.8 (312 ulasan)</span></div>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:6px;"><div style="width:7px;height:7px;border-radius:50%;background:#28CA41;box-shadow:0 0 8px rgba(40,202,65,0.7);"></div><span style="font-size:10px;color:rgba(255,255,255,0.4);">Toko Online</span></div>
     </div>
   </div>
 </div>
