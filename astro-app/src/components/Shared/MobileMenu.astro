@@ -1,0 +1,32 @@
+---
+// Shared mobile/hamburger drawer — byte-identical structure on landing & legal
+// pages. Only the nav-link hrefs differ (same base-prefix pattern as Navbar).
+export interface Props {
+  variant?: 'landing' | 'legal';
+}
+
+const { variant = 'landing' } = Astro.props;
+const base = variant === 'legal' ? 'amora-landing-v2.html' : '';
+---
+
+<div class="mobile-menu" id="mobileMenu">
+  <!-- Scrollable body: only nav links -->
+  <div class="menu-body">
+    <div class="mobile-nav-links">
+      <a href={`${base}#fitur`} class="mobile-link">Fitur</a>
+      <a href={`${base}#harga`} class="mobile-link">Harga</a>
+      <a href={`${base}#faq`} class="mobile-link">FAQ</a>
+    </div>
+  </div>
+  <!-- Pinned footer: CTAs + legal always at device bottom -->
+  <div class="menu-footer">
+    <div class="mobile-ctas">
+      <a href="https://admin.amora.id/" class="outline">Masuk</a>
+      <a href="https://admin.amora.id/" class="filled">Buat Toko</a>
+    </div>
+    <div class="mobile-legal">
+      <a href="syarat.html">Syarat &amp; Ketentuan</a>
+      <a href="privasi.html">Kebijakan Privasi</a>
+    </div>
+  </div>
+</div>

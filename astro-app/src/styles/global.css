@@ -1,0 +1,818 @@
+/* ═══════════════════════════════════════
+   GLOBAL — shared across every page
+   Extracted verbatim from amora-landing-v2.html / privasi.html / syarat.html
+   Page-specific styles (e.g. orb animation variant, hero, accordion) live in
+   styles/landing.css and styles/legal.css instead — see component variant props.
+═══════════════════════════════════════ */
+
+/* ── RESET & BASE ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── DESIGN TOKENS ── */
+:root {
+  --bg: #09090E;
+  --elevated: #0F0F17;
+  --card: #131320;
+  --accent: #6B8E5A;
+  --accent-light: #8FB87A;
+  --accent-glow: rgba(107, 142, 90, 0.22);
+  --accent-dim: rgba(107, 142, 90, 0.12);
+  --accent-border: rgba(107, 142, 90, 0.32);
+  --border: rgba(255, 255, 255, 0.07);
+  --border-mid: rgba(255, 255, 255, 0.11);
+  --border-strong: rgba(255, 255, 255, 0.17);
+  --text: #F2F2F5;
+  --text-80: rgba(242, 242, 245, 0.8);
+  --text-60: rgba(242, 242, 245, 0.6);
+  --text-40: rgba(242, 242, 245, 0.4);
+  --text-30: rgba(242, 242, 245, 0.3);
+  --text-20: rgba(242, 242, 245, 0.2);
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 20px;
+  --r-2xl: 24px;
+  --r-3xl: 32px;
+  --r-full: 9999px;
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.55);
+  --shadow-accent: 0 8px 32px rgba(107, 142, 90, 0.18);
+  --inset-top: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  --font-display: 'Geist', 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --accent-vivid: #7FB86A;
+  --depth-1: rgba(255, 255, 255, 0.05);
+  --depth-2: rgba(255, 255, 255, 0.08);
+  --depth-glow: rgba(107, 142, 90, 0.18);
+  --surface-card: rgba(15, 18, 28, 0.85);
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  overflow-x: hidden;
+  position: relative;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ── SEAMLESS BACKGROUND CANVAS (BackgroundCanvas component, base orbs 1–6) ──
+   The "landing" variant adds .pg-orb-center / .pg-orb-mid / .pg-orb-mid2 plus
+   the orb-drift animations — those live in styles/landing.css. ── */
+#page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.pg-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Top-left — deep navy depth */
+.pg-orb-1 {
+  top: -15%;
+  left: -12%;
+  width: 65vw;
+  height: 65vw;
+  background: radial-gradient(ellipse, rgba(8, 22, 55, 0.65) 0%, transparent 68%);
+  filter: blur(90px);
+}
+
+/* Top-right — forest green glow */
+.pg-orb-2 {
+  top: -8%;
+  right: -8%;
+  width: 55vw;
+  height: 55vw;
+  background: radial-gradient(ellipse, rgba(25, 65, 40, 0.55) 0%, transparent 68%);
+  filter: blur(100px);
+}
+
+/* Center — main ambient bloom */
+.pg-orb-3 {
+  top: 28%;
+  left: 20%;
+  width: 70vw;
+  height: 60vw;
+  background: radial-gradient(ellipse, rgba(15, 40, 25, 0.4) 0%, transparent 65%);
+  filter: blur(120px);
+}
+
+/* Center-right — accent green pulse */
+.pg-orb-4 {
+  top: 35%;
+  right: 5%;
+  width: 40vw;
+  height: 40vw;
+  background: radial-gradient(ellipse, rgba(107, 142, 90, 0.1) 0%, transparent 65%);
+  filter: blur(80px);
+}
+
+/* Bottom-left — deep teal */
+.pg-orb-5 {
+  bottom: 5%;
+  left: -5%;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(ellipse, rgba(10, 35, 30, 0.6) 0%, transparent 68%);
+  filter: blur(100px);
+}
+
+/* Bottom-right — navy fade */
+.pg-orb-6 {
+  bottom: -10%;
+  right: -5%;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(ellipse, rgba(10, 18, 45, 0.6) 0%, transparent 68%);
+  filter: blur(90px);
+}
+
+/* ── BackgroundCanvas "landing" variant: extra orbs + drift animation ──
+   Scoped under .pg-bg-landing so legal pages (no modifier class) keep their
+   exact static appearance with the same 6 base orbs above. ── */
+.pg-bg-landing .pg-orb-center {
+  position: absolute;
+  top: 28%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80vw;
+  height: 60vw;
+  background: radial-gradient(ellipse, rgba(107, 142, 90, 0.09) 0%, transparent 60%);
+  filter: blur(80px);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.pg-bg-landing .pg-orb-1 {
+  animation: orb-drift-1 22s ease-in-out infinite alternate;
+}
+
+.pg-bg-landing .pg-orb-2 {
+  animation: orb-drift-2 28s ease-in-out infinite alternate;
+}
+
+.pg-bg-landing .pg-orb-3 {
+  animation: orb-drift-3 34s ease-in-out infinite alternate;
+}
+
+.pg-bg-landing .pg-orb-4 {
+  animation: orb-drift-4 26s ease-in-out infinite alternate;
+}
+
+.pg-bg-landing .pg-orb-5 {
+  animation: orb-drift-5 30s ease-in-out infinite alternate;
+}
+
+.pg-bg-landing .pg-orb-6 {
+  animation: orb-drift-6 24s ease-in-out infinite alternate;
+}
+
+.pg-bg-landing .pg-orb-mid {
+  position: absolute;
+  top: 30%;
+  left: 5%;
+  width: 55vw;
+  height: 55vw;
+  background: radial-gradient(ellipse, rgba(56, 140, 120, 0.22) 0%, transparent 65%);
+  filter: blur(110px);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: orb-drift-3 32s ease-in-out infinite alternate;
+}
+
+.pg-bg-landing .pg-orb-mid2 {
+  position: absolute;
+  top: 55%;
+  right: 0%;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(ellipse, rgba(80, 140, 90, 0.18) 0%, transparent 65%);
+  filter: blur(100px);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: orb-drift-2 38s ease-in-out infinite alternate;
+}
+
+@keyframes orb-drift-1 {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(4vw, 3vh) scale(1.08); }
+}
+
+@keyframes orb-drift-2 {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(-3vw, 5vh) scale(0.94); }
+}
+
+@keyframes orb-drift-3 {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(3vw, -4vh) scale(1.06); }
+}
+
+@keyframes orb-drift-4 {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(-4vw, -3vh) scale(1.1); }
+}
+
+@keyframes orb-drift-5 {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(5vw, 4vh) scale(0.92); }
+}
+
+@keyframes orb-drift-6 {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(-3vw, -5vh) scale(1.05); }
+}
+
+/* Sections sit above the background canvas */
+section {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  border: none;
+}
+
+nav,
+footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* ═══════════════════════════════════════
+   BUTTONS (used by Navbar, Footer and page sections)
+═══════════════════════════════════════ */
+.btn-ghost {
+  padding: 9px 18px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid var(--border-mid);
+  border-radius: var(--r-xl);
+  color: var(--text-80);
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
+.btn-primary {
+  padding: 9px 18px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background: var(--accent);
+  border-radius: var(--r-xl);
+  color: #fff;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.btn-primary:hover {
+  background: var(--accent-light);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 40px rgba(107, 142, 90, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* ═══════════════════════════════════════
+   NAVBAR (Navbar component)
+═══════════════════════════════════════ */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  transition: top 0.4s cubic-bezier(0.22, 1, 0.36, 1), padding 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+nav.scrolled {
+  top: 10px;
+  padding: 0 16px;
+}
+
+.nav-inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  transition: border-radius 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.4s ease,
+    backdrop-filter 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease,
+    padding 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+nav.scrolled .nav-inner {
+  border-radius: 9999px;
+  background: rgba(13, 13, 24, 0.76);
+  backdrop-filter: blur(36px) saturate(2) brightness(1.08);
+  -webkit-backdrop-filter: blur(36px) saturate(2) brightness(1.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.55),
+    0 2px 12px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  padding: 0 20px;
+}
+
+.nav-logo img {
+  height: 30px;
+  width: auto;
+  filter: brightness(0) invert(1);
+}
+
+/* ── Logo Animation ── */
+.logo-anim {
+  position: relative;
+  height: 30px;
+  width: auto
+}
+
+.logo-anim svg {
+  height: 100%;
+  width: auto;
+  display: block
+}
+
+.logo-anim .fill-layer {
+  position: relative;
+  z-index: 1
+}
+
+.logo-anim .fill-layer path {
+  fill: #fff;
+  opacity: 0;
+  filter: blur(14px);
+  transform-box: fill-box;
+  transform-origin: center
+}
+
+.logo-anim .stroke-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none
+}
+
+.logo-anim .stroke-layer path {
+  fill: none;
+  stroke: #8FB87A;
+  stroke-width: 5;
+  stroke-opacity: 1;
+  paint-order: stroke fill
+}
+
+@keyframes strokeGlow {
+  0% {
+    filter: drop-shadow(0 0 0 rgba(89, 112, 67, 0)) drop-shadow(0 0 0 rgba(89, 112, 67, 0))
+  }
+
+  25% {
+    filter: drop-shadow(0 0 18px rgba(89, 112, 67, .7)) drop-shadow(0 0 45px rgba(89, 112, 67, .5))
+  }
+
+  60% {
+    filter: drop-shadow(0 0 10px rgba(89, 112, 67, .4)) drop-shadow(0 0 28px rgba(89, 112, 67, .25))
+  }
+
+  100% {
+    filter: drop-shadow(0 0 0 rgba(89, 112, 67, 0)) drop-shadow(0 0 0 rgba(89, 112, 67, 0));
+    opacity: 0
+  }
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.nav-links a {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-60);
+  transition: color 0.2s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  height: 1px;
+  width: 0;
+  background: var(--accent-light);
+  transition: width 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--text);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-ctas {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  padding: 8px;
+  border-radius: var(--r-md);
+  transition: background 0.2s;
+}
+
+.hamburger:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* ── Side drawer — starts below navbar (navbar IS the drawer header) ── */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 68px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 49;
+  background: rgba(9, 9, 14, 0.96);
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  flex-direction: column;
+  transform: translateX(100%);
+  pointer-events: none;
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mobile-menu.open {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* When menu is open — navbar resets to full-width bar (no pill) and lifts z-index */
+nav.menu-open {
+  top: 0 !important;
+  padding: 0 !important;
+  z-index: 55;
+  transition: none;
+}
+
+nav.menu-open .nav-inner {
+  border-radius: 0 !important;
+  background: rgba(13, 13, 24, 0.97) !important;
+  backdrop-filter: blur(24px) saturate(1.4) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(1.4) !important;
+  border: none !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09) !important;
+  box-shadow: none !important;
+  padding: 0 20px !important;
+}
+
+/* Menu scrollable body */
+.menu-body {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 32px 24px 20px;
+  gap: 2px;
+}
+
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mobile-link {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--text-60);
+  padding: 14px 16px;
+  border-radius: 10px;
+  display: block;
+  letter-spacing: 0.01em;
+  text-align: center;
+  transition: color 0.2s, background 0.2s;
+}
+
+.mobile-link:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* CTA buttons — pinned in footer */
+.mobile-ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mobile-ctas a {
+  font-size: 0.9rem;
+  padding: 13px 16px;
+  text-align: center;
+  border-radius: var(--r-lg);
+  font-weight: 500;
+  display: block;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.mobile-ctas a.outline {
+  border: 1px solid var(--border-mid);
+  color: var(--text-60);
+}
+
+.mobile-ctas a.filled {
+  background: var(--accent);
+  font-weight: 600;
+  color: #fff;
+}
+
+.mobile-ctas a:active {
+  transform: scale(0.98);
+}
+
+/* Pinned footer — CTAs + legal always at device bottom */
+.menu-footer {
+  flex-shrink: 0;
+  padding: 24px 24px;
+  padding-bottom: calc(36px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.mobile-legal {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.mobile-legal a {
+  font-size: 0.75rem;
+  color: var(--text-40);
+  transition: color 0.2s;
+}
+
+.mobile-legal a:hover {
+  color: var(--accent-light);
+}
+
+@media (max-width: 768px) {
+
+  .nav-links,
+  .nav-ctas {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .mobile-menu {
+    display: flex;
+  }
+
+  nav.scrolled {
+    top: 8px;
+    padding: 0 12px;
+  }
+
+  nav.scrolled .nav-inner {
+    padding: 0 14px;
+    height: 100%;
+  }
+}
+
+/* ═══════════════════════════════════════
+   FOOTER (Footer component)
+═══════════════════════════════════════ */
+footer {
+  background: rgba(15, 15, 23, 0.96) !important;
+  backdrop-filter: blur(24px);
+  border-top: 1px solid var(--border);
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(107, 142, 90, 0.5), transparent);
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 72px 28px 36px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px 64px;
+  margin-bottom: 52px;
+}
+
+@media (min-width: 768px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  }
+}
+
+.footer-brand img {
+  height: 30px;
+  width: auto;
+  margin-bottom: 14px;
+  filter: brightness(0) invert(1);
+}
+
+.footer-brand p {
+  font-size: 0.875rem;
+  color: var(--text-60);
+  line-height: 1.65;
+  margin-bottom: 20px;
+  max-width: 255px;
+}
+
+.footer-brand small {
+  font-size: 0.75rem;
+  color: var(--text-30);
+}
+
+.footer-col h4 {
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-40);
+  margin-bottom: 18px;
+}
+
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.footer-col ul a {
+  font-size: 0.875rem;
+  color: var(--text-60);
+  transition: color 0.2s;
+}
+
+.footer-col ul a:hover {
+  color: var(--text);
+}
+
+.footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-contact-item svg {
+  width: 15px;
+  height: 15px;
+  color: var(--text-40);
+  flex-shrink: 0;
+}
+
+.footer-contact-item a {
+  font-size: 0.875rem;
+  color: var(--text-60);
+  transition: color 0.2s;
+}
+
+.footer-contact-item a:hover {
+  color: var(--text);
+}
+
+.footer-social {
+  display: flex;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.footer-social a {
+  color: var(--text-40);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.footer-social a:hover {
+  color: var(--accent-light);
+  border-color: var(--accent-border);
+  background: var(--accent-dim);
+  transform: scale(1.1);
+  box-shadow: 0 0 12px rgba(107, 142, 90, 0.2);
+}
+
+.footer-social svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ═══════════════════════════════════════
+   ICONS
+═══════════════════════════════════════ */
+svg[data-icon] {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ═══════════════════════════════════════
+   REDUCED MOTION (generic part — page-specific
+   overrides such as .hero-3d-card live in landing.css)
+═══════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

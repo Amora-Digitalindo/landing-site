@@ -1,0 +1,66 @@
+---
+// MainLayout wraps every page with the shared chrome: background canvas,
+// navbar, mobile menu, page content, footer, and the global script bundle.
+import BackgroundCanvas from '../components/Shared/BackgroundCanvas.astro';
+import Navbar from '../components/Shared/Navbar.astro';
+import MobileMenu from '../components/Shared/MobileMenu.astro';
+import Footer from '../components/Shared/Footer.astro';
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  variant?: 'landing' | 'legal';
+}
+
+const { title, description, canonicalPath, variant = 'landing' } = Astro.props;
+const canonicalUrl = `https://amora.id${canonicalPath}`;
+const ogImageUrl = 'https://amora.id/asset/logo.png';
+---
+
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href={canonicalUrl}>
+  <link rel="icon" type="image/png" href="/asset/logo.png">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="id_ID">
+  <meta property="og:site_name" content="Amora.id">
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:url" content={canonicalUrl}>
+  <meta property="og:image" content={ogImageUrl}>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content={ogImageUrl}>
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Geist:wght@700;800;900&family=Inter:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&display=swap"
+    rel="stylesheet">
+  <slot name="head" />
+</head>
+
+<body>
+  <BackgroundCanvas variant={variant} />
+
+  <Navbar variant={variant} />
+  <MobileMenu variant={variant} />
+
+  <slot />
+
+  <Footer variant={variant} />
+
+  <script src="../scripts/global.js"></script>
+  <slot name="scripts" />
+</body>
+
+</html>

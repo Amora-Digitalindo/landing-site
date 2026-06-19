@@ -1,0 +1,16 @@
+---
+// Renders the plain pre-accordion markup (h3 + body content) exactly as the
+// original static HTML did. scripts/legal-accordion.js mutates this into the
+// interactive trigger/body structure client-side at runtime — kept that way
+// (not pre-rendered) to stay behavior-identical with the original page.
+export interface Props {
+  heading: string;
+}
+
+const { heading } = Astro.props;
+---
+
+<div class="legal-section">
+  <h3>{heading}</h3>
+  <slot />
+</div>

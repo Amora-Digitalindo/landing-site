@@ -1,0 +1,28 @@
+---
+// Shared ambient background orbs. Legal pages render 6 static orbs; the
+// landing page additionally renders 3 extra orbs (.pg-orb-center/-mid/-mid2)
+// and animates all of them via orb-drift keyframes. That CSS lives in
+// global.css scoped under the .pg-bg-landing modifier class added here, so
+// legal pages keep their exact static appearance with zero extra markup cost.
+export interface Props {
+  variant?: 'landing' | 'legal';
+}
+
+const { variant = 'landing' } = Astro.props;
+---
+
+<div id="page-bg" class:list={[{ 'pg-bg-landing': variant === 'landing' }]} aria-hidden="true">
+  <div class="pg-orb pg-orb-1"></div>
+  <div class="pg-orb pg-orb-2"></div>
+  <div class="pg-orb pg-orb-3"></div>
+  <div class="pg-orb pg-orb-4"></div>
+  <div class="pg-orb pg-orb-5"></div>
+  <div class="pg-orb pg-orb-6"></div>
+  {variant === 'landing' && (
+    <>
+      <div class="pg-orb pg-orb-center"></div>
+      <div class="pg-orb-mid"></div>
+      <div class="pg-orb-mid2"></div>
+    </>
+  )}
+</div>

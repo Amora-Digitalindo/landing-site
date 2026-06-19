@@ -1,0 +1,146 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import LegalHeader from '../components/Legal/LegalHeader.astro';
+import LegalAccordion from '../components/Legal/LegalAccordion.astro';
+import '../styles/legal.css';
+---
+
+<MainLayout
+  title="Syarat & Ketentuan — Amora.id"
+  description="Syarat dan ketentuan penggunaan layanan Amora.id — ketentuan langganan, kebijakan pembayaran, dan tanggung jawab pengguna."
+  canonicalPath="/syarat"
+  variant="legal"
+>
+  <main>
+    <div class="legal-page">
+      <LegalHeader title="Syarat & Ketentuan" date="Versi 1.1 · 24 Mei 2026 · Berlaku sejak tanggal publikasi" />
+      <div class="legal-sections">
+
+        <LegalAccordion heading="Tentang Amora">
+          <p>Amora adalah platform web builder berbasis langganan (SaaS) yang membantu UMKM membangun dan mengelola toko online sendiri. Amora adalah penyedia teknologi, bukan marketplace.</p>
+          <p>Amora tidak ikut campur dalam transaksi jual beli antara Merchant dan Pembeli, tidak menyentuh dana transaksi, dan tidak bertanggung jawab atas pengiriman pesanan.</p>
+        </LegalAccordion>
+
+        <LegalAccordion heading="Siapa yang Bisa Menggunakan Amora?">
+          <p>Anda bisa menggunakan Amora jika memenuhi syarat berikut:</p>
+          <ul>
+            <li>Berusia minimal 18 tahun atau memiliki persetujuan dari orang tua/wali yang sah</li>
+            <li>Memiliki kapasitas hukum untuk membuat perjanjian</li>
+            <li>Mendaftarkan diri dengan informasi yang benar dan lengkap</li>
+          </ul>
+          <p>Amora berhak menolak atau menutup akun yang menggunakan informasi palsu.</p>
+        </LegalAccordion>
+
+        <LegalAccordion heading="Paket dan Harga">
+          <p>Tersedia dua paket: <strong>Starter</strong> dan <strong>Pro</strong>. Detail fitur dan harga terbaru selalu tersedia di halaman harga Amora.</p>
+          <ul>
+            <li>Harga sudah termasuk PPN — tidak ada biaya pajak tambahan di luar harga yang tertera</li>
+            <li>Pembayaran pertama dilakukan di muka saat subscription</li>
+            <li>Tagihan bulanan berikutnya dibayarkan setiap bulan</li>
+            <li>Invoice tagihan bulanan diterbitkan 3 hari sebelum tanggal jatuh tempo</li>
+            <li>Pembayaran yang sudah dilakukan tidak dapat dikembalikan (non-refundable)</li>
+          </ul>
+        </LegalAccordion>
+
+        <LegalAccordion heading="Batas Waktu Pembayaran">
+          <p>Pembayaran pertama harus diselesaikan dalam waktu <strong>2 jam</strong> setelah order dibuat. Halaman pembayaran akan kadaluarsa setelah 2 jam dan order otomatis dibatalkan.</p>
+          <p>Setelah pembayaran pertama berhasil, layanan Platform langsung aktif dan dapat digunakan.</p>
+        </LegalAccordion>
+
+        <LegalAccordion heading="Perpanjangan Bulanan">
+          <p>Untuk tagihan bulanan berikutnya:</p>
+          <ul>
+            <li>Invoice diterbitkan otomatis 3 hari sebelum tanggal jatuh tempo</li>
+            <li>Tanggal jatuh tempo adalah tanggal yang sama setiap bulannya dengan tanggal pembayaran pertama</li>
+            <li>Pembayaran harus diselesaikan maksimal pada tanggal jatuh tempo</li>
+            <li>Jika melewati jatuh tempo, akses Platform ditangguhkan hingga pembayaran diselesaikan</li>
+          </ul>
+        </LegalAccordion>
+
+        <LegalAccordion heading="Biaya Kelebihan Kuota">
+          <p>Jika pesanan melebihi kuota bulanan paket Anda, biaya tambahan dikenakan:</p>
+          <ul>
+            <li>Starter (kuota 300 pesanan/bulan): +2% per pesanan lebih</li>
+            <li>Pro (kuota 1.000 pesanan/bulan): +1% per pesanan lebih</li>
+          </ul>
+          <p>Tagihan kelebihan kuota diproses di periode berikutnya.</p>
+        </LegalAccordion>
+
+        <LegalAccordion heading="Pembayaran dan Payment Gateway">
+          <p>Amora tidak memproses, menampung, atau memiliki akses ke dana dari transaksi toko Anda. Semua pembayaran dari Pembeli mengalir langsung melalui payment gateway yang Anda pilih sendiri.</p>
+          <ul>
+            <li>Amora hanya menyediakan integrasi teknis dengan payment gateway (Xendit, Midtrans, Doku, dll)</li>
+            <li>Tanggung jawab atas transaksi, klaim, dan pengembalian dana sepenuhnya ada di tangan Merchant dan payment gateway masing-masing</li>
+          </ul>
+        </LegalAccordion>
+
+        <LegalAccordion heading="Kewajiban Merchant">
+          <p>Sebagai Merchant, Anda berkewajiban untuk:</p>
+          <ul>
+            <li>Memastikan semua informasi produk akurat dan tidak menyesatkan sesuai UU No. 8 Tahun 1999</li>
+            <li>Tidak menjual produk yang melanggar hukum Indonesia</li>
+            <li>Mengisi dan mempublikasikan Kebijakan Refund sebelum toko aktif</li>
+            <li>Memproses pesanan dalam waktu wajar</li>
+            <li>Membalas komplain Pembeli dalam 2×24 jam hari kerja</li>
+          </ul>
+        </LegalAccordion>
+
+        <LegalAccordion heading="Yang Tidak Boleh Dilakukan">
+          <p>Pelanggaran berikut dapat mengakibatkan akun dinonaktifkan tanpa pemberitahuan:</p>
+          <ul>
+            <li>Menjual barang ilegal (palsu, narkotika, senjata, konten melanggar kesusilaan)</li>
+            <li>Menipu atau menyesatkan Pembeli</li>
+            <li>Menyebarkan informasi palsu atau hoaks</li>
+            <li>Melanggar hak kekayaan intelektual pihak lain</li>
+            <li>Merusak atau membebani sistem Platform</li>
+            <li>Pencucian uang atau kegiatan ilegal lainnya</li>
+          </ul>
+        </LegalAccordion>
+
+        <LegalAccordion heading="Penanganan Fraud dan Sanksi">
+          <p>Jika Amora menemukan atau menerima laporan yang dapat dipercaya tentang fraud, akun Merchant akan langsung dinonaktifkan. Untuk pelanggaran ringan, sanksi bertahap berlaku:</p>
+          <ul>
+            <li>Peringatan tertulis</li>
+            <li>Penangguhan sementara</li>
+            <li>Penghentian layanan permanen</li>
+          </ul>
+          <p>Biaya langganan yang sudah dibayar tidak akan dikembalikan. Kasus pidana dilaporkan ke pihak berwajib.</p>
+        </LegalAccordion>
+
+        <LegalAccordion heading="Hak Kekayaan Intelektual">
+          <p><strong>Milik Amora:</strong> Seluruh Platform termasuk kode, desain, merek, dan logo adalah milik Amora. Anda hanya mendapat lisensi pakai selama berlangganan.</p>
+          <p><strong>Milik Anda:</strong> Semua konten yang Anda unggah tetap milik Anda. Anda memberi Amora izin menampilkannya untuk operasional Platform. Anda bertanggung jawab jika konten Anda melanggar hak pihak lain.</p>
+        </LegalAccordion>
+
+        <LegalAccordion heading="Batasan Tanggung Jawab Amora">
+          <p>Platform disediakan as-is tanpa garansi bebas gangguan setiap saat. Amora tidak bertanggung jawab atas:</p>
+          <ul>
+            <li>Kerugian dari transaksi Merchant-Pembeli</li>
+            <li>Gangguan akibat bencana atau serangan siber</li>
+            <li>Kerugian tidak langsung</li>
+            <li>Kegagalan payment gateway atau jasa pengiriman</li>
+          </ul>
+          <p>Maksimal kewajiban Amora kepada Anda = biaya langganan 3 bulan terakhir.</p>
+        </LegalAccordion>
+
+        <LegalAccordion heading="Penghentian Layanan">
+          <ul>
+            <li><strong>Oleh Merchant:</strong> Bisa berhenti kapan saja. Berlaku di akhir periode tagihan. Tidak ada refund.</li>
+            <li><strong>Oleh Amora (30 hari pemberitahuan):</strong> Jika Amora menghentikan layanan secara keseluruhan.</li>
+            <li><strong>Oleh Amora (tanpa pemberitahuan):</strong> Jika ada pelanggaran berat, fraud, atau perintah otoritas.</li>
+          </ul>
+          <p>Ekspor data Anda sebelum akun ditutup.</p>
+        </LegalAccordion>
+
+        <LegalAccordion heading="Perubahan Ketentuan & Penyelesaian Sengketa">
+          <p>Amora bisa mengubah ketentuan ini kapan saja. Perubahan besar diberitahukan minimal 14 hari sebelum berlaku. Terus menggunakan Platform berarti menyetujui ketentuan baru.</p>
+          <p>Sengketa diselesaikan melalui: musyawarah (30 hari) → mediasi → Pengadilan Negeri Jakarta Pusat. Berlaku hukum Republik Indonesia.</p>
+          <p>Hubungi kami: <a href="mailto:support@amora.id">support@amora.id</a></p>
+        </LegalAccordion>
+
+      </div>
+    </div>
+  </main>
+
+  <script slot="scripts" src="../scripts/legal-accordion.js"></script>
+</MainLayout>

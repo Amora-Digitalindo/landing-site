@@ -1,0 +1,13 @@
+---
+export interface Props {
+  title: string;
+  date: string;
+}
+
+const { title, date } = Astro.props;
+---
+
+<div class="legal-page-header">
+  <h1>{title}</h1>
+  <p>{date}</p>
+</div>

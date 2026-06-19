@@ -1,0 +1,76 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import HeroSection from '../components/Landing/HeroSection.astro';
+import Showcase from '../components/Landing/Features/Showcase.astro';
+import Pricing from '../components/Landing/Pricing.astro';
+import CtaBanner from '../components/Landing/CtaBanner.astro';
+import Faq from '../components/Landing/Faq.astro';
+import '../styles/landing.css';
+---
+
+<MainLayout
+  title="Amora.id — Semua Bisa Punya Toko Online"
+  description="Buat toko online sendiri dalam 5 menit tanpa coding dan tanpa komisi besar. Amora.id memberi Anda website toko, domain sendiri, dan kepemilikan penuh atas data pelanggan."
+  canonicalPath="/"
+  variant="landing"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: 'Amora.id',
+      url: 'https://amora.id/',
+      logo: 'https://amora.id/asset/logo.png',
+      contactPoint: {
+        '@type': 'ContactPoint',
+        email: 'support@amora.id',
+        telephone: '+62-878-3201-1500',
+        contactType: 'customer support',
+        areaServed: 'ID',
+        availableLanguage: 'id'
+      }
+    })} />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: 'Amora.id',
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Web',
+      offers: [
+        { '@type': 'Offer', name: 'Starter', price: '149000', priceCurrency: 'IDR' },
+        { '@type': 'Offer', name: 'Pro', price: '209000', priceCurrency: 'IDR' }
+      ]
+    })} />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        { '@type': 'Question', name: 'Apa itu Amora dan apa bedanya dengan Tokopedia atau Shopee?', acceptedAnswer: { '@type': 'Answer', text: 'Amora adalah platform web builder berbasis langganan (SaaS) untuk membuat dan mengelola toko online sendiri — tanpa coding, tanpa developer. Berbeda dengan marketplace seperti Tokopedia atau Shopee, di Amora Anda memiliki toko sendiri dengan domain sendiri, dan data pelanggan sepenuhnya milik Anda.' } },
+        { '@type': 'Question', name: 'Seberapa cepat toko saya bisa online?', acceptedAnswer: { '@type': 'Answer', text: 'Sangat cepat. Setup awal rata-rata selesai dalam 5 menit — toko Anda bisa langsung online tanpa proses teknis yang rumit.' } },
+        { '@type': 'Question', name: 'Apa saja paket yang tersedia dan berapa harganya?', acceptedAnswer: { '@type': 'Answer', text: 'Tersedia dua paket: Starter (Rp 149.000/bulan) untuk hingga 100 produk dan 300 pesanan/bulan; serta Pro (Rp 209.000/bulan, diskon 40%) untuk hingga 250 produk, 1.000 pesanan/bulan, plus fitur Penjadwalan Peluncuran Toko.' } },
+        { '@type': 'Question', name: 'Apakah ada biaya per transaksi?', acceptedAnswer: { '@type': 'Answer', text: 'Tidak ada selama pesanan masih dalam kuota bulanan. Jika kuota terlampaui, biaya tambahan sebesar 2% per pesanan (Starter) atau 1% per pesanan (Pro) akan ditagihkan di periode berikutnya.' } },
+        { '@type': 'Question', name: 'Metode pembayaran apa yang didukung di toko saya?', acceptedAnswer: { '@type': 'Answer', text: 'Toko Amora mendukung Xendit, Midtrans, dan Doku — mencakup transfer bank, QRIS, e-wallet, serta kartu kredit/debit. Anda perlu mendaftar dan mengonfigurasi payment gateway secara mandiri.' } },
+        { '@type': 'Question', name: 'Apakah saya bisa menggunakan domain sendiri?', acceptedAnswer: { '@type': 'Answer', text: 'Ya. Kedua paket (Starter dan Pro) mendukung integrasi domain kustom, sehingga toko Anda dapat diakses melalui alamat brand Anda sendiri, misalnya tokosaya.com.' } },
+        { '@type': 'Question', name: 'Siapa yang memiliki data toko dan data pelanggan saya?', acceptedAnswer: { '@type': 'Answer', text: 'Anda sepenuhnya. Data toko, produk, dan pelanggan adalah milik Anda sebagai merchant. Amora tidak menjual atau memanfaatkan data Anda untuk kepentingan pihak lain.' } },
+        { '@type': 'Question', name: 'Bagaimana cara menghubungi tim support Amora?', acceptedAnswer: { '@type': 'Answer', text: 'Tim support siap membantu melalui email support@amora.id atau WhatsApp/Telepon 0878 3201 1500, Senin–Jumat pukul 09.00–17.00 WIB.' } }
+      ]
+    })} />
+  </Fragment>
+
+  <HeroSection />
+
+  <div class="section-divider" aria-hidden="true"></div>
+
+  <Showcase />
+
+  <div class="section-divider" aria-hidden="true"></div>
+
+  <Pricing />
+  <CtaBanner />
+
+  <div class="section-divider" aria-hidden="true"></div>
+
+  <Faq />
+
+  <script slot="scripts" src="../scripts/landing.js"></script>
+</MainLayout>

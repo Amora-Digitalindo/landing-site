@@ -1,0 +1,98 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import LegalHeader from '../components/Legal/LegalHeader.astro';
+import LegalAccordion from '../components/Legal/LegalAccordion.astro';
+import '../styles/legal.css';
+---
+
+<MainLayout
+  title="Kebijakan Privasi — Amora.id"
+  description="Kebijakan privasi Amora.id — bagaimana kami mengumpulkan, menggunakan, dan melindungi data Anda sesuai UU No. 27 Tahun 2022 (UU PDP)."
+  canonicalPath="/privasi"
+  variant="legal"
+>
+  <main>
+    <div class="legal-page">
+      <LegalHeader title="Kebijakan Privasi" date="24 Mei 2026 · Disusun sesuai UU No. 27 Tahun 2022 (UU PDP)" />
+      <div class="legal-sections">
+
+        <LegalAccordion heading="Data Apa yang Kami Kumpulkan?">
+          <p><strong>Data yang Anda berikan:</strong></p>
+          <ul>
+            <li>Nama, email, nomor telepon, tanggal lahir</li>
+            <li>Username dan kata sandi (disimpan terenkripsi)</li>
+            <li>Informasi bisnis untuk keperluan toko</li>
+          </ul>
+          <p><strong>Data yang dikumpulkan otomatis:</strong></p>
+          <ul>
+            <li>Jenis perangkat, browser, alamat IP</li>
+            <li>Halaman yang dikunjungi dan durasi kunjungan</li>
+            <li>Data dari cookies dan teknologi pelacakan serupa</li>
+          </ul>
+        </LegalAccordion>
+
+        <LegalAccordion heading="Untuk Apa Data Anda Digunakan?">
+          <p>Data Anda digunakan untuk:</p>
+          <ul>
+            <li>Menjalankan dan meningkatkan layanan Platform</li>
+            <li>Mengelola akun dan komunikasi dengan Anda</li>
+            <li>Mendeteksi dan mencegah penipuan atau penyalahgunaan</li>
+            <li>Memenuhi kewajiban hukum jika diminta otoritas berwenang</li>
+            <li>Mengirim info produk dan promosi (bisa Anda nonaktifkan kapan saja)</li>
+          </ul>
+          <p>Amora memproses data berdasarkan: persetujuan Anda, pelaksanaan kontrak, kewajiban hukum, atau kepentingan yang sah.</p>
+        </LegalAccordion>
+
+        <LegalAccordion heading="Siapa yang Bisa Mengakses Data Anda?">
+          <p>Amora tidak menjual data pribadi Anda. Data bisa dibagikan kepada:</p>
+          <ul>
+            <li>Mitra teknis yang membantu operasional Platform (terikat perjanjian kerahasiaan)</li>
+            <li>Otoritas hukum jika diwajibkan oleh pengadilan atau peraturan</li>
+            <li>Pihak pengakuisisi jika Amora mengalami merger atau akuisisi</li>
+          </ul>
+          <p><strong>Catatan untuk Merchant:</strong> Anda adalah Pengendali Data atas informasi Pembeli yang dikumpulkan di toko Anda dan bertanggung jawab mematuhi UU PDP.</p>
+        </LegalAccordion>
+
+        <LegalAccordion heading="Bagaimana Kami Melindungi Data Anda?">
+          <p>Langkah perlindungan yang kami terapkan:</p>
+          <ul>
+            <li>Enkripsi data saat dikirim dan disimpan</li>
+            <li>Kontrol akses ketat dan autentikasi berlapis</li>
+            <li>Pemantauan sistem secara berkala</li>
+          </ul>
+          <p>Data disimpan hanya selama diperlukan, lalu dihapus atau dianonimkan. Tidak ada sistem yang 100% aman.</p>
+        </LegalAccordion>
+
+        <LegalAccordion heading="Hak Anda atas Data Pribadi">
+          <p>Sesuai UU No. 27 Tahun 2022 (UU PDP), Anda berhak untuk:</p>
+          <ul>
+            <li>Mengakses data yang kami miliki tentang Anda</li>
+            <li>Memperbaiki data yang tidak akurat</li>
+            <li>Menghapus data Anda dalam kondisi tertentu</li>
+            <li>Menolak pemrosesan untuk tujuan pemasaran</li>
+            <li>Memindahkan data ke platform lain (portabilitas data)</li>
+            <li>Menarik persetujuan kapan saja</li>
+          </ul>
+          <p>Ajukan permintaan ke <a href="mailto:support@amora.id">support@amora.id</a>. Jika tidak puas, Anda bisa melapor ke Kementerian Komunikasi dan Digital.</p>
+        </LegalAccordion>
+
+        <LegalAccordion heading="Cookies">
+          <p>Kami menggunakan cookies untuk: fungsi dasar (login, keamanan), preferensi, analitik, dan pemasaran.</p>
+          <p>Anda bisa mengatur atau menonaktifkan cookies di browser, namun ini bisa mempengaruhi fungsi Platform.</p>
+        </LegalAccordion>
+
+        <LegalAccordion heading="Platform Tidak untuk Anak di Bawah 18 Tahun">
+          <p>Amora tidak ditujukan untuk pengguna di bawah usia 18 tahun. Jika kami mengetahui ada data anak yang terkumpul tanpa izin orang tua, data tersebut akan segera dihapus.</p>
+        </LegalAccordion>
+
+        <LegalAccordion heading="Perubahan Kebijakan">
+          <p>Kebijakan ini bisa diperbarui sewaktu-waktu. Perubahan besar diberitahukan lewat email atau notifikasi di Platform. Terus menggunakan Platform setelah perubahan berarti menyetujui kebijakan baru.</p>
+          <p>Hubungi kami: <a href="mailto:support@amora.id">support@amora.id</a> · Jakarta, Indonesia</p>
+        </LegalAccordion>
+
+      </div>
+    </div>
+  </main>
+
+  <script slot="scripts" src="../scripts/legal-accordion.js"></script>
+</MainLayout>
