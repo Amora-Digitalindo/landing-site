@@ -11,47 +11,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com/">
 <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<!-- Shared site nav/footer markup needs the homepage's CSS for those components -->
+<!-- Shared design tokens/buttons + the homepage's CSS for the shared nav/footer components -->
+<link rel="stylesheet" href="../assets/css/design-system.css">
 <link rel="stylesheet" href="../css/amora-landing-v2.css">
 <style>
+  /* Page-specific tokens that extend the shared design system (assets/css/design-system.css) */
   :root {
-    --bg: #09090E;
-    --elevated: #0F0F17;
-    --card: #131320;
-    --accent: #6B8E5A;
-    --accent-light: #8FB87A;
-    --accent-dim: rgba(107, 142, 90, 0.12);
-    --accent-border: rgba(107, 142, 90, 0.32);
-    --border: rgba(255, 255, 255, 0.07);
-    --border-mid: rgba(255, 255, 255, 0.11);
-    --border-strong: rgba(255, 255, 255, 0.17);
-    --text: #F2F2F5;
-    --text-80: rgba(242, 242, 245, 0.8);
     --text-70: rgba(242, 242, 245, 0.7);
-    --text-60: rgba(242, 242, 245, 0.6);
-    --text-40: rgba(242, 242, 245, 0.4);
     --text-35: rgba(242, 242, 245, 0.35);
     --danger: #E0584F;
     --danger-dim: rgba(224, 88, 79, 0.1);
-    --r-md: 12px;
-    --r-lg: 16px;
-    --r-xl: 20px;
-    --r-2xl: 24px;
-    --r-full: 9999px;
-    --font-display: 'Geist', 'Inter', system-ui, sans-serif;
-    --font-body: 'Inter', system-ui, sans-serif;
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { background: var(--bg); }
-
-  body {
-    font-family: var(--font-body);
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
   }
 
   .page {
@@ -331,31 +300,18 @@
     cursor: pointer;
   }
 
-  .btn-primary {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+  /* Card-context sizing for the shared .btn-primary (assets/css/design-system.css) —
+     full width + centered, since this page's CTAs fill a narrow form card. */
+  .btn-block {
     width: 100%;
+    justify-content: center;
     padding: 14px;
     font-size: 0.9375rem;
-    font-weight: 700;
-    font-family: var(--font-body);
-    color: #fff;
-    background: var(--accent);
     border: none;
-    border-radius: var(--r-md);
     cursor: pointer;
-    text-decoration: none;
-    transition: background 0.2s, transform 0.15s, opacity 0.2s;
   }
 
-  .btn-primary:hover:not(:disabled) {
-    background: var(--accent-light);
-    transform: translateY(-1px);
-  }
-
-  .btn-primary:disabled {
+  .btn-block:disabled {
     opacity: 0.6;
     cursor: not-allowed;
     transform: none;
@@ -575,7 +531,7 @@
           <label for="commitment">Saya berkomitmen aktif menggunakan Amora dan bersedia memberikan feedback jujur selama 3 bulan pertama</label>
         </div>
 
-        <button type="submit" class="btn-primary" id="submitBtn">
+        <button type="submit" class="btn-primary btn-block" id="submitBtn">
           <span id="submitBtnText">Kirim Pendaftaran →</span>
         </button>
         <a href="#" class="btn-secondary" id="subscribeLink">Subscribe Tanpa Coba Gratis →</a>
@@ -588,7 +544,7 @@
         <div class="state-icon">🙏</div>
         <h2>Slot VIP Merchant Sudah Penuh</h2>
         <p>30 slot VIP Merchant sudah terisi semua. Kamu masih bisa subscribe langsung dan menikmati semua fitur Amora.</p>
-        <a href="#" class="btn-primary" id="fullSubscribeLink">Subscribe Sekarang →</a>
+        <a href="#" class="btn-primary btn-block" id="fullSubscribeLink">Subscribe Sekarang →</a>
       </div>
 
       <!-- SUCCESS VIEW -->
@@ -619,7 +575,7 @@
         <div class="error-box">
           Ups, ada kendala teknis. Data kamu belum tersimpan. Coba lagi atau hubungi kami via WhatsApp di 0878 3210 1750.
         </div>
-        <button type="button" class="btn-primary" id="retryBtn">Coba Lagi</button>
+        <button type="button" class="btn-primary btn-block" id="retryBtn">Coba Lagi</button>
       </div>
 
     </div>

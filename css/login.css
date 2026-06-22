@@ -1,36 +1,13 @@
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:            #09090E;
-      --accent:        #6B8E5A;
-      --accent-light:  #8FB87A;
-      --accent-glow:   rgba(107,142,90,0.22);
-      --accent-border: rgba(107,142,90,0.32);
-      --border:        rgba(255,255,255,0.07);
-      --text:    #F2F2F5;
-      --text-80: rgba(242,242,245,0.8);
-      --text-60: rgba(242,242,245,0.6);
-      --r-lg: 16px;
-      --r-xl: 20px;
-      --r-full: 9999px;
-    }
-
-    html { scroll-behavior: smooth; }
+    /* Reset, design tokens, base resets (html/body/a/img), and .btn-primary/.btn-ghost
+       now live in assets/css/design-system.css (linked before this file). Only this
+       page's unique centering layout is added here. */
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', system-ui, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      line-height: 1.5;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 20px;
-      position: relative;
     }
-    a { text-decoration: none; color: inherit; }
-    img { display: block; max-width: 100%; }
 
     /* ── Background orbs ── */
     #page-bg {
@@ -169,37 +146,18 @@
     }
     .form-group input::placeholder { color: var(--text-60); }
 
-    /* ── Buttons ── */
-    .btn-primary {
+    /* ── Buttons ──
+       .btn-primary base (color, radius, hover lift) comes from the shared
+       design system — this just sizes it for the login card's full-width
+       form context and keeps the page's entrance animation. */
+    button.btn-primary {
       width: 100%;
+      justify-content: center;
       padding: 12px 16px;
-      border-radius: var(--r-xl);
       border: none;
-      background: linear-gradient(135deg, var(--accent), var(--accent-light));
-      color: #fff;
-      font-size: 0.9375rem;
-      font-weight: 600;
       cursor: pointer;
-      transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
-      position: relative;
-      overflow: hidden;
       animation: fadeInUp 0.5s cubic-bezier(0.22,1,0.36,1) 0.3s both;
     }
-    .btn-primary::after {
-      content: '';
-      position: absolute;
-      top: 0; left: -60%;
-      width: 40%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-      transition: left 0.5s ease;
-    }
-    .btn-primary:hover::after { left: 130%; }
-    .btn-primary:hover {
-      opacity: 0.92;
-      transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(107,142,90,0.35);
-    }
-    .btn-primary:active { transform: translateY(0); }
 
     .divider {
       display: flex;

@@ -1,35 +1,5 @@
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #09090E; --elevated: #0F0F17; --card: #131320;
-      --accent: #6B8E5A; --accent-light: #8FB87A;
-      --accent-glow: rgba(107,142,90,0.22); --accent-dim: rgba(107,142,90,0.12);
-      --accent-border: rgba(107,142,90,0.32);
-      --border: rgba(255,255,255,0.07); --border-mid: rgba(255,255,255,0.11);
-      --border-strong: rgba(255,255,255,0.17);
-      --text: #F2F2F5; --text-80: rgba(242,242,245,0.8);
-      --text-60: rgba(242,242,245,0.6); --text-40: rgba(242,242,245,0.4);
-      --text-30: rgba(242,242,245,0.3);
-      --r-sm: 8px; --r-md: 12px; --r-lg: 16px;
-      --r-xl: 20px; --r-2xl: 24px; --r-full: 9999px;
-      --shadow-sm: 0 1px 4px rgba(0,0,0,0.4);
-      --shadow-md: 0 4px 16px rgba(0,0,0,0.45);
-      --inset-top: inset 0 1px 0 rgba(255,255,255,0.07);
-      --font-display: 'Geist', 'Inter', system-ui, sans-serif;
-      --font-body:    'Inter', system-ui, sans-serif;
-      --accent-vivid:  #7FB86A;
-      --depth-1:       rgba(255,255,255,0.03);
-      --depth-2:       rgba(255,255,255,0.055);
-      --depth-glow:    rgba(107,142,90,0.12);
-    }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg); color: var(--text);
-      font-family: 'Inter', system-ui, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      line-height: 1.5; overflow-x: hidden; position: relative;
-    }
-    a { text-decoration: none; color: inherit; }
-    img { display: block; max-width: 100%; }
+    /* Reset, design tokens, base resets (html/body/a/img), and .btn-primary/.btn-ghost
+       now live in assets/css/design-system.css (linked before this file). */
 
     #page-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
     .pg-orb { position: absolute; border-radius: 50%; pointer-events: none; }
@@ -107,10 +77,6 @@
     .nav-links a:hover { color: var(--text); }
     .nav-links a:hover::after { width: 100%; }
     .nav-ctas { display: flex; align-items: center; gap: 10px; }
-    .btn-ghost { padding: 9px 18px; font-size: 0.875rem; font-weight: 500; border: 1px solid var(--border-mid); border-radius: var(--r-xl); color: var(--text-80); transition: background 0.2s, border-color 0.2s, color 0.2s; }
-    .btn-ghost:hover { background: rgba(255,255,255,0.05); border-color: var(--border-strong); color: var(--text); }
-    .btn-primary { padding: 9px 18px; font-size: 0.875rem; font-weight: 600; background: var(--accent); border-radius: var(--r-xl); color: #fff; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; display: inline-flex; align-items: center; gap: 7px; }
-    .btn-primary:hover { background: var(--accent-light); transform: translateY(-1px); box-shadow: 0 12px 40px rgba(107,142,90,0.3); }
     .hamburger {
       display: none; background: none; border: none; cursor: pointer;
       color: var(--text); padding: 8px; border-radius: var(--r-md); transition: background 0.2s;
