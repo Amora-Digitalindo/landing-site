@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daftar Founding Merchant — Amora.id</title>
+<meta name="description" content="Daftar jadi salah satu dari 30 Founding Merchant Amora.id. Gratis 3 bulan penuh, lalu harga founding terkunci selamanya.">
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #09090E;
+    --card: #131320;
+    --accent: #6B8E5A;
+    --accent-light: #8FB87A;
+    --accent-dim: rgba(107, 142, 90, 0.14);
+    --accent-border: rgba(107, 142, 90, 0.35);
+    --border: rgba(255, 255, 255, 0.1);
+    --border-strong: rgba(255, 255, 255, 0.18);
+    --text: #F2F2F5;
+    --text-70: rgba(242, 242, 245, 0.7);
+    --text-50: rgba(242, 242, 245, 0.5);
+    --text-35: rgba(242, 242, 245, 0.35);
+    --danger: #E0584F;
+    --danger-dim: rgba(224, 88, 79, 0.1);
+    --r-md: 12px;
+    --r-lg: 16px;
+    --r-xl: 20px;
+    --r-2xl: 24px;
+    --r-full: 9999px;
+    --font-display: 'Geist', 'Inter', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { background: var(--bg); }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    min-height: 100vh;
+    padding: 48px 20px 64px;
+    background:
+      radial-gradient(ellipse at 50% -10%, rgba(107, 142, 90, 0.18) 0%, transparent 55%),
+      var(--bg);
+  }
+
+  .container {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* ── Header card ── */
+  .header-card {
+    text-align: center;
+    padding: 36px 28px;
+    border-radius: var(--r-2xl);
+    background: linear-gradient(150deg, #6B8E5A 0%, #486B3A 100%);
+    box-shadow: 0 24px 60px rgba(107, 142, 90, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    margin-bottom: 16px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 14px;
+    border-radius: var(--r-full);
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #fff;
+    margin-bottom: 18px;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #fff;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5); }
+    50% { opacity: 0.6; box-shadow: 0 0 0 4px rgba(255, 255, 255, 0); }
+  }
+
+  .header-card h1 {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+
+  .header-card p {
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 360px;
+    margin: 0 auto 20px;
+  }
+
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .pill {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: var(--r-full);
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+  }
+
+  /* ── Slot indicator ── */
+  .slot-card {
+    padding: 16px 20px;
+    border-radius: var(--r-lg);
+    background: var(--card);
+    border: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+
+  .slot-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8125rem;
+    color: var(--text-70);
+    margin-bottom: 10px;
+  }
+
+  #slotCount {
+    font-family: var(--font-display);
+    font-weight: 800;
+    color: var(--accent-light);
+  }
+
+  .slot-bar {
+    width: 100%;
+    height: 6px;
+    border-radius: var(--r-full);
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+  }
+
+  .slot-fill {
+    height: 100%;
+    border-radius: var(--r-full);
+    background: linear-gradient(90deg, var(--accent), var(--accent-light));
+    width: 0%;
+    transition: width 0.6s ease;
+  }
+
+  /* ── Form card ── */
+  .card {
+    padding: 28px 24px;
+    border-radius: var(--r-2xl);
+    background: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+  }
+
+  .field {
+    margin-bottom: 18px;
+  }
+
+  .field label {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 7px;
+  }
+
+  .field input[type="text"],
+  .field input[type="tel"] {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 0.9375rem;
+    font-family: var(--font-body);
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r-md);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  .field input::placeholder {
+    color: var(--text-35);
+  }
+
+  .field input:focus {
+    border-color: var(--accent-border);
+    box-shadow: 0 0 0 3px var(--accent-dim);
+  }
+
+  .field input.error {
+    border-color: var(--danger);
+    box-shadow: 0 0 0 3px var(--danger-dim);
+  }
+
+  .field-hint {
+    font-size: 0.75rem;
+    color: var(--text-35);
+    margin-top: 6px;
+  }
+
+  .field-error-msg {
+    font-size: 0.75rem;
+    color: var(--danger);
+    margin-top: 6px;
+    display: none;
+  }
+
+  .field-error-msg.show {
+    display: block;
+  }
+
+  .wa-input-wrap {
+    display: flex;
+    align-items: stretch;
+  }
+
+  .wa-prefix {
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-70);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-strong);
+    border-right: none;
+    border-radius: var(--r-md) 0 0 var(--r-md);
+  }
+
+  .wa-input-wrap input {
+    border-radius: 0 var(--r-md) var(--r-md) 0 !important;
+  }
+
+  .checkbox-field {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 22px;
+    padding: 14px;
+    border-radius: var(--r-md);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+  }
+
+  .checkbox-field.error {
+    border-color: var(--danger);
+    box-shadow: 0 0 0 3px var(--danger-dim);
+  }
+
+  .checkbox-field input[type="checkbox"] {
+    margin-top: 2px;
+    width: 17px;
+    height: 17px;
+    accent-color: var(--accent);
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  .checkbox-field label {
+    font-size: 0.8125rem;
+    color: var(--text-70);
+    line-height: 1.5;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 14px;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    font-family: var(--font-body);
+    color: #fff;
+    background: var(--accent);
+    border: none;
+    border-radius: var(--r-md);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s, opacity 0.2s;
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: var(--accent-light);
+    transform: translateY(-1px);
+  }
+
+  .btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .btn-secondary {
+    display: block;
+    text-align: center;
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-70);
+    text-decoration: none;
+    border-radius: var(--r-md);
+    transition: color 0.2s, background 0.2s;
+  }
+
+  .btn-secondary:hover {
+    color: var(--accent-light);
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .footnote {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-35);
+    margin-top: 18px;
+  }
+
+  /* ── Success / Error / Full states ── */
+  .state-card {
+    text-align: center;
+    padding: 40px 28px;
+    border-radius: var(--r-2xl);
+    background: var(--card);
+    border: 1px solid var(--border);
+  }
+
+  .state-icon {
+    font-size: 2.75rem;
+    margin-bottom: 16px;
+    line-height: 1;
+  }
+
+  .state-card h2 {
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+  }
+
+  .state-card p {
+    font-size: 0.9375rem;
+    color: var(--text-70);
+    margin-bottom: 24px;
+  }
+
+  .steps {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .step-num {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--accent-dim);
+    border: 1px solid var(--accent-border);
+    color: var(--accent-light);
+    font-size: 0.75rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .step span {
+    font-size: 0.875rem;
+    color: var(--text-70);
+    line-height: 1.5;
+    padding-top: 2px;
+  }
+
+  .error-box {
+    text-align: left;
+    font-size: 0.875rem;
+    color: var(--text);
+    background: var(--danger-dim);
+    border: 1px solid rgba(224, 88, 79, 0.35);
+    border-radius: var(--r-md);
+    padding: 14px 16px;
+    margin-bottom: 20px;
+  }
+
+  [hidden] { display: none !important; }
+
+  @media (max-width: 480px) {
+    .header-card { padding: 28px 20px; }
+    .header-card h1 { font-size: 1.5rem; }
+    .card, .state-card { padding: 24px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="container">
+
+    <!-- ══════ HEADER CARD ══════ -->
+    <div class="header-card">
+      <div class="badge"><span class="dot"></span> Founding Merchant — 30 Slot</div>
+      <h1>Jadi Founding Merchant<br>Amora.id</h1>
+      <p>Gratis 3 bulan penuh, lalu harga founding terkunci selamanya. Khusus 30 toko pertama.</p>
+      <div class="pills">
+        <span class="pill">✓ 3 bulan gratis</span>
+        <span class="pill">✓ Harga terkunci</span>
+        <span class="pill">✓ Dana langsung ke kamu</span>
+      </div>
+    </div>
+
+    <!-- ══════ SLOT INDICATOR ══════ -->
+    <div class="slot-card" id="slotCard">
+      <div class="slot-row">
+        <span id="slotText">Memuat slot tersedia…</span>
+        <span id="slotCount"></span>
+      </div>
+      <div class="slot-bar"><div class="slot-fill" id="slotFill"></div></div>
+    </div>
+
+    <!-- ══════ FORM VIEW ══════ -->
+    <form class="card" id="regForm" novalidate>
+
+      <div class="field">
+        <label for="namaToko">Nama Toko / Brand</label>
+        <input type="text" id="namaToko" name="namaToko" placeholder="cth. Toko Saya">
+        <div class="field-error-msg" id="namaTokoError">Nama toko wajib diisi.</div>
+      </div>
+
+      <div class="field">
+        <label for="waNumber">Nomor WhatsApp</label>
+        <div class="wa-input-wrap">
+          <span class="wa-prefix">+62</span>
+          <input type="tel" id="waNumber" name="waNumber" placeholder="812xxxxxxx" inputmode="numeric">
+        </div>
+        <div class="field-error-msg" id="waNumberError">Nomor WhatsApp minimal 8 digit.</div>
+      </div>
+
+      <div class="field">
+        <label for="linkMarketplace">Link Toko Marketplace Aktif</label>
+        <input type="text" id="linkMarketplace" name="linkMarketplace" placeholder="https://shopee.co.id/tokokamu">
+        <div class="field-hint">Boleh Shopee, Tokopedia, TikTok Shop</div>
+        <div class="field-error-msg" id="linkMarketplaceError">Link toko wajib diisi.</div>
+      </div>
+
+      <div class="checkbox-field" id="commitmentField">
+        <input type="checkbox" id="commitment" name="commitment">
+        <label for="commitment">Saya berkomitmen aktif menggunakan Amora dan bersedia memberikan feedback jujur selama 3 bulan pertama</label>
+      </div>
+
+      <button type="submit" class="btn-primary" id="submitBtn">
+        <span id="submitBtnText">Kirim Pendaftaran →</span>
+      </button>
+      <a href="#" class="btn-secondary" id="subscribeLink">Mau langsung subscribe tanpa kurasi →</a>
+
+      <p class="footnote">Tidak ada pembayaran sampai bulan ke-4</p>
+    </form>
+
+    <!-- ══════ SLOT FULL VIEW ══════ -->
+    <div class="state-card" id="fullCard" hidden>
+      <div class="state-icon">🙏</div>
+      <h2>Slot Founding Merchant Sudah Penuh</h2>
+      <p>30 slot founding merchant sudah terisi semua. Kamu masih bisa subscribe langsung dan menikmati semua fitur Amora.</p>
+      <a href="#" class="btn-primary" id="fullSubscribeLink" style="text-decoration:none;">Subscribe Sekarang →</a>
+    </div>
+
+    <!-- ══════ SUCCESS VIEW ══════ -->
+    <div class="state-card" id="successCard" hidden>
+      <div class="state-icon">🌿</div>
+      <h2>Pendaftaran Diterima!</h2>
+      <p id="successText">Terima kasih sudah mendaftar. Tim kami akan menghubungi kamu segera.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <span>Cek WhatsApp kamu — konfirmasi dalam 1–2 hari kerja</span>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <span>Kalau approved, kamu pilih plan dan akses gratis 3 bulan</span>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <span>Founder akan personally bantu setup toko pertamamu</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ ERROR VIEW ══════ -->
+    <div class="state-card" id="errorCard" hidden>
+      <div class="state-icon">😕</div>
+      <h2>Ups, Ada Kendala Teknis</h2>
+      <div class="error-box">
+        Ups, ada kendala teknis. Data kamu belum tersimpan. Coba lagi atau hubungi kami via WhatsApp di 0878 3210 1750.
+      </div>
+      <button type="button" class="btn-primary" id="retryBtn">Coba Lagi</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // ════════════════════════════════════════════════════════════
+  // CONFIG — ganti URL ini setelah deploy Apps Script (lihat README.md)
+  // ════════════════════════════════════════════════════════════
+  const APPS_SCRIPT_URL = 'PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';
+
+  // Link tujuan untuk merchant yang tidak ikut kurasi / saat slot penuh
+  const SUBSCRIBE_URL = 'https://amora.id/amora-landing-v2.html#harga';
+
+  const TOTAL_SLOTS = 30;
+
+  document.getElementById('subscribeLink').href = SUBSCRIBE_URL;
+  document.getElementById('fullSubscribeLink').href = SUBSCRIBE_URL;
+
+  const form = document.getElementById('regForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const submitBtnText = document.getElementById('submitBtnText');
+
+  const namaTokoInput = document.getElementById('namaToko');
+  const waInput = document.getElementById('waNumber');
+  const linkInput = document.getElementById('linkMarketplace');
+  const commitmentInput = document.getElementById('commitment');
+  const commitmentField = document.getElementById('commitmentField');
+
+  const slotCard = document.getElementById('slotCard');
+  const slotText = document.getElementById('slotText');
+  const slotCount = document.getElementById('slotCount');
+  const slotFill = document.getElementById('slotFill');
+
+  const fullCard = document.getElementById('fullCard');
+  const successCard = document.getElementById('successCard');
+  const errorCard = document.getElementById('errorCard');
+  const successText = document.getElementById('successText');
+  const retryBtn = document.getElementById('retryBtn');
+
+  // ── WhatsApp number: strip non-digits, strip leading zero ──
+  waInput.addEventListener('input', () => {
+    let digits = waInput.value.replace(/\D/g, '');
+    if (digits.startsWith('0')) digits = digits.replace(/^0+/, '');
+    waInput.value = digits;
+  });
+
+  // ── Slot indicator: fetch current registration count ──
+  function renderSlots(remaining) {
+    const filled = Math.max(TOTAL_SLOTS - remaining, 0);
+    const pct = Math.min((filled / TOTAL_SLOTS) * 100, 100);
+    slotFill.style.width = pct + '%';
+
+    if (remaining <= 0) {
+      slotText.textContent = 'Slot founding merchant sudah penuh.';
+      slotCount.textContent = '0 sisa';
+      showFullState();
+    } else {
+      slotText.textContent = 'Sisa slot founding merchant';
+      slotCount.textContent = remaining + ' / ' + TOTAL_SLOTS;
+    }
+  }
+
+  function loadSlotCount() {
+    if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.indexOf('PASTE_YOUR') === 0) {
+      // Belum di-deploy / URL belum diisi — jangan blokir form, sembunyikan indikator slot.
+      slotCard.hidden = true;
+      return;
+    }
+
+    fetch(APPS_SCRIPT_URL, { method: 'GET' })
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'success' && typeof data.count === 'number') {
+          const remaining = TOTAL_SLOTS - data.count;
+          renderSlots(remaining);
+        } else {
+          slotCard.hidden = true;
+        }
+      })
+      .catch(() => {
+        // Gagal ambil jumlah slot — jangan blokir pendaftaran, sembunyikan saja indikatornya.
+        slotCard.hidden = true;
+      });
+  }
+
+  loadSlotCount();
+
+  // ── Validation helpers ──
+  function setFieldError(input, errorEl, isValid) {
+    if (isValid) {
+      input.classList.remove('error');
+      errorEl.classList.remove('show');
+    } else {
+      input.classList.add('error');
+      errorEl.classList.add('show');
+    }
+  }
+
+  function validateForm() {
+    let valid = true;
+
+    const namaTokoValid = namaTokoInput.value.trim().length > 0;
+    setFieldError(namaTokoInput, document.getElementById('namaTokoError'), namaTokoValid);
+    if (!namaTokoValid) valid = false;
+
+    const waValid = waInput.value.replace(/\D/g, '').length >= 8;
+    setFieldError(waInput, document.getElementById('waNumberError'), waValid);
+    if (!waValid) valid = false;
+
+    const linkValid = linkInput.value.trim().length > 0;
+    setFieldError(linkInput, document.getElementById('linkMarketplaceError'), linkValid);
+    if (!linkValid) valid = false;
+
+    if (!commitmentInput.checked) {
+      commitmentField.classList.add('error');
+      valid = false;
+    } else {
+      commitmentField.classList.remove('error');
+    }
+
+    return valid;
+  }
+
+  function normalizeLink(value) {
+    const trimmed = value.trim();
+    if (!/^https?:\/\//i.test(trimmed)) {
+      return 'https://' + trimmed;
+    }
+    return trimmed;
+  }
+
+  function showFullState() {
+    form.hidden = true;
+    fullCard.hidden = false;
+  }
+
+  function setLoading(isLoading) {
+    submitBtn.disabled = isLoading;
+    submitBtnText.textContent = isLoading ? 'Mengirim...' : 'Kirim Pendaftaran →';
+  }
+
+  function showSuccess(namaToko) {
+    form.hidden = true;
+    errorCard.hidden = true;
+    successText.textContent = 'Terima kasih, ' + namaToko + '! Pendaftaran kamu sudah kami terima.';
+    successCard.hidden = false;
+  }
+
+  function showError() {
+    errorCard.hidden = false;
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) return;
+
+    setLoading(true);
+    errorCard.hidden = true;
+
+    const payload = {
+      namaToko: namaTokoInput.value.trim(),
+      whatsapp: '+62' + waInput.value.replace(/\D/g, ''),
+      linkMarketplace: normalizeLink(linkInput.value)
+    };
+
+    fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // hindari CORS preflight di Apps Script
+      body: JSON.stringify(payload)
+    })
+      .then(res => res.json())
+      .then(data => {
+        setLoading(false);
+        if (data.status === 'success') {
+          showSuccess(payload.namaToko);
+        } else {
+          showError();
+        }
+      })
+      .catch(() => {
+        setLoading(false);
+        showError();
+      });
+  });
+
+  retryBtn.addEventListener('click', () => {
+    errorCard.hidden = true;
+    setLoading(false);
+  });
+</script>
+
+</body>
+</html>
