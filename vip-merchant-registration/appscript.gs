@@ -6,7 +6,7 @@
  * See README.md in this folder for full step-by-step deploy instructions.
  */
 
-var HEADERS = ['Timestamp', 'Nama Toko', 'WhatsApp', 'Link Marketplace', 'Status', 'Catatan Amora'];
+var HEADERS = ['Timestamp', 'Nama Toko', 'Email', 'WhatsApp', 'Link Marketplace', 'Status', 'Catatan Amora'];
 
 /**
  * GET — used by the registration page on load to compute remaining slots.
@@ -28,7 +28,7 @@ function doGet(e) {
 
 /**
  * POST — receives form submissions as JSON and appends a row.
- * Expected payload: { namaToko, whatsapp, linkMarketplace }
+ * Expected payload: { namaToko, email, whatsapp, linkMarketplace }
  * Returns: { status: 'success' } or { status: 'error', message }
  */
 function doPost(e) {
@@ -40,10 +40,11 @@ function doPost(e) {
     var data = JSON.parse(e.postData.contents);
 
     var namaToko = (data.namaToko || '').toString().trim();
+    var email = (data.email || '').toString().trim();
     var whatsapp = (data.whatsapp || '').toString().trim();
     var linkMarketplace = (data.linkMarketplace || '').toString().trim();
 
-    if (!namaToko || !whatsapp || !linkMarketplace) {
+    if (!namaToko || !email || !whatsapp || !linkMarketplace) {
       return jsonResponse_({ status: 'error', message: 'Data tidak lengkap.' });
     }
 
@@ -54,6 +55,7 @@ function doPost(e) {
     sheet.appendRow([
       new Date(),
       namaToko,
+      email,
       whatsapp,
       linkMarketplace,
       'Pending Review',

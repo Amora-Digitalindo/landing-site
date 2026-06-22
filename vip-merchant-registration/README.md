@@ -8,7 +8,7 @@ Dua file di folder ini:
 
 1. Buka [sheets.google.com](https://sheets.google.com) → **Blank spreadsheet**.
 2. Beri nama, misal "VIP Merchant — Amora.id".
-3. Biarkan kosong — header kolom (`Timestamp | Nama Toko | WhatsApp | Link Marketplace | Status | Catatan Amora`) akan otomatis dibuat oleh script saat submission pertama masuk.
+3. Biarkan kosong — header kolom (`Timestamp | Nama Toko | Email | WhatsApp | Link Marketplace | Status | Catatan Amora`) akan otomatis dibuat oleh script saat submission pertama masuk.
 
 ## 2. Paste dan deploy Apps Script
 

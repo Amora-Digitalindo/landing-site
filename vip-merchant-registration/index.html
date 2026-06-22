@@ -241,7 +241,8 @@
   }
 
   .field input[type="text"],
-  .field input[type="tel"] {
+  .field input[type="tel"],
+  .field input[type="email"] {
     width: 100%;
     padding: 12px 14px;
     font-size: 0.9375rem;
@@ -548,6 +549,12 @@
         </div>
 
         <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="nama@email.com">
+          <div class="field-error-msg" id="emailError">Email tidak valid.</div>
+        </div>
+
+        <div class="field">
           <label for="waNumber">Nomor WhatsApp</label>
           <div class="wa-input-wrap">
             <span class="wa-prefix">+62</span>
@@ -643,6 +650,7 @@
   const submitBtnText = document.getElementById('submitBtnText');
 
   const namaTokoInput = document.getElementById('namaToko');
+  const emailInput = document.getElementById('email');
   const waInput = document.getElementById('waNumber');
   const linkInput = document.getElementById('linkMarketplace');
   const commitmentInput = document.getElementById('commitment');
@@ -725,6 +733,10 @@
     setFieldError(namaTokoInput, document.getElementById('namaTokoError'), namaTokoValid);
     if (!namaTokoValid) valid = false;
 
+    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim());
+    setFieldError(emailInput, document.getElementById('emailError'), emailValid);
+    if (!emailValid) valid = false;
+
     const waValid = waInput.value.replace(/\D/g, '').length >= 8;
     setFieldError(waInput, document.getElementById('waNumberError'), waValid);
     if (!waValid) valid = false;
@@ -782,6 +794,7 @@
 
     const payload = {
       namaToko: namaTokoInput.value.trim(),
+      email: emailInput.value.trim(),
       whatsapp: '+62' + waInput.value.replace(/\D/g, ''),
       linkMarketplace: normalizeLink(linkInput.value)
     };
