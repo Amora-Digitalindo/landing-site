@@ -6398,84 +6398,54 @@
       margin-top: 1px;
     }
 
-    .vip-price-block {
-      padding-top: 24px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      margin-bottom: 20px;
-    }
-
-    .vip-price-label {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--accent-light);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      text-align: center;
-      margin-bottom: 16px;
-    }
-
-    .vip-price-row {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .vip-price-item {
+    .vip-free-highlight {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
-      flex: 1;
-      min-width: 160px;
-      max-width: 220px;
-      padding: 20px 16px;
-      border-radius: var(--r-xl);
-      background: rgba(107, 142, 90, 0.14);
-      border: 1px solid rgba(107, 142, 90, 0.4);
-      box-shadow: 0 0 32px rgba(107, 142, 90, 0.15);
-    }
-
-    .vip-price-tier {
-      font-family: var(--font-display);
-      font-size: 0.75rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-60);
+      gap: 2px;
       text-align: center;
+      padding: 28px 20px;
+      margin-bottom: 24px;
+      border-radius: var(--r-xl);
+      background: rgba(107, 142, 90, 0.16);
+      border: 1.5px solid rgba(107, 142, 90, 0.45);
+      box-shadow: 0 0 40px rgba(107, 142, 90, 0.2);
     }
 
-    .vip-price-old {
-      font-size: 0.8125rem;
-      color: var(--text-40);
-      text-decoration: line-through;
-    }
-
-    .vip-price-new {
+    .vip-free-label {
       font-family: var(--font-display);
-      font-size: 1.875rem;
+      font-size: 3rem;
       font-weight: 800;
-      color: var(--text);
+      line-height: 1;
+      color: var(--accent-light);
       letter-spacing: -0.02em;
     }
 
-    .vip-price-new span {
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--text-60);
+    .vip-free-duration {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-top: 4px;
     }
 
-    .vip-price-note {
-      font-size: 0.75rem;
+    .vip-free-sub {
+      font-size: 0.8125rem;
+      color: var(--text-60);
+      margin-top: 8px;
+    }
+
+    .vip-price-info {
+      font-size: 0.8125rem;
       color: var(--text-40);
       text-align: center;
-      margin-top: 16px;
-      line-height: 1.5;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .vip-price-info strong {
+      color: var(--text-60);
+      font-weight: 600;
     }
 
     .vip-validity {
