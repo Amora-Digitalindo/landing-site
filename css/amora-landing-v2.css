@@ -6324,6 +6324,27 @@
         0 0 100px rgba(107, 142, 90, 0.2);
     }
 
+    .vip-slot-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: fit-content;
+      margin: 0 auto 20px;
+      padding: 5px 14px;
+      border-radius: var(--r-full);
+      background: rgba(255, 174, 66, 0.12);
+      border: 1px solid rgba(255, 174, 66, 0.35);
+      color: #FFC97A;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .vip-slot-icon {
+      font-size: 0.8125rem;
+    }
+
     .vip-card-icon {
       width: 44px;
       height: 44px;
@@ -6377,46 +6398,68 @@
       margin-top: 1px;
     }
 
-    .vip-price-row {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
+    .vip-price-block {
       padding-top: 24px;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
       margin-bottom: 20px;
     }
 
+    .vip-price-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent-light);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .vip-price-row {
+      display: flex;
+      justify-content: center;
+    }
+
     .vip-price-item {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      align-items: center;
+      gap: 4px;
+      width: 100%;
+      max-width: 340px;
+      padding: 22px 28px;
+      border-radius: var(--r-xl);
+      background: rgba(107, 142, 90, 0.14);
+      border: 1px solid rgba(107, 142, 90, 0.4);
+      box-shadow: 0 0 32px rgba(107, 142, 90, 0.15);
     }
 
     .vip-price-tier {
-      font-family: var(--font-display);
-      font-size: 0.6875rem;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-40);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: var(--text-60);
+      text-align: center;
     }
 
     .vip-price-old {
-      font-size: 0.8125rem;
+      font-size: 0.875rem;
       color: var(--text-40);
       text-decoration: line-through;
     }
 
     .vip-price-new {
       font-family: var(--font-display);
-      font-size: 1.5rem;
+      font-size: 2.25rem;
       font-weight: 800;
       color: var(--text);
       letter-spacing: -0.02em;
     }
 
     .vip-price-new span {
-      font-size: 0.875rem;
+      font-size: 0.9375rem;
       font-weight: 500;
       color: var(--text-60);
     }
