@@ -6301,14 +6301,14 @@
     }
 
     .vip-card {
-      max-width: 560px;
+      max-width: 640px;
       margin: 0 auto;
       background: rgba(16, 18, 30, 0.92);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: var(--r-2xl);
-      padding: 40px;
+      padding: 48px;
       box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.08),
         0 24px 72px rgba(0, 0, 0, 0.55),
@@ -6461,8 +6461,38 @@
 
     .vip-cta {
       display: flex;
+      justify-content: center;
       margin: 0 auto;
       width: fit-content;
+      max-width: 100%;
+      text-align: center;
+      white-space: normal;
+    }
+
+    @media (max-width: 768px) {
+      .vip-header {
+        margin-bottom: 40px;
+      }
+
+      .vip-card {
+        padding: 28px 20px;
+      }
+
+      .vip-free-highlight {
+        padding: 22px 16px;
+      }
+
+      .vip-free-label {
+        font-size: 2.25rem;
+      }
+
+      .vip-free-duration {
+        font-size: 1.0625rem;
+      }
+
+      .vip-cta {
+        width: 100%;
+      }
     }
 
     .plan-saving {
