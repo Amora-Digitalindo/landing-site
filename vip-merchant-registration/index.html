@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Daftar Founding Merchant — Amora.id</title>
-<meta name="description" content="Daftar jadi salah satu dari 30 Founding Merchant Amora.id. Gratis 3 bulan penuh, lalu harga founding terkunci selamanya.">
+<title>Daftar VIP Merchant — Amora.id</title>
+<meta name="description" content="Daftar jadi salah satu dari 30 VIP Merchant Amora.id. Gratis 3 bulan penuh, lalu harga VIP terkunci selamanya.">
 <link rel="icon" type="image/svg+xml" href="../assets/favicon/favicon.svg">
 <link rel="icon" type="image/png" sizes="96x96" href="../assets/favicon/favicon-96x96.png">
 <link rel="shortcut icon" href="../assets/favicon/favicon.ico">
@@ -55,11 +55,9 @@
   }
 
   .page {
+    position: relative;
+    z-index: 1;
     min-height: 100vh;
-    background:
-      radial-gradient(ellipse at 15% 0%, rgba(107, 142, 90, 0.16) 0%, transparent 55%),
-      radial-gradient(ellipse at 100% 100%, rgba(107, 142, 90, 0.08) 0%, transparent 50%),
-      var(--bg);
   }
 
   .split {
@@ -477,6 +475,15 @@
 </head>
 <body>
 
+<div id="page-bg" aria-hidden="true">
+  <div class="pg-orb pg-orb-1"></div>
+  <div class="pg-orb pg-orb-2"></div>
+  <div class="pg-orb pg-orb-3"></div>
+  <div class="pg-orb pg-orb-4"></div>
+  <div class="pg-orb pg-orb-5"></div>
+  <div class="pg-orb pg-orb-6"></div>
+</div>
+
 <div id="site-navbar"></div>
 
 <div class="page">
@@ -484,11 +491,11 @@
 
     <!-- ══════ LEFT — BANNER ══════ -->
     <div class="banner">
-      <div class="eyebrow"><span class="eyebrow-dot"></span> Founding Merchant — 30 Slot</div>
+      <div class="eyebrow"><span class="eyebrow-dot"></span> VIP Merchant — 30 Slot</div>
 
-      <h1>Jadi Founding Merchant<br><span class="accent">Amora.id.</span></h1>
+      <h1>Jadi VIP Merchant<br><span class="accent">Amora.id.</span></h1>
 
-      <p class="banner-sub">Gratis 3 bulan penuh, lalu harga founding terkunci selamanya. Khusus 30 toko pertama yang mendaftar.</p>
+      <p class="banner-sub">Gratis 3 bulan penuh, lalu harga VIP terkunci selamanya. Khusus 30 toko pertama yang mendaftar.</p>
 
       <ul class="benefit-list">
         <li>
@@ -505,7 +512,7 @@
               <polyline points="20 6 9 17 4 12" />
             </svg>
           </span>
-          Harga founding terkunci selamanya
+          Harga VIP terkunci selamanya
         </li>
         <li>
           <span class="check">
@@ -572,8 +579,8 @@
       <!-- SLOT FULL VIEW -->
       <div class="card state-card" id="fullCard" hidden>
         <div class="state-icon">🙏</div>
-        <h2>Slot Founding Merchant Sudah Penuh</h2>
-        <p>30 slot founding merchant sudah terisi semua. Kamu masih bisa subscribe langsung dan menikmati semua fitur Amora.</p>
+        <h2>Slot VIP Merchant Sudah Penuh</h2>
+        <p>30 slot VIP Merchant sudah terisi semua. Kamu masih bisa subscribe langsung dan menikmati semua fitur Amora.</p>
         <a href="#" class="btn-primary" id="fullSubscribeLink">Subscribe Sekarang →</a>
       </div>
 
@@ -624,7 +631,7 @@
   const APPS_SCRIPT_URL = 'PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';
 
   // Link tujuan untuk merchant yang tidak ikut kurasi / saat slot penuh
-  const SUBSCRIBE_URL = 'https://amora.id/amora-landing-v2.html#harga';
+  const SUBSCRIBE_URL = '../amora-landing-v2.html#harga';
 
   const TOTAL_SLOTS = 30;
 
@@ -666,11 +673,11 @@
     slotFill.style.width = pct + '%';
 
     if (remaining <= 0) {
-      slotText.textContent = 'Slot founding merchant sudah penuh.';
+      slotText.textContent = 'Slot VIP Merchant sudah penuh.';
       slotCount.textContent = '0 sisa';
       showFullState();
     } else {
-      slotText.textContent = 'Sisa slot founding merchant';
+      slotText.textContent = 'Sisa slot VIP Merchant';
       slotCount.textContent = remaining + ' / ' + TOTAL_SLOTS;
     }
   }

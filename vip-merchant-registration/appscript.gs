@@ -1,5 +1,5 @@
 /**
- * Amora.id — Founding Merchant Registration
+ * Amora.id — VIP Merchant Registration
  * Google Apps Script Web App backend.
  *
  * Deploy as Web App (Execute as: Me, Who has access: Anyone).

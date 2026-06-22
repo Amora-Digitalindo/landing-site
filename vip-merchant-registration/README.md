@@ -1,4 +1,4 @@
-# Founding Merchant Registration — Deploy Guide
+# VIP Merchant Registration — Deploy Guide
 
 Dua file di folder ini:
 - `index.html` — halaman form lengkap (CSS & JS inline), siap deploy ke Netlify/Vercel/hosting statis apapun.
@@ -7,7 +7,7 @@ Dua file di folder ini:
 ## 1. Buat Google Sheet baru
 
 1. Buka [sheets.google.com](https://sheets.google.com) → **Blank spreadsheet**.
-2. Beri nama, misal "Founding Merchant — Amora.id".
+2. Beri nama, misal "VIP Merchant — Amora.id".
 3. Biarkan kosong — header kolom (`Timestamp | Nama Toko | WhatsApp | Link Marketplace | Status | Catatan Amora`) akan otomatis dibuat oleh script saat submission pertama masuk.
 
 ## 2. Paste dan deploy Apps Script
