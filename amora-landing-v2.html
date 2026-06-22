@@ -1722,52 +1722,67 @@
         <p>Coba gratis hingga 3 bulan, lalu nikmati harga spesial seumur hidup sebagai merchant VIP.</p>
       </div>
 
-      <div class="vip-cards">
-        <div class="vip-card reveal delay-1">
-          <div class="vip-card-icon">
-            <svg data-icon viewBox="0 0 24 24" width="22" height="22">
-              <circle cx="12" cy="12" r="9" />
-              <polyline points="12 7 12 12 15.5 14" />
+      <div class="vip-card vip-card-accent reveal delay-1">
+        <div class="vip-card-icon">
+          <svg data-icon viewBox="0 0 24 24" width="22" height="22">
+            <path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2-6.3-4.6-6.3 4.6 2.3-7.2-6-4.6h7.6z" />
+          </svg>
+        </div>
+        <div class="vip-card-title">Jadi VIP Merchant</div>
+        <div class="vip-card-desc">Daftar sekarang dan nikmati semua keuntungan berikut:</div>
+
+        <ul class="vip-benefits">
+          <li>
+            <svg class="check-icon" data-icon viewBox="0 0 24 24" width="18" height="18">
+              <polyline points="20 6 9 17 4 12" />
             </svg>
+            Gratis hingga 3 bulan, tanpa kartu kredit
+          </li>
+          <li>
+            <svg class="check-icon" data-icon viewBox="0 0 24 24" width="18" height="18">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            Harga spesial seumur hidup setelah trial berakhir
+          </li>
+          <li>
+            <svg class="check-icon" data-icon viewBox="0 0 24 24" width="18" height="18">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            Akses penuh ke semua fitur Starter &amp; Pro
+          </li>
+          <li>
+            <svg class="check-icon" data-icon viewBox="0 0 24 24" width="18" height="18">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            Slot terbatas, khusus merchant yang daftar lebih awal
+          </li>
+        </ul>
+
+        <div class="vip-price-row">
+          <div class="vip-price-item">
+            <span class="vip-price-tier">Starter</span>
+            <span class="vip-price-old">Rp 134.000</span>
+            <span class="vip-price-new">Rp 99.000<span>/bulan</span></span>
           </div>
-          <div class="vip-card-title">Gratis hingga 3 Bulan</div>
-          <div class="vip-card-desc">Coba semua fitur Amora tanpa biaya selama masa trial, tanpa kartu kredit.</div>
+          <div class="vip-price-item">
+            <span class="vip-price-tier">Pro</span>
+            <span class="vip-price-old">Rp 209.000</span>
+            <span class="vip-price-new">Rp 179.000<span>/bulan</span></span>
+          </div>
         </div>
 
-        <div class="vip-card vip-card-accent reveal delay-2">
-          <div class="vip-card-icon">
-            <svg data-icon viewBox="0 0 24 24" width="22" height="22">
-              <path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2-6.3-4.6-6.3 4.6 2.3-7.2-6-4.6h7.6z" />
-            </svg>
-          </div>
-          <div class="vip-card-title">Harga VIP Seumur Hidup</div>
-          <div class="vip-card-desc">Setelah trial berakhir, kunci harga spesial selamanya:</div>
-          <div class="vip-price-row">
-            <div class="vip-price-item">
-              <span class="vip-price-tier">Starter</span>
-              <span class="vip-price-old">Rp 134.000</span>
-              <span class="vip-price-new">Rp 99.000<span>/bulan</span></span>
-            </div>
-            <div class="vip-price-item">
-              <span class="vip-price-tier">Pro</span>
-              <span class="vip-price-old">Rp 209.000</span>
-              <span class="vip-price-new">Rp 179.000<span>/bulan</span></span>
-            </div>
-          </div>
-        </div>
+        <!-- TODO: update validation/expiry date for the launching program once finalized -->
+        <div class="vip-validity">Berlaku hingga 31 Desember 2026</div>
+
+        <!-- TODO: wire to actual VIP registration URL/form once available -->
+        <a href="#" class="btn-primary vip-cta">
+          Daftar VIP Merchant Sekarang
+          <svg data-icon viewBox="0 0 24 24" width="15" height="15">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </a>
       </div>
-
-      <!-- TODO: update validation/expiry date for the launching program once finalized -->
-      <div class="vip-validity reveal delay-2">Berlaku hingga 31 Desember 2026</div>
-
-      <!-- TODO: wire to actual VIP registration URL/form once available -->
-      <a href="#" class="btn-primary vip-cta reveal delay-2">
-        Daftar VIP Merchant Sekarang
-        <svg data-icon viewBox="0 0 24 24" width="15" height="15">
-          <line x1="5" y1="12" x2="19" y2="12" />
-          <polyline points="12 5 19 12 12 19" />
-        </svg>
-      </a>
 
     </div>
   </section>
