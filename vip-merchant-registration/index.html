@@ -782,11 +782,13 @@
   function showSuccess(namaToko) {
     successText.textContent = 'Terima kasih, ' + namaToko + '! Pendaftaran kamu sudah kami terima.';
     successModal.hidden = false;
+    document.documentElement.style.overflow = 'hidden';
     successCloseBtn.focus();
   }
 
   function showError() {
     errorModal.hidden = false;
+    document.documentElement.style.overflow = 'hidden';
     retryBtn.focus();
   }
 
@@ -827,12 +829,14 @@
 
   successCloseBtn.addEventListener('click', () => {
     successModal.hidden = true;
+    document.documentElement.style.overflow = '';
     form.hidden = true;
     submittedCard.hidden = false;
   });
 
   retryBtn.addEventListener('click', () => {
     errorModal.hidden = true;
+    document.documentElement.style.overflow = '';
     setLoading(false);
   });
 </script>
