@@ -666,10 +666,12 @@
   const slotFill = document.getElementById('slotFill');
 
   const fullCard = document.getElementById('fullCard');
-  const successCard = document.getElementById('successCard');
-  const errorCard = document.getElementById('errorCard');
+  const successModal = document.getElementById('successModal');
+  const errorModal = document.getElementById('errorModal');
   const successText = document.getElementById('successText');
+  const successCloseBtn = document.getElementById('successCloseBtn');
   const retryBtn = document.getElementById('retryBtn');
+  const submittedCard = document.getElementById('submittedCard');
 
   // ── WhatsApp number: strip non-digits, strip leading zero ──
   waInput.addEventListener('input', () => {
@@ -778,14 +780,14 @@
   }
 
   function showSuccess(namaToko) {
-    form.hidden = true;
-    errorCard.hidden = true;
     successText.textContent = 'Terima kasih, ' + namaToko + '! Pendaftaran kamu sudah kami terima.';
-    successCard.hidden = false;
+    successModal.hidden = false;
+    successCloseBtn.focus();
   }
 
   function showError() {
-    errorCard.hidden = false;
+    errorModal.hidden = false;
+    retryBtn.focus();
   }
 
   form.addEventListener('submit', (e) => {
@@ -794,7 +796,7 @@
     if (!validateForm()) return;
 
     setLoading(true);
-    errorCard.hidden = true;
+    errorModal.hidden = true;
 
     const payload = {
       namaToko: namaTokoInput.value.trim(),
@@ -823,8 +825,14 @@
       });
   });
 
+  successCloseBtn.addEventListener('click', () => {
+    successModal.hidden = true;
+    form.hidden = true;
+    submittedCard.hidden = false;
+  });
+
   retryBtn.addEventListener('click', () => {
-    errorCard.hidden = true;
+    errorModal.hidden = true;
     setLoading(false);
   });
 </script>
