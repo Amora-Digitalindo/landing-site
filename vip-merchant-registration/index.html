@@ -308,6 +308,7 @@
     padding: 14px;
     font-size: 0.9375rem;
     border: none;
+    border-radius: var(--r-full);
     cursor: pointer;
   }
 
@@ -346,20 +347,72 @@
   /* ── Success / Error / Full states (reuse .card) ── */
   .state-card { text-align: center; }
 
-  .state-icon {
-    font-size: 2.5rem;
-    margin-bottom: 14px;
-    line-height: 1;
+  .modal-icon-wrap {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
   }
 
-  .state-card h2 {
+  .modal-icon-glow {
+    position: absolute;
+    inset: -26px;
+    border-radius: 50%;
+    filter: blur(26px);
+    opacity: 0.6;
+    z-index: 0;
+  }
+
+  .modal-icon-badge {
+    position: relative;
+    z-index: 1;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--elevated);
+    border: 1px solid var(--border-mid);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-icon-badge svg { width: 28px; height: 28px; }
+
+  .modal-icon-success .modal-icon-glow { background: radial-gradient(circle, var(--accent-light) 0%, transparent 70%); }
+  .modal-icon-success .modal-icon-badge { color: var(--accent-light); border-color: var(--accent-border); }
+
+  .modal-icon-error .modal-icon-glow { background: radial-gradient(circle, var(--danger) 0%, transparent 70%); }
+  .modal-icon-error .modal-icon-badge { color: var(--danger); border-color: rgba(224, 88, 79, 0.35); }
+
+  .modal-icon-warning .modal-icon-glow { background: radial-gradient(circle, #E8A23D 0%, transparent 70%); }
+  .modal-icon-warning .modal-icon-badge { color: #E8A23D; border-color: rgba(232, 162, 61, 0.35); }
+
+  .state-card.modal-icon-success,
+  .modal-card.modal-icon-success {
+    background: radial-gradient(ellipse 140% 60% at 50% -10%, rgba(107, 142, 90, 0.16) 0%, transparent 60%), var(--card);
+  }
+
+  .state-card.modal-icon-error,
+  .modal-card.modal-icon-error {
+    background: radial-gradient(ellipse 140% 60% at 50% -10%, rgba(224, 88, 79, 0.14) 0%, transparent 60%), var(--card);
+  }
+
+  .state-card.modal-icon-warning,
+  .modal-card.modal-icon-warning {
+    background: radial-gradient(ellipse 140% 60% at 50% -10%, rgba(232, 162, 61, 0.14) 0%, transparent 60%), var(--card);
+  }
+
+  .state-card h2,
+  .modal-card h2 {
     font-family: var(--font-display);
     font-size: 1.25rem;
     font-weight: 800;
     margin-bottom: 10px;
   }
 
-  .state-card p {
+  .state-card p,
+  .modal-card p {
     font-size: 0.9375rem;
     color: var(--text-70);
     margin-bottom: 24px;
@@ -576,16 +629,31 @@
       </form>
 
       <!-- SLOT FULL VIEW -->
-      <div class="card state-card" id="fullCard" hidden>
-        <div class="state-icon">🙏</div>
+      <div class="card state-card modal-icon-warning" id="fullCard" hidden>
+        <div class="modal-icon-wrap">
+          <div class="modal-icon-glow"></div>
+          <div class="modal-icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="8" x2="12" y2="13" />
+              <line x1="12" y1="16.5" x2="12" y2="16.51" />
+            </svg>
+          </div>
+        </div>
         <h2>Slot VIP Merchant Sudah Penuh</h2>
         <p>30 slot VIP Merchant sudah terisi semua. Kamu masih bisa subscribe langsung dan menikmati semua fitur Amora.</p>
         <a href="#" class="btn-primary btn-block" id="fullSubscribeLink">Subscribe Sekarang →</a>
       </div>
 
       <!-- SUBMITTED STATE — replaces the form permanently after success modal is closed -->
-      <div class="card state-card" id="submittedCard" hidden>
-        <div class="state-icon">🌿</div>
+      <div class="card state-card modal-icon-success" id="submittedCard" hidden>
+        <div class="modal-icon-wrap">
+          <div class="modal-icon-glow"></div>
+          <div class="modal-icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </div>
+        </div>
         <h2>Pendaftaran Terkirim</h2>
         <p>Pendaftaran kamu sudah kami terima dan sedang dalam proses kurasi. Cek WhatsApp kamu dalam 1–2 hari kerja.</p>
       </div>
@@ -596,8 +664,15 @@
 
 <!-- SUCCESS MODAL -->
 <div class="modal-overlay" id="successModal" hidden>
-  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="successModalTitle">
-    <div class="state-icon">🌿</div>
+  <div class="modal-card modal-icon-success" role="dialog" aria-modal="true" aria-labelledby="successModalTitle">
+    <div class="modal-icon-wrap">
+      <div class="modal-icon-glow"></div>
+      <div class="modal-icon-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+      </div>
+    </div>
     <h2 id="successModalTitle">Pendaftaran Diterima!</h2>
     <p id="successText">Terima kasih sudah mendaftar. Tim kami akan menghubungi kamu segera.</p>
     <div class="steps">
@@ -620,8 +695,16 @@
 
 <!-- ERROR MODAL -->
 <div class="modal-overlay" id="errorModal" hidden>
-  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="errorModalTitle">
-    <div class="state-icon">😕</div>
+  <div class="modal-card modal-icon-error" role="dialog" aria-modal="true" aria-labelledby="errorModalTitle">
+    <div class="modal-icon-wrap">
+      <div class="modal-icon-glow"></div>
+      <div class="modal-icon-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </div>
+    </div>
     <h2 id="errorModalTitle">Ups, Ada Kendala Teknis</h2>
     <div class="error-box">
       Ups, ada kendala teknis. Data kamu belum tersimpan. Coba lagi atau hubungi kami via WhatsApp di 0878 3210 1750.
