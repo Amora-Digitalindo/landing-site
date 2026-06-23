@@ -583,38 +583,50 @@
         <a href="#" class="btn-primary btn-block" id="fullSubscribeLink">Subscribe Sekarang →</a>
       </div>
 
-      <!-- SUCCESS VIEW -->
-      <div class="card state-card" id="successCard" hidden>
+      <!-- SUBMITTED STATE — replaces the form permanently after success modal is closed -->
+      <div class="card state-card" id="submittedCard" hidden>
         <div class="state-icon">🌿</div>
-        <h2>Pendaftaran Diterima!</h2>
-        <p id="successText">Terima kasih sudah mendaftar. Tim kami akan menghubungi kamu segera.</p>
-        <div class="steps">
-          <div class="step">
-            <div class="step-num">1</div>
-            <span>Cek WhatsApp kamu — konfirmasi dalam 1–2 hari kerja</span>
-          </div>
-          <div class="step">
-            <div class="step-num">2</div>
-            <span>Kalau approved, kamu pilih plan dan akses gratis 3 bulan</span>
-          </div>
-          <div class="step">
-            <div class="step-num">3</div>
-            <span>Founder akan personally bantu setup toko pertamamu</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- ERROR VIEW -->
-      <div class="card state-card" id="errorCard" hidden>
-        <div class="state-icon">😕</div>
-        <h2>Ups, Ada Kendala Teknis</h2>
-        <div class="error-box">
-          Ups, ada kendala teknis. Data kamu belum tersimpan. Coba lagi atau hubungi kami via WhatsApp di 0878 3210 1750.
-        </div>
-        <button type="button" class="btn-primary btn-block" id="retryBtn">Coba Lagi</button>
+        <h2>Pendaftaran Terkirim</h2>
+        <p>Pendaftaran kamu sudah kami terima dan sedang dalam proses kurasi. Cek WhatsApp kamu dalam 1–2 hari kerja.</p>
       </div>
 
     </div>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="successModal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="successModalTitle">
+    <div class="state-icon">🌿</div>
+    <h2 id="successModalTitle">Pendaftaran Diterima!</h2>
+    <p id="successText">Terima kasih sudah mendaftar. Tim kami akan menghubungi kamu segera.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <span>Cek WhatsApp kamu — konfirmasi dalam 1–2 hari kerja</span>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <span>Kalau approved, kamu pilih plan dan akses gratis 3 bulan</span>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <span>Founder akan personally bantu setup toko pertamamu</span>
+      </div>
+    </div>
+    <button type="button" class="btn-primary btn-block" id="successCloseBtn">Tutup</button>
+  </div>
+</div>
+
+<!-- ERROR MODAL -->
+<div class="modal-overlay" id="errorModal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="errorModalTitle">
+    <div class="state-icon">😕</div>
+    <h2 id="errorModalTitle">Ups, Ada Kendala Teknis</h2>
+    <div class="error-box">
+      Ups, ada kendala teknis. Data kamu belum tersimpan. Coba lagi atau hubungi kami via WhatsApp di 0878 3210 1750.
+    </div>
+    <button type="button" class="btn-primary btn-block" id="retryBtn">Coba Lagi</button>
   </div>
 </div>
 
