@@ -6430,6 +6430,10 @@
     }
 
     @media (max-width: 600px) {
+      .vip-header {
+        margin-bottom: 40px;
+      }
+
       .vip-panel-top {
         flex-direction: column;
         align-items: center;
