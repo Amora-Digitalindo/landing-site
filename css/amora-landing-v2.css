@@ -6267,10 +6267,10 @@
       position: relative;
       overflow: hidden;
       display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 4px;
       text-align: center;
       padding: 22px 24px;
       margin-bottom: 28px;
@@ -6316,9 +6316,9 @@
     }
 
     .vip-highlight-sub {
-      flex-basis: 100%;
       font-size: 0.8125rem;
       color: var(--text-60);
+      margin-top: 6px;
     }
 
     .vip-benefits {
