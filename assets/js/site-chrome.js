@@ -18,11 +18,11 @@
  * not on individual pages.
  */
 (function () {
-  var ROOT = window.SITE_ROOT || '';
+  var ROOT = '/';
 
   function isHomePage() {
     // Checks if the path is exactly '/' or matches '/index.html'
-    return location.pathname === '/' || location.pathname.endsWith('/index.html');
+    return location.pathname === '/'
   }
 
   function homeLink() {
