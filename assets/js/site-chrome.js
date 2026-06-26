@@ -18,11 +18,12 @@
  * not on individual pages.
  */
 (function () {
+  // Use a clean root or enforce an absolute path fallback
   var ROOT = '/';
 
   function isHomePage() {
-    // Checks if the path is exactly '/' or matches '/index.html'
-    return location.pathname === '/'
+    // True only if exactly at the root path or the root index
+    return location.pathname === '/' || location.pathname === '/index.html';
   }
 
   function homeLink() {
@@ -30,7 +31,15 @@
   }
 
   function sectionLink(id) {
-    return isHomePage() ? '#' + id : ROOT + '#' + id;
+    // If we are on an internal page like /vip-merchant-registration, 
+    // force an absolute URL routing back to the home origin root plus the hash.
+    if (isHomePage()) {
+      return '#' + id;
+    } else {
+      // Using location.origin guarantees it goes back to https://yourdomain.com/#id
+      // instead of relative appending.
+      return location.origin + ROOT + '#' + id;
+    }
   }
 
   var LOGO_SVG =
