@@ -21,7 +21,8 @@
   var ROOT = window.SITE_ROOT || '';
 
   function isHomePage() {
-    return /amora-landing-v2\.html$/.test(location.pathname);
+    // Checks if the path is exactly '/' or matches '/index.html'
+    return location.pathname === '/' || location.pathname.endsWith('/index.html');
   }
 
   function homeLink() {
