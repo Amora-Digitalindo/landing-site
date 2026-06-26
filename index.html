@@ -4,12 +4,23 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://esm.sh/three@0.169.0",
+      "three/addons/": "https://esm.sh/three@0.169.0/examples/jsm/"
+    }
+  }
+  </script>
   <title>Amora.id — Solusi Praktis Website Jualan</title>
   <meta name="description"
     content="Hadirkan website e-commerce independen dengan cepat dan atur sistem penjualan secara terpusat tanpa hambatan teknis.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://amora.id/">
-  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon/favicon.svg">
+  <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon/favicon-96x96.png">
+  <link rel="shortcut icon" href="assets/favicon/favicon.ico">
+  <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="id_ID">
   <meta property="og:site_name" content="Amora.id">
@@ -28,9 +39,6 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Geist:wght@700;800;900&family=Inter:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="styles/global.css">
-  <link rel="stylesheet" href="styles/landing.css">
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -66,50 +74,3052 @@
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      { "@type": "Question", "name": "Apa itu Amora dan apa bedanya dengan Tokopedia atau Shopee?", "acceptedAnswer": { "@type": "Answer", "text": "Amora adalah platform web builder berbasis langganan (SaaS) untuk membuat dan mengelola toko online sendiri — tanpa coding, tanpa developer. Berbeda dengan marketplace seperti Tokopedia atau Shopee, di Amora Anda memiliki toko sendiri dengan domain sendiri, dan data pelanggan sepenuhnya milik Anda." } },
-      { "@type": "Question", "name": "Seberapa cepat toko saya bisa online?", "acceptedAnswer": { "@type": "Answer", "text": "Sangat cepat. Setup awal rata-rata selesai dalam 5 menit — toko Anda bisa langsung online tanpa proses teknis yang rumit." } },
-      { "@type": "Question", "name": "Apa saja paket yang tersedia dan berapa harganya?", "acceptedAnswer": { "@type": "Answer", "text": "Tersedia dua paket: Starter (Rp 149.000/bulan) untuk hingga 100 produk dan 300 pesanan/bulan; serta Pro (Rp 209.000/bulan, diskon 40%) untuk hingga 250 produk, 1.000 pesanan/bulan, plus fitur Penjadwalan Peluncuran Toko." } },
-      { "@type": "Question", "name": "Apakah ada biaya per transaksi?", "acceptedAnswer": { "@type": "Answer", "text": "Tidak ada selama pesanan masih dalam kuota bulanan. Jika kuota terlampaui, biaya tambahan sebesar 2% per pesanan (Starter) atau 1% per pesanan (Pro) akan ditagihkan di periode berikutnya." } },
-      { "@type": "Question", "name": "Metode pembayaran apa yang didukung di toko saya?", "acceptedAnswer": { "@type": "Answer", "text": "Toko Amora mendukung Xendit, Midtrans, dan Doku — mencakup transfer bank, QRIS, e-wallet, serta kartu kredit/debit. Anda perlu mendaftar dan mengonfigurasi payment gateway secara mandiri." } },
-      { "@type": "Question", "name": "Apakah saya bisa menggunakan domain sendiri?", "acceptedAnswer": { "@type": "Answer", "text": "Ya. Kedua paket (Starter dan Pro) mendukung integrasi domain kustom, sehingga toko Anda dapat diakses melalui alamat brand Anda sendiri, misalnya tokosaya.com." } },
-      { "@type": "Question", "name": "Siapa yang memiliki data toko dan data pelanggan saya?", "acceptedAnswer": { "@type": "Answer", "text": "Anda sepenuhnya. Data toko, produk, dan pelanggan adalah milik Anda sebagai merchant. Amora tidak menjual atau memanfaatkan data Anda untuk kepentingan pihak lain." } },
-      { "@type": "Question", "name": "Bagaimana cara menghubungi tim support Amora?", "acceptedAnswer": { "@type": "Answer", "text": "Tim support siap membantu melalui email support@amora.id atau WhatsApp/Telepon 0878 3201 1500, Senin–Jumat pukul 09.00–17.00 WIB." } }
+      {
+        "@type": "Question",
+        "name": "Apa itu Amora dan apa bedanya dengan Tokopedia atau Shopee?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Amora adalah platform web builder berbasis langganan (SaaS) untuk membuat dan mengelola toko online sendiri — tanpa coding, tanpa developer. Berbeda dengan marketplace seperti Tokopedia atau Shopee, di Amora Anda memiliki toko sendiri dengan domain sendiri, dan data pelanggan sepenuhnya milik Anda." }
+      },
+      {
+        "@type": "Question",
+        "name": "Seberapa cepat toko saya bisa online?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Sangat cepat. Setup awal rata-rata selesai dalam 5 menit — toko Anda bisa langsung online tanpa proses teknis yang rumit." }
+      },
+      {
+        "@type": "Question",
+        "name": "Apa saja paket yang tersedia dan berapa harganya?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Tersedia dua paket: Starter (Rp 149.000/bulan) untuk hingga 100 produk dan 300 pesanan/bulan; serta Pro (Rp 209.000/bulan, diskon 40%) untuk hingga 250 produk, 1.000 pesanan/bulan, plus fitur Penjadwalan Peluncuran Toko." }
+      },
+      {
+        "@type": "Question",
+        "name": "Apakah ada biaya per transaksi?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Tidak ada selama pesanan masih dalam kuota bulanan. Jika kuota terlampaui, biaya tambahan sebesar 2% per pesanan (Starter) atau 1% per pesanan (Pro) akan ditagihkan di periode berikutnya." }
+      },
+      {
+        "@type": "Question",
+        "name": "Metode pembayaran apa yang didukung di toko saya?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Toko Amora mendukung Xendit, Midtrans, dan Doku — mencakup transfer bank, QRIS, e-wallet, serta kartu kredit/debit. Anda perlu mendaftar dan mengonfigurasi payment gateway secara mandiri." }
+      },
+      {
+        "@type": "Question",
+        "name": "Apakah saya bisa menggunakan domain sendiri?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Ya. Kedua paket (Starter dan Pro) mendukung integrasi domain kustom, sehingga toko Anda dapat diakses melalui alamat brand Anda sendiri, misalnya tokosaya.com." }
+      },
+      {
+        "@type": "Question",
+        "name": "Siapa yang memiliki data toko dan data pelanggan saya?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Anda sepenuhnya. Data toko, produk, dan pelanggan adalah milik Anda sebagai merchant. Amora tidak menjual atau memanfaatkan data Anda untuk kepentingan pihak lain." }
+      },
+      {
+        "@type": "Question",
+        "name": "Bagaimana cara menghubungi tim support Amora?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Tim support siap membantu melalui email support@amora.id atau WhatsApp/Telepon 0878 3201 1500, Senin–Jumat pukul 09.00–17.00 WIB." }
+      }
     ]
   }
   </script>
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/amora-landing-v2.css">
 </head>
 
 <body>
-  <div data-include="components/shared/background-canvas-landing.html"></div>
 
-  <div data-include="components/shared/navbar.html" data-base="" data-home-href="#"></div>
-  <div data-include="components/shared/mobile-menu.html" data-base=""></div>
+  <!-- ══════════════ SEAMLESS BACKGROUND CANVAS ══════════════ -->
+  <div id="page-bg" aria-hidden="true">
+    <div class="pg-orb pg-orb-1"></div>
+    <div class="pg-orb pg-orb-2"></div>
+    <div class="pg-orb pg-orb-3"></div>
+    <div class="pg-orb pg-orb-4"></div>
+    <div class="pg-orb pg-orb-5"></div>
+    <div class="pg-orb pg-orb-6"></div>
+    <div class="pg-orb pg-orb-center"></div>
+    <div class="pg-orb-mid"></div>
+    <div class="pg-orb-mid2"></div>
+  </div>
 
-  <div data-include="components/landing/hero-section.html"></div>
+  <!-- ══════════════ NAVBAR (shared component) ══════════════ -->
+  <div id="site-navbar"></div>
+
+  <!-- ══════════════ HERO ══════════════ -->
+  <section id="hero">
+    <div class="hero-bg">
+      <div class="hero-gradient"></div>
+      <div class="hero-grid"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-split">
+
+        <!-- Left: copy -->
+        <div class="hero-left">
+          <p class="hero-eyebrow">
+            <span class="hero-eyebrow-dot"></span>
+            Solusi Website Toko Online
+          </p>
+
+          <h1 class="hero-title">
+            Solusi Praktis<br>
+            <span class="highlight">Website Jualan</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            Hadirkan website e-commerce independen dengan cepat dan atur sistem penjualan
+            secara terpusat tanpa hambatan teknis.
+          </p>
+
+          <div class="hero-cta">
+            <a href="#vip-program" class="btn-primary">
+              Join VIP Merchant Free Trial
+              <svg data-icon viewBox="0 0 24 24" width="15" height="15">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </a>
+            <a href="https://admin.amora.id/" class="btn-ghost">
+              Buka Toko Sekarang
+            </a>
+          </div>
+
+          <div class="hero-stats-wrap">
+            <div class="hero-stats">
+              <div class="hero-stat">
+                <span class="hero-stat-value">5 menit</span>
+                <span class="hero-stat-label">Setup toko</span>
+              </div>
+              <div class="hero-stat">
+                <span class="hero-stat-value">0%</span>
+                <span class="hero-stat-label">Komisi*</span>
+              </div>
+              <div class="hero-stat">
+                <span class="hero-stat-value">100%</span>
+                <span class="hero-stat-label">Data Pelanggan
+              </div>
+            </div>
+            <p class="hero-stat-note">*sesuai dengan kuota transaksi paket</p>
+          </div>
+        </div>
+
+        <!-- Right: glassmorphic 2D hero scene -->
+        <div class="hero-right">
+          <div class="hero-canvas-wrap" id="heroWrap" aria-hidden="true">
+            <div class="hero-canvas-glow"></div>
+            <div class="hscene" id="hscene">
+
+              <!-- ═══ MAIN: T2 storefront product catalog ═══ -->
+              <div class="gc gc-t2 gc-main">
+                <div class="gc-pad">
+                  <!-- nav bar -->
+                  <div class="gc-title">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(100,210,180,0.8)"
+                      stroke-width="2">
+                      <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                    </svg>
+                    <span class="m-label" style="font-size:8px;color:rgba(255,255,255,0.5);">Toko Saya</span>
+                    <div style="flex:1"></div>
+                    <div
+                      style="padding:3px 8px;border-radius:12px;background:rgba(100,210,180,0.18);border:1px solid rgba(100,210,180,0.35);">
+                      <span class="m-label" style="font-size:7px;color:rgba(100,210,180,0.95);">+ Produk Baru</span>
+                    </div>
+                  </div>
+                  <!-- search -->
+                  <div
+                    style="border:1px solid rgba(100,210,180,0.14);border-radius:14px;height:22px;display:flex;align-items:center;padding:0 8px;gap:5px;background:rgba(100,210,180,0.04);">
+                    <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="rgba(100,210,180,0.5)"
+                      stroke-width="2.5">
+                      <circle cx="11" cy="11" r="8" />
+                      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
+                    <span class="m-label" style="font-size:6.5px;">Cari produk...</span>
+                  </div>
+                  <!-- product grid -->
+                  <div class="gc-grid" style="flex:1;min-height:0;">
+                    <!-- Product 1: T-Shirt -->
+                    <div class="gc-cell" style="border-color:rgba(60,210,150,0.2);">
+                      <div class="sk-img"
+                        style="flex:1;min-height:0;position:relative;background:linear-gradient(145deg,rgba(10,70,45,0.75),rgba(5,40,25,0.5));">
+                        <img src="assets/shirt.png"
+                          style="width:100%;height:100%;object-fit:contain;opacity:0.9;border-radius:inherit;padding:4px;"
+                          alt="T-Shirt">
+                        <div style="position:absolute;top:4px;right:4px;" class="m-badge m-badge-g">BEST</div>
+                      </div>
+                      <span class="m-label">T-Shirt Oversize</span>
+                      <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <span class="m-price">Rp 185.000</span>
+                        <div class="m-stars"><svg class="m-star" viewBox="0 0 10 10">
+                            <polygon points="5,1 6.2,3.8 9,4 7,6.2 7.6,9 5,7.5 2.4,9 3,6.2 1,4 3.8,3.8"
+                              class="m-star-on" />
+                          </svg><svg class="m-star" viewBox="0 0 10 10">
+                            <polygon points="5,1 6.2,3.8 9,4 7,6.2 7.6,9 5,7.5 2.4,9 3,6.2 1,4 3.8,3.8"
+                              class="m-star-on" />
+                          </svg><svg class="m-star" viewBox="0 0 10 10">
+                            <polygon points="5,1 6.2,3.8 9,4 7,6.2 7.6,9 5,7.5 2.4,9 3,6.2 1,4 3.8,3.8"
+                              class="m-star-on" />
+                          </svg><svg class="m-star" viewBox="0 0 10 10">
+                            <polygon points="5,1 6.2,3.8 9,4 7,6.2 7.6,9 5,7.5 2.4,9 3,6.2 1,4 3.8,3.8"
+                              class="m-star-on" />
+                          </svg><svg class="m-star" viewBox="0 0 10 10">
+                            <polygon points="5,1 6.2,3.8 9,4 7,6.2 7.6,9 5,7.5 2.4,9 3,6.2 1,4 3.8,3.8"
+                              class="m-star-off" />
+                          </svg></div>
+                      </div>
+                    </div>
+                    <!-- Product 2: Hoodie -->
+                    <div class="gc-cell" style="border-color:rgba(100,210,180,0.2);">
+                      <div class="sk-img"
+                        style="flex:1;min-height:0;position:relative;background:linear-gradient(145deg,rgba(10,60,40,0.7),rgba(5,35,22,0.5));">
+                        <img src="assets/shirt.png"
+                          style="width:100%;height:100%;object-fit:contain;opacity:0.85;border-radius:inherit;padding:4px;"
+                          alt="Hoodie">
+                        <div style="position:absolute;top:4px;right:4px;" class="m-badge m-badge-w">NEW</div>
+                      </div>
+                      <span class="m-label">Hoodie Crop Navy</span>
+                      <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <span class="m-price">Rp 320.000</span>
+                        <div class="m-stars"><svg class="m-star" viewBox="0 0 10 10">
+                            <polygon points="5,1 6.2,3.8 9,4 7,6.2 7.6,9 5,7.5 2.4,9 3,6.2 1,4 3.8,3.8"
+                              class="m-star-on" />
+                          </svg><svg class="m-star" viewBox="0 0 10 10">
+                            <polygon points="5,1 6.2,3.8 9,4 7,6.2 7.6,9 5,7.5 2.4,9 3,6.2 1,4 3.8,3.8"
+                              class="m-star-on" />
+                          </svg><svg class="m-star" viewBox="0 0 10 10">
+                            <polygon points="5,1 6.2,3.8 9,4 7,6.2 7.6,9 5,7.5 2.4,9 3,6.2 1,4 3.8,3.8"
+                              class="m-star-on" />
+                          </svg><svg class="m-star" viewBox="0 0 10 10">
+                            <polygon points="5,1 6.2,3.8 9,4 7,6.2 7.6,9 5,7.5 2.4,9 3,6.2 1,4 3.8,3.8"
+                              class="m-star-on" />
+                          </svg><svg class="m-star" viewBox="0 0 10 10">
+                            <polygon points="5,1 6.2,3.8 9,4 7,6.2 7.6,9 5,7.5 2.4,9 3,6.2 1,4 3.8,3.8"
+                              class="m-star-on" />
+                          </svg></div>
+                      </div>
+                    </div>
+                    <!-- Product 3: Celana -->
+                    <div class="gc-cell gc-cell-hide-mobile" style="border-color:rgba(100,210,180,0.18);">
+                      <div class="sk-img"
+                        style="flex:1;min-height:0;background:linear-gradient(145deg,rgba(8,45,30,0.7),rgba(5,28,18,0.5));">
+                        <img src="assets/shirt.png"
+                          style="width:100%;height:100%;object-fit:contain;opacity:0.8;border-radius:inherit;padding:4px;"
+                          alt="Celana">
+                      </div>
+                      <span class="m-label">Celana Cargo Olive</span>
+                      <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <span class="m-price">Rp 245.000</span>
+                        <span class="m-badge m-badge-g">Laris</span>
+                      </div>
+                    </div>
+                    <!-- Product 4: Jaket -->
+                    <div class="gc-cell gc-cell-hide-mobile" style="border-color:rgba(100,210,180,0.15);">
+                      <div class="sk-img"
+                        style="flex:1;min-height:0;background:linear-gradient(145deg,rgba(6,36,24,0.7),rgba(4,22,14,0.5));">
+                        <img src="assets/shirt.png"
+                          style="width:100%;height:100%;object-fit:contain;opacity:0.75;border-radius:inherit;padding:4px;"
+                          alt="Jaket">
+                      </div>
+                      <span class="m-label">Jaket Denim Klasik</span>
+                      <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <span class="m-price">Rp 459.000</span>
+                        <span class="m-badge m-badge-g">Laris</span>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- bottom stats -->
+                  <div class="gc-stats" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;">
+                    <div style="text-align:center;padding:3px 0;">
+                      <div class="m-value">128</div>
+                      <div class="m-label">Produk</div>
+                    </div>
+                    <div
+                      style="text-align:center;padding:3px 0;border-left:1px solid rgba(100,210,180,0.11);border-right:1px solid rgba(100,210,180,0.11);">
+                      <div class="m-value">4.8<span style="font-size:7px;opacity:0.5;">/5</span></div>
+                      <div class="m-label">Rating</div>
+                    </div>
+                    <div style="text-align:center;padding:3px 0;">
+                      <div class="m-value" style="color:rgba(100,210,180,0.95);">Online</div>
+                      <div class="m-label">Status</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ═══ LEFT: T3 revenue analytics ═══ -->
+              <div class="gc gc-t3 gc-left">
+                <div class="gc-pad">
+                  <div style="display:flex;align-items:center;gap:4px;">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="rgba(100,210,180,0.55)"
+                      stroke-width="2">
+                      <path d="M18 20V10M12 20V4M6 20v-6" />
+                    </svg>
+                    <span class="m-label" style="font-size:7px;">Analitik</span>
+                  </div>
+                  <div class="sk-div"></div>
+                  <div class="m-value" style="font-size:13px;">Rp 12.4jt</div>
+                  <div style="display:flex;align-items:center;gap:3px;">
+                    <span class="m-label" style="font-size:6px;color:rgba(100,210,180,0.9);">▲ 24.5%</span>
+                    <span class="m-label" style="font-size:6px;">vs bulan lalu</span>
+                  </div>
+                  <!-- revenue chart -->
+                  <svg class="sk-spark" width="100%" height="36" viewBox="0 0 100 36" preserveAspectRatio="none"
+                    style="flex-shrink:0;">
+                    <polyline points="0,32 10,28 20,24 30,20 40,26 50,18 60,14 70,16 80,8 90,10 100,5" />
+                    <polygon points="0,32 10,28 20,24 30,20 40,26 50,18 60,14 70,16 80,8 90,10 100,5 100,36 0,36"
+                      fill="rgba(100,210,180,0.09)" stroke="none" />
+                  </svg>
+                  <div class="sk-div"></div>
+                  <!-- metric rows -->
+                  <div style="flex:1;display:flex;flex-direction:column;justify-content:space-evenly;">
+                    <div class="sk-row">
+                      <div class="sk-dot"></div>
+                      <div style="flex:1">
+                        <div class="m-label">Pesanan</div>
+                      </div>
+                      <div class="m-label" style="color:rgba(255,255,255,0.6);">347</div>
+                    </div>
+                    <div class="sk-row">
+                      <div class="sk-dot"
+                        style="background:rgba(100,210,180,0.7);box-shadow:0 0 5px rgba(100,210,180,0.35);"></div>
+                      <div style="flex:1">
+                        <div class="m-label">Pengunjung</div>
+                      </div>
+                      <div class="m-label" style="color:rgba(255,255,255,0.6);">2.1k</div>
+                    </div>
+                    <div class="sk-row">
+                      <div class="sk-dot"
+                        style="background:rgba(100,210,180,0.35);box-shadow:0 0 4px rgba(100,210,180,0.18);"></div>
+                      <div style="flex:1">
+                        <div class="m-label">Konversi</div>
+                      </div>
+                      <div class="m-label" style="color:rgba(255,255,255,0.6);">16.5%</div>
+                    </div>
+                  </div>
+                  <!-- mini bar chart -->
+                  <div class="sk-bars" style="height:30px;align-items:flex-end;gap:2px;">
+                    <div class="sk-bar-d" style="height:45%;flex:1;"></div>
+                    <div class="sk-bar" style="height:72%;flex:1;"></div>
+                    <div class="sk-bar-d" style="height:35%;flex:1;"></div>
+                    <div class="sk-bar" style="height:85%;flex:1;"></div>
+                    <div class="sk-bar" style="height:92%;flex:1;"></div>
+                    <div class="sk-bar-d" style="height:55%;flex:1;"></div>
+                    <div class="sk-bar" style="height:65%;flex:1;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ═══ RIGHT: T3 recent orders ═══ -->
+              <div class="gc gc-t3 gc-right">
+                <div class="gc-pad">
+                  <div style="display:flex;align-items:center;gap:4px;">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="rgba(100,210,180,0.55)"
+                      stroke-width="2">
+                      <rect x="2" y="3" width="20" height="18" rx="2" />
+                      <line x1="2" y1="9" x2="22" y2="9" />
+                    </svg>
+                    <span class="m-label" style="font-size:7px;">Pesanan Terbaru</span>
+                    <div style="flex:1"></div>
+                    <span class="m-badge m-badge-g">3 Baru</span>
+                  </div>
+                  <div class="sk-div"></div>
+                  <!-- order rows with real data -->
+                  <div style="flex:1;display:flex;flex-direction:column;gap:6px;justify-content:start;">
+                    <!-- order 1 -->
+                    <div class="sk-row"
+                      style="padding:4px;border-radius:8px;background:rgba(100,210,180,0.12);border:1px solid rgba(100,210,180,0.18);">
+                      <div
+                        style="width:24px;height:24px;border-radius:6px;background:rgba(100,210,180,0.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                        <span style="font-size:10px;">👕</span>
+                      </div>
+                      <div style="flex:1;min-width:0;">
+                        <div class="m-label" style="color:rgba(255,255,255,0.55);">T-Shirt Oversize ×2</div>
+                        <div class="m-price" style="font-size:8px;">Rp 370.000</div>
+                      </div>
+                      <span class="m-badge m-badge-g" style="font-size:5px;">Dibayar</span>
+                    </div>
+                    <!-- order 2 -->
+                    <div class="sk-row"
+                      style="padding:4px;border-radius:8px;background:rgba(100,210,180,0.12);border:1px solid rgba(100,210,180,0.18);">
+                      <div
+                        style="width:24px;height:24px;border-radius:6px;background:rgba(100,210,180,0.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                        <span style="font-size:10px;">🧥</span>
+                      </div>
+                      <div style="flex:1;min-width:0;">
+                        <div class="m-label" style="color:rgba(255,255,255,0.55);">Hoodie Crop ×1</div>
+                        <div class="m-price" style="font-size:8px;">Rp 320.000</div>
+                      </div>
+                      <span class="m-badge m-badge-w" style="font-size:5px;">Proses</span>
+                    </div>
+                    <!-- order 3 -->
+                    <div class="sk-row"
+                      style="padding:4px;border-radius:8px;background:rgba(100,210,180,0.12);border:1px solid rgba(100,210,180,0.18);">
+                      <div
+                        style="width:24px;height:24px;border-radius:6px;background:rgba(100,210,180,0.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                        <span style="font-size:10px;">👖</span>
+                      </div>
+                      <div style="flex:1;min-width:0;">
+                        <div class="m-label" style="color:rgba(255,255,255,0.55);">Celana Cargo ×1</div>
+                        <div class="m-price" style="font-size:8px;">Rp 245.000</div>
+                      </div>
+                      <span class="m-badge m-badge-b" style="font-size:5px;">Dikirim</span>
+                    </div>
+                    <!-- order 4 -->
+                    <div class="sk-row"
+                      style="padding:4px;border-radius:8px;background:rgba(100,210,180,0.12);border:1px solid rgba(100,210,180,0.18);">
+                      <div
+                        style="width:24px;height:24px;border-radius:6px;background:rgba(100,210,180,0.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                        <span style="font-size:10px;">🧣</span>
+                      </div>
+                      <div style="flex:1;min-width:0;">
+                        <div class="m-label" style="color:rgba(255,255,255,0.55);">Jaket Denim ×1</div>
+                        <div class="m-price" style="font-size:8px;">Rp 459.000</div>
+                      </div>
+                      <span class="m-badge m-badge-g" style="font-size:5px;">Dibayar</span>
+                    </div>
+                  </div>
+                  <div class="sk-div"></div>
+                  <!-- total -->
+                  <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <span class="m-label">Total hari ini</span>
+                    <span class="m-value" style="color:rgba(100,210,180,0.95);font-size:10px;">Rp 1.39jt</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ═══ TOP-RIGHT: T1 live visitors ═══ -->
+              <div class="gc gc-t1 gc-tr">
+                <div class="gc-pad" style="flex-direction:row;align-items:center;gap:8px;">
+                  <div style="position:relative;width:38px;height:38px;flex-shrink:0;">
+                    <svg class="sk-donut" width="38" height="38" viewBox="0 0 36 36">
+                      <circle cx="18" cy="18" r="13" fill="none" stroke="rgba(80,200,170,0.1)" stroke-width="5" />
+                      <circle cx="18" cy="18" r="13" fill="none" stroke="rgba(80,200,170,0.7)" stroke-width="5"
+                        stroke-dasharray="55 27" stroke-linecap="round" />
+                    </svg>
+                    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+                      <span
+                        style="font-size:8px;font-weight:700;color:rgba(100,210,180,0.9);font-family:var(--font-body);">67%</span>
+                    </div>
+                  </div>
+                  <div style="flex:1;display:flex;flex-direction:column;gap:3px;">
+                    <div style="display:flex;align-items:center;gap:4px;">
+                      <div class="sk-dot" style="width:5px;height:5px;animation:pulse-dot 2s infinite;"></div>
+                      <span class="m-label" style="color:rgba(100,210,180,0.9);font-size:7px;">24 Online</span>
+                    </div>
+                    <span class="m-label" style="font-size:6px;">Konversi minggu ini</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ═══ BOTTOM-LEFT: T1 new order notif ═══ -->
+              <div class="gc gc-t1 gc-bl">
+                <div class="gc-pad" style="flex-direction:row;align-items:center;gap:8px;">
+                  <div
+                    style="width:28px;height:28px;border-radius:8px;background:rgba(100,210,180,0.18);border:1px solid rgba(100,210,180,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 12px rgba(100,210,180,0.25);">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(100,210,180,0.9)"
+                      stroke-width="2">
+                      <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                      <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                  </div>
+                  <div style="flex:1;display:flex;flex-direction:column;gap:2px;">
+                    <span class="m-label" style="color:rgba(255,255,255,0.6);font-size:7px;">Pesanan baru masuk!</span>
+                    <span class="m-price" style="font-size:8px;">+Rp 285.000</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ═══ BOTTOM-RIGHT: T1 revenue trend ═══ -->
+              <div class="gc gc-t1 gc-br">
+                <div class="gc-pad">
+                  <div class="sk-row">
+                    <div style="flex:1;">
+                      <div class="m-label" style="font-size:6px;margin-bottom:2px;">Revenue 7 hari</div>
+                      <div style="display:flex;align-items:baseline;gap:3px;">
+                        <span class="m-value" style="font-size:12px;">Rp 8.2jt</span>
+                        <span class="m-label" style="color:rgba(100,210,180,0.9);font-size:6px;">▲ 18%</span>
+                      </div>
+                    </div>
+                  </div>
+                  <svg class="sk-spark" width="100%" height="28" viewBox="0 0 100 28" preserveAspectRatio="none"
+                    style="flex:1;">
+                    <polyline points="0,24 12,20 24,22 36,16 48,14 60,8 72,10 84,6 100,3" />
+                    <polygon points="0,24 12,20 24,22 36,16 48,14 60,8 72,10 84,6 100,3 100,28 0,28"
+                      fill="rgba(100,210,180,0.11)" stroke="none" />
+                  </svg>
+                </div>
+              </div>
+
+            </div><!-- .hscene -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <a href="#fitur" class="scroll-indicator" aria-label="Scroll">
+      <svg data-icon viewBox="0 0 24 24" width="24" height="24">
+        <polyline points="6 9 12 15 18 9" />
+      </svg>
+    </a>
+  </section>
 
   <div class="section-divider" aria-hidden="true"></div>
 
-  <div data-include="components/landing/features.html"></div>
+  <!-- ══════════════ FEATURE: LIVE ORDERS ══════════════ -->
+  <section id="fitur" class="py-section">
+    <div class="section-inner">
+      <div class="feature-grid margin-grid">
+        <div class="feature-text reveal from-left">
+          <span class="section-eyebrow"><span class="section-eyebrow-dot"></span>Keunggulan Amora</span>
+          <h2>Amankan <span class="accent">margin</span><br>produk toko Anda</h2>
+          <p>Jual langsung melalui website toko sendiri tanpa bergantung sepenuhnya pada marketplace. Setiap pesanan
+            masuk langsung ke dashboard Anda secara real-time — margin keuntungan tetap optimal, brand bisnis lebih
+            profesional.</p>
+          <ul class="feature-bullets">
+            <li><span class="feature-bullet-icon"><svg data-icon viewBox="0 0 24 24">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg></span>Notifikasi pesanan masuk secara real-time</li>
+            <li><span class="feature-bullet-icon"><svg data-icon viewBox="0 0 24 24">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg></span>Tanpa potongan komisi marketplace</li>
+            <li><span class="feature-bullet-icon"><svg data-icon viewBox="0 0 24 24">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg></span>Kontrol penuh atas data pelanggan</li>
+          </ul>
+        </div>
+        <div class="feature-image order-first reveal from-right delay-2">
+          <div class="bento-widget orders-widget" id="ordersWidget">
+            <div class="bento-chrome">
+              <span class="bento-chrome-dot dot-red"></span>
+              <span class="bento-chrome-dot dot-yellow"></span>
+              <span class="bento-chrome-dot dot-green"></span>
+            </div>
+            <div class="orders-widget-header">
+              <span class="orders-widget-icon"><svg data-icon viewBox="0 0 24 24">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                  <polyline points="9 22 9 12 15 12 15 22" />
+                </svg></span>
+              <span class="orders-widget-title">Pesanan Masuk</span>
+              <span class="orders-widget-live"><span class="section-eyebrow-dot"></span>Live</span>
+            </div>
+            <div class="orders-widget-list" id="ordersList"></div>
+          </div>
+          <div class="glow-bg"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ FEATURE: ORDER TRACKING ══════════════ -->
+  <section id="feature-setup" class="py-section">
+    <div class="section-inner">
+      <div class="feature-grid setup-grid">
+        <div class="feature-image setup reveal from-left order-first">
+          <div class="bento-widget tracking-widget">
+            <div class="bento-chrome">
+              <span class="bento-chrome-dot dot-red"></span>
+              <span class="bento-chrome-dot dot-yellow"></span>
+              <span class="bento-chrome-dot dot-green"></span>
+            </div>
+            <div class="tracking-widget-header">
+              <span class="tracking-widget-title">Lacak Pesanan</span>
+              <span class="tracking-widget-id">#AMR-7421</span>
+            </div>
+            <div class="tracking-steps">
+              <div class="tracking-line">
+                <div class="tracking-line-fill"></div>
+                <div class="tracking-dot"></div>
+              </div>
+              <div class="tracking-step done">
+                <span class="tracking-node"><svg data-icon viewBox="0 0 24 24">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg></span>
+                <div class="tracking-step-text">
+                  <strong>Pesanan Dikonfirmasi</strong>
+                  <span>Hari ini, 09:12</span>
+                </div>
+              </div>
+              <div class="tracking-step done">
+                <span class="tracking-node"><svg data-icon viewBox="0 0 24 24">
+                    <path
+                      d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                    <line x1="12" y1="22.08" x2="12" y2="12" />
+                  </svg></span>
+                <div class="tracking-step-text">
+                  <strong>Sedang Disiapkan</strong>
+                  <span>Hari ini, 10:40</span>
+                </div>
+              </div>
+              <div class="tracking-step active">
+                <span class="tracking-node tracking-node-pulse"><svg data-icon viewBox="0 0 24 24">
+                    <rect x="1" y="3" width="15" height="13" />
+                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+                    <circle cx="5.5" cy="18.5" r="2.5" />
+                    <circle cx="18.5" cy="18.5" r="2.5" />
+                  </svg></span>
+                <div class="tracking-step-text">
+                  <strong>Dikirim</strong>
+                  <span>Dalam perjalanan</span>
+                </div>
+              </div>
+              <div class="tracking-step">
+                <span class="tracking-node"><svg data-icon viewBox="0 0 24 24">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg></span>
+                <div class="tracking-step-text">
+                  <strong>Selesai</strong>
+                  <span>Menunggu konfirmasi</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="glow-bg"></div>
+        </div>
+        <div class="feature-text reveal from-right delay-2">
+          <span class="section-eyebrow"><span class="section-eyebrow-dot"></span>Kelola Pesanan</span>
+          <h2>Pantau status pesanan<br>dari <span class="accent">awal sampai selesai</span></h2>
+          <p>Setiap pesanan otomatis mendapatkan update status — dari dikonfirmasi, disiapkan, dikirim, hingga selesai.
+            Pelanggan bisa memantau sendiri tanpa perlu bertanya ke Anda.</p>
+          <ul class="feature-bullets">
+            <li><span class="feature-bullet-icon"><svg data-icon viewBox="0 0 24 24">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg></span>Status pesanan otomatis terupdate di setiap tahap</li>
+            <li><span class="feature-bullet-icon"><svg data-icon viewBox="0 0 24 24">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg></span>Pelanggan dapat memantau status pengiriman sendiri</li>
+            <li><span class="feature-bullet-icon"><svg data-icon viewBox="0 0 24 24">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg></span>Semua riwayat pesanan dalam satu dashboard</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <div class="section-divider" aria-hidden="true"></div>
 
-  <div data-include="components/landing/pricing.html"></div>
-  <div data-include="components/landing/cta-banner.html"></div>
+  <!-- ══════════════ FEATURES GRID ══════════════ -->
+  <section id="features-grid" class="py-section">
+    <div class="section-inner">
+      <div class="features-header reveal">
+        <div class="section-eyebrow"><span class="section-eyebrow-dot"></span>Fitur Lengkap</div>
+        <h2>Semua yang kamu butuhkan untuk <span class="accent">jualan online</span></h2>
+      </div>
+      <!-- Showcase: icon tabs + full-width panel -->
+      <div class="feature-showcase reveal">
+
+        <!-- Icon tab row (all devices) -->
+        <div class="feature-tabs-wrap">
+          <div class="feature-tabs-row" id="featureTabs">
+            <button class="feature-tab active" data-idx="0">
+              <span class="feature-tab-icon"><svg viewBox="0 0 24 24">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                  <polyline points="9 22 9 12 15 12 15 22" />
+                </svg></span>
+              <span class="feature-tab-label">Website Toko</span>
+            </button>
+            <button class="feature-tab" data-idx="1">
+              <span class="feature-tab-icon"><svg viewBox="0 0 24 24">
+                  <rect x="2" y="3" width="20" height="14" rx="2" />
+                  <path d="M8 21h8M12 17v4" />
+                </svg></span>
+              <span class="feature-tab-label">Dashboard</span>
+            </button>
+            <button class="feature-tab" data-idx="2">
+              <span class="feature-tab-icon"><svg viewBox="0 0 24 24">
+                  <rect x="1" y="4" width="22" height="16" rx="2" />
+                  <line x1="1" y1="10" x2="23" y2="10" />
+                </svg></span>
+              <span class="feature-tab-label">Pembayaran</span>
+            </button>
+            <button class="feature-tab" data-idx="3">
+              <span class="feature-tab-icon"><svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="3" />
+                  <path
+                    d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
+                </svg></span>
+              <span class="feature-tab-label">Kustomisasi</span>
+            </button>
+            <button class="feature-tab" data-idx="4">
+              <span class="feature-tab-icon"><svg viewBox="0 0 24 24">
+                  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+                  <line x1="7" y1="7" x2="7.01" y2="7" />
+                </svg></span>
+              <span class="feature-tab-label">Promo</span>
+            </button>
+          </div>
+          <div class="feature-tabs-scrollbar" id="tabsScrollbar">
+            <div class="feature-tabs-scrollbar-thumb" id="tabsScrollbarThumb"></div>
+          </div>
+        </div><!-- /.feature-tabs-wrap -->
+
+        <!-- Large showcase panel -->
+        <div class="showcase-panel">
+
+          <!-- View 0: Website Toko -->
+          <div class="showcase-view active" data-view="0">
+            <div class="sv0-bleed"
+              style="display:flex;flex-direction:column;height:100%;gap:0;margin:-40px -52px;flex:1;overflow:hidden;">
+              <!-- Browser chrome -->
+              <div
+                style="display:flex;align-items:center;gap:10px;padding:9px 18px;background:rgba(0,0,0,0.18);border-bottom:1px solid rgba(255,255,255,0.06);flex-shrink:0;">
+                <div style="display:flex;gap:5px;flex-shrink:0;">
+                  <div style="width:10px;height:10px;border-radius:50%;background:#FF5F57;"></div>
+                  <div style="width:10px;height:10px;border-radius:50%;background:#FFBD2E;"></div>
+                  <div style="width:10px;height:10px;border-radius:50%;background:#28CA41;"></div>
+                </div>
+                <div
+                  style="flex:1;background:rgba(255,255,255,0.05);border-radius:6px;padding:5px 12px;display:flex;align-items:center;gap:6px;max-width:280px;margin:0 auto;border:1px solid rgba(255,255,255,0.07);">
+                  <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="rgba(155,232,201,0.4)"
+                    stroke-width="2.5">
+                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                  </svg>
+                  <span style="font-size:10px;color:rgba(255,255,255,0.35);">tokosaya.amora.id</span>
+                </div>
+                <div style="width:60px;"></div>
+              </div>
+              <!-- Store nav -->
+              <div
+                style="display:flex;align-items:center;justify-content:space-between;padding:9px 20px;border-bottom:1px solid rgba(255,255,255,0.05);flex-shrink:0;">
+                <div style="display:flex;align-items:center;gap:7px;">
+                  <div
+                    style="width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,rgba(100,210,180,0.22),rgba(60,140,110,0.12));border:1px solid rgba(100,210,180,0.2);display:flex;align-items:center;justify-content:center;">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#9BE8C9" stroke-width="2.5">
+                      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                      <polyline points="9 22 9 12 15 12 15 22" />
+                    </svg>
+                  </div>
+                  <span style="font-size:11px;font-weight:800;color:rgba(255,255,255,0.92);letter-spacing:0.06em;">TOKO
+                    SAYA</span>
+                </div>
+                <div style="display:flex;gap:14px;align-items:center;">
+                  <span style="font-size:9.5px;color:rgba(255,255,255,0.3);">Beranda</span>
+                  <span style="font-size:9.5px;color:rgba(255,255,255,0.3);">Produk</span>
+                  <span style="font-size:9.5px;color:rgba(255,255,255,0.3);">Tentang</span>
+                  <div
+                    style="display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;background:rgba(100,210,180,0.1);border:1px solid rgba(100,210,180,0.22);">
+                    <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#9BE8C9" stroke-width="2.5">
+                      <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                      <line x1="3" y1="6" x2="21" y2="6" />
+                      <path d="M16 10a4 4 0 01-8 0" />
+                    </svg>
+                    <span style="font-size:9px;color:#9BE8C9;font-weight:700;">Keranjang</span>
+                    <div
+                      style="width:13px;height:13px;border-radius:50%;background:#9BE8C9;display:flex;align-items:center;justify-content:center;">
+                      <span style="font-size:7px;font-weight:800;color:rgba(6,14,10,0.95);">2</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Main layout: filter sidebar + product grid -->
+              <div class="sv0-layout"
+                style="flex:1;display:grid;grid-template-columns:150px 1fr;min-height:0;overflow:hidden;">
+                <!-- SIDEBAR: Filters -->
+                <div class="sv0-sidebar"
+                  style="padding:14px 12px;border-right:1px solid rgba(100,210,180,0.1);background:rgba(100,210,180,0.03);display:flex;flex-direction:column;gap:14px;overflow:hidden;">
+                  <!-- Search -->
+                  <div
+                    style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:6px 9px;">
+                    <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)"
+                      stroke-width="2.5">
+                      <circle cx="11" cy="11" r="8" />
+                      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
+                    <span style="font-size:9px;color:rgba(255,255,255,0.25);">Cari produk...</span>
+                  </div>
+                  <!-- Category -->
+                  <div>
+                    <div
+                      style="font-size:8px;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.28);font-weight:700;margin-bottom:6px;">
+                      Kategori</div>
+                    <div style="display:flex;flex-direction:column;gap:2px;">
+                      <div
+                        style="padding:5px 8px;border-radius:7px;background:rgba(100,210,180,0.12);border:1px solid rgba(100,210,180,0.22);font-size:9px;color:#9BE8C9;font-weight:600;display:flex;justify-content:space-between;cursor:pointer;">
+                        Semua <span style="opacity:0.7;">128</span></div>
+                      <div
+                        style="padding:5px 8px;border-radius:7px;font-size:9px;color:rgba(255,255,255,0.45);display:flex;justify-content:space-between;cursor:pointer;"
+                        onmouseenter="this.style.background='rgba(255,255,255,0.04)'"
+                        onmouseleave="this.style.background=''">Kaos <span style="opacity:0.5;">48</span></div>
+                      <div
+                        style="padding:5px 8px;border-radius:7px;font-size:9px;color:rgba(255,255,255,0.45);display:flex;justify-content:space-between;cursor:pointer;"
+                        onmouseenter="this.style.background='rgba(255,255,255,0.04)'"
+                        onmouseleave="this.style.background=''">Hoodie <span style="opacity:0.5;">31</span></div>
+                      <div
+                        style="padding:5px 8px;border-radius:7px;font-size:9px;color:rgba(255,255,255,0.45);display:flex;justify-content:space-between;cursor:pointer;"
+                        onmouseenter="this.style.background='rgba(255,255,255,0.04)'"
+                        onmouseleave="this.style.background=''">Jaket <span style="opacity:0.5;">22</span></div>
+                      <div
+                        style="padding:5px 8px;border-radius:7px;font-size:9px;color:rgba(255,255,255,0.45);display:flex;justify-content:space-between;cursor:pointer;"
+                        onmouseenter="this.style.background='rgba(255,255,255,0.04)'"
+                        onmouseleave="this.style.background=''">Celana <span style="opacity:0.5;">27</span></div>
+                    </div>
+                  </div>
+                  <!-- Sort -->
+                  <div>
+                    <div
+                      style="font-size:8px;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.28);font-weight:700;margin-bottom:6px;">
+                      Urutkan</div>
+                    <div style="display:flex;flex-direction:column;gap:2px;">
+                      <div
+                        style="padding:5px 8px;border-radius:7px;background:rgba(100,210,180,0.08);font-size:9px;color:rgba(155,232,201,0.85);display:flex;align-items:center;gap:5px;cursor:pointer;">
+                        <div style="width:5px;height:5px;border-radius:50%;background:#9BE8C9;flex-shrink:0;"></div>
+                        Terlaris
+                      </div>
+                      <div
+                        style="padding:5px 8px;border-radius:7px;font-size:9px;color:rgba(255,255,255,0.38);display:flex;align-items:center;gap:5px;cursor:pointer;">
+                        <div
+                          style="width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.15);flex-shrink:0;">
+                        </div>Terbaru
+                      </div>
+                      <div
+                        style="padding:5px 8px;border-radius:7px;font-size:9px;color:rgba(255,255,255,0.38);display:flex;align-items:center;gap:5px;cursor:pointer;">
+                        <div
+                          style="width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.15);flex-shrink:0;">
+                        </div>Harga ↑
+                      </div>
+                      <div
+                        style="padding:5px 8px;border-radius:7px;font-size:9px;color:rgba(255,255,255,0.38);display:flex;align-items:center;gap:5px;cursor:pointer;">
+                        <div
+                          style="width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.15);flex-shrink:0;">
+                        </div>Harga ↓
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Price range -->
+                  <div>
+                    <div
+                      style="font-size:8px;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.28);font-weight:700;margin-bottom:6px;">
+                      Harga</div>
+                    <div
+                      style="height:3px;border-radius:99px;background:rgba(255,255,255,0.08);position:relative;margin:0 4px;">
+                      <div
+                        style="position:absolute;left:0;right:40%;height:100%;border-radius:99px;background:linear-gradient(90deg,rgba(100,210,180,0.4),#9BE8C9);">
+                      </div>
+                      <div
+                        style="position:absolute;left:60%;width:10px;height:10px;border-radius:50%;background:#9BE8C9;top:50%;transform:translate(-50%,-50%);box-shadow:0 0 6px rgba(155,232,201,0.5);cursor:pointer;">
+                      </div>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;margin-top:5px;">
+                      <span style="font-size:8px;color:rgba(255,255,255,0.3);">Rp 0</span>
+                      <span style="font-size:8px;color:rgba(255,255,255,0.3);">Rp 500rb</span>
+                    </div>
+                  </div>
+                  <!-- Active filters -->
+                  <div style="margin-top:auto;">
+                    <div
+                      style="display:flex;align-items:center;gap:5px;padding:5px 8px;border-radius:7px;background:rgba(100,210,180,0.06);border:1px solid rgba(100,210,180,0.12);">
+                      <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#9BE8C9" stroke-width="2.5">
+                        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+                      </svg>
+                      <span style="font-size:8px;color:#9BE8C9;font-weight:600;">Filter Aktif: 1</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- PRODUCT GRID: 3 col × 2 row -->
+                <div class="sv0-products-panel"
+                  style="padding:12px;display:flex;flex-direction:column;gap:10px;overflow:hidden;">
+                  <!-- Toolbar -->
+                  <div style="display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+                    <span style="font-size:9px;color:rgba(255,255,255,0.35);">128 produk ditemukan</span>
+                    <div style="display:flex;gap:4px;">
+                      <div
+                        style="padding:4px 8px;border-radius:6px;background:rgba(100,210,180,0.1);border:1px solid rgba(100,210,180,0.2);font-size:8px;color:#9BE8C9;cursor:pointer;">
+                        Grid</div>
+                      <div
+                        style="padding:4px 8px;border-radius:6px;background:rgba(255,255,255,0.04);font-size:8px;color:rgba(255,255,255,0.3);cursor:pointer;">
+                        List</div>
+                    </div>
+                  </div>
+                  <!-- Row 1 -->
+                  <div class="sv0-row"
+                    style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px;flex:1;min-height:0;">
+                    <div
+                      style="border-radius:11px;background:linear-gradient(155deg,rgba(100,210,180,0.07),rgba(7,11,20,0.94));border:1px solid rgba(100,210,180,0.14);padding:10px;display:flex;flex-direction:column;gap:7px;overflow:hidden;cursor:pointer;transition:border-color 0.18s,transform 0.18s;"
+                      onmouseenter="this.style.borderColor='rgba(100,210,180,0.32)';this.style.transform='translateY(-1px)'"
+                      onmouseleave="this.style.borderColor='rgba(100,210,180,0.14)';this.style.transform=''">
+                      <div
+                        style="position:relative;flex:1;min-height:0;border-radius:8px;background:rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+                        <img src="assets/shirt.png"
+                          style="max-width:80%;max-height:100%;object-fit:contain;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.6));"
+                          alt="T-Shirt">
+                        <div
+                          style="position:absolute;top:5px;left:5px;padding:2px 6px;border-radius:999px;background:rgba(100,210,180,0.18);font-size:7px;color:#9BE8C9;font-weight:700;">
+                          TERLARIS</div>
+                      </div>
+                      <div style="flex-shrink:0;">
+                        <div
+                          style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.85);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                          T-Shirt Oversize</div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;">
+                          <span style="font-size:11px;font-weight:800;color:#9BE8C9;">Rp 185.000</span>
+                          <div
+                            style="width:20px;height:20px;border-radius:6px;background:rgba(100,210,180,0.12);border:1px solid rgba(100,210,180,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#9BE8C9" stroke-width="3">
+                              <line x1="12" y1="5" x2="12" y2="19" />
+                              <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      style="border-radius:11px;background:linear-gradient(155deg,rgba(100,210,180,0.07),rgba(7,11,20,0.94));border:1px solid rgba(100,210,180,0.14);padding:10px;display:flex;flex-direction:column;gap:7px;overflow:hidden;cursor:pointer;transition:border-color 0.18s,transform 0.18s;"
+                      onmouseenter="this.style.borderColor='rgba(100,210,180,0.32)';this.style.transform='translateY(-1px)'"
+                      onmouseleave="this.style.borderColor='rgba(100,210,180,0.14)';this.style.transform=''">
+                      <div
+                        style="position:relative;flex:1;min-height:0;border-radius:8px;background:rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+                        <img src="assets/shirt.png"
+                          style="max-width:80%;max-height:100%;object-fit:contain;filter:brightness(0.9) drop-shadow(0 4px 12px rgba(0,0,0,0.6));"
+                          alt="T-Shirt">
+                        <div
+                          style="position:absolute;top:5px;left:5px;padding:2px 6px;border-radius:999px;background:rgba(100,210,180,0.18);font-size:7px;color:#9BE8C9;font-weight:700;">
+                          BARU</div>
+                      </div>
+                      <div style="flex-shrink:0;">
+                        <div
+                          style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.85);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                          Hoodie Crop Navy</div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;">
+                          <span style="font-size:11px;font-weight:800;color:#9BE8C9;">Rp 320.000</span>
+                          <div
+                            style="width:20px;height:20px;border-radius:6px;background:rgba(100,210,180,0.12);border:1px solid rgba(100,210,180,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#9BE8C9" stroke-width="3">
+                              <line x1="12" y1="5" x2="12" y2="19" />
+                              <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      style="border-radius:11px;background:linear-gradient(155deg,rgba(100,210,180,0.07),rgba(7,11,20,0.94));border:1px solid rgba(100,210,180,0.14);padding:10px;display:flex;flex-direction:column;gap:7px;overflow:hidden;cursor:pointer;transition:border-color 0.18s,transform 0.18s;"
+                      onmouseenter="this.style.borderColor='rgba(100,210,180,0.32)';this.style.transform='translateY(-1px)'"
+                      onmouseleave="this.style.borderColor='rgba(100,210,180,0.14)';this.style.transform=''">
+                      <div
+                        style="position:relative;flex:1;min-height:0;border-radius:8px;background:rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+                        <img src="assets/shirt.png"
+                          style="max-width:80%;max-height:100%;object-fit:contain;filter:brightness(0.85) drop-shadow(0 4px 12px rgba(0,0,0,0.6));"
+                          alt="T-Shirt">
+                        <div
+                          style="position:absolute;top:5px;left:5px;padding:2px 6px;border-radius:999px;background:rgba(100,210,180,0.18);font-size:7px;color:#9BE8C9;font-weight:700;">
+                          PROMO</div>
+                        <div
+                          style="position:absolute;top:5px;right:5px;padding:2px 5px;border-radius:5px;background:rgba(255,80,80,0.18);font-size:7px;color:rgba(255,160,160,0.9);font-weight:700;">
+                          -20%</div>
+                      </div>
+                      <div style="flex-shrink:0;">
+                        <div
+                          style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.85);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                          Jaket Denim Klasik</div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;">
+                          <div><span style="font-size:11px;font-weight:800;color:#9BE8C9;">Rp 367.000</span><span
+                              style="font-size:7px;text-decoration:line-through;color:rgba(255,255,255,0.22);margin-left:3px;">459rb</span>
+                          </div>
+                          <div
+                            style="width:20px;height:20px;border-radius:6px;background:rgba(100,210,180,0.12);border:1px solid rgba(100,210,180,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#9BE8C9" stroke-width="3">
+                              <line x1="12" y1="5" x2="12" y2="19" />
+                              <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Row 2 -->
+                  <div class="sv0-row"
+                    style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px;flex:1;min-height:0;">
+                    <div
+                      style="border-radius:11px;background:linear-gradient(155deg,rgba(100,210,180,0.07),rgba(7,11,20,0.94));border:1px solid rgba(100,210,180,0.14);padding:10px;display:flex;flex-direction:column;gap:7px;overflow:hidden;cursor:pointer;transition:border-color 0.18s,transform 0.18s;"
+                      onmouseenter="this.style.borderColor='rgba(100,210,180,0.32)';this.style.transform='translateY(-1px)'"
+                      onmouseleave="this.style.borderColor='rgba(100,210,180,0.14)';this.style.transform=''">
+                      <div
+                        style="position:relative;flex:1;min-height:0;border-radius:8px;background:rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+                        <img src="assets/shirt.png"
+                          style="max-width:80%;max-height:100%;object-fit:contain;filter:brightness(0.95) drop-shadow(0 4px 12px rgba(0,0,0,0.6));"
+                          alt="T-Shirt">
+                        <div
+                          style="position:absolute;top:5px;left:5px;padding:2px 6px;border-radius:999px;background:rgba(100,210,180,0.18);font-size:7px;color:#9BE8C9;font-weight:700;">
+                          EKSKLUSIF</div>
+                      </div>
+                      <div style="flex-shrink:0;">
+                        <div
+                          style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.85);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                          Polo Shirt Premium</div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;">
+                          <span style="font-size:11px;font-weight:800;color:#9BE8C9;">Rp 245.000</span>
+                          <div
+                            style="width:20px;height:20px;border-radius:6px;background:rgba(100,210,180,0.12);border:1px solid rgba(100,210,180,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#9BE8C9" stroke-width="3">
+                              <line x1="12" y1="5" x2="12" y2="19" />
+                              <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      style="border-radius:11px;background:linear-gradient(155deg,rgba(100,210,180,0.07),rgba(7,11,20,0.94));border:1px solid rgba(100,210,180,0.14);padding:10px;display:flex;flex-direction:column;gap:7px;overflow:hidden;cursor:pointer;transition:border-color 0.18s,transform 0.18s;"
+                      onmouseenter="this.style.borderColor='rgba(100,210,180,0.32)';this.style.transform='translateY(-1px)'"
+                      onmouseleave="this.style.borderColor='rgba(100,210,180,0.14)';this.style.transform=''">
+                      <div
+                        style="position:relative;flex:1;min-height:0;border-radius:8px;background:rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+                        <img src="assets/shirt.png"
+                          style="max-width:80%;max-height:100%;object-fit:contain;filter:brightness(0.88) drop-shadow(0 4px 12px rgba(0,0,0,0.6));"
+                          alt="T-Shirt">
+                        <div
+                          style="position:absolute;top:5px;left:5px;padding:2px 6px;border-radius:999px;background:rgba(100,210,180,0.18);font-size:7px;color:#9BE8C9;font-weight:700;">
+                          FAVORIT</div>
+                      </div>
+                      <div style="flex-shrink:0;">
+                        <div
+                          style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.85);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                          Crop Top Linen</div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;">
+                          <span style="font-size:11px;font-weight:800;color:#9BE8C9;">Rp 165.000</span>
+                          <div
+                            style="width:20px;height:20px;border-radius:6px;background:rgba(100,210,180,0.12);border:1px solid rgba(100,210,180,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#9BE8C9" stroke-width="3">
+                              <line x1="12" y1="5" x2="12" y2="19" />
+                              <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      style="border-radius:11px;background:linear-gradient(155deg,rgba(100,210,180,0.07),rgba(7,11,20,0.94));border:1px solid rgba(100,210,180,0.14);padding:10px;display:flex;flex-direction:column;gap:7px;overflow:hidden;cursor:pointer;transition:border-color 0.18s,transform 0.18s;"
+                      onmouseenter="this.style.borderColor='rgba(100,210,180,0.32)';this.style.transform='translateY(-1px)'"
+                      onmouseleave="this.style.borderColor='rgba(100,210,180,0.14)';this.style.transform=''">
+                      <div
+                        style="position:relative;flex:1;min-height:0;border-radius:8px;background:rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+                        <img src="assets/shirt.png"
+                          style="max-width:80%;max-height:100%;object-fit:contain;filter:brightness(0.92) drop-shadow(0 4px 12px rgba(0,0,0,0.6));"
+                          alt="T-Shirt">
+                        <div
+                          style="position:absolute;top:5px;left:5px;padding:2px 6px;border-radius:999px;background:rgba(100,210,180,0.18);font-size:7px;color:#9BE8C9;font-weight:700;">
+                          CLASSIC</div>
+                      </div>
+                      <div style="flex-shrink:0;">
+                        <div
+                          style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.85);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                          Kemeja Oxford</div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;">
+                          <span style="font-size:11px;font-weight:800;color:#9BE8C9;">Rp 295.000</span>
+                          <div
+                            style="width:20px;height:20px;border-radius:6px;background:rgba(100,210,180,0.12);border:1px solid rgba(100,210,180,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#9BE8C9" stroke-width="3">
+                              <line x1="12" y1="5" x2="12" y2="19" />
+                              <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- View 1: Dashboard -->
+          <div class="showcase-view" data-view="1">
+            <div style="display:flex;flex-direction:column;gap:14px;height:100%;">
+              <div style="display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+                <div>
+                  <div style="font-size:15px;font-weight:700;color:rgba(255,255,255,0.92);">Dashboard</div>
+                  <div style="font-size:10px;color:rgba(255,255,255,0.35);margin-top:2px;">Performa toko hari ini</div>
+                </div>
+                <div
+                  style="display:flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;background:rgba(100,210,180,0.1);border:1px solid rgba(100,210,180,0.2);">
+                  <div style="width:6px;height:6px;border-radius:50%;background:#9BE8C9;"></div><span
+                    style="font-size:10px;color:#9BE8C9;font-weight:600;">Live</span>
+                </div>
+              </div>
+              <div class="sv1-stats" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;flex-shrink:0;">
+                <div
+                  style="padding:14px;border-radius:14px;background:linear-gradient(145deg,rgba(100,210,180,0.09),rgba(14,28,18,0.94));border:1px solid rgba(100,210,180,0.16);">
+                  <div
+                    style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.38);margin-bottom:8px;">
+                    Total Pesanan</div>
+                  <div
+                    style="font-size:28px;font-weight:900;color:rgba(255,255,255,0.95);line-height:1;letter-spacing:-0.03em;">
+                    247</div>
+                  <div style="margin-top:6px;font-size:10px;font-weight:600;color:#9BE8C9;">↑ 12% minggu ini</div>
+                </div>
+                <div
+                  style="padding:14px;border-radius:14px;background:linear-gradient(145deg,rgba(100,210,180,0.09),rgba(14,28,18,0.94));border:1px solid rgba(100,210,180,0.16);">
+                  <div
+                    style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.38);margin-bottom:8px;">
+                    Revenue Bulan Ini</div>
+                  <div
+                    style="font-size:22px;font-weight:900;color:rgba(255,255,255,0.95);line-height:1;letter-spacing:-0.03em;">
+                    Rp 18.4jt</div>
+                  <div style="margin-top:6px;font-size:10px;font-weight:600;color:#9BE8C9;">↑ 8% bulan lalu</div>
+                </div>
+                <div
+                  style="padding:14px;border-radius:14px;background:linear-gradient(145deg,rgba(100,210,180,0.09),rgba(6,12,8,0.96));border:1px solid rgba(100,210,180,0.16);">
+                  <div
+                    style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.38);margin-bottom:8px;">
+                    Pengunjung</div>
+                  <div
+                    style="font-size:28px;font-weight:900;color:rgba(255,255,255,0.95);line-height:1;letter-spacing:-0.03em;">
+                    1.2rb</div>
+                  <div style="margin-top:6px;font-size:10px;font-weight:600;color:#9BE8C9;">↑ 23% organik</div>
+                </div>
+              </div>
+              <div class="sv1-bottom" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:1;min-height:0;">
+                <div class="sv1-chart"
+                  style="padding:14px;border-radius:14px;background:linear-gradient(145deg,rgba(100,210,180,0.05),rgba(6,12,8,0.94));border:1px solid rgba(100,210,180,0.1);display:flex;flex-direction:column;">
+                  <div
+                    style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.35);margin-bottom:12px;">
+                    Pesanan 7 Hari</div>
+                  <div style="display:flex;align-items:flex-end;gap:6px;flex:1;">
+                    <div
+                      style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;height:100%;">
+                      <div
+                        style="width:100%;border-radius:4px 4px 0 0;height:52%;background:linear-gradient(180deg,rgba(100,210,180,0.65),rgba(60,140,110,0.35));">
+                      </div><span style="font-size:8px;color:rgba(255,255,255,0.22);">S</span>
+                    </div>
+                    <div
+                      style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;height:100%;">
+                      <div
+                        style="width:100%;border-radius:4px 4px 0 0;height:70%;background:linear-gradient(180deg,rgba(100,210,180,0.7),rgba(60,140,110,0.4));">
+                      </div><span style="font-size:8px;color:rgba(255,255,255,0.22);">S</span>
+                    </div>
+                    <div
+                      style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;height:100%;">
+                      <div
+                        style="width:100%;border-radius:4px 4px 0 0;height:40%;background:linear-gradient(180deg,rgba(100,210,180,0.6),rgba(60,140,110,0.3));">
+                      </div><span style="font-size:8px;color:rgba(255,255,255,0.22);">R</span>
+                    </div>
+                    <div
+                      style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;height:100%;">
+                      <div
+                        style="width:100%;border-radius:4px 4px 0 0;height:90%;background:linear-gradient(180deg,#9BE8C9,rgba(60,160,120,0.6));box-shadow:0 0 12px rgba(100,210,180,0.3);">
+                      </div><span style="font-size:8px;color:rgba(255,255,255,0.22);">K</span>
+                    </div>
+                    <div
+                      style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;height:100%;">
+                      <div
+                        style="width:100%;border-radius:4px 4px 0 0;height:60%;background:linear-gradient(180deg,rgba(100,210,180,0.65),rgba(60,140,110,0.35));">
+                      </div><span style="font-size:8px;color:rgba(255,255,255,0.22);">J</span>
+                    </div>
+                    <div
+                      style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;height:100%;">
+                      <div
+                        style="width:100%;border-radius:4px 4px 0 0;height:95%;background:linear-gradient(180deg,#9BE8C9,rgba(60,160,120,0.65));box-shadow:0 0 14px rgba(100,210,180,0.35);">
+                      </div><span style="font-size:8px;color:rgba(255,255,255,0.22);">S</span>
+                    </div>
+                    <div
+                      style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;height:100%;">
+                      <div
+                        style="width:100%;border-radius:4px 4px 0 0;height:76%;background:linear-gradient(180deg,rgba(100,210,180,0.72),rgba(60,140,110,0.42));">
+                      </div><span style="font-size:8px;color:rgba(255,255,255,0.22);">M</span>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  style="border-radius:14px;background:linear-gradient(145deg,rgba(100,210,180,0.05),rgba(6,12,8,0.94));border:1px solid rgba(100,210,180,0.1);padding:14px;display:flex;flex-direction:column;gap:8px;overflow:hidden;">
+                  <div
+                    style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.35);flex-shrink:0;">
+                    Pesanan Terbaru</div>
+                  <div
+                    style="display:flex;align-items:center;justify-content:space-between;padding:9px 10px;border-radius:10px;background:rgba(100,210,180,0.06);border:1px solid rgba(100,210,180,0.1);flex-shrink:0;">
+                    <div>
+                      <div style="font-size:10px;color:rgba(255,255,255,0.8);font-weight:500;">T-Shirt Oversize ×2</div>
+                      <div style="font-size:9px;color:#9BE8C9;font-weight:700;margin-top:2px;">Rp 370.000</div>
+                    </div>
+                    <span
+                      style="font-size:8px;padding:2px 7px;border-radius:999px;background:rgba(100,210,180,0.12);color:#9BE8C9;border:1px solid rgba(100,210,180,0.2);white-space:nowrap;">Dibayar</span>
+                  </div>
+                  <div
+                    style="display:flex;align-items:center;justify-content:space-between;padding:9px 10px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);flex-shrink:0;">
+                    <div>
+                      <div style="font-size:10px;color:rgba(255,255,255,0.65);">Hoodie Crop ×1</div>
+                      <div style="font-size:9px;color:#9BE8C9;font-weight:700;margin-top:2px;">Rp 320.000</div>
+                    </div>
+                    <span
+                      style="font-size:8px;padding:2px 7px;border-radius:999px;background:rgba(251,146,60,0.12);color:rgba(253,186,116,0.9);border:1px solid rgba(251,146,60,0.2);white-space:nowrap;">Diproses</span>
+                  </div>
+                  <div
+                    style="display:flex;align-items:center;justify-content:space-between;padding:9px 10px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);flex-shrink:0;">
+                    <div>
+                      <div style="font-size:10px;color:rgba(255,255,255,0.65);">Celana Cargo ×1</div>
+                      <div style="font-size:9px;color:#9BE8C9;font-weight:700;margin-top:2px;">Rp 245.000</div>
+                    </div>
+                    <span
+                      style="font-size:8px;padding:2px 7px;border-radius:999px;background:rgba(96,165,250,0.12);color:rgba(147,197,253,0.9);border:1px solid rgba(96,165,250,0.2);white-space:nowrap;">Dikirim</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- View 2: Pembayaran -->
+          <div class="showcase-view" data-view="2">
+            <div class="sv2-wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;height:100%;">
+              <div class="sv2-left" style="display:flex;flex-direction:column;gap:12px;">
+                <div style="font-size:15px;font-weight:700;color:rgba(255,255,255,0.92);">Ringkasan Pesanan</div>
+                <div
+                  style="border-radius:14px;background:linear-gradient(145deg,rgba(100,210,180,0.06),rgba(6,12,8,0.95));border:1px solid rgba(100,210,180,0.13);overflow:hidden;">
+                  <div
+                    style="padding:12px 14px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
+                    <div
+                      style="width:38px;height:38px;border-radius:9px;background:rgba(255,255,255,0.04);border:1px solid rgba(100,210,180,0.12);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">
+                      <img src="assets/shirt.png" style="width:90%;height:90%;object-fit:contain;" alt="T-Shirt">
+                    </div>
+                    <div style="flex:1;">
+                      <div style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.88);">T-Shirt Oversize</div>
+                      <div style="font-size:9px;color:rgba(255,255,255,0.38);margin-top:2px;">Ukuran M · Qty 1</div>
+                    </div>
+                    <span style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.85);">Rp 185.000</span>
+                  </div>
+                  <div
+                    style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;justify-content:space-between;align-items:center;">
+                    <span style="font-size:10px;color:rgba(255,255,255,0.45);">Subtotal</span><span
+                      style="font-size:11px;color:rgba(255,255,255,0.7);">Rp 185.000</span>
+                  </div>
+                  <div
+                    style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;justify-content:space-between;align-items:center;">
+                    <span style="font-size:10px;color:rgba(255,255,255,0.45);">Ongkos Kirim</span>
+                    <div style="display:flex;align-items:center;gap:5px;"><span
+                        style="font-size:9px;text-decoration:line-through;color:rgba(255,255,255,0.25);">Rp
+                        15.000</span><span style="font-size:10px;font-weight:700;color:#9BE8C9;">Gratis</span></div>
+                  </div>
+                  <div
+                    style="padding:12px 14px;background:rgba(100,210,180,0.05);display:flex;justify-content:space-between;align-items:center;">
+                    <span style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.9);">Total Bayar</span><span
+                      style="font-size:18px;font-weight:900;color:#9BE8C9;letter-spacing:-0.02em;">Rp 185.000</span>
+                  </div>
+                </div>
+                <div style="display:flex;gap:8px;">
+                  <div
+                    style="flex:1;padding:9px 12px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);font-size:10px;color:rgba(255,255,255,0.28);">
+                    Kode voucher...</div>
+                  <div
+                    style="padding:9px 14px;border-radius:10px;background:rgba(100,210,180,0.1);border:1px solid rgba(100,210,180,0.2);font-size:10px;font-weight:600;color:#9BE8C9;cursor:pointer;">
+                    Pakai</div>
+                </div>
+              </div>
+              <div class="sv2-right" style="display:flex;flex-direction:column;gap:12px;">
+                <div style="font-size:15px;font-weight:700;color:rgba(255,255,255,0.92);">Metode Pembayaran</div>
+                <div style="display:flex;flex-direction:column;gap:8px;flex:1;">
+                  <div
+                    style="padding:13px 14px;border-radius:12px;background:linear-gradient(135deg,rgba(100,210,180,0.1),rgba(6,12,8,0.95));border:2px solid rgba(100,210,180,0.3);display:flex;align-items:center;gap:12px;cursor:pointer;">
+                    <div
+                      style="width:16px;height:16px;border-radius:50%;border:2px solid #9BE8C9;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                      <div style="width:7px;height:7px;border-radius:50%;background:#9BE8C9;"></div>
+                    </div>
+                    <div style="flex:1;">
+                      <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.92);">QRIS</div>
+                      <div style="font-size:9px;color:rgba(255,255,255,0.4);margin-top:1px;">Scan &amp; bayar instant
+                      </div>
+                    </div>
+                    <span
+                      style="font-size:8px;font-weight:700;padding:2px 7px;border-radius:999px;background:rgba(100,210,180,0.12);color:#9BE8C9;border:1px solid rgba(100,210,180,0.22);">Rekomendasi</span>
+                  </div>
+                  <div
+                    style="padding:13px 14px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:12px;cursor:pointer;">
+                    <div
+                      style="width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);flex-shrink:0;">
+                    </div>
+                    <div style="flex:1;">
+                      <div style="font-size:11px;font-weight:500;color:rgba(255,255,255,0.6);">Transfer Bank BCA</div>
+                      <div style="font-size:9px;color:rgba(255,255,255,0.3);margin-top:1px;">Konfirmasi manual</div>
+                    </div>
+                  </div>
+                  <div
+                    style="padding:13px 14px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:12px;cursor:pointer;">
+                    <div
+                      style="width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);flex-shrink:0;">
+                    </div>
+                    <div style="flex:1;">
+                      <div style="font-size:11px;font-weight:500;color:rgba(255,255,255,0.6);">Bayar di Tempat (COD)
+                      </div>
+                      <div style="font-size:9px;color:rgba(255,255,255,0.3);margin-top:1px;">Bayar saat barang tiba
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  style="padding:15px;border-radius:12px;background:linear-gradient(135deg,rgba(107,142,90,0.92),rgba(74,107,58,0.96));font-size:14px;font-weight:700;color:#0a1a0e;text-align:center;cursor:pointer;box-shadow:0 6px 24px rgba(100,210,180,0.22);">
+                  Bayar Sekarang →</div>
+                <div style="text-align:center;font-size:9px;color:rgba(255,255,255,0.28);">🔒 Transaksi dienkripsi &amp;
+                  aman</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- View 3: Kustomisasi -->
+          <div class="showcase-view" data-view="3">
+            <div class="sv3-wrap" style="display:grid;grid-template-columns:1fr 190px;gap:16px;height:100%;">
+              <!-- Left: live preview -->
+              <div
+                style="border-radius:14px;background:rgba(6,12,8,0.96);border:1px solid rgba(100,210,180,0.12);overflow:hidden;display:flex;flex-direction:column;"
+                id="kustPreviewPanel">
+                <div
+                  style="padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:8px;flex-shrink:0;background:rgba(255,255,255,0.02);">
+                  <div style="display:flex;gap:4px;">
+                    <div style="width:8px;height:8px;border-radius:50%;background:#FF5F57;"></div>
+                    <div style="width:8px;height:8px;border-radius:50%;background:#FFBD2E;"></div>
+                    <div style="width:8px;height:8px;border-radius:50%;background:#28CA41;"></div>
+                  </div>
+                  <div
+                    style="flex:1;background:rgba(255,255,255,0.05);border-radius:5px;height:16px;display:flex;align-items:center;padding:0 8px;">
+                    <span style="font-size:8px;color:rgba(255,255,255,0.3);">namatok.amora.id</span>
+                  </div>
+                  <div
+                    style="font-size:8px;color:#9BE8C9;padding:2px 7px;border-radius:4px;background:rgba(100,210,180,0.1);border:1px solid rgba(100,210,180,0.18);">
+                    Live Preview</div>
+                </div>
+                <div style="flex:1;padding:14px;display:flex;flex-direction:column;gap:10px;overflow:hidden;">
+                  <div
+                    style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:9px;border:1px solid rgba(100,210,180,0.12);background:rgba(100,210,180,0.07);"
+                    id="kustNavBar">
+                    <span
+                      style="font-size:11px;font-weight:800;color:rgba(255,255,255,0.92);letter-spacing:0.07em;">NAMA
+                      TOKO</span>
+                    <div style="display:flex;gap:8px;align-items:center;">
+                      <span style="font-size:8px;color:rgba(255,255,255,0.4);">Produk</span>
+                      <span style="font-size:8px;color:rgba(255,255,255,0.4);">Tentang</span>
+                      <div
+                        style="padding:3px 8px;border-radius:999px;font-size:8px;font-weight:600;border:1px solid rgba(100,210,180,0.25);background:rgba(100,210,180,0.14);color:#9BE8C9;"
+                        id="kustCta">Keranjang</div>
+                    </div>
+                  </div>
+                  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;flex:1;min-height:0;"
+                    id="kustProductGrid">
+                    <div
+                      style="border-radius:9px;background:rgba(255,255,255,0.03);border:1px solid rgba(100,210,180,0.14);padding:8px;display:flex;flex-direction:column;gap:5px;"
+                      class="kust-product-card">
+                      <div
+                        style="aspect-ratio:1;border-radius:6px;background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+                        <img src="assets/shirt.png" style="width:85%;height:85%;object-fit:contain;" alt="T-Shirt">
+                      </div>
+                      <div style="font-size:8px;color:rgba(255,255,255,0.7);">T-Shirt Oversize</div>
+                      <div style="font-size:9px;font-weight:800;color:#9BE8C9;" class="kust-price">Rp 185.000</div>
+                    </div>
+                    <div
+                      style="border-radius:9px;background:rgba(255,255,255,0.03);border:1px solid rgba(100,210,180,0.14);padding:8px;display:flex;flex-direction:column;gap:5px;"
+                      class="kust-product-card">
+                      <div
+                        style="aspect-ratio:1;border-radius:6px;background:rgba(100,210,180,0.05);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+                        <img src="assets/shirt.png"
+                          style="width:85%;height:85%;object-fit:contain;filter:brightness(0.88);" alt="T-Shirt">
+                      </div>
+                      <div style="font-size:8px;color:rgba(255,255,255,0.7);">Hoodie Crop</div>
+                      <div style="font-size:9px;font-weight:800;color:#9BE8C9;" class="kust-price">Rp 320.000</div>
+                    </div>
+                    <div
+                      style="border-radius:9px;background:rgba(255,255,255,0.03);border:1px solid rgba(100,210,180,0.14);padding:8px;display:flex;flex-direction:column;gap:5px;"
+                      class="kust-product-card">
+                      <div
+                        style="aspect-ratio:1;border-radius:6px;background:rgba(100,210,180,0.03);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+                        <img src="assets/shirt.png"
+                          style="width:85%;height:85%;object-fit:contain;filter:brightness(0.82);" alt="T-Shirt">
+                      </div>
+                      <div style="font-size:8px;color:rgba(255,255,255,0.7);">Jaket Denim</div>
+                      <div style="font-size:9px;font-weight:800;color:#9BE8C9;" class="kust-price">Rp 459.000</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Right: controls -->
+              <div class="sv3-controls" style="display:flex;flex-direction:column;gap:10px;">
+                <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.88);">Kustomisasi Toko</div>
+                <div
+                  style="border-radius:12px;background:linear-gradient(145deg,rgba(100,210,180,0.06),rgba(6,12,8,0.95));border:1px solid rgba(100,210,180,0.12);padding:12px;">
+                  <div
+                    style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.38);margin-bottom:10px;">
+                    Warna Tema</div>
+                  <div style="display:flex;gap:7px;flex-wrap:wrap;" id="kustColors">
+                    <div class="kust-color-dot" data-color="#9BE8C9" data-rgba="100,210,180"
+                      style="width:22px;height:22px;border-radius:50%;background:#9BE8C9;cursor:pointer;box-shadow:0 0 0 2px rgba(255,255,255,0.5),0 0 8px rgba(155,232,201,0.5);transition:box-shadow 0.2s;">
+                    </div>
+                    <div class="kust-color-dot" data-color="#60A5FA" data-rgba="96,165,250"
+                      style="width:22px;height:22px;border-radius:50%;background:#60A5FA;cursor:pointer;transition:box-shadow 0.2s;">
+                    </div>
+                    <div class="kust-color-dot" data-color="#F472B6" data-rgba="244,114,182"
+                      style="width:22px;height:22px;border-radius:50%;background:#F472B6;cursor:pointer;transition:box-shadow 0.2s;">
+                    </div>
+                    <div class="kust-color-dot" data-color="#FB923C" data-rgba="251,146,60"
+                      style="width:22px;height:22px;border-radius:50%;background:#FB923C;cursor:pointer;transition:box-shadow 0.2s;">
+                    </div>
+                    <div class="kust-color-dot" data-color="#A78BFA" data-rgba="167,139,250"
+                      style="width:22px;height:22px;border-radius:50%;background:#A78BFA;cursor:pointer;transition:box-shadow 0.2s;">
+                    </div>
+                  </div>
+                </div>
+                <div
+                  style="border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);padding:12px;">
+                  <div
+                    style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.38);margin-bottom:8px;">
+                    Tipografi</div>
+                  <div style="display:flex;flex-direction:column;gap:5px;" id="kustFonts">
+                    <div class="kust-font-opt active-font"
+                      style="padding:6px 9px;border-radius:7px;background:rgba(100,210,180,0.1);border:1px solid rgba(100,210,180,0.2);font-size:9px;color:#9BE8C9;font-weight:700;display:flex;justify-content:space-between;cursor:pointer;">
+                      Inter <span style="opacity:0.6;">Aktif</span></div>
+                    <div class="kust-font-opt"
+                      style="padding:6px 9px;border-radius:7px;font-size:9px;color:rgba(255,255,255,0.4);cursor:pointer;">
+                      Poppins</div>
+                    <div class="kust-font-opt"
+                      style="padding:6px 9px;border-radius:7px;font-size:9px;color:rgba(255,255,255,0.4);cursor:pointer;font-style:italic;">
+                      Playfair Display</div>
+                  </div>
+                </div>
+                <div
+                  style="border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);padding:12px;">
+                  <div
+                    style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.38);margin-bottom:8px;">
+                    Layout Grid</div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;" id="kustLayouts">
+                    <div class="kust-layout-opt active-layout" data-cols="2"
+                      style="padding:7px 4px;border-radius:7px;background:rgba(100,210,180,0.1);border:1px solid rgba(100,210,180,0.2);display:flex;justify-content:center;gap:3px;cursor:pointer;">
+                      <div style="width:8px;height:10px;background:#9BE8C9;border-radius:1px;opacity:0.7;"></div>
+                      <div style="width:8px;height:10px;background:#9BE8C9;border-radius:1px;opacity:0.7;"></div>
+                    </div>
+                    <div class="kust-layout-opt" data-cols="3"
+                      style="padding:7px 4px;border-radius:7px;background:rgba(255,255,255,0.03);display:flex;justify-content:center;gap:2px;cursor:pointer;">
+                      <div style="width:5px;height:10px;background:rgba(255,255,255,0.2);border-radius:1px;"></div>
+                      <div style="width:5px;height:10px;background:rgba(255,255,255,0.2);border-radius:1px;"></div>
+                      <div style="width:5px;height:10px;background:rgba(255,255,255,0.2);border-radius:1px;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- View 4: Promo -->
+          <div class="showcase-view" data-view="4">
+            <div style="display:flex;flex-direction:column;gap:14px;height:100%;">
+              <div style="display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+                <div>
+                  <div style="font-size:15px;font-weight:700;color:rgba(255,255,255,0.92);">Manajemen Promo</div>
+                  <div style="font-size:10px;color:rgba(255,255,255,0.35);margin-top:2px;">Kelola kode diskon &amp;
+                    penawaran</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <div
+                    style="font-size:10px;color:#9BE8C9;background:rgba(100,210,180,0.1);border:1px solid rgba(100,210,180,0.2);padding:4px 12px;border-radius:999px;font-weight:600;">
+                    3 Aktif</div>
+                  <div
+                    style="padding:6px 12px;border-radius:8px;background:linear-gradient(135deg,rgba(100,210,180,0.12),rgba(6,12,8,0.95));border:1px solid rgba(100,210,180,0.2);font-size:10px;color:#9BE8C9;font-weight:600;cursor:pointer;">
+                    + Buat Promo</div>
+                </div>
+              </div>
+              <div class="sv4-stats" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;flex-shrink:0;">
+                <div
+                  style="padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);text-align:center;">
+                  <div style="font-size:20px;font-weight:800;color:#9BE8C9;">265</div>
+                  <div style="font-size:8px;color:rgba(255,255,255,0.38);margin-top:2px;">Total Penggunaan</div>
+                </div>
+                <div
+                  style="padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);text-align:center;">
+                  <div style="font-size:18px;font-weight:800;color:rgba(255,255,255,0.75);">Rp 4.2jt</div>
+                  <div style="font-size:8px;color:rgba(255,255,255,0.38);margin-top:2px;">Total Diskon</div>
+                </div>
+                <div
+                  style="padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);text-align:center;">
+                  <div style="font-size:18px;font-weight:800;color:rgba(255,255,255,0.75);">18.4%</div>
+                  <div style="font-size:8px;color:rgba(255,255,255,0.38);margin-top:2px;">Conversion Rate</div>
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px;flex:1;min-height:0;overflow:hidden;">
+                <div class="sv4-promo-row"
+                  style="padding:14px 16px;border-radius:12px;background:linear-gradient(135deg,rgba(100,210,180,0.08),rgba(6,12,8,0.95));border:1px solid rgba(100,210,180,0.18);display:flex;align-items:center;gap:14px;flex-shrink:0;">
+                  <div style="flex:0 0 auto;">
+                    <div
+                      style="font-family:monospace;font-size:14px;font-weight:900;color:rgba(255,255,255,0.95);letter-spacing:0.05em;">
+                      AMORA20</div>
+                    <div style="font-size:9px;color:rgba(255,255,255,0.4);margin-top:3px;">Diskon 20% · Semua produk
+                    </div>
+                  </div>
+                  <div style="flex:1;min-width:0;">
+                    <div style="display:flex;justify-content:space-between;margin-bottom:5px;"><span
+                        style="font-size:9px;color:rgba(255,255,255,0.35);">142 penggunaan</span><span
+                        style="font-size:9px;color:#9BE8C9;font-weight:700;">85%</span></div>
+                    <div style="height:5px;border-radius:3px;background:rgba(255,255,255,0.06);overflow:hidden;">
+                      <div
+                        style="height:100%;width:85%;border-radius:3px;background:linear-gradient(90deg,#9BE8C9,rgba(100,210,180,0.5));">
+                      </div>
+                    </div>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span
+                      style="font-size:8px;color:#9BE8C9;padding:2px 7px;border-radius:999px;background:rgba(100,210,180,0.1);border:1px solid rgba(100,210,180,0.2);">Aktif</span>
+                    <div
+                      style="width:36px;height:20px;border-radius:10px;background:rgba(107,142,90,0.8);position:relative;cursor:pointer;">
+                      <div
+                        style="width:16px;height:16px;border-radius:50%;background:white;position:absolute;right:2px;top:2px;box-shadow:0 1px 4px rgba(0,0,0,0.3);">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="sv4-promo-row"
+                  style="padding:14px 16px;border-radius:12px;background:linear-gradient(135deg,rgba(100,210,180,0.06),rgba(6,12,8,0.93));border:1px solid rgba(100,210,180,0.13);display:flex;align-items:center;gap:14px;flex-shrink:0;">
+                  <div style="flex:0 0 auto;">
+                    <div
+                      style="font-family:monospace;font-size:14px;font-weight:900;color:rgba(255,255,255,0.9);letter-spacing:0.05em;">
+                      ONGKIR0</div>
+                    <div style="font-size:9px;color:rgba(255,255,255,0.4);margin-top:3px;">Gratis ongkir · Min. Rp 100rb
+                    </div>
+                  </div>
+                  <div style="flex:1;min-width:0;">
+                    <div style="display:flex;justify-content:space-between;margin-bottom:5px;"><span
+                        style="font-size:9px;color:rgba(255,255,255,0.35);">89 penggunaan</span><span
+                        style="font-size:9px;color:#9BE8C9;font-weight:700;">58%</span></div>
+                    <div style="height:5px;border-radius:3px;background:rgba(255,255,255,0.06);overflow:hidden;">
+                      <div
+                        style="height:100%;width:58%;border-radius:3px;background:linear-gradient(90deg,rgba(100,210,180,0.85),rgba(100,210,180,0.4));">
+                      </div>
+                    </div>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span
+                      style="font-size:8px;color:#9BE8C9;padding:2px 7px;border-radius:999px;background:rgba(100,210,180,0.1);border:1px solid rgba(100,210,180,0.2);">Aktif</span>
+                    <div
+                      style="width:36px;height:20px;border-radius:10px;background:rgba(107,142,90,0.8);position:relative;cursor:pointer;">
+                      <div
+                        style="width:16px;height:16px;border-radius:50%;background:white;position:absolute;right:2px;top:2px;box-shadow:0 1px 4px rgba(0,0,0,0.3);">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="sv4-promo-row"
+                  style="padding:14px 16px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:14px;flex-shrink:0;">
+                  <div style="flex:0 0 auto;">
+                    <div
+                      style="font-family:monospace;font-size:14px;font-weight:900;color:rgba(255,255,255,0.5);letter-spacing:0.05em;">
+                      BELI2</div>
+                    <div style="font-size:9px;color:rgba(255,255,255,0.3);margin-top:3px;">Beli 2 gratis 1 item pilihan
+                    </div>
+                  </div>
+                  <div style="flex:1;min-width:0;">
+                    <div style="display:flex;justify-content:space-between;margin-bottom:5px;"><span
+                        style="font-size:9px;color:rgba(255,255,255,0.25);">34 penggunaan</span><span
+                        style="font-size:9px;color:rgba(255,255,255,0.35);">22%</span></div>
+                    <div style="height:5px;border-radius:3px;background:rgba(255,255,255,0.06);overflow:hidden;">
+                      <div style="height:100%;width:22%;border-radius:3px;background:rgba(100,210,180,0.3);"></div>
+                    </div>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;"><span
+                      style="font-size:8px;color:rgba(255,255,255,0.35);padding:2px 7px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);">Nonaktif</span>
+                    <div
+                      style="width:36px;height:20px;border-radius:10px;background:rgba(255,255,255,0.1);position:relative;cursor:pointer;">
+                      <div
+                        style="width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,0.4);position:absolute;left:2px;top:2px;">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /.showcase-panel -->
+
+      </div><!-- /.feature-showcase -->
+    </div>
+  </section>
 
   <div class="section-divider" aria-hidden="true"></div>
 
-  <div data-include="components/landing/faq.html"></div>
+  <!-- ══════════════ VIP MERCHANT LAUNCHING PROGRAM ══════════════ -->
+  <section id="vip-program" class="py-section">
+    <div class="section-inner">
 
-  <div data-include="components/shared/footer.html" data-base="" data-home-href="#" data-year="2025"
-    data-reveal-class="reveal"></div>
+      <div class="vip-header reveal">
+        <div class="section-eyebrow"><span class="section-eyebrow-dot"></span>Launching Program</div>
+        <h2>Daftar Sekarang, Jadi<br><span class="accent">VIP Merchant.</span></h2>
+      </div>
 
-  <script src="scripts/include.js"></script>
+      <div class="vip-panel reveal delay-1">
+        <div class="vip-panel-glow" aria-hidden="true"></div>
+
+        <!-- Identity -->
+        <div class="vip-identity">
+          <img src="assets/vip-merchant-badge.png" alt="VIP Merchant Badge" width="52" height="52" class="vip-identity-badge">
+          <div class="vip-identity-title">Jadi VIP Merchant</div>
+          <div class="vip-slot-badge">Terbatas hanya 30 slot VIP Merchant</div>
+        </div>
+
+        <!-- Hero highlight band -->
+        <div class="vip-highlight-band">
+          <span class="vip-highlight-label">Gratis</span>
+          <span class="vip-highlight-duration">untuk 3 Bulan Pertama</span>
+          <span class="vip-highlight-sub">Khusus paket Starter, tanpa kartu kredit</span>
+        </div>
+
+        <!-- Benefits — one list, not separate cards -->
+        <ul class="vip-benefits">
+          <li>
+            <svg class="check-icon" data-icon viewBox="0 0 24 24" width="18" height="18">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            Harga spesial seumur hidup untuk Starter maupun Pro
+          </li>
+          <li>
+            <svg class="check-icon" data-icon viewBox="0 0 24 24" width="18" height="18">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            Bisa upgrade ke Pro kapan saja dengan harga VIP
+          </li>
+          <li>
+            <svg class="check-icon" data-icon viewBox="0 0 24 24" width="18" height="18">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            Slot sangat terbatas — hanya untuk 30 merchant pertama
+          </li>
+        </ul>
+
+        <div class="vip-price-info">
+          Setelah trial, harga spesial seumur hidup:<br>
+          <strong>Starter Rp 99.000</strong> &amp; <strong>Pro Rp 179.000</strong> per bulan.
+        </div>
+
+        <!-- TODO: update validation/expiry date for the launching program once finalized -->
+        <div class="vip-validity">Berlaku hingga 31 Desember 2026</div>
+
+        <a href="vip-merchant-registration/index.html" class="btn-primary vip-cta">
+          Daftar VIP Merchant Sekarang
+          <svg data-icon viewBox="0 0 24 24" width="15" height="15">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider" aria-hidden="true"></div>
+
+  <!-- ══════════════ PRICING ══════════════ -->
+  <section id="harga" class="py-section">
+    <div class="section-inner">
+
+      <div class="pricing-header reveal">
+        <div class="section-eyebrow"><span class="section-eyebrow-dot"></span>Harga</div>
+        <h2>Transparan, sederhana,<br><span class="accent">tanpa biaya tersembunyi.</span></h2>
+        <p>Semua harga sudah termasuk PPN. Tidak ada biaya tambahan atau potongan tersembunyi.</p>
+      </div>
+
+      <!-- Two plan cards -->
+      <div class="pricing-plans-grid">
+        <!-- STARTER -->
+        <div class="plan-card-wrapper reveal delay-1">
+          <div class="plan-card plan-card-starter">
+            <div class="plan-discount-badge starter-badge"><span class="plan-discount-icon">🏷</span> DISKON 10%</div>
+            <div class="plan-old-price">Rp 149.000</div>
+            <div class="plan-tier">STARTER</div>
+            <div class="plan-price">Rp 134.000<span>/bulan</span></div>
+            <div class="plan-saving">Hemat Rp 15.000!</div>
+            <a href="https://admin.amora.id/" class="plan-cta outline-cta">Mulai Starter</a>
+          </div>
+        </div>
+        <!-- PRO -->
+        <div class="plan-card-wrapper reveal delay-2">
+          <span class="plan-ribbon">Rekomendasi</span>
+          <div class="plan-card plan-card-pro">
+            <div class="plan-discount-badge pro-badge"><span class="plan-discount-icon">🔥</span> DISKON 40%</div>
+            <div class="plan-old-price">Rp 349.000</div>
+            <div class="plan-tier">PRO</div>
+            <div class="plan-price">Rp 209.000<span>/bulan</span></div>
+            <div class="plan-saving">Hemat Rp 140.000!</div>
+            <a href="https://admin.amora.id/" class="plan-cta filled-cta">Mulai Pro</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparison table -->
+      <div class="pricing-table reveal delay-2">
+        <table>
+          <thead>
+            <tr>
+              <th>FITUR</th>
+              <th class="th-starter">Starter</th>
+              <th class="th-pro">Pro</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- TOKO & TAMPILAN -->
+            <tr class="cat-row">
+              <td colspan="3">Toko &amp; Tampilan</td>
+            </tr>
+            <tr>
+              <td class="feat-name">Kustomisasi Desain Toko</td>
+              <td class="feat-val"><span class="pill-limited">Terbatas</span></td>
+              <td class="feat-val"><span class="pill-full">Fitur Lengkap</span></td>
+            </tr>
+            <tr>
+              <td class="feat-name">Integrasi Domain Kustom</td>
+              <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="20" height="20">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg></td>
+              <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="20" height="20">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg></td>
+            </tr>
+            <tr>
+              <td class="feat-name">Penjadwalan Peluncuran Produk</td>
+              <td class="feat-val"><svg class="cross-icon" data-icon viewBox="0 0 24 24" width="20" height="20">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg></td>
+              <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="20" height="20">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg></td>
+            </tr>
+
+            <!-- PRODUK & INVENTORI -->
+            <tr class="cat-row">
+              <td colspan="3">Produk &amp; Inventori</td>
+            </tr>
+            <tr>
+              <td class="feat-name">Jumlah Produk</td>
+              <td class="feat-val blue-val">Maks. 100 produk</td>
+              <td class="feat-val accent-val">Maks. 250 produk</td>
+            </tr>
+            <tr>
+              <td class="feat-name">
+                Opsi Produk
+                <small>Pilihan variasi yang bisa dipilih pembeli (mis. ukuran, warna, bahan)</small>
+              </td>
+              <td class="feat-val blue-val">Maks. 2 opsi</td>
+              <td class="feat-val accent-val">Maks. 3 opsi</td>
+            </tr>
+            <tr>
+              <td class="feat-name">Koleksi Produk</td>
+              <td class="feat-val blue-val">Maks. 10 koleksi</td>
+              <td class="feat-val accent-val">Maks. 25 koleksi</td>
+            </tr>
+            <tr>
+              <td class="feat-name">Variasi per Produk</td>
+              <td class="feat-val blue-val">Maks. 256 variasi</td>
+              <td class="feat-val accent-val">Maks. 512 variasi</td>
+            </tr>
+            <tr>
+              <td class="feat-name">Pengaturan Diskon Produk</td>
+              <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="20" height="20">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg></td>
+              <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="20" height="20">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg></td>
+            </tr>
+
+            <!-- KATEGORI PRODUK -->
+            <tr class="cat-row">
+              <td colspan="3">Kategori Produk</td>
+            </tr>
+            <tr>
+              <td class="feat-name">
+                Kategori Induk
+                <small>Kelompok kategori utama (mis. Pakaian, Elektronik)</small>
+              </td>
+              <td class="feat-val blue-val">Maks. 10 kategori</td>
+              <td class="feat-val accent-val">Maks. 10 kategori</td>
+            </tr>
+            <tr>
+              <td class="feat-name">
+                Kategori Anak
+                <small>Sub-kategori di dalam kategori induk (mis. Pakaian → Kaos, Celana)</small>
+              </td>
+              <td class="feat-val"><span class="pill-limited">Tidak tersedia</span></td>
+              <td class="feat-val accent-val">Maks. 10 per induk</td>
+            </tr>
+
+            <!-- VOUCHER -->
+            <tr class="cat-row">
+              <td colspan="3">Voucher</td>
+            </tr>
+            <tr>
+              <td class="feat-name">
+                Voucher Aktif
+                <small>Jumlah voucher diskon yang bisa aktif sekaligus</small>
+              </td>
+              <td class="feat-val blue-val">Maks. 5 voucher</td>
+              <td class="feat-val accent-val">Maks. 15 voucher</td>
+            </tr>
+            <tr>
+              <td class="feat-name">
+                Kombinasi Voucher
+                <small>Berapa banyak voucher berbeda yang bisa dipakai sekaligus dalam 1 transaksi</small>
+              </td>
+              <td class="feat-val blue-val">Maks. 2 kombinasi</td>
+              <td class="feat-val accent-val">Maks. 5 kombinasi</td>
+            </tr>
+            <tr>
+              <td class="feat-name">
+                Whitelist Kombinasi Voucher
+                <small>Atur sendiri voucher mana saja yang boleh dipakai bersama (dikombinasikan)</small>
+              </td>
+              <td class="feat-val"><svg class="cross-icon" data-icon viewBox="0 0 24 24" width="20" height="20">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg></td>
+              <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="20" height="20">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg></td>
+            </tr>
+
+            <!-- PESANAN -->
+            <tr class="cat-row">
+              <td colspan="3">Pesanan</td>
+            </tr>
+            <tr>
+              <td class="feat-name">
+                Kuota Transaksi Bulanan
+                <small>sudah termasuk dalam paket</small>
+              </td>
+              <td class="feat-val blue-val">300 pesanan<br><span
+                  style="font-size:0.75rem;font-weight:400;color:var(--text-40)">per bulan</span></td>
+              <td class="feat-val accent-val">1.000 pesanan<br><span
+                  style="font-size:0.75rem;font-weight:400;color:var(--text-40)">per bulan</span></td>
+            </tr>
+            <tr>
+              <td class="feat-name">
+                Biaya Kelebihan Kuota
+                <small>dikenakan per pesanan di atas kuota</small>
+              </td>
+              <td class="feat-val blue-val">2% per pesanan</td>
+              <td class="feat-val accent-val">1% per pesanan</td>
+            </tr>
+
+            <!-- PEMBAYARAN & PENGIRIMAN -->
+            <tr class="cat-row">
+              <td colspan="3">Pembayaran &amp; Pengiriman</td>
+            </tr>
+            <tr>
+              <td class="feat-name">
+                Integrasi Payment Gateway Lokal
+                <small>Xendit, Doku, Midtrans</small>
+              </td>
+              <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="20" height="20">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg></td>
+              <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="20" height="20">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg></td>
+            </tr>
+            <tr>
+              <td class="feat-name">Cek Ongkir, Cetak Resi &amp; Pelacakan Pengiriman</td>
+              <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="20" height="20">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg></td>
+              <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="20" height="20">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>
+                <p class="pricing-note">* Harga sudah termasuk PPN</p>
+              </td>
+              <td class="tfoot-cta tfoot-cta-starter"><a href="https://admin.amora.id/">Starter</a></td>
+              <td class="tfoot-cta tfoot-cta-pro"><a href="https://admin.amora.id/">Pro</a></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════ CTA BANNER ══════════════ -->
+  <section id="cta-banner" class="py-section">
+    <div class="cta-banner-inner">
+      <div class="cta-card reveal">
+        <h2>Siap punya <span class="accent">toko<br>online</span> sendiri?</h2>
+        <p>Buat toko online Anda sendiri dalam 5 menit. Tanpa coding. Tanpa developer.</p>
+        <div class="cta-banner-actions">
+          <a href="https://admin.amora.id/" class="btn-primary">
+            Buka Toko Sekarang
+            <svg data-icon viewBox="0 0 24 24" width="15" height="15">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </a>
+          <a href="#harga" class="btn-ghost">Lihat Harga</a>
+        </div>
+        <p class="cta-trust">Tanpa kartu kredit &nbsp;·&nbsp; Setup dalam 5 menit &nbsp;·&nbsp; Batalkan kapan saja</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider" aria-hidden="true"></div>
+
+  <!-- ══════════════ FAQ ══════════════ -->
+  <section id="faq" class="py-section">
+    <div class="section-inner faq-inner">
+      <div class="faq-header reveal">
+        <h2>Pertanyaan Seputar Amora.id</h2>
+        <p>Temukan jawaban seputar fitur, pembayaran, pengiriman, dan cara menggunakan Amora.id.</p>
+      </div>
+      <div class="reveal delay-2 faq-list" id="faqList"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════ FOOTER (shared component) ══════════════ -->
+  <div id="site-footer"></div>
+
+  <script>window.SITE_ROOT = '';</script>
+  <script src="assets/js/site-chrome.js"></script>
+
   <script>
-    loadIncludes()
-      .then(() => loadScript('scripts/global.js'))
-      .then(() => loadScript('scripts/landing.js'))
-      .catch((err) => console.error(err));
+    // ── Hero 3D canvas: handled by Three.js module script below ──
+    (function () {
+      // Canvas 2D disabled — Three.js WebGL module takes over #heroCanvas
+      return;
+      const canvas = document.getElementById('heroCanvas');
+      if (!canvas) return;
+      const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const ctx = canvas.getContext('2d');
+      const DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+      function resize() {
+        const r = canvas.getBoundingClientRect();
+        canvas.width = r.width * DPR; canvas.height = r.height * DPR;
+        ctx.scale(DPR, DPR);
+      }
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+
+      const proj = (x, y, z, cx, cy, fov = 520) => { const s = fov / (fov + z); return { x: cx + x * s, y: cy + y * s, s }; };
+      const rotX = (p, a) => { const c = Math.cos(a), s = Math.sin(a); return [p[0], p[1] * c - p[2] * s, p[1] * s + p[2] * c]; };
+      const rotY = (p, a) => { const c = Math.cos(a), s = Math.sin(a); return [p[0] * c + p[2] * s, p[1], -p[0] * s + p[2] * c]; };
+
+      function cubeVerts(h) {
+        return [[-h, -h, -h], [h, -h, -h], [h, h, -h], [-h, h, -h], [-h, -h, h], [h, -h, h], [h, h, h], [-h, h, h]];
+      }
+      const FACES = [
+        { v: [0, 1, 2, 3], label: 'back' }, { v: [4, 5, 6, 7], label: 'front' },
+        { v: [0, 1, 5, 4], label: 'top' }, { v: [2, 3, 7, 6], label: 'bottom' },
+        { v: [0, 3, 7, 4], label: 'left' }, { v: [1, 2, 6, 5], label: 'right' }
+      ];
+      const EDGES = [[0, 1], [1, 2], [2, 3], [3, 0], [4, 5], [5, 6], [6, 7], [7, 4], [0, 4], [1, 5], [2, 6], [3, 7]];
+
+      let rX = 0.42, rY = -0.55, tX = 0.42, tY = -0.55, vX = 0, vY = 0, drag = false, lx = 0, ly = 0;
+      canvas.addEventListener('pointerdown', e => { drag = true; lx = e.clientX; ly = e.clientY; vX = vY = 0; canvas.setPointerCapture(e.pointerId); });
+      canvas.addEventListener('pointermove', e => { if (!drag) return; vX = (e.clientY - ly) * 0.007; vY = (e.clientX - lx) * 0.007; tX += vX; tY += vY; lx = e.clientX; ly = e.clientY; });
+      canvas.addEventListener('pointerup', () => drag = false);
+      canvas.addEventListener('pointercancel', () => drag = false);
+
+      function clipPoly(pts) {
+        ctx.beginPath(); ctx.moveTo(pts[0].x, pts[0].y);
+        for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
+        ctx.closePath();
+      }
+      function faceCenter(pts) {
+        const cx = (pts[0].x + pts[1].x + pts[2].x + pts[3].x) / 4;
+        const cy = (pts[0].y + pts[1].y + pts[2].y + pts[3].y) / 4;
+        const fw = Math.hypot(pts[1].x - pts[0].x, pts[1].y - pts[0].y);
+        const fh = Math.hypot(pts[3].x - pts[0].x, pts[3].y - pts[0].y);
+        return { cx, cy, fw, fh };
+      }
+
+      function sparkline(x0, y0, W, H, data, color) {
+        const max = Math.max(...data), min = Math.min(...data);
+        ctx.beginPath();
+        data.forEach((v, i) => {
+          const px = x0 + i / (data.length - 1) * W, py = y0 + H - (v - min) / (max - min || 1) * H;
+          i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+        });
+        ctx.strokeStyle = color; ctx.lineWidth = 1.5; ctx.lineJoin = 'round'; ctx.stroke();
+        ctx.lineTo(x0 + W, y0 + H); ctx.lineTo(x0, y0 + H); ctx.closePath();
+        ctx.fillStyle = color.replace('rgb(', 'rgba(').replace(')', ',0.12)'); ctx.fill();
+      }
+
+      function barChart(x0, y0, W, H, data) {
+        const max = Math.max(...data), gap = W / data.length, bw = gap * 0.62;
+        data.forEach((v, i) => {
+          const bh = (v / max) * H, bx = x0 + i * gap + (gap - bw) / 2, by = y0 + H - bh;
+          const g = ctx.createLinearGradient(bx, by, bx, y0 + H);
+          g.addColorStop(0, 'rgba(143,184,122,0.9)'); g.addColorStop(1, 'rgba(107,142,90,0.15)');
+          ctx.fillStyle = g;
+          ctx.beginPath(); ctx.roundRect(bx, by, bw, bh, 2); ctx.fill();
+        });
+      }
+
+      // Draw rich UI content clipped inside a cube face
+      function drawFaceContent(pts, label, t) {
+        const { cx, cy, fw, fh } = faceCenter(pts);
+        const pad = fw * 0.09;
+
+        ctx.save();
+        clipPoly(pts); ctx.clip();
+
+        // dark glass background
+        clipPoly(pts);
+        ctx.fillStyle = 'rgba(8,12,18,0.82)'; ctx.fill();
+
+        // subtle inner gradient overlay
+        const g = ctx.createRadialGradient(cx, cy - fh * 0.2, 0, cx, cy, fw * 0.8);
+        g.addColorStop(0, 'rgba(107,142,90,0.08)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = g; clipPoly(pts); ctx.fill();
+
+        const x0 = cx - fw / 2 + pad, y0 = cy - fh / 2 + pad, W = fw - pad * 2, H = fh - pad * 2;
+        const fs = n => Math.max(6, fw * n);
+
+        if (label === 'front') {
+          // Header row
+          ctx.fillStyle = 'rgba(143,184,122,0.85)';
+          ctx.font = `bold ${fs(0.075)}px Inter,sans-serif`; ctx.textAlign = 'left';
+          ctx.fillText('🛍 Katalog Produk', x0, y0 + fs(0.075));
+          // divider
+          ctx.strokeStyle = 'rgba(143,184,122,0.2)'; ctx.lineWidth = 0.5;
+          ctx.beginPath(); ctx.moveTo(x0, y0 + H * 0.13); ctx.lineTo(x0 + W, y0 + H * 0.13); ctx.stroke();
+          // 2×2 product cards
+          const prods = [['👕', 'Batik', 'Rp 299k'], ['👜', 'Tas Rotan', 'Rp 189k'], ['🧤', 'Sarung Tangan', 'Rp 89k'], ['👗', 'Kebaya Modern', 'Rp 450k']];
+          const cw = (W - pad * 0.5) / 2, ch = (H * 0.85 - pad * 0.5) / 2;
+          prods.forEach(([icon, name, price], i) => {
+            const col = i % 2, row = Math.floor(i / 2);
+            const bx = x0 + col * (cw + pad * 0.5), by = y0 + H * 0.15 + row * (ch + pad * 0.5);
+            ctx.fillStyle = 'rgba(143,184,122,0.06)';
+            ctx.strokeStyle = 'rgba(143,184,122,0.22)'; ctx.lineWidth = 0.8;
+            ctx.beginPath(); ctx.roundRect(bx, by, cw, ch, 4); ctx.fill(); ctx.stroke();
+            ctx.font = `${fs(0.12)}px sans-serif`; ctx.textAlign = 'center';
+            ctx.fillText(icon, bx + cw / 2, by + ch * 0.52);
+            ctx.fillStyle = 'rgba(255,255,255,0.55)'; ctx.font = `${fs(0.058)}px Inter,sans-serif`;
+            ctx.fillText(name, bx + cw / 2, by + ch * 0.74);
+            ctx.fillStyle = 'rgba(143,184,122,0.95)'; ctx.font = `bold ${fs(0.062)}px Inter,sans-serif`;
+            ctx.fillText(price, bx + cw / 2, by + ch * 0.91);
+          });
+
+        } else if (label === 'right') {
+          // Analytics panel
+          ctx.fillStyle = 'rgba(143,184,122,0.75)'; ctx.font = `bold ${fs(0.07)}px Inter,sans-serif`; ctx.textAlign = 'left';
+          ctx.fillText('📊 Analitik', x0, y0 + fs(0.07));
+          ctx.strokeStyle = 'rgba(143,184,122,0.18)'; ctx.lineWidth = 0.5;
+          ctx.beginPath(); ctx.moveTo(x0, y0 + H * 0.13); ctx.lineTo(x0 + W, y0 + H * 0.13); ctx.stroke();
+          ctx.fillStyle = 'rgba(255,255,255,0.9)'; ctx.font = `bold ${fs(0.16)}px Geist,Inter,sans-serif`;
+          ctx.fillText('Rp 8.4jt', x0, y0 + H * 0.32);
+          ctx.fillStyle = 'rgba(143,184,122,0.8)'; ctx.font = `${fs(0.065)}px Inter,sans-serif`;
+          ctx.fillText('↑ 32% bulan ini', x0, y0 + H * 0.43);
+          sparkline(x0, y0 + H * 0.5, W, H * 0.3, [20, 35, 28, 50, 42, 65, 58, 78, 70, 91], 'rgb(143,184,122)');
+          barChart(x0, y0 + H * 0.83, W, H * 0.15, [40, 65, 50, 80, 70, 90]);
+
+        } else if (label === 'top') {
+          ctx.fillStyle = 'rgba(143,184,122,0.9)'; ctx.font = `bold ${fs(0.18)}px Inter,sans-serif`; ctx.textAlign = 'center';
+          ctx.fillText('🏪 TOKO SAYA', cx, cy);
+          ctx.fillStyle = 'rgba(255,255,255,0.3)'; ctx.font = `${fs(0.12)}px Inter,sans-serif`;
+          ctx.fillText('amora.id/toko', cx, cy + fh * 0.28);
+
+        } else if (label === 'left') {
+          ctx.fillStyle = 'rgba(143,184,122,0.75)'; ctx.font = `bold ${fs(0.075)}px Inter,sans-serif`; ctx.textAlign = 'left';
+          ctx.fillText('📋 Pesanan Masuk', x0, y0 + fs(0.075));
+          ctx.strokeStyle = 'rgba(143,184,122,0.18)'; ctx.lineWidth = 0.5;
+          ctx.beginPath(); ctx.moveTo(x0, y0 + H * 0.14); ctx.lineTo(x0 + W, y0 + H * 0.14); ctx.stroke();
+          const orders = [['#1042', 'Rp 299k', '✓ Selesai'], ['#1041', 'Rp 189k', '✓ Selesai'], ['#1040', 'Rp 89k', '⏳ Proses']];
+          orders.forEach(([id, amt, st], i) => {
+            const oy = y0 + H * 0.22 + i * H * 0.26;
+            ctx.fillStyle = 'rgba(255,255,255,0.04)'; ctx.strokeStyle = 'rgba(143,184,122,0.12)'; ctx.lineWidth = 0.5;
+            ctx.beginPath(); ctx.roundRect(x0, oy, W, H * 0.22, 3); ctx.fill(); ctx.stroke();
+            ctx.fillStyle = 'rgba(255,255,255,0.6)'; ctx.font = `bold ${fs(0.065)}px Inter,sans-serif`;
+            ctx.fillText(id, x0 + 4, oy + H * 0.14);
+            ctx.fillStyle = 'rgba(143,184,122,0.9)'; ctx.textAlign = 'right';
+            ctx.fillText(amt, x0 + W - 2, oy + H * 0.14);
+            ctx.fillStyle = st.startsWith('✓') ? 'rgba(143,184,122,0.7)' : 'rgba(255,180,60,0.7)';
+            ctx.font = `${fs(0.055)}px Inter,sans-serif`; ctx.textAlign = 'left';
+            ctx.fillText(st, x0 + 4, oy + H * 0.21);
+          });
+        }
+
+        // top accent line
+        ctx.strokeStyle = 'rgba(143,184,122,0.6)'; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(pts[0].x, pts[0].y); ctx.lineTo(pts[1].x, pts[1].y); ctx.stroke();
+
+        ctx.restore();
+      }
+
+      // Floating UI card (orbiting panel)
+      function drawCard(x3, y3, z3, w, h, tx, ty, drawFn) {
+        const r = canvas.getBoundingClientRect();
+        const cx = r.width / 2, cy = r.height / 2;
+        const corners = [[-w / 2, -h / 2, 0], [w / 2, -h / 2, 0], [w / 2, h / 2, 0], [-w / 2, h / 2, 0]];
+        const pts = corners.map(c => { let p = rotX(rotY(c, ty), tx); return proj(p[0] + x3, p[1] + y3, p[2] + z3, cx, cy); });
+        ctx.save();
+        ctx.shadowColor = 'rgba(107,142,90,0.4)'; ctx.shadowBlur = 18;
+        clipPoly(pts); ctx.fillStyle = 'rgba(8,12,18,0.9)'; ctx.fill();
+        ctx.restore();
+        ctx.strokeStyle = 'rgba(143,184,122,0.45)'; ctx.lineWidth = 1;
+        clipPoly(pts); ctx.stroke();
+        // top accent
+        ctx.save(); ctx.beginPath(); ctx.moveTo(pts[0].x, pts[0].y); ctx.lineTo(pts[1].x, pts[1].y);
+        ctx.strokeStyle = 'rgba(143,184,122,0.85)'; ctx.lineWidth = 1.5; ctx.stroke(); ctx.restore();
+        // content
+        ctx.save(); clipPoly(pts); ctx.clip();
+        const fw = Math.hypot(pts[1].x - pts[0].x, pts[1].y - pts[0].y);
+        const fh = Math.hypot(pts[3].x - pts[0].x, pts[3].y - pts[0].y);
+        const pcx = (pts[0].x + pts[2].x) / 2, pcy = (pts[0].y + pts[2].y) / 2;
+        drawFn(pcx, pcy, fw, fh); ctx.restore();
+      }
+
+      function draw(ts) {
+        const t = ts / 1000;
+        const r = canvas.getBoundingClientRect();
+        const W = r.width, H = r.height, cx = W / 2, cy = H / 2;
+        ctx.clearRect(0, 0, W, H);
+
+        if (!drag) {
+          rX += (tX - rX) * 0.05; rY += (tY - rY) * 0.05;
+          vX *= 0.92; vY *= 0.92; tX += vX; tY += vY;
+          if (!rm) tY -= 0.004;
+        } else { rX = tX; rY = tY; }
+
+        const S = Math.min(W, H) * 0.3;
+        const verts = cubeVerts(S).map(v => { let p = rotX(rotY(v, rY), rX); return { ...proj(p[0], p[1], p[2], cx, cy), z: p[2] }; });
+
+        const sorted = FACES.map((f, i) => ({ ...f, z: f.v.reduce((s, vi) => s + verts[vi].z, 0) / 4 })).sort((a, b) => a.z - b.z);
+
+        // Draw faces (back-to-front)
+        sorted.forEach(({ v, label, z }) => {
+          const pts = v.map(vi => verts[vi]);
+          const norm = (pts[1].x - pts[0].x) * (pts[2].y - pts[0].y) - (pts[1].y - pts[0].y) * (pts[2].x - pts[0].x);
+          if (norm >= 0) {
+            // back faces: faint glass only
+            ctx.save(); clipPoly(pts);
+            ctx.fillStyle = 'rgba(107,142,90,0.03)'; ctx.fill();
+            ctx.strokeStyle = 'rgba(143,184,122,0.1)'; ctx.lineWidth = 0.8; ctx.stroke();
+            ctx.restore();
+          } else {
+            drawFaceContent(pts, label, t);
+          }
+        });
+
+        // Glowing edges
+        EDGES.forEach(([a, b]) => {
+          const za = (verts[a].z + verts[b].z) / 2;
+          const dA = Math.max(0.25, Math.min(1, (za + S * 1.5) / (S * 3)));
+          ctx.save();
+          ctx.shadowColor = 'rgba(143,184,122,0.75)'; ctx.shadowBlur = 12;
+          ctx.beginPath(); ctx.moveTo(verts[a].x, verts[a].y); ctx.lineTo(verts[b].x, verts[b].y);
+          ctx.strokeStyle = `rgba(143,184,122,${dA})`; ctx.lineWidth = 2.2; ctx.stroke();
+          ctx.shadowBlur = 0;
+          ctx.strokeStyle = `rgba(210,240,180,${dA * 0.35})`; ctx.lineWidth = 0.8; ctx.stroke();
+          ctx.restore();
+        });
+
+        // Vertex dots
+        verts.forEach(v => {
+          const dA = Math.max(0.15, (v.z + S * 1.5) / (S * 3));
+          ctx.save(); ctx.shadowColor = 'rgba(143,184,122,0.9)'; ctx.shadowBlur = 10;
+          ctx.beginPath(); ctx.arc(v.x, v.y, 3.8 * v.s, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(190,230,160,${dA})`; ctx.fill(); ctx.restore();
+        });
+
+        // Floating cards
+        const sinT = Math.sin(t * 0.38), cosT = Math.cos(t * 0.31);
+        const fs = n => Math.max(6, n);
+
+        // Card 1: Sales (top-right)
+        drawCard(S * 1.52 + sinT * 10, -S * 0.88 + cosT * 7, -S * 0.1, 118, 74, rX * 0.35, rY * 0.35, (px, py, fw, fh) => {
+          const x0 = px - fw / 2 + 6, y0 = py - fh / 2 + 6;
+          ctx.textAlign = 'left';
+          ctx.fillStyle = 'rgba(143,184,122,0.6)'; ctx.font = `${Math.max(6, fw * 0.075)}px Inter,sans-serif`;
+          ctx.fillText('PENJUALAN HARI INI', x0, y0 + fw * 0.075);
+          ctx.fillStyle = 'rgba(255,255,255,0.92)'; ctx.font = `bold ${Math.max(8, fw * 0.14)}px Geist,Inter,sans-serif`;
+          ctx.fillText('Rp 2.4jt', x0, y0 + fh * 0.35);
+          ctx.fillStyle = 'rgba(143,184,122,0.85)'; ctx.font = `${Math.max(5, fw * 0.068)}px Inter,sans-serif`;
+          ctx.fillText('↑ 24% vs kemarin', x0, y0 + fh * 0.48);
+          sparkline(x0, y0 + fh * 0.56, fw - 12, fh * 0.32, [30, 45, 38, 60, 52, 75, 68, 91], 'rgb(143,184,122)');
+        });
+
+        // Card 2: New order notification (top-left)
+        drawCard(-S * 0.5 + cosT * 6, -S * 1.48 + sinT * 5, S * 0.3, 112, 48, rX * 0.2, rY * 0.2, (px, py, fw, fh) => {
+          const x0 = px - fw / 2 + 8;
+          ctx.beginPath(); ctx.arc(x0 + 6, py, 4, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(143,184,122,${0.55 + 0.45 * Math.sin(t * 3)})`; ctx.fill();
+          ctx.fillStyle = 'rgba(143,184,122,0.95)'; ctx.font = `bold ${Math.max(6, fw * 0.075)}px Inter,sans-serif`; ctx.textAlign = 'left';
+          ctx.fillText('Pesanan Baru!', x0 + 16, py - 2);
+          ctx.fillStyle = 'rgba(255,255,255,0.4)'; ctx.font = `${Math.max(5, fw * 0.062)}px Inter,sans-serif`;
+          ctx.fillText('#AMR-9021 · Rp 299.000', x0, py + fh * 0.3);
+        });
+
+        // Card 3: Product highlight (left)
+        drawCard(-S * 1.52 + cosT * 8, sinT * 12, S * 0.2, 96, 76, rX * 0.25, rY * 0.25, (px, py, fw, fh) => {
+          ctx.textAlign = 'center';
+          ctx.fillStyle = 'rgba(107,142,90,0.15)'; ctx.strokeStyle = 'rgba(143,184,122,0.2)'; ctx.lineWidth = 0.8;
+          const iW = fw * 0.68, iH = fh * 0.44;
+          ctx.beginPath(); ctx.roundRect(px - iW / 2, py - fh * 0.44, iW, iH, 5); ctx.fill(); ctx.stroke();
+          ctx.font = `${Math.max(12, fw * 0.24)}px sans-serif`; ctx.fillText('👕', px, py - fh * 0.1);
+          ctx.fillStyle = 'rgba(255,255,255,0.72)'; ctx.font = `bold ${Math.max(6, fw * 0.075)}px Inter,sans-serif`;
+          ctx.fillText('Batik Kontemporer', px, py + fh * 0.18);
+          ctx.fillStyle = 'rgba(143,184,122,1)'; ctx.font = `bold ${Math.max(7, fw * 0.09)}px Inter,sans-serif`;
+          ctx.fillText('Rp 299.000', px, py + fh * 0.36);
+          ctx.fillStyle = 'rgba(255,200,60,0.85)'; ctx.font = `${Math.max(7, fw * 0.09)}px sans-serif`;
+          ctx.fillText('★★★★★', px, py + fh * 0.52);
+        });
+
+        // Card 4: Visitors (bottom)
+        drawCard(S * 0.38 + sinT * 8, S * 1.52 + cosT * 5, S * 0.1, 94, 42, rX * 0.3, rY * 0.3, (px, py, fw, fh) => {
+          const x0 = px - fw / 2 + 7;
+          ctx.textAlign = 'left';
+          ctx.fillStyle = 'rgba(255,255,255,0.3)'; ctx.font = `${Math.max(5, fw * 0.062)}px Inter,sans-serif`;
+          ctx.fillText('PENGUNJUNG HARI INI', x0, py - fh * 0.18);
+          ctx.fillStyle = 'rgba(255,255,255,0.92)'; ctx.font = `bold ${Math.max(9, fw * 0.16)}px Geist,Inter,sans-serif`;
+          ctx.fillText('1.284', x0, py + fh * 0.28);
+          ctx.fillStyle = 'rgba(143,184,122,0.9)'; ctx.font = `bold ${Math.max(7, fw * 0.088)}px Inter,sans-serif`;
+          ctx.textAlign = 'right'; ctx.fillText('↑18%', px + fw / 2 - 7, py + fh * 0.28);
+        });
+
+        // Particles
+        for (let i = 0; i < 24; i++) {
+          const ph = (i / 24) * Math.PI * 2;
+          const px3 = Math.cos(ph + t * 0.04) * S * 1.9 * (0.5 + Math.sin(ph * 3) * 0.5);
+          const py3 = Math.sin(ph * 1.7 + t * 0.035) * S * 1.7;
+          const pz3 = Math.cos(ph * 2.3) * S * 0.9;
+          const pp = proj(px3, py3, pz3, cx, cy);
+          const a = Math.max(0.03, Math.min(0.22, (pz3 + S * 1.5) / (S * 3)));
+          ctx.beginPath(); ctx.arc(pp.x, pp.y, 1.4 * pp.s, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(143,184,122,${a})`; ctx.fill();
+        }
+
+        requestAnimationFrame(draw);
+      }
+      requestAnimationFrame(draw);
+    })();
+
+    // Navbar scroll state + mobile drawer: handled by assets/js/site-chrome.js
+
+    // Scroll reveal — with staggered entrance and per-element fallback
+    const revealEls = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.05, rootMargin: '0px 0px -60px 0px' });
+      revealEls.forEach(el => {
+        observer.observe(el);
+        // Per-element fallback: reveal this element if the observer hasn't
+        // caught it within 1.5s (handles edge cases/timing misses).
+        setTimeout(() => {
+          if (!el.classList.contains('visible')) {
+            el.classList.add('visible');
+            observer.unobserve(el);
+          }
+        }, 1500);
+      });
+    } else {
+      revealEls.forEach(el => el.classList.add('visible'));
+    }
+
+    // ── Feature card mockup animations ──
+    // ── Feature Showcase — icon tab switcher ──
+    (function () {
+      const sidebarTabs = Array.from(document.querySelectorAll('#featureTabs .feature-tab'));
+      const pillTabs = [];
+      const views = Array.from(document.querySelectorAll('.showcase-panel .showcase-view'));
+      let current = 0;
+
+      // ── Kustomisasi: live color cycling ──
+      const kustSwatchWraps = Array.from(document.querySelectorAll('#svKustSwatches .sv-kust-swatch-wrap'));
+      const kustSwatches = Array.from(document.querySelectorAll('#svKustSwatches .sv-kust-swatch'));
+      const kustNav = document.getElementById('svKustNav');
+      const kustCta = document.getElementById('svKustCta');
+      const kustGrid = document.getElementById('svKustGrid');
+      const kustThumbs = [document.getElementById('svKustThumb1'), document.getElementById('svKustThumb2'), document.getElementById('svKustThumb3')];
+      const kustPrices = [document.getElementById('svKustPrice1'), document.getElementById('svKustPrice2'), document.getElementById('svKustPrice3')];
+      const kustBtns = [document.getElementById('svKustBtn1'), document.getElementById('svKustBtn2'), document.getElementById('svKustBtn3')];
+      const kustNames = [document.getElementById('svKustName1'), document.getElementById('svKustName2'), document.getElementById('svKustName3')];
+      let kustIdx = 0, kustTimer = null;
+
+      const kustTabBtns = Array.from(document.querySelectorAll('#svKustTabs .sv-kust-tab'));
+      const kustPanes = Array.from(document.querySelectorAll('.sv-kust-controls .sv-kust-pane'));
+      kustTabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          kustTabBtns.forEach(b => b.classList.remove('active'));
+          kustPanes.forEach(p => p.classList.remove('active'));
+          btn.classList.add('active');
+          const pane = document.querySelector(`.sv-kust-controls .sv-kust-pane[data-pane="${btn.dataset.tab}"]`);
+          if (pane) pane.classList.add('active');
+          if (btn.dataset.tab !== 'warna') stopKustCycle();
+        });
+      });
+
+      document.querySelectorAll('.sv-kust-font-opt').forEach(opt => {
+        opt.addEventListener('click', () => {
+          document.querySelectorAll('.sv-kust-font-opt').forEach(o => o.classList.remove('active'));
+          opt.classList.add('active');
+          const fontMap = { sans: 'Inter,sans-serif', serif: 'Georgia,serif', mono: "'SF Mono',monospace" };
+          const ff = fontMap[opt.dataset.font] || 'Inter,sans-serif';
+          kustNames.forEach(n => { if (n) n.style.fontFamily = ff; });
+          if (kustNav) kustNav.querySelector('.sv-kust-nav-logo').style.fontFamily = ff;
+        });
+      });
+
+      document.querySelectorAll('.sv-kust-layout-opt').forEach(opt => {
+        opt.addEventListener('click', () => {
+          document.querySelectorAll('.sv-kust-layout-opt').forEach(o => o.classList.remove('active'));
+          opt.classList.add('active');
+          if (!kustGrid) return;
+          kustGrid.classList.remove('layout-list', 'layout-mosaic');
+          if (opt.dataset.layout === 'list') kustGrid.classList.add('layout-list');
+          else if (opt.dataset.layout === 'mosaic') kustGrid.classList.add('layout-mosaic');
+        });
+      });
+
+      function applyKustColor(idx) {
+        const swatch = kustSwatches[idx];
+        if (!swatch) return;
+        kustSwatches.forEach((s, i) => s.classList.toggle('active', i === idx));
+        kustSwatchWraps.forEach((w, i) => w.classList.toggle('active', i === idx));
+        const solid = swatch.dataset.solid || '#6B8E5A';
+        const nav = swatch.dataset.nav || 'rgba(107,142,90,0.3)';
+        if (kustNav) kustNav.style.background = nav;
+        if (kustCta) kustCta.style.background = solid;
+        kustPrices.forEach(p => { if (p) p.style.color = solid; });
+        kustBtns.forEach(b => { if (b) b.style.background = solid; });
+        const h = solid.replace('#', '');
+        const r = parseInt(h.slice(0, 2), 16), g = parseInt(h.slice(2, 4), 16), b = parseInt(h.slice(4, 6), 16);
+        const opacities = [0.2, 0.13, 0.08];
+        kustThumbs.forEach((t, i) => { if (t) t.style.background = `rgba(${r},${g},${b},${opacities[i]})`; });
+      }
+
+      function startKustCycle() {
+        if (kustTimer) return;
+        kustTimer = setInterval(() => {
+          const activeTab = document.querySelector('#svKustTabs .sv-kust-tab.active');
+          if (activeTab && activeTab.dataset.tab !== 'warna') return;
+          kustIdx = (kustIdx + 1) % kustSwatches.length;
+          applyKustColor(kustIdx);
+        }, 2200);
+      }
+      function stopKustCycle() { clearInterval(kustTimer); kustTimer = null; }
+
+      // ── Main tab switcher — directional slide animation ──
+      const dots = Array.from(document.querySelectorAll('#showcaseDots .showcase-dot'));
+      let isAnimating = false;
+
+      function updateDots(idx) {
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      }
+
+      function goTo(idx) {
+        if (idx === current || isAnimating) return;
+        const dir = idx > current ? 1 : -1;
+        const prevIdx = current;
+        current = idx;
+        isAnimating = true;
+
+        // Update tab buttons and dots immediately
+        sidebarTabs[prevIdx]?.classList.remove('active');
+        pillTabs[prevIdx]?.classList.remove('active');
+        sidebarTabs[current]?.classList.add('active');
+        pillTabs[current]?.classList.add('active');
+        updateDots(current);
+
+        const outView = views[prevIdx];
+        const inView = views[current];
+
+        // Animate out current view
+        outView.style.transition = 'opacity 0.22s ease, transform 0.22s cubic-bezier(0.4,0,0.6,1)';
+        outView.style.opacity = '0';
+        outView.style.transform = `translateX(${dir > 0 ? -28 : 28}px)`;
+
+        // Prepare incoming view off-screen
+        inView.style.transition = 'none';
+        inView.style.display = 'flex';
+        inView.style.flexDirection = 'column';
+        inView.style.opacity = '0';
+        inView.style.transform = `translateX(${dir > 0 ? 28 : -28}px)`;
+
+        // Trigger slide-in on next paint
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            inView.style.transition = 'opacity 0.32s ease, transform 0.32s cubic-bezier(0.22,1,0.36,1)';
+            inView.style.opacity = '1';
+            inView.style.transform = 'translateX(0)';
+          });
+        });
+
+        // Cleanup after animation completes
+        setTimeout(() => {
+          outView.classList.remove('active');
+          outView.style.cssText = '';
+          inView.classList.add('active');
+          inView.style.cssText = '';
+          isAnimating = false;
+          if (current === 3) startKustCycle();
+          else stopKustCycle();
+        }, 360);
+      }
+
+      [...sidebarTabs, ...pillTabs].forEach(tab => {
+        tab.addEventListener('click', () => goTo(parseInt(tab.dataset.idx)));
+      });
+
+      // Custom scrollbar for feature tabs (mobile)
+      (function () {
+        const row = document.getElementById('featureTabs');
+        const track = document.getElementById('tabsScrollbar');
+        const thumb = document.getElementById('tabsScrollbarThumb');
+        if (!row || !track || !thumb) return;
+        function updateThumb() {
+          const ratio = row.scrollWidth > row.clientWidth
+            ? row.clientWidth / row.scrollWidth : 1;
+          const thumbW = Math.max(ratio * 100, 20);
+          const maxScroll = row.scrollWidth - row.clientWidth;
+          const scrollFrac = maxScroll > 0 ? row.scrollLeft / maxScroll : 0;
+          const maxLeft = 100 - thumbW;
+          thumb.style.width = thumbW + '%';
+          thumb.style.left = (scrollFrac * maxLeft) + '%';
+        }
+        row.addEventListener('scroll', updateThumb, { passive: true });
+        window.addEventListener('resize', updateThumb);
+        updateThumb();
+      })();
+
+      // Dots click
+      dots.forEach(dot => {
+        dot.addEventListener('click', () => goTo(parseInt(dot.dataset.idx)));
+      });
+
+      // Touch swipe support
+      (function () {
+        const panel = document.querySelector('.showcase-panel');
+        if (!panel) return;
+        let tx = 0, ty = 0;
+        panel.addEventListener('touchstart', e => {
+          tx = e.touches[0].clientX;
+          ty = e.touches[0].clientY;
+        }, { passive: true });
+        panel.addEventListener('touchend', e => {
+          const dx = e.changedTouches[0].clientX - tx;
+          const dy = e.changedTouches[0].clientY - ty;
+          if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 48) {
+            if (dx < 0 && current < views.length - 1) goTo(current + 1);
+            else if (dx > 0 && current > 0) goTo(current - 1);
+          }
+        }, { passive: true });
+      })();
+
+      // Init kust swatches click
+      kustSwatches.forEach((s, i) => {
+        s.addEventListener('click', () => { kustIdx = i; applyKustColor(i); stopKustCycle(); });
+      });
+    })();
+
+    // ── Kustomisasi interactive ──────────────────────────────────
+    (function () {
+      var accentColor = '#9BE8C9';
+      var accentRgba = '100,210,180';
+
+      function applyColor(hex, rgba) {
+        accentColor = hex; accentRgba = rgba;
+        var nav = document.getElementById('kustNavBar');
+        if (nav) {
+          nav.style.background = 'rgba(' + rgba + ',0.08)';
+          nav.style.borderColor = 'rgba(' + rgba + ',0.14)';
+        }
+        var cta = document.getElementById('kustCta');
+        if (cta) {
+          cta.style.background = 'rgba(' + rgba + ',0.14)';
+          cta.style.borderColor = 'rgba(' + rgba + ',0.28)';
+          cta.style.color = hex;
+        }
+        document.querySelectorAll('.kust-product-card').forEach(function (c) {
+          c.style.borderColor = 'rgba(' + rgba + ',0.14)';
+        });
+        document.querySelectorAll('.kust-price').forEach(function (p) {
+          p.style.color = hex;
+        });
+        document.querySelectorAll('.kust-color-dot').forEach(function (d) {
+          d.style.boxShadow = (d.dataset.color === hex)
+            ? '0 0 0 2px rgba(255,255,255,0.5),0 0 8px ' + hex + '88'
+            : '';
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        applyColor('#9BE8C9', '100,210,180');
+
+        document.querySelectorAll('.kust-color-dot').forEach(function (dot) {
+          dot.addEventListener('click', function () {
+            applyColor(this.dataset.color, this.dataset.rgba);
+          });
+        });
+
+        document.querySelectorAll('.kust-font-opt').forEach(function (opt) {
+          opt.addEventListener('click', function () {
+            document.querySelectorAll('.kust-font-opt').forEach(function (o) {
+              o.style.background = '';
+              o.style.border = '';
+              o.style.color = 'rgba(255,255,255,0.4)';
+              o.style.fontWeight = '';
+              o.innerHTML = o.innerHTML.replace(' <span style="opacity:0.6;">Aktif</span>', '');
+            });
+            this.style.background = 'rgba(' + accentRgba + ',0.1)';
+            this.style.border = '1px solid rgba(' + accentRgba + ',0.2)';
+            this.style.color = accentColor;
+            this.style.fontWeight = '700';
+            if (!this.innerHTML.includes('Aktif')) this.innerHTML += ' <span style="opacity:0.6;">Aktif</span>';
+          });
+        });
+
+        document.querySelectorAll('.kust-layout-opt').forEach(function (opt) {
+          opt.addEventListener('click', function () {
+            document.querySelectorAll('.kust-layout-opt').forEach(function (o) {
+              o.style.background = 'rgba(255,255,255,0.03)';
+              o.style.border = '';
+            });
+            this.style.background = 'rgba(' + accentRgba + ',0.1)';
+            this.style.border = '1px solid rgba(' + accentRgba + ',0.2)';
+            var cols = parseInt(this.dataset.cols);
+            var grid = document.getElementById('kustProductGrid');
+            if (grid) grid.style.gridTemplateColumns = 'repeat(' + cols + ',1fr)';
+          });
+        });
+      });
+
+      // Also wire up immediately (in case DOMContentLoaded already fired)
+      if (document.readyState !== 'loading') {
+        applyColor('#9BE8C9', '100,210,180');
+        document.querySelectorAll('.kust-color-dot').forEach(function (dot) {
+          dot.addEventListener('click', function () {
+            applyColor(this.dataset.color, this.dataset.rgba);
+          });
+        });
+        document.querySelectorAll('.kust-font-opt').forEach(function (opt) {
+          opt.addEventListener('click', function () {
+            document.querySelectorAll('.kust-font-opt').forEach(function (o) {
+              o.style.background = '';
+              o.style.border = '';
+              o.style.color = 'rgba(255,255,255,0.4)';
+              o.style.fontWeight = '';
+              o.innerHTML = o.innerHTML.replace(' <span style="opacity:0.6;">Aktif</span>', '');
+            });
+            this.style.background = 'rgba(' + accentRgba + ',0.1)';
+            this.style.border = '1px solid rgba(' + accentRgba + ',0.2)';
+            this.style.color = accentColor;
+            this.style.fontWeight = '700';
+            if (!this.innerHTML.includes('Aktif')) this.innerHTML += ' <span style="opacity:0.6;">Aktif</span>';
+          });
+        });
+        document.querySelectorAll('.kust-layout-opt').forEach(function (opt) {
+          opt.addEventListener('click', function () {
+            document.querySelectorAll('.kust-layout-opt').forEach(function (o) {
+              o.style.background = 'rgba(255,255,255,0.03)';
+              o.style.border = '';
+            });
+            this.style.background = 'rgba(' + accentRgba + ',0.1)';
+            this.style.border = '1px solid rgba(' + accentRgba + ',0.2)';
+            var cols = parseInt(this.dataset.cols);
+            var grid = document.getElementById('kustProductGrid');
+            if (grid) grid.style.gridTemplateColumns = 'repeat(' + cols + ',1fr)';
+          });
+        });
+      }
+    })();
+
+    // ── Responsive showcase grids ────────────────────────────────
+    (function () {
+      function adjustShowcaseGrids() {
+        var isMobile = window.innerWidth < 600;
+        var v0grid = document.getElementById('kustProductGrid') ? null : document.querySelector('.showcase-view[data-view="0"] [style*="grid-template-columns"]');
+        if (v0grid) v0grid.style.gridTemplateColumns = isMobile ? 'repeat(2,1fr)' : 'repeat(3,1fr)';
+        var v1split = document.querySelector('.sv1-split');
+        if (v1split) v1split.style.gridTemplateColumns = isMobile ? '1fr' : '1fr 1fr';
+        var v2split = document.querySelector('.sv2-split');
+        if (v2split) v2split.style.gridTemplateColumns = isMobile ? '1fr' : '1fr 1fr';
+        var v3split = document.querySelector('.sv3-wrap');
+        if (v3split) v3split.style.gridTemplateColumns = isMobile ? '1fr' : '1fr 190px';
+      }
+      window.addEventListener('resize', adjustShowcaseGrids);
+      adjustShowcaseGrids();
+    })();
+
+    // ── Widget interactivity ──
+    (function () {
+      // Dashboard: click bars to highlight
+      document.querySelectorAll('.sv-bar').forEach(bar => {
+        bar.addEventListener('click', () => {
+          document.querySelectorAll('.sv-bar').forEach(b => b.classList.remove('bar-selected'));
+          bar.classList.add('bar-selected');
+        });
+      });
+      // Dashboard sidebar: click to change active
+      document.querySelectorAll('.sv-sidebar-item').forEach(item => {
+        item.addEventListener('click', () => {
+          item.closest('.sv-sidebar').querySelectorAll('.sv-sidebar-item').forEach(i => i.classList.remove('active'));
+          item.classList.add('active');
+        });
+      });
+      // Website Toko: click product to toggle cart
+      document.querySelectorAll('.sv-product').forEach(prod => {
+        prod.addEventListener('click', () => prod.classList.toggle('in-cart'));
+      });
+      // Promo: click toggle to switch on/off
+      document.querySelectorAll('.sv-promo-toggle').forEach(toggle => {
+        toggle.style.cursor = 'pointer';
+        toggle.addEventListener('click', () => {
+          if (toggle.classList.contains('on')) {
+            toggle.classList.replace('on', 'off');
+          } else {
+            toggle.classList.replace('off', 'on');
+          }
+        });
+      });
+      // Promo: "+ Promo Baru" flash
+      document.querySelectorAll('.sv-promo-add, .sv-promo-create').forEach(btn => {
+        btn.style.cursor = 'pointer';
+        btn.addEventListener('click', () => {
+          btn.style.background = 'rgba(107,142,90,0.35)';
+          setTimeout(() => btn.style.background = '', 400);
+        });
+      });
+    })();
+
+    // ── FAQ ──
+    const faqs = [
+      {
+        q: 'Apa itu Amora dan apa bedanya dengan Tokopedia atau Shopee?',
+        a: 'Amora adalah platform web builder berbasis langganan (SaaS) untuk membuat dan mengelola toko online sendiri — tanpa coding, tanpa developer. Berbeda dengan marketplace seperti Tokopedia atau Shopee, di Amora Anda memiliki toko sendiri dengan domain sendiri, dan data pelanggan sepenuhnya milik Anda.'
+      },
+      {
+        q: 'Seberapa cepat toko saya bisa online?',
+        a: 'Sangat cepat. Setup awal rata-rata selesai dalam 5 menit — toko Anda bisa langsung online tanpa proses teknis yang rumit.'
+      },
+      {
+        q: 'Apa saja paket yang tersedia dan berapa harganya?',
+        a: 'Tersedia dua paket: Starter (Rp 149.000/bulan) untuk hingga 100 produk dan 300 pesanan/bulan; serta Pro (Rp 209.000/bulan, diskon 40%) untuk hingga 250 produk, 1.000 pesanan/bulan, plus fitur Penjadwalan Peluncuran Toko.'
+      },
+      {
+        q: 'Apakah ada biaya per transaksi?',
+        a: 'Tidak ada selama pesanan masih dalam kuota bulanan. Jika kuota terlampaui, biaya tambahan sebesar 2% per pesanan (Starter) atau 1% per pesanan (Pro) akan ditagihkan di periode berikutnya.'
+      },
+      {
+        q: 'Metode pembayaran apa yang didukung di toko saya?',
+        a: 'Toko Amora mendukung Xendit, Midtrans, dan Doku — mencakup transfer bank, QRIS, e-wallet, serta kartu kredit/debit. Anda perlu mendaftar dan mengonfigurasi payment gateway secara mandiri.'
+      },
+      {
+        q: 'Apakah saya bisa menggunakan domain sendiri?',
+        a: 'Ya. Kedua paket (Starter dan Pro) mendukung integrasi domain kustom, sehingga toko Anda dapat diakses melalui alamat brand Anda sendiri, misalnya tokosaya.com.'
+      },
+      {
+        q: 'Siapa yang memiliki data toko dan data pelanggan saya?',
+        a: 'Anda sepenuhnya. Data toko, produk, dan pelanggan adalah milik Anda sebagai merchant. Amora tidak menjual atau memanfaatkan data Anda untuk kepentingan pihak lain.'
+      },
+      {
+        q: 'Bagaimana cara menghubungi tim support Amora?',
+        a: 'Tim support siap membantu melalui email support@amora.id atau WhatsApp/Telepon 0878 3201 1500, Senin–Jumat pukul 09.00–17.00 WIB.'
+      },
+    ];
+
+    const faqList = document.getElementById('faqList');
+    function initFaqs() {
+      faqList.innerHTML = faqs.map((f, i) => `
+      <div class="faq-item${i === 0 ? ' active' : ''}">
+        <button class="faq-question" data-index="${i}">
+          <span>${f.q}</span>
+          <svg class="faq-chevron${i === 0 ? ' open' : ''}" data-icon viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer${i === 0 ? ' open' : ''}">
+          <div class="faq-answer-body"><p>${f.a.replace(/<\/?p>/g, '')}</p></div>
+        </div>
+      </div>
+    `).join('');
+      faqList.querySelectorAll('.faq-question').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt(btn.dataset.index);
+          const items = faqList.querySelectorAll('.faq-item');
+          const clicked = items[idx];
+          const wasOpen = clicked.classList.contains('active');
+          items.forEach(item => {
+            item.classList.remove('active');
+            item.querySelector('.faq-answer').classList.remove('open');
+            item.querySelector('.faq-chevron').classList.remove('open');
+          });
+          if (!wasOpen) {
+            clicked.classList.add('active');
+            clicked.querySelector('.faq-answer').classList.add('open');
+            clicked.querySelector('.faq-chevron').classList.add('open');
+          }
+        });
+      });
+    }
+    // ── Count-up / countdown stats ──
+    (function () {
+      function easeOutQuart(t) { return 1 - Math.pow(1 - t, 4); }
+
+      function animateCount(el, target, suffix, separator, duration) {
+        const start = performance.now();
+        function tick(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const value = Math.round(easeOutQuart(progress) * target);
+          let display = value.toString();
+          if (separator) display = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+          el.textContent = display + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+
+      function animateCountDown(el, from, to, suffix, duration) {
+        const startTime = performance.now();
+        function tick(now) {
+          const elapsed = now - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const value = Math.round(from - easeOutQuart(progress) * (from - to));
+          el.textContent = value + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+
+      const statsSection = document.querySelector('.hero-stats');
+      if (!statsSection) return;
+
+      const statObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          statObserver.unobserve(entry.target);
+
+          const statValues = document.querySelectorAll('.hero-stat-value');
+          // statValues[0] = "5 menit", statValues[1] = "0%", statValues[2] = "100%"
+          if (statValues[0]) animateCountDown(statValues[0], 120, 5, ' menit', 2000);
+          // stat[1] and stat[2] — no animation needed, HTML values stay as-is
+        });
+      }, { threshold: 0.5 });
+
+      statObserver.observe(statsSection);
+    })();
+
+    initFaqs();
+
+    // ── Live Orders feed (Section: Pesanan Masuk) ──
+    (function () {
+      var list = document.getElementById('ordersList');
+      if (!list) return;
+
+      var ITEMS = [
+        { item: 'Sneakers Classic White', price: 'Rp 249.000' },
+        { item: 'Kaos Polos Premium', price: 'Rp 89.000' },
+        { item: 'Tas Selempang Kanvas', price: 'Rp 175.000' },
+        { item: 'Kopi Arabika 250g', price: 'Rp 65.000' },
+        { item: 'Jaket Hoodie Oversize', price: 'Rp 219.000' },
+        { item: 'Sandal Slip-On', price: 'Rp 129.000' },
+        { item: 'Botol Minum Stainless', price: 'Rp 95.000' },
+        { item: 'Dompet Kulit Asli', price: 'Rp 159.000' }
+      ];
+
+      var BAG_ICON = '<svg data-icon viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>';
+
+      function randomOrderId() {
+        return '#AMR-' + Math.floor(1000 + Math.random() * 9000);
+      }
+
+      function buildCard(data, animate) {
+        var card = document.createElement('div');
+        card.className = 'order-card' + (animate ? ' entering' : '');
+        card.innerHTML = [
+          '<div class="order-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;color:var(--accent-light)"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>',
+          '<div class="order-card-info">',
+          '<div class="order-card-top">',
+          '<span class="order-card-label">Pesanan Baru</span>',
+          '<span class="order-card-id">#AMR-' + (7000 + Math.floor(Math.random() * 999)) + '</span>',
+          '</div>',
+          '<div class="order-card-item">' + data.item + '</div>',
+          '</div>',
+          '<div class="order-card-price">' + data.price + '</div>'
+        ].join('');
+        return card;
+      }
+
+      function addOrder() {
+        var data = ITEMS[Math.floor(Math.random() * ITEMS.length)];
+        var card = buildCard(data, true);
+        list.insertBefore(card, list.firstChild);
+
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            card.classList.remove('entering');
+            card.classList.add('just-in');
+          });
+        });
+
+        var cards = list.querySelectorAll('.order-card');
+        if (cards.length > 3) {
+          var last = cards[cards.length - 1];
+          last.classList.add('exiting');
+          last.addEventListener('transitionend', function () {
+            if (last.parentNode) last.parentNode.removeChild(last);
+          }, { once: true });
+        }
+      }
+
+      // Initial 3 cards, no entrance animation
+      [ITEMS[0], ITEMS[1], ITEMS[2]].forEach(function (data) {
+        list.appendChild(buildCard(data, false));
+      });
+
+      var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) return;
+
+      var widget = document.getElementById('ordersWidget');
+      var started = false;
+      function scheduleNext() {
+        // Slightly randomized interval so new orders don't feel metronomic
+        var delay = 1200 + Math.random() * 1000;
+        setTimeout(function () {
+          addOrder();
+          scheduleNext();
+        }, delay);
+      }
+      function start() {
+        if (started) return;
+        started = true;
+        scheduleNext();
+      }
+
+      if ('IntersectionObserver' in window && widget) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              start();
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.2 });
+        io.observe(widget);
+      } else {
+        start();
+      }
+    })();
+
+    // ── Lacak Pesanan — looping step animation ──
+    (function () {
+      var tw = document.querySelector('.tracking-widget');
+      if (!tw) return;
+      var lineFill = tw.querySelector('.tracking-line-fill');
+      var dot = tw.querySelector('.tracking-dot');
+      var steps = Array.from(tw.querySelectorAll('.tracking-step'));
+      if (!steps.length || !lineFill) return;
+
+      // Heights per active step index (0-based)
+      var heights = ['8%', '33%', '66%', '95%'];
+      var labels = [
+        { strong: 'Pesanan Dikonfirmasi', sub: 'Hari ini, 09:12' },
+        { strong: 'Sedang Disiapkan', sub: 'Hari ini, 10:40' },
+        { strong: 'Dikirim', sub: 'Dalam perjalanan' },
+        { strong: 'Selesai', sub: 'Terkirim, 14:55' }
+      ];
+      var cur = 2; // start at "Dikirim"
+
+      function goTo(idx) {
+        steps.forEach(function (s, i) {
+          s.classList.remove('done', 'active');
+          if (i < idx) s.classList.add('done');
+          else if (i === idx) s.classList.add('active');
+          var node = s.querySelector('.tracking-node');
+          if (node) {
+            node.classList.remove('tracking-node-pulse');
+            if (i === idx) node.classList.add('tracking-node-pulse');
+          }
+        });
+        lineFill.style.height = heights[idx];
+        if (dot) { dot.style.top = heights[idx]; dot.style.opacity = '1'; }
+      }
+
+      // Wait for initial reveal animation then start loop
+      var started = false;
+      function startLoop() {
+        if (started) return;
+        started = true;
+        // already shown at state 2 on scroll-in, start cycling after 2.5s
+        setInterval(function () {
+          cur = (cur + 1) % 4;
+          // brief "reset" pause when cycling from end back to 0
+          if (cur === 0) {
+            lineFill.style.transition = 'none';
+            if (dot) dot.style.transition = 'none';
+            lineFill.style.height = '0%';
+            if (dot) { dot.style.top = '0%'; dot.style.opacity = '0'; }
+            setTimeout(function () {
+              lineFill.style.transition = 'height 1.2s cubic-bezier(0.22,1,0.36,1)';
+              if (dot) dot.style.transition = 'top 1.2s cubic-bezier(0.22,1,0.36,1), opacity 0.4s ease';
+              goTo(0);
+            }, 200);
+          } else {
+            goTo(cur);
+          }
+        }, 2500);
+      }
+
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          if (entries[0].isIntersecting) { startLoop(); io.disconnect(); }
+        }, { threshold: 0.3 });
+        io.observe(tw);
+      } else {
+        startLoop();
+      }
+    })();
+
+
   </script>
+
+  <script>
+    // ── Hero glassmorphic parallax — pure CSS 3D, no WebGL ──
+
+    (function () {
+      const wrap = document.getElementById('heroWrap');
+      const sc = document.getElementById('hscene');
+      if (!wrap || !sc) return;
+
+      const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let tx = 0, ty = 0, cx = 0, cy = 0;
+      let mouseIn = false;
+
+      const MAX_ROT_Y = 18;
+      const MAX_ROT_X = 10;
+
+      wrap.addEventListener('mousemove', e => {
+        mouseIn = true;
+        const r = wrap.getBoundingClientRect();
+        tx = ((e.clientX - r.left) / r.width - 0.5) * MAX_ROT_Y * 2;
+        ty = ((e.clientY - r.top) / r.height - 0.5) * -MAX_ROT_X * 2;
+      });
+      wrap.addEventListener('mouseleave', () => { mouseIn = false; tx = 0; ty = 0; });
+
+      const allCards = wrap.querySelectorAll('.gc');
+      const depths = [];
+      allCards.forEach(el => {
+        const cs = getComputedStyle(el);
+        const m = cs.transform;
+        depths.push({ el, factor: el.classList.contains('gc-t1') ? 1.5 : el.classList.contains('gc-t3') ? 0.6 : 1 });
+      });
+
+      const floats = wrap.querySelectorAll('.gc-tr,.gc-bl,.gc-br');
+      let t = 0;
+
+      function tick() {
+        if (!rm) {
+          cx += (tx - cx) * 0.06;
+          cy += (ty - cy) * 0.06;
+          cx = Math.max(-MAX_ROT_Y, Math.min(MAX_ROT_Y, cx));
+          cy = Math.max(-MAX_ROT_X, Math.min(MAX_ROT_X, cy));
+          sc.style.transform = `rotateX(${cy}deg) rotateY(${cx}deg)`;
+
+          t += 0.014;
+          floats.forEach((el, i) => {
+            const dy = Math.sin(t + i * 1.5) * 7;
+            const dx = Math.cos(t * 0.6 + i * 2.2) * 4;
+            el.style.setProperty('--float-x', dx + 'px');
+            el.style.setProperty('--float-y', dy + 'px');
+          });
+        }
+        requestAnimationFrame(tick);
+      }
+
+      let idleT = 0;
+      function idleTick() {
+        if (!mouseIn && !rm) {
+          idleT += 0.005;
+          tx = Math.sin(idleT * 0.5) * 5;
+          ty = Math.cos(idleT * 0.35) * 3;
+        }
+        requestAnimationFrame(idleTick);
+      }
+
+      requestAnimationFrame(tick);
+      requestAnimationFrame(idleTick);
+
+      // ── Floating particles ──
+      const pCanvas = document.createElement('canvas');
+      pCanvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;';
+      wrap.appendChild(pCanvas);
+      const ctx = pCanvas.getContext('2d');
+      const particles = [];
+      const PCOUNT = 28;
+
+      function initParticles() {
+        pCanvas.width = wrap.offsetWidth * devicePixelRatio;
+        pCanvas.height = wrap.offsetHeight * devicePixelRatio;
+        ctx.scale(devicePixelRatio, devicePixelRatio);
+        particles.length = 0;
+        const w = wrap.offsetWidth, h = wrap.offsetHeight;
+        for (let i = 0; i < PCOUNT; i++) {
+          particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            r: Math.random() * 1.8 + 0.5,
+            vx: (Math.random() - 0.5) * 0.3,
+            vy: -Math.random() * 0.4 - 0.1,
+            o: Math.random() * 0.4 + 0.1,
+            hue: Math.random() > 0.5 ? '143,184,122' : '80,190,170'
+          });
+        }
+      }
+      initParticles();
+      window.addEventListener('resize', initParticles);
+
+      function drawParticles() {
+        const w = wrap.offsetWidth, h = wrap.offsetHeight;
+        ctx.clearRect(0, 0, w, h);
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.y < -10) { p.y = h + 10; p.x = Math.random() * w; }
+          if (p.x < -10) p.x = w + 10;
+          if (p.x > w + 10) p.x = -10;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${p.hue},${p.o})`;
+          ctx.fill();
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2);
+          const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 3);
+          g.addColorStop(0, `rgba(${p.hue},${p.o * 0.4})`);
+          g.addColorStop(1, `rgba(${p.hue},0)`);
+          ctx.fillStyle = g;
+          ctx.fill();
+        });
+        requestAnimationFrame(drawParticles);
+      }
+      if (!rm) requestAnimationFrame(drawParticles);
+    })();
+  </script>
+
+  <script>
+    (function () {
+      // 3D tilt for showcase panels and feature mockups — skip on touch devices
+      if (window.matchMedia('(hover: none)').matches) return;
+
+      const tiltTargets = [];
+
+      function init3DTilt(el, maxY, maxX) {
+        const state = { tx: 0, ty: 0, cx: 0, cy: 0 };
+        // Give direct parent perspective
+        const wrap = el.parentElement;
+        if (!wrap.style.perspective) wrap.style.perspective = '1400px';
+        el.addEventListener('mousemove', e => {
+          const r = el.getBoundingClientRect();
+          state.tx = ((e.clientX - r.left) / r.width - 0.5) * maxY * 2;
+          state.ty = ((e.clientY - r.top) / r.height - 0.5) * -maxX * 2;
+        });
+        el.addEventListener('mouseleave', () => { state.tx = 0; state.ty = 0; });
+        tiltTargets.push({ el, state });
+      }
+
+      document.querySelectorAll('.bento-widget, .feature-mockup').forEach(el => init3DTilt(el, 8, 5));
+
+      function tiltTick() {
+        tiltTargets.forEach(({ el, state: s }) => {
+          s.cx += (s.tx - s.cx) * 0.07;
+          s.cy += (s.ty - s.cy) * 0.07;
+          if (Math.abs(s.cx) > 0.01 || Math.abs(s.cy) > 0.01 || s.tx !== 0 || s.ty !== 0) {
+            el.style.transform = `rotateX(${s.cy.toFixed(2)}deg) rotateY(${s.cx.toFixed(2)}deg)`;
+          }
+        });
+        requestAnimationFrame(tiltTick);
+      }
+      requestAnimationFrame(tiltTick);
+    })();
+  </script>
+
 </body>
 
 </html>
