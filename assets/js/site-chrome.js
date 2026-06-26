@@ -25,11 +25,11 @@
   }
 
   function homeLink() {
-    return isHomePage() ? '#' : ROOT + 'amora-landing-v2.html';
+    return isHomePage() ? '#' : ROOT;
   }
 
   function sectionLink(id) {
-    return isHomePage() ? '#' + id : ROOT + 'amora-landing-v2.html#' + id;
+    return isHomePage() ? '#' + id : ROOT + '#' + id;
   }
 
   var LOGO_SVG =
