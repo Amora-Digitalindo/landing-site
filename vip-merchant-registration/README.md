@@ -46,13 +46,13 @@ mengisi form secara otomatis.
 2. Pilih jenis **reCAPTCHA v3**.
 3. Isi domain tempat `index.html` akan di-hosting (contoh: `amora.id`, atau domain Netlify/Vercel kamu).
 4. Setelah submit, kamu akan mendapat dua key: **Site Key** dan **Secret Key**.
-5. Di `index.html`, cari baris ini dan ganti dengan Site Key:
+5. Di `index.html`, cari baris ini dan ganti `[REPLACE SITEKEY]` dengan Site Key:
    ```js
-   const RECAPTCHA_SITE_KEY = 'PASTE_YOUR_RECAPTCHA_SITE_KEY_HERE';
+   const RECAPTCHA_SITE_KEY = '[REPLACE SITEKEY]';
    ```
-6. Di `appscript.gs`, cari baris ini dan ganti dengan Secret Key:
+6. Di `appscript.gs`, cari baris ini dan ganti `[REPLACE SECRET KEY]` dengan Secret Key:
    ```js
-   var RECAPTCHA_SECRET = 'PASTE_YOUR_RECAPTCHA_SECRET_HERE';
+   var RECAPTCHA_SECRET = '[REPLACE SECRET KEY]';
    ```
 7. Re-deploy Apps Script (lihat catatan "New version" di bagian bawah halaman ini) setelah mengubah `appscript.gs`.
 

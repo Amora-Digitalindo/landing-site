@@ -739,7 +739,7 @@
   const APPS_SCRIPT_URL = 'PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';
 
   // reCAPTCHA v3 site key — lihat README.md untuk cara dapatkan ini di google.com/recaptcha
-  const RECAPTCHA_SITE_KEY = 'PASTE_YOUR_RECAPTCHA_SITE_KEY_HERE';
+  const RECAPTCHA_SITE_KEY = '[REPLACE SITEKEY]';
 
   // Link tujuan untuk merchant yang tidak ikut kurasi / saat slot penuh
   const SUBSCRIBE_URL = '../#harga';
@@ -752,7 +752,7 @@
   // Muat script reCAPTCHA secara dinamis supaya site key di atas dipakai konsisten
   // di URL script dan di panggilan grecaptcha.execute() di bawah.
   let recaptchaReady = null;
-  if (RECAPTCHA_SITE_KEY && RECAPTCHA_SITE_KEY.indexOf('PASTE_YOUR') !== 0) {
+  if (RECAPTCHA_SITE_KEY && RECAPTCHA_SITE_KEY.indexOf('[REPLACE') !== 0) {
     recaptchaReady = new Promise((resolve) => {
       const script = document.createElement('script');
       script.src = 'https://www.google.com/recaptcha/api.js?render=' + RECAPTCHA_SITE_KEY;
