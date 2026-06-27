@@ -499,6 +499,15 @@
 
   [hidden] { display: none !important; }
 
+  /* Honeypot — invisible to real users/screen readers, but a plain "name" field bots tend to fill in. */
+  .hp-field {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
   @media (max-width: 900px) {
     .split {
       grid-template-columns: 1fr;
@@ -615,6 +624,11 @@
           <div class="field-error-msg" id="linkMarketplaceError">Link toko wajib diisi.</div>
         </div>
 
+        <div class="hp-field" aria-hidden="true">
+          <label for="website">Website</label>
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+        </div>
+
         <div class="checkbox-field" id="commitmentField">
           <input type="checkbox" id="commitment" name="commitment">
           <label for="commitment">Saya berkomitmen aktif menggunakan Amora dan bersedia memberikan feedback jujur selama 3 bulan pertama</label>
@@ -706,7 +720,7 @@
       </div>
     </div>
     <h2 id="errorModalTitle">Ups, Ada Kendala Teknis</h2>
-    <div class="error-box">
+    <div class="error-box" id="errorBoxText">
       Ups, ada kendala teknis. Data kamu belum tersimpan. Coba lagi atau hubungi kami via WhatsApp di 0878 3210 1750.
     </div>
     <button type="button" class="btn-primary btn-block" id="retryBtn">Coba Lagi</button>
@@ -724,10 +738,29 @@
   // ════════════════════════════════════════════════════════════
   const APPS_SCRIPT_URL = 'PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';
 
+  // reCAPTCHA v3 site key — lihat README.md untuk cara dapatkan ini di google.com/recaptcha
+  const RECAPTCHA_SITE_KEY = 'PASTE_YOUR_RECAPTCHA_SITE_KEY_HERE';
+
   // Link tujuan untuk merchant yang tidak ikut kurasi / saat slot penuh
   const SUBSCRIBE_URL = '../#harga';
 
   const TOTAL_SLOTS = 30;
+
+  // Waktu form pertama kali siap diisi — dipakai untuk deteksi submit instan (bot).
+  const formRenderedAt = Date.now();
+
+  // Muat script reCAPTCHA secara dinamis supaya site key di atas dipakai konsisten
+  // di URL script dan di panggilan grecaptcha.execute() di bawah.
+  let recaptchaReady = null;
+  if (RECAPTCHA_SITE_KEY && RECAPTCHA_SITE_KEY.indexOf('PASTE_YOUR') !== 0) {
+    recaptchaReady = new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = 'https://www.google.com/recaptcha/api.js?render=' + RECAPTCHA_SITE_KEY;
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.head.appendChild(script);
+    });
+  }
 
   document.getElementById('subscribeLink').href = SUBSCRIBE_URL;
   document.getElementById('fullSubscribeLink').href = SUBSCRIBE_URL;
@@ -742,6 +775,7 @@
   const linkInput = document.getElementById('linkMarketplace');
   const commitmentInput = document.getElementById('commitment');
   const commitmentField = document.getElementById('commitmentField');
+  const honeypotInput = document.getElementById('website');
 
   const slotCard = document.getElementById('slotCard');
   const slotText = document.getElementById('slotText');
@@ -869,7 +903,9 @@
     successCloseBtn.focus();
   }
 
-  function showError() {
+  function showError(message) {
+    document.getElementById('errorBoxText').textContent = message ||
+      'Ups, ada kendala teknis. Data kamu belum tersimpan. Coba lagi atau hubungi kami via WhatsApp di 0878 3210 1750.';
     errorModal.hidden = false;
     document.documentElement.style.overflow = 'hidden';
     retryBtn.focus();
@@ -883,25 +919,41 @@
     setLoading(true);
     errorModal.hidden = true;
 
-    const payload = {
+    const basePayload = {
       namaToko: namaTokoInput.value.trim(),
       email: emailInput.value.trim(),
       whatsapp: '+62' + waInput.value.replace(/\D/g, ''),
-      linkMarketplace: normalizeLink(linkInput.value)
+      linkMarketplace: normalizeLink(linkInput.value),
+      website: honeypotInput.value, // honeypot — harus selalu kosong untuk manusia
+      elapsedMs: Date.now() - formRenderedAt
     };
 
-    fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // hindari CORS preflight di Apps Script
-      body: JSON.stringify(payload)
-    })
+    // reCAPTCHA wajib berhasil sebelum submit jalan — gagal tertutup (fail closed)
+    // supaya bot tidak bisa lolos hanya dengan memblokir script reCAPTCHA.
+    const tokenPromise = recaptchaReady
+      ? recaptchaReady.then((loaded) => {
+          if (!loaded || typeof grecaptcha === 'undefined') return Promise.reject(new Error('recaptcha-unavailable'));
+          return grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'vip_register' });
+        })
+      : Promise.resolve(null); // reCAPTCHA belum dikonfigurasi (site key belum diisi) — lewati saja
+
+    tokenPromise
+      .then((token) => {
+        const payload = Object.assign({}, basePayload, { recaptchaToken: token });
+
+        return fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // hindari CORS preflight di Apps Script
+          body: JSON.stringify(payload)
+        });
+      })
       .then(res => res.json())
       .then(data => {
         setLoading(false);
         if (data.status === 'success') {
-          showSuccess(payload.namaToko);
+          showSuccess(basePayload.namaToko);
         } else {
-          showError();
+          showError(data.message);
         }
       })
       .catch(() => {

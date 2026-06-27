@@ -36,7 +36,31 @@ Dua file di folder ini:
    ```
 4. (Opsional) Ganti juga `SUBSCRIBE_URL` di bawahnya jika link tujuan "subscribe langsung" berbeda dari default.
 
-## 4. Deploy index.html
+## 4. Setup reCAPTCHA v3 (anti-bot)
+
+Form ini pakai reCAPTCHA v3 invisible (tidak ada checkbox "saya bukan robot" — skor dihitung
+di belakang layar) ditambah honeypot field dan validasi server-side, supaya bot tidak bisa
+mengisi form secara otomatis.
+
+1. Buka [google.com/recaptcha/admin](https://www.google.com/recaptcha/admin) → daftarkan site baru.
+2. Pilih jenis **reCAPTCHA v3**.
+3. Isi domain tempat `index.html` akan di-hosting (contoh: `amora.id`, atau domain Netlify/Vercel kamu).
+4. Setelah submit, kamu akan mendapat dua key: **Site Key** dan **Secret Key**.
+5. Di `index.html`, cari baris ini dan ganti dengan Site Key:
+   ```js
+   const RECAPTCHA_SITE_KEY = 'PASTE_YOUR_RECAPTCHA_SITE_KEY_HERE';
+   ```
+6. Di `appscript.gs`, cari baris ini dan ganti dengan Secret Key:
+   ```js
+   var RECAPTCHA_SECRET = 'PASTE_YOUR_RECAPTCHA_SECRET_HERE';
+   ```
+7. Re-deploy Apps Script (lihat catatan "New version" di bagian bawah halaman ini) setelah mengubah `appscript.gs`.
+
+Catatan: jika kedua key ini dibiarkan sebagai placeholder, form tetap berfungsi (verifikasi
+reCAPTCHA dilewati) — tapi lapisan proteksi anti-bot yang paling kuat jadi tidak aktif. Honeypot
+field, minimum waktu isi form, dan validasi/dedup server-side tetap aktif tanpa konfigurasi tambahan.
+
+## 5. Deploy index.html
 
 Upload folder ini (atau cukup `index.html`) ke hosting statis pilihanmu:
 - **Netlify**: drag-and-drop folder ke [app.netlify.com/drop](https://app.netlify.com/drop)
