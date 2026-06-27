@@ -9,7 +9,7 @@
 var HEADERS = ['Timestamp', 'Nama Toko', 'Email', 'WhatsApp', 'Link Marketplace', 'Status', 'Catatan Amora'];
 
 // reCAPTCHA v3 secret key — lihat README.md untuk cara dapatkan ini di google.com/recaptcha
-var RECAPTCHA_SECRET = '[REPLACE SECRET KEY]';
+var RECAPTCHA_SECRET = '6Lc6OzgtAAAAAPeA7MglaMxDRh__zDG8RyUP3pVv';
 var RECAPTCHA_MIN_SCORE = 0.5;
 
 var MAX_FIELD_LENGTH = 200;

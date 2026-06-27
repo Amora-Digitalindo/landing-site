@@ -1,980 +1,1079 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Daftar VIP Merchant — Amora.id</title>
-<meta name="description" content="Daftar jadi salah satu dari 30 VIP Merchant Amora.id. Gratis 3 bulan penuh, lalu harga VIP terkunci selamanya.">
-<link rel="icon" type="image/svg+xml" href="../assets/favicon/favicon.svg">
-<link rel="icon" type="image/png" sizes="96x96" href="../assets/favicon/favicon-96x96.png">
-<link rel="shortcut icon" href="../assets/favicon/favicon.ico">
-<link rel="preconnect" href="https://fonts.googleapis.com/">
-<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<!-- Shared design tokens/buttons + the homepage's CSS for the shared nav/footer components -->
-<link rel="stylesheet" href="../css/design-system.css">
-<link rel="stylesheet" href="../css/amora-landing-v2.css">
-<style>
-  /* Page-specific tokens that extend the shared design system (css/design-system.css) */
-  :root {
-    --text-70: rgba(242, 242, 245, 0.7);
-    --text-35: rgba(242, 242, 245, 0.35);
-    --danger: #E0584F;
-    --danger-dim: rgba(224, 88, 79, 0.1);
-  }
-
-  .page {
-    position: relative;
-    z-index: 1;
-    min-height: 100vh;
-  }
-
-  .split {
-    display: grid;
-    grid-template-columns: 1.05fr 1fr;
-    align-items: center;
-    gap: 56px;
-    max-width: 1180px;
-    margin: 0 auto;
-    min-height: 100vh;
-    padding: 110px 32px 56px;
-  }
-
-  /* ══════ LEFT — BANNER ══════ */
-  .banner {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    padding: 5px 14px;
-    border-radius: var(--r-full);
-    background: var(--accent-dim);
-    border: 1px solid var(--accent-border);
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--accent-light);
-    letter-spacing: 0.01em;
-    margin-bottom: 22px;
-  }
-
-  .eyebrow-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent-light);
-    animation: pulse-dot 2s ease-in-out infinite;
-  }
-
-  @keyframes pulse-dot {
-    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(143, 184, 122, 0.45); }
-    50% { opacity: 0.6; box-shadow: 0 0 0 4px rgba(143, 184, 122, 0); }
-  }
-
-  .banner h1 {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 3.4vw, 2.75rem);
-    font-weight: 800;
-    line-height: 1.16;
-    letter-spacing: -0.02em;
-    margin-bottom: 18px;
-  }
-
-  .banner h1 .accent {
-    background: linear-gradient(135deg, #B8E6A0 0%, #7FB86A 60%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .banner-sub {
-    font-size: 1rem;
-    color: var(--text-60);
-    max-width: 440px;
-    margin-bottom: 32px;
-  }
-
-  .benefit-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    margin-bottom: 36px;
-  }
-
-  .benefit-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 11px;
-    font-size: 0.9375rem;
-    color: var(--text-80);
-  }
-
-  .benefit-list .check {
-    flex-shrink: 0;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--accent-dim);
-    border: 1px solid var(--accent-border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 1px;
-  }
-
-  .benefit-list svg {
-    color: var(--accent-light);
-  }
-
-  .slot-card {
-    width: 100%;
-    max-width: 380px;
-    padding: 16px 18px;
-    border-radius: var(--r-lg);
-    background: var(--elevated);
-    border: 1px solid var(--border-mid);
-  }
-
-  .slot-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 0.8125rem;
-    color: var(--text-60);
-    margin-bottom: 10px;
-  }
-
-  #slotCount {
-    font-family: var(--font-display);
-    font-weight: 800;
-    color: var(--accent-light);
-  }
-
-  .slot-bar {
-    width: 100%;
-    height: 6px;
-    border-radius: var(--r-full);
-    background: rgba(255, 255, 255, 0.08);
-    overflow: hidden;
-  }
-
-  .slot-fill {
-    height: 100%;
-    border-radius: var(--r-full);
-    background: linear-gradient(90deg, var(--accent), var(--accent-light));
-    width: 0%;
-    transition: width 0.6s ease;
-  }
-
-  /* ══════ RIGHT — FORM COLUMN ══════ */
-  .form-col {
-    width: 100%;
-  }
-
-  .card {
-    padding: 36px 32px;
-    border-radius: var(--r-2xl);
-    background: var(--card);
-    border: 1px solid var(--border-mid);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.06),
-      0 24px 64px rgba(0, 0, 0, 0.5);
-  }
-
-  .card-title {
-    font-family: var(--font-display);
-    font-size: 1.25rem;
-    font-weight: 800;
-    margin-bottom: 6px;
-  }
-
-  .card-subtitle {
-    font-size: 0.875rem;
-    color: var(--text-60);
-    margin-bottom: 26px;
-  }
-
-  .field { margin-bottom: 18px; }
-
-  .field label {
-    display: block;
-    font-size: 0.8125rem;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 7px;
-  }
-
-  .field input[type="text"],
-  .field input[type="tel"],
-  .field input[type="email"] {
-    width: 100%;
-    padding: 12px 14px;
-    font-size: 0.9375rem;
-    font-family: var(--font-body);
-    color: var(--text);
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid var(--border-strong);
-    border-radius: var(--r-md);
-    outline: none;
-    transition: border-color 0.15s, box-shadow 0.15s;
-  }
-
-  .field input::placeholder { color: var(--text-35); }
-
-  .field input:focus {
-    border-color: var(--accent-border);
-    box-shadow: 0 0 0 3px var(--accent-dim);
-  }
-
-  .field input.error {
-    border-color: var(--danger);
-    box-shadow: 0 0 0 3px var(--danger-dim);
-  }
-
-  .field-hint {
-    font-size: 0.75rem;
-    color: var(--text-35);
-    margin-top: 6px;
-  }
-
-  .field-error-msg {
-    font-size: 0.75rem;
-    color: var(--danger);
-    margin-top: 6px;
-    display: none;
-  }
-
-  .field-error-msg.show { display: block; }
-
-  .wa-input-wrap { display: flex; align-items: stretch; }
-
-  .wa-prefix {
-    display: flex;
-    align-items: center;
-    padding: 0 12px;
-    font-size: 0.9375rem;
-    font-weight: 600;
-    color: var(--text-70);
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid var(--border-strong);
-    border-right: none;
-    border-radius: var(--r-md) 0 0 var(--r-md);
-  }
-
-  .wa-input-wrap input { border-radius: 0 var(--r-md) var(--r-md) 0 !important; }
-
-  .checkbox-field {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    margin-bottom: 22px;
-    padding: 14px;
-    border-radius: var(--r-md);
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--border);
-  }
-
-  .checkbox-field.error {
-    border-color: var(--danger);
-    box-shadow: 0 0 0 3px var(--danger-dim);
-  }
-
-  .checkbox-field input[type="checkbox"] {
-    margin-top: 2px;
-    width: 17px;
-    height: 17px;
-    accent-color: var(--accent);
-    flex-shrink: 0;
-    cursor: pointer;
-  }
-
-  .checkbox-field label {
-    font-size: 0.8125rem;
-    color: var(--text-70);
-    line-height: 1.5;
-    cursor: pointer;
-  }
-
-  /* Card-context sizing for the shared .btn-primary (css/design-system.css) —
-     full width + centered, since this page's CTAs fill a narrow form card. */
-  .btn-block {
-    width: 100%;
-    justify-content: center;
-    padding: 14px;
-    font-size: 0.9375rem;
-    border: none;
-    border-radius: var(--r-full);
-    cursor: pointer;
-  }
-
-  .btn-block:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
-  }
-
-  .btn-secondary {
-    display: block;
-    text-align: center;
-    width: 100%;
-    padding: 12px;
-    margin-top: 12px;
-    font-size: 0.8125rem;
-    font-weight: 600;
-    color: var(--text-70);
-    text-decoration: none;
-    border-radius: var(--r-md);
-    transition: color 0.2s, background 0.2s;
-  }
-
-  .btn-secondary:hover {
-    color: var(--accent-light);
-    background: rgba(255, 255, 255, 0.04);
-  }
-
-  .footnote {
-    text-align: center;
-    font-size: 0.75rem;
-    color: var(--text-35);
-    margin-top: 18px;
-  }
-
-  /* ── Success / Error / Full states (reuse .card) ── */
-  .state-card { text-align: center; }
-
-  .modal-icon-wrap {
-    position: relative;
-    width: 64px;
-    height: 64px;
-    margin: 0 auto 20px;
-  }
-
-  .modal-icon-glow {
-    position: absolute;
-    inset: -26px;
-    border-radius: 50%;
-    filter: blur(26px);
-    opacity: 0.6;
-    z-index: 0;
-  }
-
-  .modal-icon-badge {
-    position: relative;
-    z-index: 1;
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    background: var(--elevated);
-    border: 1px solid var(--border-mid);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .modal-icon-badge svg { width: 28px; height: 28px; }
-
-  .modal-icon-success .modal-icon-glow { background: radial-gradient(circle, var(--accent-light) 0%, transparent 70%); }
-  .modal-icon-success .modal-icon-badge { color: var(--accent-light); border-color: var(--accent-border); }
-
-  .modal-icon-error .modal-icon-glow { background: radial-gradient(circle, var(--danger) 0%, transparent 70%); }
-  .modal-icon-error .modal-icon-badge { color: var(--danger); border-color: rgba(224, 88, 79, 0.35); }
-
-  .modal-icon-warning .modal-icon-glow { background: radial-gradient(circle, #E8A23D 0%, transparent 70%); }
-  .modal-icon-warning .modal-icon-badge { color: #E8A23D; border-color: rgba(232, 162, 61, 0.35); }
-
-  .state-card.modal-icon-success,
-  .modal-card.modal-icon-success {
-    background: radial-gradient(ellipse 140% 60% at 50% -10%, rgba(107, 142, 90, 0.16) 0%, transparent 60%), var(--card);
-  }
-
-  .state-card.modal-icon-error,
-  .modal-card.modal-icon-error {
-    background: radial-gradient(ellipse 140% 60% at 50% -10%, rgba(224, 88, 79, 0.14) 0%, transparent 60%), var(--card);
-  }
-
-  .state-card.modal-icon-warning,
-  .modal-card.modal-icon-warning {
-    background: radial-gradient(ellipse 140% 60% at 50% -10%, rgba(232, 162, 61, 0.14) 0%, transparent 60%), var(--card);
-  }
-
-  .state-card h2,
-  .modal-card h2 {
-    font-family: var(--font-display);
-    font-size: 1.25rem;
-    font-weight: 800;
-    margin-bottom: 10px;
-  }
-
-  .state-card p,
-  .modal-card p {
-    font-size: 0.9375rem;
-    color: var(--text-70);
-    margin-bottom: 24px;
-  }
-
-  .steps {
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    margin-bottom: 28px;
-  }
-
-  .step { display: flex; align-items: flex-start; gap: 12px; }
-
-  .step-num {
-    flex-shrink: 0;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: var(--accent-dim);
-    border: 1px solid var(--accent-border);
-    color: var(--accent-light);
-    font-size: 0.75rem;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .step span {
-    font-size: 0.875rem;
-    color: var(--text-70);
-    line-height: 1.5;
-    padding-top: 2px;
-  }
-
-  .error-box {
-    text-align: left;
-    font-size: 0.875rem;
-    color: var(--text);
-    background: var(--danger-dim);
-    border: 1px solid rgba(224, 88, 79, 0.35);
-    border-radius: var(--r-md);
-    padding: 14px 16px;
-    margin-bottom: 20px;
-  }
-
-  /* ── Feedback modals (success / error) ── */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(4px);
-    animation: modalFadeIn 0.2s ease;
-  }
-
-  .modal-card {
-    max-width: 420px;
-    width: 100%;
-    text-align: center;
-    padding: 36px 32px;
-    border-radius: var(--r-2xl);
-    background: var(--card);
-    border: 1px solid var(--border-mid);
-    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.04);
-    animation: modalPopIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  @keyframes modalFadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @keyframes modalPopIn {
-    from { opacity: 0; transform: scale(0.94) translateY(8px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
-  }
-
-  [hidden] { display: none !important; }
-
-  /* Honeypot — invisible to real users/screen readers, but a plain "name" field bots tend to fill in. */
-  .hp-field {
-    position: absolute;
-    left: -9999px;
-    top: -9999px;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  @media (max-width: 900px) {
-    .split {
-      grid-template-columns: 1fr;
-      gap: 36px;
-      padding: 100px 24px 40px;
-      min-height: auto;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar VIP Merchant — Amora.id</title>
+  <meta name="description"
+    content="Daftar jadi salah satu dari 30 VIP Merchant Amora.id. Gratis 3 bulan penuh, lalu harga VIP terkunci selamanya.">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon/favicon.svg">
+  <link rel="icon" type="image/png" sizes="96x96" href="../assets/favicon/favicon-96x96.png">
+  <link rel="shortcut icon" href="../assets/favicon/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Geist:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <!-- Shared design tokens/buttons + the homepage's CSS for the shared nav/footer components -->
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/amora-landing-v2.css">
+  <style>
+    /* Page-specific tokens that extend the shared design system (css/design-system.css) */
+    :root {
+      --text-70: rgba(242, 242, 245, 0.7);
+      --text-35: rgba(242, 242, 245, 0.35);
+      --danger: #E0584F;
+      --danger-dim: rgba(224, 88, 79, 0.1);
     }
 
-    .banner { align-items: center; text-align: center; }
-    .banner-sub { margin-left: auto; margin-right: auto; }
-    .benefit-list { width: 100%; max-width: 380px; }
-    .slot-card { margin: 0 auto; }
-  }
+    .page {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+    }
 
-  @media (max-width: 480px) {
-    .card { padding: 26px 20px; }
-    .banner h1 { font-size: 1.75rem; }
-  }
-</style>
+    .split {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      align-items: center;
+      gap: 56px;
+      max-width: 1180px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding: 110px 32px 56px;
+    }
+
+    /* ══════ LEFT — BANNER ══════ */
+    .banner {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 14px;
+      border-radius: var(--r-full);
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-border);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent-light);
+      letter-spacing: 0.01em;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+
+      0%,
+      100% {
+        opacity: 1;
+        box-shadow: 0 0 0 0 rgba(143, 184, 122, 0.45);
+      }
+
+      50% {
+        opacity: 0.6;
+        box-shadow: 0 0 0 4px rgba(143, 184, 122, 0);
+      }
+    }
+
+    .banner h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.4vw, 2.75rem);
+      font-weight: 800;
+      line-height: 1.16;
+      letter-spacing: -0.02em;
+      margin-bottom: 18px;
+    }
+
+    .banner h1 .accent {
+      background: linear-gradient(135deg, #B8E6A0 0%, #7FB86A 60%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .banner-sub {
+      font-size: 1rem;
+      color: var(--text-60);
+      max-width: 440px;
+      margin-bottom: 32px;
+    }
+
+    .benefit-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 36px;
+    }
+
+    .benefit-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      font-size: 0.9375rem;
+      color: var(--text-80);
+    }
+
+    .benefit-list .check {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+
+    .benefit-list svg {
+      color: var(--accent-light);
+    }
+
+    .slot-card {
+      width: 100%;
+      max-width: 380px;
+      padding: 16px 18px;
+      border-radius: var(--r-lg);
+      background: var(--elevated);
+      border: 1px solid var(--border-mid);
+    }
+
+    .slot-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8125rem;
+      color: var(--text-60);
+      margin-bottom: 10px;
+    }
+
+    #slotCount {
+      font-family: var(--font-display);
+      font-weight: 800;
+      color: var(--accent-light);
+    }
+
+    .slot-bar {
+      width: 100%;
+      height: 6px;
+      border-radius: var(--r-full);
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .slot-fill {
+      height: 100%;
+      border-radius: var(--r-full);
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      width: 0%;
+      transition: width 0.6s ease;
+    }
+
+    /* ══════ RIGHT — FORM COLUMN ══════ */
+    .form-col {
+      width: 100%;
+    }
+
+    .card {
+      padding: 36px 32px;
+      border-radius: var(--r-2xl);
+      background: var(--card);
+      border: 1px solid var(--border-mid);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 24px 64px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .card-subtitle {
+      font-size: 0.875rem;
+      color: var(--text-60);
+      margin-bottom: 26px;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 7px;
+    }
+
+    .field input[type="text"],
+    .field input[type="tel"],
+    .field input[type="email"] {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 0.9375rem;
+      font-family: var(--font-body);
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--r-md);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .field input::placeholder {
+      color: var(--text-35);
+    }
+
+    .field input:focus {
+      border-color: var(--accent-border);
+      box-shadow: 0 0 0 3px var(--accent-dim);
+    }
+
+    .field input.error {
+      border-color: var(--danger);
+      box-shadow: 0 0 0 3px var(--danger-dim);
+    }
+
+    .field-hint {
+      font-size: 0.75rem;
+      color: var(--text-35);
+      margin-top: 6px;
+    }
+
+    .field-error-msg {
+      font-size: 0.75rem;
+      color: var(--danger);
+      margin-top: 6px;
+      display: none;
+    }
+
+    .field-error-msg.show {
+      display: block;
+    }
+
+    .wa-input-wrap {
+      display: flex;
+      align-items: stretch;
+    }
+
+    .wa-prefix {
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--text-70);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-strong);
+      border-right: none;
+      border-radius: var(--r-md) 0 0 var(--r-md);
+    }
+
+    .wa-input-wrap input {
+      border-radius: 0 var(--r-md) var(--r-md) 0 !important;
+    }
+
+    .checkbox-field {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 22px;
+      padding: 14px;
+      border-radius: var(--r-md);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+    }
+
+    .checkbox-field.error {
+      border-color: var(--danger);
+      box-shadow: 0 0 0 3px var(--danger-dim);
+    }
+
+    .checkbox-field input[type="checkbox"] {
+      margin-top: 2px;
+      width: 17px;
+      height: 17px;
+      accent-color: var(--accent);
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .checkbox-field label {
+      font-size: 0.8125rem;
+      color: var(--text-70);
+      line-height: 1.5;
+      cursor: pointer;
+    }
+
+    /* Card-context sizing for the shared .btn-primary (css/design-system.css) —
+     full width + centered, since this page's CTAs fill a narrow form card. */
+    .btn-block {
+      width: 100%;
+      justify-content: center;
+      padding: 14px;
+      font-size: 0.9375rem;
+      border: none;
+      border-radius: var(--r-full);
+      cursor: pointer;
+    }
+
+    .btn-block:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-secondary {
+      display: block;
+      text-align: center;
+      width: 100%;
+      padding: 12px;
+      margin-top: 12px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--text-70);
+      text-decoration: none;
+      border-radius: var(--r-md);
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .btn-secondary:hover {
+      color: var(--accent-light);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .footnote {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-35);
+      margin-top: 18px;
+    }
+
+    /* ── Success / Error / Full states (reuse .card) ── */
+    .state-card {
+      text-align: center;
+    }
+
+    .modal-icon-wrap {
+      position: relative;
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 20px;
+    }
+
+    .modal-icon-glow {
+      position: absolute;
+      inset: -26px;
+      border-radius: 50%;
+      filter: blur(26px);
+      opacity: 0.6;
+      z-index: 0;
+    }
+
+    .modal-icon-badge {
+      position: relative;
+      z-index: 1;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--elevated);
+      border: 1px solid var(--border-mid);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-icon-badge svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .modal-icon-success .modal-icon-glow {
+      background: radial-gradient(circle, var(--accent-light) 0%, transparent 70%);
+    }
+
+    .modal-icon-success .modal-icon-badge {
+      color: var(--accent-light);
+      border-color: var(--accent-border);
+    }
+
+    .modal-icon-error .modal-icon-glow {
+      background: radial-gradient(circle, var(--danger) 0%, transparent 70%);
+    }
+
+    .modal-icon-error .modal-icon-badge {
+      color: var(--danger);
+      border-color: rgba(224, 88, 79, 0.35);
+    }
+
+    .modal-icon-warning .modal-icon-glow {
+      background: radial-gradient(circle, #E8A23D 0%, transparent 70%);
+    }
+
+    .modal-icon-warning .modal-icon-badge {
+      color: #E8A23D;
+      border-color: rgba(232, 162, 61, 0.35);
+    }
+
+    .state-card.modal-icon-success,
+    .modal-card.modal-icon-success {
+      background: radial-gradient(ellipse 140% 60% at 50% -10%, rgba(107, 142, 90, 0.16) 0%, transparent 60%), var(--card);
+    }
+
+    .state-card.modal-icon-error,
+    .modal-card.modal-icon-error {
+      background: radial-gradient(ellipse 140% 60% at 50% -10%, rgba(224, 88, 79, 0.14) 0%, transparent 60%), var(--card);
+    }
+
+    .state-card.modal-icon-warning,
+    .modal-card.modal-icon-warning {
+      background: radial-gradient(ellipse 140% 60% at 50% -10%, rgba(232, 162, 61, 0.14) 0%, transparent 60%), var(--card);
+    }
+
+    .state-card h2,
+    .modal-card h2 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .state-card p,
+    .modal-card p {
+      font-size: 0.9375rem;
+      color: var(--text-70);
+      margin-bottom: 24px;
+    }
+
+    .steps {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-border);
+      color: var(--accent-light);
+      font-size: 0.75rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step span {
+      font-size: 0.875rem;
+      color: var(--text-70);
+      line-height: 1.5;
+      padding-top: 2px;
+    }
+
+    .error-box {
+      text-align: left;
+      font-size: 0.875rem;
+      color: var(--text);
+      background: var(--danger-dim);
+      border: 1px solid rgba(224, 88, 79, 0.35);
+      border-radius: var(--r-md);
+      padding: 14px 16px;
+      margin-bottom: 20px;
+    }
+
+    /* ── Feedback modals (success / error) ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      animation: modalFadeIn 0.2s ease;
+    }
+
+    .modal-card {
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      padding: 36px 32px;
+      border-radius: var(--r-2xl);
+      background: var(--card);
+      border: 1px solid var(--border-mid);
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.04);
+      animation: modalPopIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes modalFadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes modalPopIn {
+      from {
+        opacity: 0;
+        transform: scale(0.94) translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    /* Honeypot — invisible to real users/screen readers, but a plain "name" field bots tend to fill in. */
+    .hp-field {
+      position: absolute;
+      left: -9999px;
+      top: -9999px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    @media (max-width: 900px) {
+      .split {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        padding: 100px 24px 40px;
+        min-height: auto;
+      }
+
+      .banner {
+        align-items: center;
+        text-align: center;
+      }
+
+      .banner-sub {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .benefit-list {
+        width: 100%;
+        max-width: 380px;
+      }
+
+      .slot-card {
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 26px 20px;
+      }
+
+      .banner h1 {
+        font-size: 1.75rem;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div id="page-bg" aria-hidden="true">
-  <div class="pg-orb pg-orb-1"></div>
-  <div class="pg-orb pg-orb-2"></div>
-  <div class="pg-orb pg-orb-3"></div>
-  <div class="pg-orb pg-orb-4"></div>
-  <div class="pg-orb pg-orb-5"></div>
-  <div class="pg-orb pg-orb-6"></div>
-</div>
+  <div id="page-bg" aria-hidden="true">
+    <div class="pg-orb pg-orb-1"></div>
+    <div class="pg-orb pg-orb-2"></div>
+    <div class="pg-orb pg-orb-3"></div>
+    <div class="pg-orb pg-orb-4"></div>
+    <div class="pg-orb pg-orb-5"></div>
+    <div class="pg-orb pg-orb-6"></div>
+  </div>
 
-<div id="site-navbar"></div>
+  <div id="site-navbar"></div>
 
-<div class="page">
-  <div class="split">
+  <div class="page">
+    <div class="split">
 
-    <!-- ══════ LEFT — BANNER ══════ -->
-    <div class="banner">
-      <div class="eyebrow"><span class="eyebrow-dot"></span> VIP Merchant — 30 Slot</div>
+      <!-- ══════ LEFT — BANNER ══════ -->
+      <div class="banner">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> VIP Merchant — 30 Slot</div>
 
-      <h1>Jadi VIP Merchant<br><span class="accent">Amora.id.</span></h1>
+        <h1>Jadi VIP Merchant<br><span class="accent">Amora.id.</span></h1>
 
-      <p class="banner-sub">VIP Merchant merupakan bagian dari Launching Program Amora.id — gratis 3 bulan penuh, lalu harga VIP terkunci selamanya. Khusus 30 toko pertama yang mendaftar.</p>
+        <p class="banner-sub">VIP Merchant merupakan bagian dari Launching Program Amora.id — gratis 3 bulan penuh, lalu
+          harga VIP terkunci selamanya. Khusus 30 toko pertama yang mendaftar.</p>
 
-      <ul class="benefit-list">
-        <li>
-          <span class="check">
-            <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
-          </span>
-          3 bulan gratis, tanpa kartu kredit
-        </li>
-        <li>
-          <span class="check">
-            <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
-          </span>
-          Harga VIP terkunci selamanya
-        </li>
-        <li>
-          <span class="check">
-            <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
-          </span>
-          Dana langsung ke kamu, tanpa potongan
-        </li>
-      </ul>
+        <ul class="benefit-list">
+          <li>
+            <span class="check">
+              <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="3"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </span>
+            3 bulan gratis, tanpa kartu kredit
+          </li>
+          <li>
+            <span class="check">
+              <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="3"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </span>
+            Harga VIP terkunci selamanya
+          </li>
+          <li>
+            <span class="check">
+              <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="3"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </span>
+            Dana langsung ke kamu, tanpa potongan
+          </li>
+        </ul>
 
-      <div class="slot-card" id="slotCard">
-        <div class="slot-row">
-          <span id="slotText">Memuat slot tersedia…</span>
-          <span id="slotCount"></span>
-        </div>
-        <div class="slot-bar"><div class="slot-fill" id="slotFill"></div></div>
-      </div>
-    </div>
-
-    <!-- ══════ RIGHT — FORM COLUMN ══════ -->
-    <div class="form-col">
-
-      <!-- FORM VIEW -->
-      <form class="card" id="regForm" novalidate>
-        <div class="card-title">Daftar Sekarang</div>
-        <div class="card-subtitle">Isi data toko kamu, tim Amora akan kurasi dalam 1–2 hari kerja.</div>
-
-        <div class="field">
-          <label for="namaToko">Nama Toko / Brand</label>
-          <input type="text" id="namaToko" name="namaToko" placeholder="cth. Toko Saya">
-          <div class="field-error-msg" id="namaTokoError">Nama toko wajib diisi.</div>
-        </div>
-
-        <div class="field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="nama@email.com">
-          <div class="field-error-msg" id="emailError">Email tidak valid.</div>
-        </div>
-
-        <div class="field">
-          <label for="waNumber">Nomor WhatsApp</label>
-          <div class="wa-input-wrap">
-            <span class="wa-prefix">+62</span>
-            <input type="tel" id="waNumber" name="waNumber" placeholder="812xxxxxxx" inputmode="numeric">
+        <div class="slot-card" id="slotCard">
+          <div class="slot-row">
+            <span id="slotText">Memuat slot tersedia…</span>
+            <span id="slotCount"></span>
           </div>
-          <div class="field-error-msg" id="waNumberError">Nomor WhatsApp minimal 8 digit.</div>
-        </div>
-
-        <div class="field">
-          <label for="linkMarketplace">Link Toko Marketplace Aktif</label>
-          <input type="text" id="linkMarketplace" name="linkMarketplace" placeholder="https://shopee.co.id/tokokamu">
-          <div class="field-hint">Boleh Shopee, Tokopedia, TikTok Shop</div>
-          <div class="field-error-msg" id="linkMarketplaceError">Link toko wajib diisi.</div>
-        </div>
-
-        <div class="hp-field" aria-hidden="true">
-          <label for="website">Website</label>
-          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
-        </div>
-
-        <div class="checkbox-field" id="commitmentField">
-          <input type="checkbox" id="commitment" name="commitment">
-          <label for="commitment">Saya berkomitmen aktif menggunakan Amora dan bersedia memberikan feedback jujur selama 3 bulan pertama</label>
-        </div>
-
-        <button type="submit" class="btn-primary btn-block" id="submitBtn">
-          <span id="submitBtnText">Kirim Pendaftaran →</span>
-        </button>
-        <a href="#" class="btn-secondary" id="subscribeLink">Subscribe Tanpa Coba Gratis →</a>
-
-        <p class="footnote">Tidak ada pembayaran sampai bulan ke-4</p>
-      </form>
-
-      <!-- SLOT FULL VIEW -->
-      <div class="card state-card modal-icon-warning" id="fullCard" hidden>
-        <div class="modal-icon-wrap">
-          <div class="modal-icon-glow"></div>
-          <div class="modal-icon-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="8" x2="12" y2="13" />
-              <line x1="12" y1="16.5" x2="12" y2="16.51" />
-            </svg>
+          <div class="slot-bar">
+            <div class="slot-fill" id="slotFill"></div>
           </div>
         </div>
-        <h2>Slot VIP Merchant Sudah Penuh</h2>
-        <p>30 slot VIP Merchant sudah terisi semua. Kamu masih bisa subscribe langsung dan menikmati semua fitur Amora.</p>
-        <a href="#" class="btn-primary btn-block" id="fullSubscribeLink">Subscribe Sekarang →</a>
       </div>
 
-      <!-- SUBMITTED STATE — replaces the form permanently after success modal is closed -->
-      <div class="card state-card modal-icon-success" id="submittedCard" hidden>
-        <div class="modal-icon-wrap">
-          <div class="modal-icon-glow"></div>
-          <div class="modal-icon-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
+      <!-- ══════ RIGHT — FORM COLUMN ══════ -->
+      <div class="form-col">
+
+        <!-- FORM VIEW -->
+        <form class="card" id="regForm" novalidate>
+          <div class="card-title">Daftar Sekarang</div>
+          <div class="card-subtitle">Isi data toko kamu, tim Amora akan kurasi dalam 1–2 hari kerja.</div>
+
+          <div class="field">
+            <label for="namaToko">Nama Toko / Brand</label>
+            <input type="text" id="namaToko" name="namaToko" placeholder="cth. Toko Saya">
+            <div class="field-error-msg" id="namaTokoError">Nama toko wajib diisi.</div>
           </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="nama@email.com">
+            <div class="field-error-msg" id="emailError">Email tidak valid.</div>
+          </div>
+
+          <div class="field">
+            <label for="waNumber">Nomor WhatsApp</label>
+            <div class="wa-input-wrap">
+              <span class="wa-prefix">+62</span>
+              <input type="tel" id="waNumber" name="waNumber" placeholder="812xxxxxxx" inputmode="numeric">
+            </div>
+            <div class="field-error-msg" id="waNumberError">Nomor WhatsApp minimal 8 digit.</div>
+          </div>
+
+          <div class="field">
+            <label for="linkMarketplace">Link Toko Marketplace Aktif</label>
+            <input type="text" id="linkMarketplace" name="linkMarketplace" placeholder="https://shopee.co.id/tokokamu">
+            <div class="field-hint">Boleh Shopee, Tokopedia, TikTok Shop</div>
+            <div class="field-error-msg" id="linkMarketplaceError">Link toko wajib diisi.</div>
+          </div>
+
+          <div class="hp-field" aria-hidden="true">
+            <label for="website">Website</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <div class="checkbox-field" id="commitmentField">
+            <input type="checkbox" id="commitment" name="commitment">
+            <label for="commitment">Saya berkomitmen aktif menggunakan Amora dan bersedia memberikan feedback jujur
+              selama 3 bulan pertama</label>
+          </div>
+
+          <button type="submit" class="btn-primary btn-block" id="submitBtn">
+            <span id="submitBtnText">Kirim Pendaftaran →</span>
+          </button>
+          <a href="#" class="btn-secondary" id="subscribeLink">Subscribe Tanpa Coba Gratis →</a>
+
+          <p class="footnote">Tidak ada pembayaran sampai bulan ke-4</p>
+        </form>
+
+        <!-- SLOT FULL VIEW -->
+        <div class="card state-card modal-icon-warning" id="fullCard" hidden>
+          <div class="modal-icon-wrap">
+            <div class="modal-icon-glow"></div>
+            <div class="modal-icon-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round">
+                <line x1="12" y1="8" x2="12" y2="13" />
+                <line x1="12" y1="16.5" x2="12" y2="16.51" />
+              </svg>
+            </div>
+          </div>
+          <h2>Slot VIP Merchant Sudah Penuh</h2>
+          <p>30 slot VIP Merchant sudah terisi semua. Kamu masih bisa subscribe langsung dan menikmati semua fitur
+            Amora.</p>
+          <a href="#" class="btn-primary btn-block" id="fullSubscribeLink">Subscribe Sekarang →</a>
         </div>
-        <h2>Pendaftaran Terkirim</h2>
-        <p>Pendaftaran kamu sudah kami terima dan sedang dalam proses kurasi. Cek WhatsApp kamu dalam 1–2 hari kerja.</p>
-      </div>
 
+        <!-- SUBMITTED STATE — replaces the form permanently after success modal is closed -->
+        <div class="card state-card modal-icon-success" id="submittedCard" hidden>
+          <div class="modal-icon-wrap">
+            <div class="modal-icon-glow"></div>
+            <div class="modal-icon-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+          </div>
+          <h2>Pendaftaran Terkirim</h2>
+          <p>Pendaftaran kamu sudah kami terima dan sedang dalam proses kurasi. Cek WhatsApp kamu dalam 1–2 hari kerja.
+          </p>
+        </div>
+
+      </div>
     </div>
   </div>
-</div>
 
-<!-- SUCCESS MODAL -->
-<div class="modal-overlay" id="successModal" hidden>
-  <div class="modal-card modal-icon-success" role="dialog" aria-modal="true" aria-labelledby="successModalTitle">
-    <div class="modal-icon-wrap">
-      <div class="modal-icon-glow"></div>
-      <div class="modal-icon-badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="20 6 9 17 4 12" />
-        </svg>
+  <!-- SUCCESS MODAL -->
+  <div class="modal-overlay" id="successModal" hidden>
+    <div class="modal-card modal-icon-success" role="dialog" aria-modal="true" aria-labelledby="successModalTitle">
+      <div class="modal-icon-wrap">
+        <div class="modal-icon-glow"></div>
+        <div class="modal-icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </div>
       </div>
+      <h2 id="successModalTitle">Pendaftaran Diterima!</h2>
+      <p id="successText">Terima kasih sudah mendaftar. Tim kami akan menghubungi kamu segera.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <span>Cek WhatsApp kamu — konfirmasi dalam 1–2 hari kerja</span>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <span>Kalau approved, kamu pilih plan dan akses gratis 3 bulan</span>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <span>Founder akan personally bantu setup toko pertamamu</span>
+        </div>
+      </div>
+      <button type="button" class="btn-primary btn-block" id="successCloseBtn">Tutup</button>
     </div>
-    <h2 id="successModalTitle">Pendaftaran Diterima!</h2>
-    <p id="successText">Terima kasih sudah mendaftar. Tim kami akan menghubungi kamu segera.</p>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <span>Cek WhatsApp kamu — konfirmasi dalam 1–2 hari kerja</span>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <span>Kalau approved, kamu pilih plan dan akses gratis 3 bulan</span>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <span>Founder akan personally bantu setup toko pertamamu</span>
-      </div>
-    </div>
-    <button type="button" class="btn-primary btn-block" id="successCloseBtn">Tutup</button>
   </div>
-</div>
 
-<!-- ERROR MODAL -->
-<div class="modal-overlay" id="errorModal" hidden>
-  <div class="modal-card modal-icon-error" role="dialog" aria-modal="true" aria-labelledby="errorModalTitle">
-    <div class="modal-icon-wrap">
-      <div class="modal-icon-glow"></div>
-      <div class="modal-icon-badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18" />
-          <line x1="6" y1="6" x2="18" y2="18" />
-        </svg>
+  <!-- ERROR MODAL -->
+  <div class="modal-overlay" id="errorModal" hidden>
+    <div class="modal-card modal-icon-error" role="dialog" aria-modal="true" aria-labelledby="errorModalTitle">
+      <div class="modal-icon-wrap">
+        <div class="modal-icon-glow"></div>
+        <div class="modal-icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+            stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </div>
       </div>
+      <h2 id="errorModalTitle">Ups, Ada Kendala Teknis</h2>
+      <div class="error-box" id="errorBoxText">
+        Ups, ada kendala teknis. Data kamu belum tersimpan. Coba lagi atau hubungi kami via WhatsApp di 0878 3210 1750.
+      </div>
+      <button type="button" class="btn-primary btn-block" id="retryBtn">Coba Lagi</button>
     </div>
-    <h2 id="errorModalTitle">Ups, Ada Kendala Teknis</h2>
-    <div class="error-box" id="errorBoxText">
-      Ups, ada kendala teknis. Data kamu belum tersimpan. Coba lagi atau hubungi kami via WhatsApp di 0878 3210 1750.
-    </div>
-    <button type="button" class="btn-primary btn-block" id="retryBtn">Coba Lagi</button>
   </div>
-</div>
 
-<div id="site-footer"></div>
+  <div id="site-footer"></div>
 
-<script>window.SITE_ROOT = '../';</script>
-<script src="../assets/js/site-chrome.js"></script>
+  <script>window.SITE_ROOT = '../';</script>
+  <script src="../assets/js/site-chrome.js"></script>
 
-<script>
-  // ════════════════════════════════════════════════════════════
-  // CONFIG — ganti URL ini setelah deploy Apps Script (lihat README.md)
-  // ════════════════════════════════════════════════════════════
-  const APPS_SCRIPT_URL = 'PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';
+  <script>
+    // ════════════════════════════════════════════════════════════
+    // CONFIG — ganti URL ini setelah deploy Apps Script (lihat README.md)
+    // ════════════════════════════════════════════════════════════
+    const APPS_SCRIPT_URL = 'PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';
 
-  // reCAPTCHA v3 site key — lihat README.md untuk cara dapatkan ini di google.com/recaptcha
-  const RECAPTCHA_SITE_KEY = '[REPLACE SITEKEY]';
+    // reCAPTCHA v3 site key — lihat README.md untuk cara dapatkan ini di google.com/recaptcha
+    const RECAPTCHA_SITE_KEY = '6Lc6OzgtAAAAAPi3Ejm3sXRDBkfkZA-p5uOvGOjL';
 
-  // Link tujuan untuk merchant yang tidak ikut kurasi / saat slot penuh
-  const SUBSCRIBE_URL = '../#harga';
+    // Link tujuan untuk merchant yang tidak ikut kurasi / saat slot penuh
+    const SUBSCRIBE_URL = '../#harga';
 
-  const TOTAL_SLOTS = 30;
+    const TOTAL_SLOTS = 30;
 
-  // Waktu form pertama kali siap diisi — dipakai untuk deteksi submit instan (bot).
-  const formRenderedAt = Date.now();
+    // Waktu form pertama kali siap diisi — dipakai untuk deteksi submit instan (bot).
+    const formRenderedAt = Date.now();
 
-  // Muat script reCAPTCHA secara dinamis supaya site key di atas dipakai konsisten
-  // di URL script dan di panggilan grecaptcha.execute() di bawah.
-  let recaptchaReady = null;
-  if (RECAPTCHA_SITE_KEY && RECAPTCHA_SITE_KEY.indexOf('[REPLACE') !== 0) {
-    recaptchaReady = new Promise((resolve) => {
-      const script = document.createElement('script');
-      script.src = 'https://www.google.com/recaptcha/api.js?render=' + RECAPTCHA_SITE_KEY;
-      script.onload = () => resolve(true);
-      script.onerror = () => resolve(false);
-      document.head.appendChild(script);
-    });
-  }
-
-  document.getElementById('subscribeLink').href = SUBSCRIBE_URL;
-  document.getElementById('fullSubscribeLink').href = SUBSCRIBE_URL;
-
-  const form = document.getElementById('regForm');
-  const submitBtn = document.getElementById('submitBtn');
-  const submitBtnText = document.getElementById('submitBtnText');
-
-  const namaTokoInput = document.getElementById('namaToko');
-  const emailInput = document.getElementById('email');
-  const waInput = document.getElementById('waNumber');
-  const linkInput = document.getElementById('linkMarketplace');
-  const commitmentInput = document.getElementById('commitment');
-  const commitmentField = document.getElementById('commitmentField');
-  const honeypotInput = document.getElementById('website');
-
-  const slotCard = document.getElementById('slotCard');
-  const slotText = document.getElementById('slotText');
-  const slotCount = document.getElementById('slotCount');
-  const slotFill = document.getElementById('slotFill');
-
-  const fullCard = document.getElementById('fullCard');
-  const successModal = document.getElementById('successModal');
-  const errorModal = document.getElementById('errorModal');
-  const successText = document.getElementById('successText');
-  const successCloseBtn = document.getElementById('successCloseBtn');
-  const retryBtn = document.getElementById('retryBtn');
-  const submittedCard = document.getElementById('submittedCard');
-
-  // ── WhatsApp number: strip non-digits, strip leading zero ──
-  waInput.addEventListener('input', () => {
-    let digits = waInput.value.replace(/\D/g, '');
-    if (digits.startsWith('0')) digits = digits.replace(/^0+/, '');
-    waInput.value = digits;
-  });
-
-  // ── Slot indicator: fetch current registration count ──
-  function renderSlots(remaining) {
-    const filled = Math.max(TOTAL_SLOTS - remaining, 0);
-    const pct = Math.min((filled / TOTAL_SLOTS) * 100, 100);
-    slotFill.style.width = pct + '%';
-
-    if (remaining <= 0) {
-      slotText.textContent = 'Slot VIP Merchant sudah penuh.';
-      slotCount.textContent = '0 sisa';
-      showFullState();
-    } else {
-      slotText.textContent = 'Sisa slot VIP Merchant';
-      slotCount.textContent = remaining + ' / ' + TOTAL_SLOTS;
-    }
-  }
-
-  function loadSlotCount() {
-    if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.indexOf('PASTE_YOUR') === 0) {
-      // Belum di-deploy / URL belum diisi — jangan blokir form, sembunyikan indikator slot.
-      slotCard.hidden = true;
-      return;
-    }
-
-    fetch(APPS_SCRIPT_URL, { method: 'GET' })
-      .then(res => res.json())
-      .then(data => {
-        if (data.status === 'success' && typeof data.count === 'number') {
-          const remaining = TOTAL_SLOTS - data.count;
-          renderSlots(remaining);
-        } else {
-          slotCard.hidden = true;
-        }
-      })
-      .catch(() => {
-        // Gagal ambil jumlah slot — jangan blokir pendaftaran, sembunyikan saja indikatornya.
-        slotCard.hidden = true;
+    // Muat script reCAPTCHA secara dinamis supaya site key di atas dipakai konsisten
+    // di URL script dan di panggilan grecaptcha.execute() di bawah.
+    let recaptchaReady = null;
+    if (RECAPTCHA_SITE_KEY && RECAPTCHA_SITE_KEY.indexOf('[REPLACE') !== 0) {
+      recaptchaReady = new Promise((resolve) => {
+        const script = document.createElement('script');
+        script.src = 'https://www.google.com/recaptcha/api.js?render=' + RECAPTCHA_SITE_KEY;
+        script.onload = () => resolve(true);
+        script.onerror = () => resolve(false);
+        document.head.appendChild(script);
       });
-  }
-
-  loadSlotCount();
-
-  // ── Validation helpers ──
-  function setFieldError(input, errorEl, isValid) {
-    if (isValid) {
-      input.classList.remove('error');
-      errorEl.classList.remove('show');
-    } else {
-      input.classList.add('error');
-      errorEl.classList.add('show');
-    }
-  }
-
-  function validateForm() {
-    let valid = true;
-
-    const namaTokoValid = namaTokoInput.value.trim().length > 0;
-    setFieldError(namaTokoInput, document.getElementById('namaTokoError'), namaTokoValid);
-    if (!namaTokoValid) valid = false;
-
-    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim());
-    setFieldError(emailInput, document.getElementById('emailError'), emailValid);
-    if (!emailValid) valid = false;
-
-    const waValid = waInput.value.replace(/\D/g, '').length >= 8;
-    setFieldError(waInput, document.getElementById('waNumberError'), waValid);
-    if (!waValid) valid = false;
-
-    const linkValid = linkInput.value.trim().length > 0;
-    setFieldError(linkInput, document.getElementById('linkMarketplaceError'), linkValid);
-    if (!linkValid) valid = false;
-
-    if (!commitmentInput.checked) {
-      commitmentField.classList.add('error');
-      valid = false;
-    } else {
-      commitmentField.classList.remove('error');
     }
 
-    return valid;
-  }
+    document.getElementById('subscribeLink').href = SUBSCRIBE_URL;
+    document.getElementById('fullSubscribeLink').href = SUBSCRIBE_URL;
 
-  function normalizeLink(value) {
-    const trimmed = value.trim();
-    if (!/^https?:\/\//i.test(trimmed)) {
-      return 'https://' + trimmed;
+    const form = document.getElementById('regForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const submitBtnText = document.getElementById('submitBtnText');
+
+    const namaTokoInput = document.getElementById('namaToko');
+    const emailInput = document.getElementById('email');
+    const waInput = document.getElementById('waNumber');
+    const linkInput = document.getElementById('linkMarketplace');
+    const commitmentInput = document.getElementById('commitment');
+    const commitmentField = document.getElementById('commitmentField');
+    const honeypotInput = document.getElementById('website');
+
+    const slotCard = document.getElementById('slotCard');
+    const slotText = document.getElementById('slotText');
+    const slotCount = document.getElementById('slotCount');
+    const slotFill = document.getElementById('slotFill');
+
+    const fullCard = document.getElementById('fullCard');
+    const successModal = document.getElementById('successModal');
+    const errorModal = document.getElementById('errorModal');
+    const successText = document.getElementById('successText');
+    const successCloseBtn = document.getElementById('successCloseBtn');
+    const retryBtn = document.getElementById('retryBtn');
+    const submittedCard = document.getElementById('submittedCard');
+
+    // ── WhatsApp number: strip non-digits, strip leading zero ──
+    waInput.addEventListener('input', () => {
+      let digits = waInput.value.replace(/\D/g, '');
+      if (digits.startsWith('0')) digits = digits.replace(/^0+/, '');
+      waInput.value = digits;
+    });
+
+    // ── Slot indicator: fetch current registration count ──
+    function renderSlots(remaining) {
+      const filled = Math.max(TOTAL_SLOTS - remaining, 0);
+      const pct = Math.min((filled / TOTAL_SLOTS) * 100, 100);
+      slotFill.style.width = pct + '%';
+
+      if (remaining <= 0) {
+        slotText.textContent = 'Slot VIP Merchant sudah penuh.';
+        slotCount.textContent = '0 sisa';
+        showFullState();
+      } else {
+        slotText.textContent = 'Sisa slot VIP Merchant';
+        slotCount.textContent = remaining + ' / ' + TOTAL_SLOTS;
+      }
     }
-    return trimmed;
-  }
 
-  function showFullState() {
-    form.hidden = true;
-    fullCard.hidden = false;
-  }
+    function loadSlotCount() {
+      if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.indexOf('PASTE_YOUR') === 0) {
+        // Belum di-deploy / URL belum diisi — jangan blokir form, sembunyikan indikator slot.
+        slotCard.hidden = true;
+        return;
+      }
 
-  function setLoading(isLoading) {
-    submitBtn.disabled = isLoading;
-    submitBtnText.textContent = isLoading ? 'Mengirim...' : 'Kirim Pendaftaran →';
-  }
+      fetch(APPS_SCRIPT_URL, { method: 'GET' })
+        .then(res => res.json())
+        .then(data => {
+          if (data.status === 'success' && typeof data.count === 'number') {
+            const remaining = TOTAL_SLOTS - data.count;
+            renderSlots(remaining);
+          } else {
+            slotCard.hidden = true;
+          }
+        })
+        .catch(() => {
+          // Gagal ambil jumlah slot — jangan blokir pendaftaran, sembunyikan saja indikatornya.
+          slotCard.hidden = true;
+        });
+    }
 
-  function showSuccess(namaToko) {
-    successText.textContent = 'Terima kasih, ' + namaToko + '! Pendaftaran kamu sudah kami terima.';
-    successModal.hidden = false;
-    document.documentElement.style.overflow = 'hidden';
-    successCloseBtn.focus();
-  }
+    loadSlotCount();
 
-  function showError(message) {
-    document.getElementById('errorBoxText').textContent = message ||
-      'Ups, ada kendala teknis. Data kamu belum tersimpan. Coba lagi atau hubungi kami via WhatsApp di 0878 3210 1750.';
-    errorModal.hidden = false;
-    document.documentElement.style.overflow = 'hidden';
-    retryBtn.focus();
-  }
+    // ── Validation helpers ──
+    function setFieldError(input, errorEl, isValid) {
+      if (isValid) {
+        input.classList.remove('error');
+        errorEl.classList.remove('show');
+      } else {
+        input.classList.add('error');
+        errorEl.classList.add('show');
+      }
+    }
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
+    function validateForm() {
+      let valid = true;
 
-    if (!validateForm()) return;
+      const namaTokoValid = namaTokoInput.value.trim().length > 0;
+      setFieldError(namaTokoInput, document.getElementById('namaTokoError'), namaTokoValid);
+      if (!namaTokoValid) valid = false;
 
-    setLoading(true);
-    errorModal.hidden = true;
+      const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim());
+      setFieldError(emailInput, document.getElementById('emailError'), emailValid);
+      if (!emailValid) valid = false;
 
-    const basePayload = {
-      namaToko: namaTokoInput.value.trim(),
-      email: emailInput.value.trim(),
-      whatsapp: '+62' + waInput.value.replace(/\D/g, ''),
-      linkMarketplace: normalizeLink(linkInput.value),
-      website: honeypotInput.value, // honeypot — harus selalu kosong untuk manusia
-      elapsedMs: Date.now() - formRenderedAt
-    };
+      const waValid = waInput.value.replace(/\D/g, '').length >= 8;
+      setFieldError(waInput, document.getElementById('waNumberError'), waValid);
+      if (!waValid) valid = false;
 
-    // reCAPTCHA wajib berhasil sebelum submit jalan — gagal tertutup (fail closed)
-    // supaya bot tidak bisa lolos hanya dengan memblokir script reCAPTCHA.
-    const tokenPromise = recaptchaReady
-      ? recaptchaReady.then((loaded) => {
+      const linkValid = linkInput.value.trim().length > 0;
+      setFieldError(linkInput, document.getElementById('linkMarketplaceError'), linkValid);
+      if (!linkValid) valid = false;
+
+      if (!commitmentInput.checked) {
+        commitmentField.classList.add('error');
+        valid = false;
+      } else {
+        commitmentField.classList.remove('error');
+      }
+
+      return valid;
+    }
+
+    function normalizeLink(value) {
+      const trimmed = value.trim();
+      if (!/^https?:\/\//i.test(trimmed)) {
+        return 'https://' + trimmed;
+      }
+      return trimmed;
+    }
+
+    function showFullState() {
+      form.hidden = true;
+      fullCard.hidden = false;
+    }
+
+    function setLoading(isLoading) {
+      submitBtn.disabled = isLoading;
+      submitBtnText.textContent = isLoading ? 'Mengirim...' : 'Kirim Pendaftaran →';
+    }
+
+    function showSuccess(namaToko) {
+      successText.textContent = 'Terima kasih, ' + namaToko + '! Pendaftaran kamu sudah kami terima.';
+      successModal.hidden = false;
+      document.documentElement.style.overflow = 'hidden';
+      successCloseBtn.focus();
+    }
+
+    function showError(message) {
+      document.getElementById('errorBoxText').textContent = message ||
+        'Ups, ada kendala teknis. Data kamu belum tersimpan. Coba lagi atau hubungi kami via WhatsApp di 0878 3210 1750.';
+      errorModal.hidden = false;
+      document.documentElement.style.overflow = 'hidden';
+      retryBtn.focus();
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      if (!validateForm()) return;
+
+      setLoading(true);
+      errorModal.hidden = true;
+
+      const basePayload = {
+        namaToko: namaTokoInput.value.trim(),
+        email: emailInput.value.trim(),
+        whatsapp: '+62' + waInput.value.replace(/\D/g, ''),
+        linkMarketplace: normalizeLink(linkInput.value),
+        website: honeypotInput.value, // honeypot — harus selalu kosong untuk manusia
+        elapsedMs: Date.now() - formRenderedAt
+      };
+
+      // reCAPTCHA wajib berhasil sebelum submit jalan — gagal tertutup (fail closed)
+      // supaya bot tidak bisa lolos hanya dengan memblokir script reCAPTCHA.
+      const tokenPromise = recaptchaReady
+        ? recaptchaReady.then((loaded) => {
           if (!loaded || typeof grecaptcha === 'undefined') return Promise.reject(new Error('recaptcha-unavailable'));
           return grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'vip_register' });
         })
-      : Promise.resolve(null); // reCAPTCHA belum dikonfigurasi (site key belum diisi) — lewati saja
+        : Promise.resolve(null); // reCAPTCHA belum dikonfigurasi (site key belum diisi) — lewati saja
 
-    tokenPromise
-      .then((token) => {
-        const payload = Object.assign({}, basePayload, { recaptchaToken: token });
+      tokenPromise
+        .then((token) => {
+          const payload = Object.assign({}, basePayload, { recaptchaToken: token });
 
-        return fetch(APPS_SCRIPT_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // hindari CORS preflight di Apps Script
-          body: JSON.stringify(payload)
+          return fetch(APPS_SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // hindari CORS preflight di Apps Script
+            body: JSON.stringify(payload)
+          });
+        })
+        .then(res => res.json())
+        .then(data => {
+          setLoading(false);
+          if (data.status === 'success') {
+            showSuccess(basePayload.namaToko);
+          } else {
+            showError(data.message);
+          }
+        })
+        .catch(() => {
+          setLoading(false);
+          showError();
         });
-      })
-      .then(res => res.json())
-      .then(data => {
-        setLoading(false);
-        if (data.status === 'success') {
-          showSuccess(basePayload.namaToko);
-        } else {
-          showError(data.message);
-        }
-      })
-      .catch(() => {
-        setLoading(false);
-        showError();
-      });
-  });
+    });
 
-  successCloseBtn.addEventListener('click', () => {
-    successModal.hidden = true;
-    document.documentElement.style.overflow = '';
-    form.hidden = true;
-    submittedCard.hidden = false;
-  });
+    successCloseBtn.addEventListener('click', () => {
+      successModal.hidden = true;
+      document.documentElement.style.overflow = '';
+      form.hidden = true;
+      submittedCard.hidden = false;
+    });
 
-  retryBtn.addEventListener('click', () => {
-    errorModal.hidden = true;
-    document.documentElement.style.overflow = '';
-    setLoading(false);
-  });
-</script>
+    retryBtn.addEventListener('click', () => {
+      errorModal.hidden = true;
+      document.documentElement.style.overflow = '';
+      setLoading(false);
+    });
+  </script>
 
 </body>
+
 </html>
