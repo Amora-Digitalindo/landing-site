@@ -368,6 +368,11 @@
       margin-top: 18px;
     }
 
+    .footnote a {
+      color: var(--text-35);
+      text-decoration: underline;
+    }
+
     /* ── Success / Error / Full states (reuse .card) ── */
     .state-card {
       text-align: center;
@@ -564,6 +569,13 @@
       display: none !important;
     }
 
+    /* Hide the reCAPTCHA v3 floating badge icon. Google's ToS requires keeping
+       the "protected by reCAPTCHA" disclosure visible somewhere on the page when
+       the badge is hidden — see the footnote text added near the submit button. */
+    .grecaptcha-badge {
+      visibility: hidden;
+    }
+
     /* Honeypot — invisible to real users/screen readers, but a plain "name" field bots tend to fill in. */
     .hp-field {
       position: absolute;
@@ -732,6 +744,7 @@
           <a href="#" class="btn-secondary" id="subscribeLink">Subscribe Tanpa Coba Gratis →</a>
 
           <p class="footnote">Tidak ada pembayaran sampai bulan ke-4</p>
+          <p class="footnote">Halaman ini dilindungi reCAPTCHA. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> dan <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of Service</a> Google berlaku.</p>
         </form>
 
         <!-- SLOT FULL VIEW -->

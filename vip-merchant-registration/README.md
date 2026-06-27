@@ -8,7 +8,7 @@ Dua file di folder ini:
 
 1. Buka [sheets.google.com](https://sheets.google.com) → **Blank spreadsheet**.
 2. Beri nama, misal "VIP Merchant — Amora.id".
-3. Biarkan kosong — header kolom (`Timestamp | Nama Toko | Email | WhatsApp | Link Marketplace | Status | Catatan Amora`) akan otomatis dibuat oleh script saat submission pertama masuk.
+3. Biarkan kosong — header kolom (`Timestamp | Nama Toko | Email | WhatsApp | Link Marketplace | Status | Catatan Amora | Tidak Eligible`) akan otomatis dibuat oleh script saat submission pertama masuk, termasuk checkbox + highlight merah di kolom "Tidak Eligible" (lihat bagian "Cara cek data masuk" di bawah).
 
 ## 2. Paste dan deploy Apps Script
 
@@ -76,3 +76,9 @@ Apps Script Web App **harus** di-deploy dengan **"Who has access: Anyone"** (buk
 ## Cara cek data masuk
 
 Setiap submission baru akan muncul sebagai baris baru di spreadsheet dengan status default **"Pending Review"**. Kolom **"Catatan Amora"** dikosongkan untuk diisi manual oleh tim kurasi — gunakan kolom ini untuk menandai approve/reject setelah proses kurasi WhatsApp (1–2 hari kerja).
+
+## Menandai toko "Tidak Eligible" (tidak makan slot)
+
+Kolom terakhir, **"Tidak Eligible"**, berupa checkbox. Centang checkbox ini untuk toko yang gagal kurasi — barisnya akan otomatis berwarna merah, dan baris itu **tidak dihitung** di slot counter halaman form (`GET` ke Apps Script mengecualikan baris yang dicentang). Jangan hapus barisnya — cukup centang, supaya histori tetap ada di sheet tapi tidak makan slot 30 VIP Merchant.
+
+> Kalau spreadsheet kamu sudah punya data dari sebelum kolom ini ada, jalankan sekali fungsi `setupExistingSheet` dari Apps Script editor (pilih fungsinya di dropdown sebelah tombol **Run**, lalu klik **Run**) untuk menambahkan kolom + checkbox + format merah ke sheet yang sudah ada, tanpa mengubah data lain.
