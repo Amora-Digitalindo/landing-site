@@ -181,16 +181,33 @@ function doPost(e) {
       });
     }
 
-    sheet.appendRow([
-      new Date(),
-      namaToko,
-      email,
-      whatsapp,
-      linkMarketplace,
-      "Pending Review",
-      "",
-      false,
-    ]);
+    // Write to the row right after the last real Timestamp instead of using
+    // appendRow()/getLastRow() — those can be thrown off by stale formatting
+    // or validation left behind after manually clearing cell content in the
+    // Sheets UI (Delete key clears values but doesn't always reset Sheets'
+    // internal "last used row" tracking).
+    var targetRow = getLastDataRow_(sheet) + 1;
+    sheet
+      .getRange(targetRow, 1, 1, HEADERS.length)
+      .setValues([[
+        new Date(),
+        namaToko,
+        email,
+        whatsapp,
+        linkMarketplace,
+        "Pending Review",
+        "",
+        false,
+      ]]);
+
+    // Re-apply checkbox validation to this exact row in case it was lost —
+    // deleting rows in the Sheets UI can leave the row that shifts into this
+    // position without the "Tidak Eligible" checkbox, rendering as plain
+    // TRUE/FALSE text instead.
+    var flagColIndex = HEADERS.indexOf("Tidak Eligible") + 1;
+    sheet
+      .getRange(targetRow, flagColIndex)
+      .setDataValidation(SpreadsheetApp.newDataValidation().requireCheckbox().build());
 
     return jsonResponse_({ status: "success" });
   } catch (err) {
