@@ -3054,7 +3054,16 @@
         }
       }
       initParticles();
-      window.addEventListener('resize', initParticles);
+      let lastW = wrap.offsetWidth, lastH = wrap.offsetHeight;
+      window.addEventListener('resize', () => {
+        // Mobile browsers fire 'resize' when the address bar shows/hides during
+        // scroll even though layout size didn't change — skip those to avoid
+        // re-randomizing particle positions mid-scroll.
+        const w = wrap.offsetWidth, h = wrap.offsetHeight;
+        if (w === lastW && h === lastH) return;
+        lastW = w; lastH = h;
+        initParticles();
+      }, { passive: true });
 
       function drawParticles() {
         const w = wrap.offsetWidth, h = wrap.offsetHeight;
