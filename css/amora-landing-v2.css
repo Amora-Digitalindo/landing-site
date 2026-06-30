@@ -2529,6 +2529,400 @@
       }
     }
 
+    /* ── Config widget header (matches orders-widget / tracking-widget chrome) ── */
+    .config-widget-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .config-widget-icon {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: var(--r-md);
+      background: linear-gradient(135deg, rgba(60, 200, 150, 0.25) 0%, rgba(40, 170, 130, 0.1) 100%);
+      border: 1px solid var(--accent-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: config-icon-spin 7s linear infinite;
+    }
+
+    @keyframes config-icon-spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .config-widget-icon svg {
+      width: 15px;
+      height: 15px;
+      color: var(--accent-light);
+    }
+
+    .config-widget-title {
+      font-family: var(--font-display);
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--text);
+      flex: 1;
+    }
+
+    .config-widget-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      border-radius: var(--r-full);
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-border);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent-light);
+      white-space: nowrap;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .config-widget-icon {
+        animation: none;
+      }
+    }
+
+    /* ── Settings rows: "Mudah Konfigurasi Website" ──
+       A real-looking settings list, staggered in on scroll, with the
+       two toggles flipping on like a live save — same fidelity as the
+       Live Orders / Order Tracking widgets elsewhere on the page. */
+    .config-widget-rows {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .config-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 13px;
+      background: linear-gradient(135deg, rgba(80, 200, 170, 0.10) 0%, rgba(7, 11, 20, 0.90) 100%);
+      border: 1px solid rgba(100, 210, 180, 0.2);
+      border-radius: 12px;
+      backdrop-filter: blur(12px);
+      opacity: 0;
+      transform: translateX(-14px);
+      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .config-row:nth-child(1) {
+      transition-delay: 0.05s;
+    }
+
+    .config-row:nth-child(2) {
+      transition-delay: 0.13s;
+    }
+
+    .config-row:nth-child(3) {
+      transition-delay: 0.21s;
+    }
+
+    .config-row:nth-child(4) {
+      transition-delay: 0.29s;
+    }
+
+    .config-row:nth-child(5) {
+      transition-delay: 0.37s;
+    }
+
+    .reveal.visible .config-row {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .config-row-label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-80);
+    }
+
+    .config-row-value {
+      font-size: 0.8125rem;
+      color: var(--text-40);
+      font-family: 'SF Mono', 'Roboto Mono', 'Consolas', monospace;
+      white-space: nowrap;
+    }
+
+    .config-row-verified {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--accent-light);
+    }
+
+    .config-row-verified svg {
+      width: 11px;
+      height: 11px;
+      flex-shrink: 0;
+    }
+
+    .config-toggle {
+      flex-shrink: 0;
+      width: 34px;
+      height: 19px;
+      border-radius: var(--r-full);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      position: relative;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .config-toggle-dot {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--text-40);
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    /* Toggles marked --on stay off until the widget scrolls into view, then flip — like watching a setting get applied live */
+    .config-toggle--on {
+      transition: background 0.35s ease, border-color 0.35s ease;
+    }
+
+    .config-toggle--on .config-toggle-dot {
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.35s ease;
+    }
+
+    .config-row:nth-child(3) .config-toggle--on {
+      transition-delay: 0.55s;
+    }
+
+    .config-row:nth-child(3) .config-toggle--on .config-toggle-dot {
+      transition-delay: 0.55s;
+    }
+
+    .reveal.visible .config-toggle--on {
+      background: var(--accent-dim);
+      border-color: var(--accent-border);
+    }
+
+    .reveal.visible .config-toggle--on .config-toggle-dot {
+      transform: translateX(15px);
+      background: var(--accent-light);
+      box-shadow: 0 0 8px var(--accent-glow);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .config-row {
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+
+    /* ── Customers widget header (matches orders-widget / tracking-widget chrome) ── */
+    .customers-widget-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .customers-widget-icon {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: var(--r-md);
+      background: linear-gradient(135deg, rgba(60, 200, 150, 0.25) 0%, rgba(40, 170, 130, 0.1) 100%);
+      border: 1px solid var(--accent-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .customers-widget-icon svg {
+      width: 15px;
+      height: 15px;
+      color: var(--accent-light);
+    }
+
+    .customers-widget-title {
+      font-family: var(--font-display);
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--text);
+      flex: 1;
+    }
+
+    .customers-widget-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      border-radius: var(--r-full);
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-border);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent-light);
+      white-space: nowrap;
+    }
+
+    /* ── Customer list: "Miliki Data Customer Mu Sendiri" ──
+       A real-looking customer database list, staggered in on scroll —
+       same fidelity as the Live Orders / Order Tracking widgets. */
+    .customers-widget-count {
+      position: relative;
+      z-index: 1;
+      font-size: 0.75rem;
+      color: var(--text-40);
+      margin-bottom: 14px;
+    }
+
+    .customers-widget-count strong {
+      font-family: var(--font-display);
+      font-size: 0.9375rem;
+      font-weight: 800;
+      color: var(--accent-light);
+    }
+
+    .customers-list {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .customer-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 13px;
+      background: linear-gradient(135deg, rgba(80, 200, 170, 0.10) 0%, rgba(7, 11, 20, 0.90) 100%);
+      border: 1px solid rgba(100, 210, 180, 0.2);
+      border-radius: 12px;
+      backdrop-filter: blur(12px);
+      opacity: 0;
+      transform: translateX(-14px);
+      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .customer-row:nth-child(1) {
+      transition-delay: 0.05s;
+    }
+
+    .customer-row:nth-child(2) {
+      transition-delay: 0.15s;
+    }
+
+    .customer-row:nth-child(3) {
+      transition-delay: 0.25s;
+    }
+
+    .customer-row:nth-child(4) {
+      transition-delay: 0.35s;
+    }
+
+    .reveal.visible .customer-row {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .customer-avatar {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(100, 210, 180, 0.22) 0%, rgba(100, 210, 180, 0.08) 100%);
+      border: 1px solid rgba(100, 210, 180, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      color: var(--accent-light);
+      transform: scale(0);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .customer-row:nth-child(1) .customer-avatar {
+      transition-delay: 0.2s;
+    }
+
+    .customer-row:nth-child(2) .customer-avatar {
+      transition-delay: 0.3s;
+    }
+
+    .customer-row:nth-child(3) .customer-avatar {
+      transition-delay: 0.4s;
+    }
+
+    .customer-row:nth-child(4) .customer-avatar {
+      transition-delay: 0.5s;
+    }
+
+    .reveal.visible .customer-avatar {
+      transform: scale(1);
+    }
+
+    .customer-info {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .customer-info strong {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-80);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .customer-info span {
+      font-size: 0.75rem;
+      color: var(--text-30);
+      font-family: 'SF Mono', 'Roboto Mono', 'Consolas', monospace;
+    }
+
+    .customer-orders {
+      flex-shrink: 0;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent-light);
+      white-space: nowrap;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .customer-row,
+      .customer-avatar {
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+
+
     /* ═══════════════════════════════════════
        FEATURES GRID
     ═══════════════════════════════════════ */
