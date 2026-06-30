@@ -2859,28 +2859,32 @@
       if (prefersReducedMotion) return;
 
       var widget = document.getElementById('ordersWidget');
-      var started = false;
+      var running = false;
+      var timer = null;
       function scheduleNext() {
         // Slightly randomized interval so new orders don't feel metronomic
         var delay = 1200 + Math.random() * 1000;
-        setTimeout(function () {
+        timer = setTimeout(function () {
           addOrder();
           scheduleNext();
         }, delay);
       }
       function start() {
-        if (started) return;
-        started = true;
+        if (running) return;
+        running = true;
         scheduleNext();
+      }
+      function stop() {
+        running = false;
+        if (timer) { clearTimeout(timer); timer = null; }
       }
 
       if ('IntersectionObserver' in window && widget) {
+        // Pause the feed (and its blurred/animated cards) while scrolled out
+        // of view — keeps it from repainting/compositing during scroll.
         var io = new IntersectionObserver(function (entries) {
           entries.forEach(function (e) {
-            if (e.isIntersecting) {
-              start();
-              io.unobserve(e.target);
-            }
+            if (e.isIntersecting) start(); else stop();
           });
         }, { threshold: 0.2 });
         io.observe(widget);
@@ -2924,12 +2928,11 @@
       }
 
       // Wait for initial reveal animation then start loop
-      var started = false;
+      var loopTimer = null;
       function startLoop() {
-        if (started) return;
-        started = true;
+        if (loopTimer) return;
         // already shown at state 2 on scroll-in, start cycling after 2.5s
-        setInterval(function () {
+        loopTimer = setInterval(function () {
           cur = (cur + 1) % 4;
           // brief "reset" pause when cycling from end back to 0
           if (cur === 0) {
@@ -2947,10 +2950,15 @@
           }
         }, 2500);
       }
+      function stopLoop() {
+        if (loopTimer) { clearInterval(loopTimer); loopTimer = null; }
+      }
 
       if ('IntersectionObserver' in window) {
+        // Pause cycling (and its node glow/box-shadow transitions) while
+        // scrolled out of view, so it isn't repainting during scroll.
         var io = new IntersectionObserver(function (entries) {
-          if (entries[0].isIntersecting) { startLoop(); io.disconnect(); }
+          if (entries[0].isIntersecting) startLoop(); else stopLoop();
         }, { threshold: 0.3 });
         io.observe(tw);
       } else {
@@ -2984,16 +2992,17 @@
       });
       wrap.addEventListener('mouseleave', () => { mouseIn = false; tx = 0; ty = 0; });
 
-      const allCards = wrap.querySelectorAll('.gc');
-      const depths = [];
-      allCards.forEach(el => {
-        const cs = getComputedStyle(el);
-        const m = cs.transform;
-        depths.push({ el, factor: el.classList.contains('gc-t1') ? 1.5 : el.classList.contains('gc-t3') ? 0.6 : 1 });
-      });
-
-      const floats = wrap.querySelectorAll('.gc-tr,.gc-bl,.gc-br');
-      let t = 0;
+      // The floating motion for .gc-tr/.gc-bl/.gc-br is a CSS animation
+      // (see gc-float-* keyframes) rather than a per-frame JS-driven
+      // inline transform — the latter, combined with backdrop-filter on
+      // those cards, was causing Chrome on Android to intermittently fail
+      // to paint the cards' content for a frame ("blipping").
+      //
+      // The tilt rAF loop below only ever touches #hscene's own transform
+      // (a single, non-blurred element), so it's comparatively cheap —
+      // but it's still gated to only run while the hero is visible so it
+      // doesn't keep competing for GPU frame budget while scrolled away.
+      let heroVisible = true;
 
       function tick() {
         if (!rm) {
@@ -3002,16 +3011,8 @@
           cx = Math.max(-MAX_ROT_Y, Math.min(MAX_ROT_Y, cx));
           cy = Math.max(-MAX_ROT_X, Math.min(MAX_ROT_X, cy));
           sc.style.transform = `rotateX(${cy}deg) rotateY(${cx}deg)`;
-
-          t += 0.014;
-          floats.forEach((el, i) => {
-            const dy = Math.sin(t + i * 1.5) * 7;
-            const dx = Math.cos(t * 0.6 + i * 2.2) * 4;
-            el.style.setProperty('--float-x', dx + 'px');
-            el.style.setProperty('--float-y', dy + 'px');
-          });
         }
-        requestAnimationFrame(tick);
+        if (heroVisible) requestAnimationFrame(tick);
       }
 
       let idleT = 0;
@@ -3021,7 +3022,18 @@
           tx = Math.sin(idleT * 0.5) * 5;
           ty = Math.cos(idleT * 0.35) * 3;
         }
+        if (heroVisible) requestAnimationFrame(idleTick);
+      }
+
+      function startHeroLoops() {
+        if (heroVisible) return;
+        heroVisible = true;
+        requestAnimationFrame(tick);
         requestAnimationFrame(idleTick);
+        if (!rm) requestAnimationFrame(drawParticles);
+      }
+      function stopHeroLoops() {
+        heroVisible = false;
       }
 
       requestAnimationFrame(tick);
@@ -3086,9 +3098,16 @@
           ctx.fillStyle = g;
           ctx.fill();
         });
-        requestAnimationFrame(drawParticles);
+        if (heroVisible) requestAnimationFrame(drawParticles);
       }
       if (!rm) requestAnimationFrame(drawParticles);
+
+      if ('IntersectionObserver' in window) {
+        const heroIo = new IntersectionObserver(entries => {
+          if (entries[0].isIntersecting) startHeroLoops(); else stopHeroLoops();
+        }, { threshold: 0 });
+        heroIo.observe(wrap);
+      }
     })();
   </script>
 

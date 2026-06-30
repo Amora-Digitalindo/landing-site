@@ -26,7 +26,7 @@
       width: 65vw;
       height: 65vw;
       background: radial-gradient(ellipse, rgba(8, 22, 55, 0.651) 0%, transparent 68%);
-      filter: blur(90px);
+      filter: blur(45px);
     }
 
     /* Top-right — forest green glow */
@@ -36,7 +36,7 @@
       width: 55vw;
       height: 55vw;
       background: radial-gradient(ellipse, rgba(25, 65, 40, 0.55) 0%, transparent 68%);
-      filter: blur(100px);
+      filter: blur(50px);
     }
 
     /* Center — main ambient bloom */
@@ -46,7 +46,7 @@
       width: 70vw;
       height: 60vw;
       background: radial-gradient(ellipse, rgba(15, 40, 25, 0.4) 0%, transparent 65%);
-      filter: blur(120px);
+      filter: blur(55px);
     }
 
     /* Center-right — accent green pulse */
@@ -56,7 +56,7 @@
       width: 40vw;
       height: 40vw;
       background: radial-gradient(ellipse, rgba(107, 142, 90, 0.1) 0%, transparent 65%);
-      filter: blur(80px);
+      filter: blur(40px);
     }
 
     /* Bottom-left — deep teal */
@@ -66,7 +66,7 @@
       width: 50vw;
       height: 50vw;
       background: radial-gradient(ellipse, rgba(10, 35, 30, 0.6) 0%, transparent 68%);
-      filter: blur(100px);
+      filter: blur(50px);
     }
 
     /* Bottom-right — navy fade */
@@ -76,7 +76,7 @@
       width: 50vw;
       height: 50vw;
       background: radial-gradient(ellipse, rgba(10, 18, 45, 0.6) 0%, transparent 68%);
-      filter: blur(90px);
+      filter: blur(45px);
     }
 
     /* Center bloom — stronger ambient behind hero mockup */
@@ -88,7 +88,7 @@
       width: 80vw;
       height: 60vw;
       background: radial-gradient(ellipse, rgba(107, 142, 90, 0.09) 0%, transparent 60%);
-      filter: blur(80px);
+      filter: blur(40px);
       border-radius: 50%;
       pointer-events: none;
     }
@@ -145,7 +145,7 @@
       width: 55vw;
       height: 55vw;
       background: radial-gradient(ellipse, rgba(56, 140, 120, 0.22) 0%, transparent 65%);
-      filter: blur(110px);
+      filter: blur(50px);
       border-radius: 50%;
       pointer-events: none;
       animation: orb-drift-3 32s ease-in-out infinite alternate;
@@ -158,10 +158,29 @@
       width: 50vw;
       height: 50vw;
       background: radial-gradient(ellipse, rgba(80, 140, 90, 0.18) 0%, transparent 65%);
-      filter: blur(100px);
+      filter: blur(50px);
       border-radius: 50%;
       pointer-events: none;
       animation: orb-drift-2 38s ease-in-out infinite alternate;
+    }
+
+    /* This fixed full-viewport background holds 9 large blurred orbs that
+       (pre-fix) ran a perpetual transform/scale animation forever, on every
+       screen, regardless of scroll position — by far the most GPU-expensive
+       continuously-active thing on the page. Frozen on mobile entirely;
+       desktop keeps the subtle drift. */
+    @media (max-width: 900px) {
+
+      .pg-orb-1,
+      .pg-orb-2,
+      .pg-orb-3,
+      .pg-orb-4,
+      .pg-orb-5,
+      .pg-orb-6,
+      .pg-orb-mid,
+      .pg-orb-mid2 {
+        animation: none;
+      }
     }
 
     @keyframes orb-drift-1 {
@@ -373,10 +392,8 @@
     .reveal {
       opacity: 0;
       transform: translateY(32px);
-      filter: blur(4px);
       transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-        filter 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .reveal:not(.visible) {
@@ -387,7 +404,6 @@
       to {
         opacity: 1;
         transform: none;
-        filter: blur(0);
       }
     }
 
@@ -406,7 +422,6 @@
     .reveal.visible {
       opacity: 1;
       transform: none;
-      filter: blur(0);
     }
 
     .reveal.delay-1 {
@@ -1188,8 +1203,8 @@
       transition: box-shadow 0.45s ease, border-color 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
       background: rgba(10, 20, 14, 0.80);
       border: 1px solid rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(48px) saturate(2) brightness(1.08);
-      -webkit-backdrop-filter: blur(48px) saturate(2) brightness(1.08);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       box-shadow:
         0 0 0 1px rgba(100, 210, 180, 0.1),
         0 8px 36px rgba(0, 0, 0, 0.42),
@@ -1198,15 +1213,22 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.12);
     }
 
-    .gc:hover {
-      border-color: rgba(100, 210, 180, 0.4);
-      box-shadow:
-        0 0 0 1px rgba(100, 210, 180, 0.22),
-        0 0 28px rgba(80, 200, 170, 0.2),
-        0 12px 48px rgba(0, 0, 0, 0.45),
-        0 28px 70px -8px rgba(0, 0, 0, 0.6),
-        0 48px 90px -20px rgba(0, 0, 0, 0.38),
-        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    /* Hover-only effects (box-shadow/background swaps) are scoped to real
+       pointer-hover devices. These cards are decorative (aria-hidden) and
+       on touch devices a tap can stick the :hover state, which fired an
+       animated box-shadow change on a backdrop-filter element and caused
+       the same paint-glitch ("blip") tap-triggered as on scroll. */
+    @media (hover: hover) and (pointer: fine) {
+      .gc:hover {
+        border-color: rgba(100, 210, 180, 0.4);
+        box-shadow:
+          0 0 0 1px rgba(100, 210, 180, 0.22),
+          0 0 28px rgba(80, 200, 170, 0.2),
+          0 12px 48px rgba(0, 0, 0, 0.45),
+          0 28px 70px -8px rgba(0, 0, 0, 0.6),
+          0 48px 90px -20px rgba(0, 0, 0, 0.38),
+          inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      }
     }
 
     /* glass specular highlight + scan lines */
@@ -1240,31 +1262,21 @@
       transition: opacity 0.4s ease;
     }
 
-    .gc:hover::before {
-      background: linear-gradient(90deg, transparent, rgba(100, 220, 185, 0.95), transparent);
+    @media (hover: hover) and (pointer: fine) {
+      .gc:hover::before {
+        background: linear-gradient(90deg, transparent, rgba(100, 220, 185, 0.95), transparent);
+      }
     }
 
-    @keyframes gcGlowBreath {
+    @keyframes gcGlowOpacity {
 
       0%,
       100% {
-        box-shadow:
-          0 0 0 1px rgba(80, 210, 180, 0.18),
-          0 0 30px rgba(60, 190, 165, 0.20),
-          0 10px 44px rgba(0, 0, 0, 0.35),
-          0 24px 60px -8px rgba(0, 0, 0, 0.55),
-          0 40px 80px -20px rgba(0, 0, 0, 0.35),
-          inset 0 1px 0 rgba(255, 255, 255, 0.18);
+        opacity: 0.55;
       }
 
       50% {
-        box-shadow:
-          0 0 0 1px rgba(80, 210, 180, 0.55),
-          0 0 70px rgba(60, 190, 165, 0.55),
-          0 0 120px rgba(60, 190, 165, 0.20),
-          0 12px 52px rgba(0, 0, 0, 0.38),
-          0 28px 70px -8px rgba(0, 0, 0, 0.58),
-          inset 0 1px 0 rgba(255, 255, 255, 0.28);
+        opacity: 1;
       }
     }
 
@@ -1290,13 +1302,34 @@
     .gc-t1 {
       background: rgba(12, 30, 26, 0.82);
       border-color: rgba(100, 210, 180, 0.28);
-      animation: gcGlowBreath 5s ease-in-out infinite;
+      box-shadow:
+        0 0 0 1px rgba(80, 210, 180, 0.18),
+        0 0 30px rgba(60, 190, 165, 0.20),
+        0 10px 44px rgba(0, 0, 0, 0.35),
+        0 24px 60px -8px rgba(0, 0, 0, 0.55),
+        0 40px 80px -20px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
     }
 
-    .gc-t1:hover {
-      background: rgba(12, 30, 26, 0.90);
-      border-color: rgba(80, 220, 190, 0.45);
-      animation-play-state: paused;
+    /* Glow "breathes" via opacity on the specular overlay (composite-only)
+       instead of animating box-shadow on a backdrop-filter element, which
+       forces a repaint of the blurred layer every frame and was causing
+       the content inside these cards to intermittently fail to paint on
+       Android Chrome. */
+    .gc-t1::after {
+      animation: gcGlowOpacity 5s ease-in-out infinite;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .gc-t1:hover {
+        background: rgba(12, 30, 26, 0.90);
+        border-color: rgba(80, 220, 190, 0.45);
+        animation-play-state: paused;
+      }
+
+      .gc-t1:hover::after {
+        animation-play-state: paused;
+      }
     }
 
     .gc-t1::before {
@@ -1315,9 +1348,11 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
-    .gc-t2:hover {
-      background: rgba(11, 22, 15, 0.90);
-      border-color: rgba(100, 200, 150, 0.3);
+    @media (hover: hover) and (pointer: fine) {
+      .gc-t2:hover {
+        background: rgba(11, 22, 15, 0.90);
+        border-color: rgba(100, 200, 150, 0.3);
+      }
     }
 
     /* T3 DEEP — back panels */
@@ -1330,9 +1365,11 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.07);
     }
 
-    .gc-t3:hover {
-      background: rgba(9, 14, 20, 0.90);
-      border-color: rgba(70, 155, 170, 0.28);
+    @media (hover: hover) and (pointer: fine) {
+      .gc-t3:hover {
+        background: rgba(9, 14, 20, 0.90);
+        border-color: rgba(70, 155, 170, 0.28);
+      }
     }
 
     .gc-t3::before {
@@ -1527,13 +1564,17 @@
       transform: translateZ(-22px) rotateY(-14deg) scale(0.97);
     }
 
+    /* Floating motion below is a CSS animation rather than a JS rAF loop
+       writing inline transforms every frame — the latter, combined with
+       backdrop-filter on these cards, was causing Chrome on Android to
+       intermittently fail to paint the card's content for a frame. */
     .gc-tr {
       width: 29%;
       right: 3%;
       top: 2%;
       height: 17%;
       z-index: 5;
-      transform: translateZ(32px) rotateY(-5deg) translate(var(--float-x, 0), var(--float-y, 0));
+      animation: gc-float-tr 7.5s ease-in-out infinite;
     }
 
     .gc-bl {
@@ -1542,7 +1583,8 @@
       bottom: 3%;
       height: 17%;
       z-index: 5;
-      transform: translateZ(28px) rotateY(9deg) translate(var(--float-x, 0), var(--float-y, 0));
+      animation: gc-float-bl 8.5s ease-in-out infinite;
+      animation-delay: -2.8s;
     }
 
     .gc-br {
@@ -1551,7 +1593,53 @@
       bottom: 1%;
       height: 21%;
       z-index: 5;
-      transform: translateZ(30px) rotateY(-6deg) translate(var(--float-x, 0), var(--float-y, 0));
+      animation: gc-float-br 9.5s ease-in-out infinite;
+      animation-delay: -5.6s;
+    }
+
+    @keyframes gc-float-tr {
+
+      0%,
+      100% {
+        transform: translateZ(32px) rotateY(-5deg) translate(0, 0);
+      }
+
+      50% {
+        transform: translateZ(32px) rotateY(-5deg) translate(-4px, -7px);
+      }
+    }
+
+    @keyframes gc-float-bl {
+
+      0%,
+      100% {
+        transform: translateZ(28px) rotateY(9deg) translate(0, 0);
+      }
+
+      50% {
+        transform: translateZ(28px) rotateY(9deg) translate(4px, 7px);
+      }
+    }
+
+    @keyframes gc-float-br {
+
+      0%,
+      100% {
+        transform: translateZ(30px) rotateY(-6deg) translate(0, 0);
+      }
+
+      50% {
+        transform: translateZ(30px) rotateY(-6deg) translate(-3px, 7px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .gc-tr,
+      .gc-bl,
+      .gc-br {
+        animation: none;
+      }
     }
 
     /* inner layout */
@@ -1579,6 +1667,69 @@
     }
 
     @media (max-width: 900px) {
+      /* backdrop-filter dropped entirely on mobile for these cards — even at
+         a light blur radius, backdrop-filter nested inside a 3D-transformed
+         parent intermittently fails to paint its content on Android Chrome
+         (confirmed via screenshots: card background renders, text doesn't,
+         alternating frame to frame). Solid background instead — no blur,
+         no glitch. Bumped opacity slightly to compensate visually for the
+         lost frosted-glass depth. Desktop keeps the blur.  */
+      .bento-widget {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background: linear-gradient(145deg, rgba(16, 42, 28, 0.99) 0%, rgba(6, 10, 18, 0.99) 100%);
+      }
+
+      .order-card {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background: linear-gradient(135deg, rgba(80, 200, 170, 0.10) 0%, rgba(6, 10, 18, 0.97) 100%);
+      }
+
+      .order-card.just-in {
+        animation: order-card-flash-mobile 2.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+
+      .gc {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background: rgba(9, 18, 13, 0.97);
+      }
+
+      .gc-t1 {
+        background: rgba(11, 27, 23, 0.97);
+      }
+
+      .gc-t2 {
+        background: linear-gradient(145deg, rgba(15, 33, 20, 0.97) 0%, rgba(6, 10, 18, 0.98) 100%);
+      }
+
+      .gc-t3 {
+        background: linear-gradient(145deg, rgba(11, 24, 17, 0.97) 0%, rgba(6, 10, 18, 0.97) 100%);
+      }
+    }
+
+    @keyframes order-card-flash-mobile {
+      0% {
+        background: rgba(60, 200, 150, 0.28);
+        border-color: rgba(60, 200, 150, 0.7);
+        transform: scale(1.015);
+      }
+
+      15% {
+        background: rgba(60, 200, 150, 0.18);
+        border-color: rgba(60, 200, 150, 0.4);
+        transform: scale(1);
+      }
+
+      100% {
+        background: rgba(255, 255, 255, 0.03);
+        border-color: rgba(255, 255, 255, 0.06);
+        transform: scale(1);
+      }
+    }
+
+    @media (max-width: 900px) {
       .hero-canvas-wrap {
         max-width: 320px;
         margin: 0 auto;
@@ -1598,12 +1749,17 @@
         height: 82%;
       }
 
+      /* animation: none so the flattened transform below actually applies —
+         a running animation targeting `transform` overrides any static
+         transform declaration regardless of specificity. Floating motion
+         is a desktop-only flourish anyway. */
       .gc-tr {
         width: 36%;
         right: -2%;
         top: -2%;
         height: 14%;
         display: flex;
+        animation: none;
       }
 
       .gc-bl {
@@ -1613,6 +1769,7 @@
         bottom: 5%;
         height: auto;
         min-height: 44px;
+        animation: none;
         transform: translateZ(0) rotateY(0);
       }
 
@@ -1623,6 +1780,7 @@
         bottom: 2%;
         height: auto;
         min-height: 44px;
+        animation: none;
         transform: translateZ(0) rotateY(0);
       }
 
@@ -1939,7 +2097,6 @@
         0 4px 16px rgba(0, 0, 0, 0.3),
         0 0 0 1px rgba(0, 0, 0, 0.15);
       overflow: hidden;
-      will-change: transform;
       transform-origin: center center;
       transition: box-shadow 0.4s ease, border-color 0.4s ease;
     }
@@ -2474,15 +2631,17 @@
       pointer-events: none;
     }
 
-    .feature-card:hover {
-      transform: translateY(-6px) scale(1.01);
-      border-color: rgba(107, 142, 90, 0.2);
-      border-top-color: rgba(107, 142, 90, 0.5);
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.08),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.2),
-        0 20px 56px rgba(0, 0, 0, 0.6),
-        0 0 40px rgba(107, 142, 90, 0.1);
+    @media (hover: hover) and (pointer: fine) {
+      .feature-card:hover {
+        transform: translateY(-6px) scale(1.01);
+        border-color: rgba(107, 142, 90, 0.2);
+        border-top-color: rgba(107, 142, 90, 0.5);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.08),
+          inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+          0 20px 56px rgba(0, 0, 0, 0.6),
+          0 0 40px rgba(107, 142, 90, 0.1);
+      }
     }
 
     .feature-card-icon {
@@ -2534,10 +2693,17 @@
       transition: box-shadow 0.4s ease, border-color 0.4s ease;
     }
 
-    .feature-mockup:hover,
-    .bento-widget:hover {
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 30px rgba(80, 200, 170, 0.1);
-      border-color: rgba(100, 210, 180, 0.2);
+    /* Scoped to real pointer-hover devices — on touch, a tap can stick this
+       :hover state and fire the animated box-shadow transition on a
+       backdrop-filter element, causing the same paint glitch as the .gc
+       card hover did. */
+    @media (hover: hover) and (pointer: fine) {
+
+      .feature-mockup:hover,
+      .bento-widget:hover {
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 30px rgba(80, 200, 170, 0.1);
+        border-color: rgba(100, 210, 180, 0.2);
+      }
     }
 
     .bento-chrome {
@@ -6087,12 +6253,17 @@
       animation: shimmer-auto 0.6s ease-in-out forwards;
     }
 
-    /* PRO card hover glow — deepens on hover */
-    .plan-card-wrapper:hover .plan-card-pro {
-      box-shadow:
-        0 0 0 1px rgba(107, 142, 90, 0.1),
-        0 28px 72px rgba(0, 0, 0, 0.65),
-        0 0 120px rgba(107, 142, 90, 0.25);
+    /* PRO card hover glow — deepens on hover. Scoped to real pointer-hover
+       devices: on touch a tap can stick :hover and fire this animated
+       box-shadow transition on a backdrop-filter element, causing the
+       same paint glitch seen on the hero cards. */
+    @media (hover: hover) and (pointer: fine) {
+      .plan-card-wrapper:hover .plan-card-pro {
+        box-shadow:
+          0 0 0 1px rgba(107, 142, 90, 0.1),
+          0 28px 72px rgba(0, 0, 0, 0.65),
+          0 0 120px rgba(107, 142, 90, 0.25);
+      }
     }
 
     .plan-discount-badge {
