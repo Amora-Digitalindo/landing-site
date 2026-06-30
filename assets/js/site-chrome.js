@@ -163,7 +163,7 @@
       '          </li>' +
       '          <li class="footer-contact-item">' +
       '            <svg data-icon viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.58 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l1.32-1.32a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>' +
-      '            <a href="tel:+6285117208085">0851 1720 8085</a>' +
+      '            <a href="https://wa.me/6285117208085" target="_blank" rel="noopener">0851 1720 8085</a>' +
       '          </li>' +
       '          <li class="footer-social">' +
       '            <a href="https://www.instagram.com/amora.commerce" target="_blank" rel="noopener" aria-label="Instagram"><svg data-icon viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" /></svg></a>' +
