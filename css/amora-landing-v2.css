@@ -498,7 +498,7 @@
       width: 100%;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 28px;
+      padding: 0 48px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -509,6 +509,12 @@
         border-color 0.4s ease,
         box-shadow 0.4s ease,
         padding 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @media (max-width: 900px) {
+      .nav-inner {
+        padding: 0 28px;
+      }
     }
 
     nav.scrolled .nav-inner {
@@ -816,7 +822,13 @@
     .section-inner {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 28px;
+      padding: 0 48px;
+    }
+
+    @media (max-width: 900px) {
+      .section-inner {
+        padding: 0 28px;
+      }
     }
 
     .py-section {
@@ -1922,6 +1934,14 @@
       align-items: center;
     }
 
+    /* Grid items default to min-width:auto (their content's min-content size),
+       which can force a percentage track wider than intended and overflow into
+       the section padding. Let them actually shrink to their track size. */
+    .feature-grid>.feature-text,
+    .feature-grid>.feature-image {
+      min-width: 0;
+    }
+
     @media (max-width: 1023px) {
 
       /* On single-column layout, cap widget width and center it */
@@ -1935,11 +1955,11 @@
 
     @media (min-width: 1024px) {
       .feature-grid.margin-grid {
-        grid-template-columns: 52% 48%;
+        grid-template-columns: 13fr 12fr;
       }
 
       .feature-grid.setup-grid {
-        grid-template-columns: 48% 52%;
+        grid-template-columns: 12fr 13fr;
       }
     }
 
@@ -6971,7 +6991,31 @@
       font-size: 0.8125rem;
       font-weight: 600;
       color: var(--accent-light);
-      margin-bottom: 28px;
+      margin-bottom: 20px;
+    }
+
+    .plan-highlights {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .plan-highlights li {
+      font-size: 0.8125rem;
+      color: var(--text-60);
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .plan-highlights li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--accent-light);
+      font-weight: 700;
     }
 
     .plan-cta {
@@ -7456,21 +7500,21 @@
       }
 
       .cta-banner-actions {
-        flex-wrap: nowrap;
-        gap: 8px;
+        flex-wrap: wrap;
+        gap: 10px;
       }
 
       .cta-banner-actions .btn-primary {
-        flex: 1.6;
-        padding: 13px 16px;
+        flex: 1 1 auto;
+        padding: 13px 20px;
         font-size: 0.875rem;
         justify-content: center;
         white-space: nowrap;
       }
 
       .cta-banner-actions .btn-ghost {
-        flex: 1;
-        padding: 13px 12px;
+        flex: 1 1 auto;
+        padding: 13px 20px;
         font-size: 0.875rem;
         justify-content: center;
         white-space: nowrap;
@@ -7630,7 +7674,13 @@
     .footer-inner {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 72px 28px 36px;
+      padding: 72px 48px 36px;
+    }
+
+    @media (max-width: 900px) {
+      .footer-inner {
+        padding: 72px 28px 36px;
+      }
     }
 
     .footer-grid {
