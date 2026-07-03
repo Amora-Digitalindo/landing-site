@@ -132,22 +132,14 @@
       '      <div class="footer-brand">' +
       '        <img src="' + ROOT + 'assets/logo.png" alt="Amora.id">' +
       '        <p>Solusi Website Jualan untuk Bisnis Modern Indonesia</p>' +
-      '        <small>© 2026 Amora.id. Hak cipta dilindungi.</small>' +
       '      </div>' +
       '      <div class="footer-col">' +
       '        <h4>Amora.id</h4>' +
       '        <ul>' +
-      '          <li><a href="' + homeLink() + '">About Amora</a></li>' +
       '          <li><a href="' + sectionLink('fitur') + '">Fitur</a></li>' +
+      '          <li><a href="' + sectionLink('vip-program') + '">VIP Merchant</a></li>' +
       '          <li><a href="' + sectionLink('harga') + '">Harga</a></li>' +
       '          <li><a href="' + sectionLink('faq') + '">FAQ</a></li>' +
-      '        </ul>' +
-      '      </div>' +
-      '      <div class="footer-col">' +
-      '        <h4>Panduan</h4>' +
-      '        <ul>' +
-      '          <li><a href="' + ROOT + 'syarat.html">Syarat &amp; Ketentuan</a></li>' +
-      '          <li><a href="' + ROOT + 'privasi.html">Kebijakan Privasi</a></li>' +
       '        </ul>' +
       '      </div>' +
       '      <div class="footer-col">' +
@@ -170,6 +162,13 @@
       '            <a href="https://www.threads.com/@amora.commerce" target="_blank" rel="noopener" aria-label="Threads"><svg viewBox="0 0 440 511.43" fill="currentColor"><path fill-rule="nonzero" d="' + THREADS_PATH + '" /></svg></a>' +
       '          </li>' +
       '        </ul>' +
+      '      </div>' +
+      '    </div>' +
+      '    <div class="footer-bottom">' +
+      '      <p>© 2026 Amora.id. Hak cipta dilindungi.</p>' +
+      '      <div class="footer-legal-links">' +
+      '        <a href="' + ROOT + 'syarat.html">Syarat &amp; Ketentuan</a>' +
+      '        <a href="' + ROOT + 'privasi.html">Kebijakan Privasi</a>' +
       '      </div>' +
       '    </div>' +
       '  </div>' +
