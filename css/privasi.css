@@ -238,26 +238,4 @@
     .legal-section a:hover { color: var(--text-80); }
     .legal-section strong { color: var(--text-80); }
 
-    footer { background: rgba(15,15,23,0.96) !important; backdrop-filter: blur(24px); border-top: 1px solid var(--border); margin-top: 80px; position: relative; }
-    footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(107,142,90,0.5), transparent); }
-    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 72px 28px 36px; }
-    .footer-grid { display: grid; grid-template-columns: 1fr; gap: 48px 64px; }
-    @media (min-width: 768px)  { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (min-width: 1024px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1.5fr; } }
-    .footer-brand img { height: 30px; width: auto; margin-bottom: 14px; filter: brightness(0) invert(1); }
-    .footer-brand p { font-size: 0.875rem; color: var(--text-60); line-height: 1.65; margin-bottom: 20px; max-width: 255px; }
-    .footer-brand small { font-size: 0.75rem; color: var(--text-30); }
-    .footer-col h4 { font-family: var(--font-display); font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-40); margin-bottom: 18px; }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
-    .footer-col ul a { font-size: 0.875rem; color: var(--text-60); transition: color 0.2s; }
-    .footer-col ul a:hover { color: var(--text); }
-    .footer-contact-item { display: flex; align-items: center; gap: 10px; }
-    .footer-contact-item svg { width: 15px; height: 15px; color: var(--text-40); flex-shrink: 0; }
-    .footer-contact-item a { font-size: 0.875rem; color: var(--text-60); transition: color 0.2s; }
-    .footer-contact-item a:hover { color: var(--text); }
-    .footer-social { display: flex; gap: 8px; padding-top: 4px; }
-    .footer-social a { color: var(--text-40); width: 36px; height: 36px; border-radius: var(--r-md); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s; }
-    .footer-social a:hover { color: var(--accent-light); border-color: var(--accent-border); background: var(--accent-dim); transform: scale(1.1); box-shadow: 0 0 12px rgba(107,142,90,0.2); }
-    .footer-social svg { width: 16px; height: 16px; }
-
     svg[data-icon] { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
