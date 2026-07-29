@@ -113,8 +113,8 @@
       '      <a href="https://admin.amora.id/" class="filled">Buat Toko</a>' +
       '    </div>' +
       '    <div class="mobile-legal">' +
-      '      <a href="' + ROOT + 'syarat.html">Syarat &amp; Ketentuan</a>' +
-      '      <a href="' + ROOT + 'privasi.html">Kebijakan Privasi</a>' +
+      '      <a href="https://amora.id/syarat-ketentuan">Syarat &amp; Ketentuan</a>' +
+      '      <a href="https://amora.id/kebijakan-privasi">Kebijakan Privasi</a>' +
       '    </div>' +
       '  </div>' +
       '</div>'
@@ -167,8 +167,8 @@
       '    <div class="footer-bottom">' +
       '      <p>© 2026 Amora.id. Hak cipta dilindungi.</p>' +
       '      <div class="footer-legal-links">' +
-      '        <a href="' + ROOT + 'syarat.html">Syarat &amp; Ketentuan</a>' +
-      '        <a href="' + ROOT + 'privasi.html">Kebijakan Privasi</a>' +
+      '        <a href="https://amora.id/syarat-ketentuan">Syarat &amp; Ketentuan</a>' +
+      '        <a href="https://amora.id/kebijakan-privasi">Kebijakan Privasi</a>' +
       '      </div>' +
       '    </div>' +
       '  </div>' +
