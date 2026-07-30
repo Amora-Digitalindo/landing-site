@@ -6987,6 +6987,443 @@
       }
     }
 
+    /* ══════ VIP REGISTRATION FORM — merged from the former standalone
+       /vip-merchant-registration/ page. Widens .vip-panel into a two-column
+       split: pitch (left) + live registration form (right). ══════ */
+
+    .vip-panel-split {
+      max-width: 1040px;
+      text-align: left;
+      padding: 44px 48px;
+    }
+
+    .vip-split {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    @media (min-width: 1024px) {
+      .vip-split {
+        grid-template-columns: 1fr 1.05fr;
+        gap: 8px;
+      }
+    }
+
+    .vip-pitch {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .vip-pitch .vip-identity {
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .vip-pitch .vip-identity-badge {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+    }
+
+    .vip-pitch .vip-slot-badge {
+      margin-bottom: 20px;
+    }
+
+    .vip-slot-bar {
+      width: 100%;
+      height: 6px;
+      border-radius: var(--r-full);
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+      margin: -10px 0 22px;
+    }
+
+    .vip-slot-fill {
+      height: 100%;
+      border-radius: var(--r-full);
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      width: 0%;
+      transition: width 0.6s ease;
+    }
+
+    .vip-pitch .vip-benefits,
+    .vip-pitch .vip-price-info,
+    .vip-pitch .vip-validity {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .vip-form-side {
+      width: 100%;
+      padding-top: 32px;
+      border-top: 1px solid var(--border-mid);
+    }
+
+    @media (min-width: 1024px) {
+      .vip-form-side {
+        padding-top: 0;
+        padding-left: 40px;
+        border-top: none;
+        border-left: 1px solid var(--border-mid);
+      }
+    }
+
+    .vip-form-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .vip-form-subtitle {
+      font-size: 0.875rem;
+      color: var(--text-60);
+      margin-bottom: 24px;
+    }
+
+    .vip-field {
+      margin-bottom: 18px;
+    }
+
+    .vip-field label {
+      display: block;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 7px;
+    }
+
+    .vip-field input[type="text"],
+    .vip-field input[type="tel"],
+    .vip-field input[type="email"] {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 0.9375rem;
+      font-family: var(--font-body);
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--r-md);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .vip-field input::placeholder {
+      color: var(--text-35);
+    }
+
+    .vip-field input:focus {
+      border-color: var(--accent-border);
+      box-shadow: 0 0 0 3px var(--accent-dim);
+    }
+
+    .vip-field input.error {
+      border-color: var(--danger);
+      box-shadow: 0 0 0 3px var(--danger-dim);
+    }
+
+    .vip-field-hint {
+      font-size: 0.75rem;
+      color: var(--text-35);
+      margin-top: 6px;
+    }
+
+    .vip-field-error {
+      font-size: 0.75rem;
+      color: var(--danger);
+      margin-top: 6px;
+      display: none;
+    }
+
+    .vip-field-error.show {
+      display: block;
+    }
+
+    .vip-wa-wrap {
+      display: flex;
+      align-items: stretch;
+    }
+
+    .vip-wa-prefix {
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--text-70);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-strong);
+      border-right: none;
+      border-radius: var(--r-md) 0 0 var(--r-md);
+    }
+
+    .vip-wa-wrap input {
+      border-radius: 0 var(--r-md) var(--r-md) 0 !important;
+    }
+
+    .vip-checkbox-field {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 22px;
+      padding: 14px;
+      border-radius: var(--r-md);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+    }
+
+    .vip-checkbox-field.error {
+      border-color: var(--danger);
+      box-shadow: 0 0 0 3px var(--danger-dim);
+    }
+
+    .vip-checkbox-field input[type="checkbox"] {
+      margin-top: 2px;
+      width: 17px;
+      height: 17px;
+      accent-color: var(--accent);
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .vip-checkbox-field label {
+      font-size: 0.8125rem;
+      color: var(--text-70);
+      line-height: 1.5;
+      cursor: pointer;
+    }
+
+    .vip-hp-field {
+      position: absolute;
+      left: -9999px;
+      top: -9999px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .vip-submit-btn {
+      width: 100%;
+      justify-content: center;
+      padding: 14px;
+      font-size: 0.9375rem;
+      border: none;
+      border-radius: var(--r-full);
+      cursor: pointer;
+    }
+
+    .vip-submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .vip-secondary-link {
+      display: block;
+      text-align: center;
+      width: 100%;
+      padding: 12px;
+      margin-top: 12px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--text-70);
+      text-decoration: none;
+      border-radius: var(--r-md);
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .vip-secondary-link:hover {
+      color: var(--accent-light);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .vip-footnote {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-35);
+      margin-top: 18px;
+    }
+
+    .vip-footnote a {
+      color: var(--text-35);
+      text-decoration: underline;
+    }
+
+    /* ── Full-slot / submitted states (swap in for .vip-form inside .vip-form-side) ── */
+    .vip-state {
+      text-align: center;
+    }
+
+    .vip-state-icon {
+      position: relative;
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: var(--elevated);
+      border: 1px solid var(--border-mid);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .vip-state-icon svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .vip-state-icon-success {
+      color: var(--accent-light);
+      border-color: var(--accent-border);
+    }
+
+    .vip-state-icon-warning {
+      color: #E8A23D;
+      border-color: rgba(232, 162, 61, 0.35);
+    }
+
+    .vip-state h3 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .vip-state p {
+      font-size: 0.9375rem;
+      color: var(--text-70);
+      margin-bottom: 24px;
+    }
+
+    /* ── Success / error feedback modals ── */
+    .vip-modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      animation: vip-modal-fade-in 0.2s ease;
+    }
+
+    .vip-modal-card {
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      padding: 36px 32px;
+      border-radius: var(--r-2xl);
+      background: var(--card);
+      border: 1px solid var(--border-mid);
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.04);
+      animation: vip-modal-pop-in 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes vip-modal-fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes vip-modal-pop-in {
+      from { opacity: 0; transform: scale(0.94) translateY(8px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .vip-modal-card.vip-state-icon-success {
+      background: radial-gradient(ellipse 140% 60% at 50% -10%, rgba(107, 142, 90, 0.16) 0%, transparent 60%), var(--card);
+    }
+
+    .vip-modal-card.vip-state-icon-error {
+      background: radial-gradient(ellipse 140% 60% at 50% -10%, rgba(224, 88, 79, 0.14) 0%, transparent 60%), var(--card);
+    }
+
+    .vip-modal-icon-error {
+      color: var(--danger);
+      border-color: rgba(224, 88, 79, 0.35);
+    }
+
+    .vip-modal-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .vip-modal-card p {
+      font-size: 0.9375rem;
+      color: var(--text-70);
+      margin-bottom: 24px;
+    }
+
+    .vip-steps {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .vip-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .vip-step-num {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-border);
+      color: var(--accent-light);
+      font-size: 0.75rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .vip-step span {
+      font-size: 0.875rem;
+      color: var(--text-70);
+      line-height: 1.5;
+      padding-top: 2px;
+    }
+
+    .vip-error-box {
+      text-align: left;
+      font-size: 0.875rem;
+      color: var(--text);
+      background: var(--danger-dim);
+      border: 1px solid rgba(224, 88, 79, 0.35);
+      border-radius: var(--r-md);
+      padding: 14px 16px;
+      margin-bottom: 20px;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    /* Hide the reCAPTCHA v3 floating badge icon — Google's ToS requires keeping
+       the "protected by reCAPTCHA" disclosure visible elsewhere (see .vip-footnote). */
+    .grecaptcha-badge {
+      visibility: hidden;
+    }
+
+    @media (max-width: 600px) {
+      .vip-panel-split {
+        padding: 32px 24px;
+      }
+    }
+
     .plan-saving {
       font-size: 0.8125rem;
       font-weight: 600;

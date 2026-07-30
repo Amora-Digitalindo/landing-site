@@ -1768,65 +1768,200 @@
         <h2>Daftar Sekarang, Jadi<br><span class="accent">VIP Merchant.</span></h2>
       </div>
 
-      <div class="vip-panel reveal delay-1">
+      <div class="vip-panel vip-panel-split reveal delay-1">
         <div class="vip-panel-glow" aria-hidden="true"></div>
 
-        <!-- Identity -->
-        <div class="vip-identity">
-          <img src="assets/vip-merchant-badge.png" alt="VIP Merchant Badge" width="52" height="52"
-            class="vip-identity-badge">
-          <div class="vip-identity-title">Jadi VIP Merchant</div>
-          <div class="vip-slot-badge">Terbatas hanya 30 slot VIP Merchant</div>
+        <div class="vip-split">
+
+          <!-- ══════ PITCH COLUMN ══════ -->
+          <div class="vip-pitch">
+
+            <div class="vip-identity">
+              <img src="assets/vip-merchant-badge.png" alt="VIP Merchant Badge" width="44" height="44"
+                class="vip-identity-badge">
+              <div class="vip-identity-title">Jadi VIP Merchant</div>
+            </div>
+
+            <span class="vip-slot-badge" id="vipSlotBadge">Terbatas hanya 30 slot VIP Merchant</span>
+            <div class="vip-slot-bar" id="vipSlotBar" hidden>
+              <div class="vip-slot-fill" id="vipSlotFill"></div>
+            </div>
+
+            <!-- Hero highlight band -->
+            <div class="vip-highlight-band">
+              <span class="vip-highlight-label">Gratis</span>
+              <span class="vip-highlight-duration">untuk 3 Bulan Pertama</span>
+              <span class="vip-highlight-sub">Khusus paket Starter, tanpa kartu kredit</span>
+            </div>
+
+            <!-- Benefits — one list, not separate cards -->
+            <ul class="vip-benefits">
+              <li>
+                <svg class="check-icon" data-icon viewBox="0 0 24 24" width="18" height="18">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                Harga spesial seumur hidup untuk Starter maupun Pro
+              </li>
+              <li>
+                <svg class="check-icon" data-icon viewBox="0 0 24 24" width="18" height="18">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                Bisa upgrade ke Pro kapan saja dengan harga VIP
+              </li>
+              <li>
+                <svg class="check-icon" data-icon viewBox="0 0 24 24" width="18" height="18">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                Slot sangat terbatas — hanya untuk 30 merchant pertama
+              </li>
+            </ul>
+
+          </div>
+
+          <!-- ══════ FORM COLUMN ══════ -->
+          <div class="vip-form-side">
+
+            <!-- FORM VIEW -->
+            <form class="vip-form" id="vipForm" novalidate>
+              <div class="vip-form-title">Daftar Sekarang</div>
+              <div class="vip-form-subtitle">Isi data toko kamu, tim Amora akan kurasi dalam 1–2 hari kerja.</div>
+
+              <div class="vip-field">
+                <label for="vipNamaToko">Nama Toko / Brand</label>
+                <input type="text" id="vipNamaToko" name="namaToko" placeholder="cth. Toko Saya">
+                <div class="vip-field-error" id="vipNamaTokoError">Nama toko wajib diisi.</div>
+              </div>
+
+              <div class="vip-field">
+                <label for="vipEmail">Email</label>
+                <input type="email" id="vipEmail" name="email" placeholder="nama@email.com">
+                <div class="vip-field-error" id="vipEmailError">Email tidak valid.</div>
+              </div>
+
+              <div class="vip-field">
+                <label for="vipWaNumber">Nomor WhatsApp</label>
+                <div class="vip-wa-wrap">
+                  <span class="vip-wa-prefix">+62</span>
+                  <input type="tel" id="vipWaNumber" name="waNumber" placeholder="812xxxxxxx" inputmode="numeric">
+                </div>
+                <div class="vip-field-error" id="vipWaNumberError">Nomor WhatsApp minimal 8 digit.</div>
+              </div>
+
+              <div class="vip-field">
+                <label for="vipLinkMarketplace">Link Toko Marketplace Aktif</label>
+                <input type="text" id="vipLinkMarketplace" name="linkMarketplace"
+                  placeholder="https://shopee.co.id/tokokamu">
+                <div class="vip-field-hint">Boleh Shopee, Tokopedia, TikTok Shop</div>
+                <div class="vip-field-error" id="vipLinkMarketplaceError">Link toko wajib diisi.</div>
+              </div>
+
+              <div class="vip-hp-field" aria-hidden="true">
+                <label for="vipWebsite">Website</label>
+                <input type="text" id="vipWebsite" name="website" tabindex="-1" autocomplete="off">
+              </div>
+
+              <div class="vip-checkbox-field" id="vipCommitmentField">
+                <input type="checkbox" id="vipCommitment" name="commitment">
+                <label for="vipCommitment">Saya berkomitmen aktif menggunakan Amora dan bersedia memberikan feedback
+                  jujur selama 3 bulan pertama</label>
+              </div>
+
+              <button type="submit" class="btn-primary vip-submit-btn" id="vipSubmitBtn">
+                <span id="vipSubmitBtnText">Kirim Pendaftaran →</span>
+              </button>
+              <a href="#harga" class="vip-secondary-link" id="vipSubscribeLink">Subscribe Tanpa Coba Gratis →</a>
+
+              <p class="vip-footnote">Tidak ada pembayaran sampai bulan ke-4</p>
+              <p class="vip-footnote">Halaman ini dilindungi reCAPTCHA. <a href="https://policies.google.com/privacy"
+                  target="_blank" rel="noopener">Privacy Policy</a> dan <a
+                  href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of Service</a>
+                Google berlaku.</p>
+            </form>
+
+            <!-- SLOT FULL VIEW -->
+            <div class="vip-state" id="vipFullState" hidden>
+              <div class="vip-state-icon vip-state-icon-warning">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <line x1="12" y1="8" x2="12" y2="13" />
+                  <line x1="12" y1="16.5" x2="12" y2="16.51" />
+                </svg>
+              </div>
+              <h3>Slot VIP Merchant Sudah Penuh</h3>
+              <p>30 slot VIP Merchant sudah terisi semua. Kamu masih bisa subscribe langsung dan menikmati semua
+                fitur Amora.</p>
+              <a href="#harga" class="btn-primary vip-submit-btn" id="vipFullSubscribeLink">Subscribe Sekarang →</a>
+            </div>
+
+            <!-- SUBMITTED STATE — replaces the form permanently after success modal is closed -->
+            <div class="vip-state" id="vipSubmittedState" hidden>
+              <div class="vip-state-icon vip-state-icon-success">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <h3>Pendaftaran Terkirim</h3>
+              <p>Pendaftaran kamu sudah kami terima dan sedang dalam proses kurasi. Cek WhatsApp kamu dalam 1–2 hari
+                kerja.</p>
+            </div>
+
+          </div>
         </div>
-
-        <!-- Hero highlight band -->
-        <div class="vip-highlight-band">
-          <span class="vip-highlight-label">Gratis</span>
-          <span class="vip-highlight-duration">untuk 3 Bulan Pertama</span>
-          <span class="vip-highlight-sub">Khusus paket Starter, tanpa kartu kredit</span>
-        </div>
-
-        <!-- Benefits — one list, not separate cards -->
-        <ul class="vip-benefits">
-          <li>
-            <svg class="check-icon" data-icon viewBox="0 0 24 24" width="18" height="18">
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
-            Harga spesial seumur hidup untuk Starter maupun Pro
-          </li>
-          <li>
-            <svg class="check-icon" data-icon viewBox="0 0 24 24" width="18" height="18">
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
-            Bisa upgrade ke Pro kapan saja dengan harga VIP
-          </li>
-          <li>
-            <svg class="check-icon" data-icon viewBox="0 0 24 24" width="18" height="18">
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
-            Slot sangat terbatas — hanya untuk 30 merchant pertama
-          </li>
-        </ul>
-
-        <div class="vip-price-info">
-          Setelah trial, harga spesial seumur hidup:<br>
-          <strong>Starter Rp 99.000</strong> &amp; <strong>Pro Rp 249.000</strong> per bulan.
-        </div>
-
-        <!-- TODO: update validation/expiry date for the launching program once finalized -->
-        <div class="vip-validity">Berlaku hingga 30 September 2026</div>
-
-        <a href="vip-merchant-registration/" class="btn-primary vip-cta">
-          Daftar VIP Merchant Sekarang
-          <svg data-icon viewBox="0 0 24 24" width="15" height="15">
-            <line x1="5" y1="12" x2="19" y2="12" />
-            <polyline points="12 5 19 12 12 19" />
-          </svg>
-        </a>
       </div>
 
     </div>
   </section>
+
+  <!-- VIP SUCCESS MODAL -->
+  <div class="vip-modal-overlay" id="vipSuccessModal" hidden>
+    <div class="vip-modal-card vip-state-icon-success" role="dialog" aria-modal="true"
+      aria-labelledby="vipSuccessModalTitle">
+      <div class="vip-state-icon vip-state-icon-success">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+      </div>
+      <h3 id="vipSuccessModalTitle">Pendaftaran Diterima!</h3>
+      <p id="vipSuccessText">Terima kasih sudah mendaftar. Tim kami akan menghubungi kamu segera.</p>
+      <div class="vip-steps">
+        <div class="vip-step">
+          <div class="vip-step-num">1</div>
+          <span>Cek WhatsApp kamu — konfirmasi dalam 1–2 hari kerja</span>
+        </div>
+        <div class="vip-step">
+          <div class="vip-step-num">2</div>
+          <span>Kalau approved, kamu pilih plan dan akses gratis 3 bulan</span>
+        </div>
+        <div class="vip-step">
+          <div class="vip-step-num">3</div>
+          <span>Founder akan personally bantu setup toko pertamamu</span>
+        </div>
+      </div>
+      <button type="button" class="btn-primary vip-submit-btn" id="vipSuccessCloseBtn">Tutup</button>
+    </div>
+  </div>
+
+  <!-- VIP ERROR MODAL -->
+  <div class="vip-modal-overlay" id="vipErrorModal" hidden>
+    <div class="vip-modal-card vip-modal-icon-error" role="dialog" aria-modal="true"
+      aria-labelledby="vipErrorModalTitle">
+      <div class="vip-state-icon vip-modal-icon-error">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </div>
+      <h3 id="vipErrorModalTitle">Ups, Ada Kendala Teknis</h3>
+      <div class="vip-error-box" id="vipErrorBoxText">
+        Ups, ada kendala teknis. Data kamu belum tersimpan. Coba lagi atau hubungi kami via WhatsApp di 0851 1720
+        8085.
+      </div>
+      <button type="button" class="btn-primary vip-submit-btn" id="vipRetryBtn">Coba Lagi</button>
+    </div>
+  </div>
 
   <div class="section-divider" aria-hidden="true"></div>
 
@@ -1898,7 +2033,12 @@
               <td class="feat-val"><span class="pill-full">Fitur Lengkap</span></td>
             </tr>
             <tr>
-              <td class="feat-name">Penjadwalan Peluncuran Produk</td>
+              <td class="feat-name">Template Etalase</td>
+              <td class="feat-val blue-val">Default Template</td>
+              <td class="feat-val accent-val">Default Template, Modern Template</td>
+            </tr>
+            <tr>
+              <td class="feat-name">Domain Kustom Apex</td>
               <td class="feat-val"><svg class="cross-icon" data-icon viewBox="0 0 24 24" width="20" height="20">
                   <line x1="18" y1="6" x2="6" y2="18" />
                   <line x1="6" y1="6" x2="18" y2="18" />
@@ -1906,6 +2046,11 @@
               <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="20" height="20">
                   <polyline points="20 6 9 17 4 12" />
                 </svg></td>
+            </tr>
+            <tr>
+              <td class="feat-name">Jumlah Akun Karyawan</td>
+              <td class="feat-val blue-val">1 karyawan</td>
+              <td class="feat-val accent-val">1 karyawan</td>
             </tr>
 
             <!-- PRODUK & INVENTORI -->
@@ -1964,6 +2109,16 @@
               </td>
               <td class="feat-val"><span class="pill-limited">Tidak tersedia</span></td>
               <td class="feat-val accent-val">Maks. 10 per induk</td>
+            </tr>
+            <tr>
+              <td class="feat-name">Penjadwalan Peluncuran Produk</td>
+              <td class="feat-val"><svg class="cross-icon" data-icon viewBox="0 0 24 24" width="20" height="20">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg></td>
+              <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="20" height="20">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg></td>
             </tr>
 
             <!-- VOUCHER -->
@@ -2043,6 +2198,47 @@
               <td class="feat-name">Cek Ongkir, Cetak Resi &amp; Pelacakan Pengiriman</td>
               <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="20" height="20">
                   <polyline points="20 6 9 17 4 12" />
+                </svg></td>
+              <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="20" height="20">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg></td>
+            </tr>
+
+            <!-- PEMASARAN & LOYALITAS -->
+            <tr class="cat-row">
+              <td colspan="3">Pemasaran &amp; Loyalitas</td>
+            </tr>
+            <tr>
+              <td class="feat-name">
+                Program Loyalitas
+                <small>Poin &amp; reward untuk pelanggan setia</small>
+              </td>
+              <td class="feat-val"><svg class="cross-icon" data-icon viewBox="0 0 24 24" width="20" height="20">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg></td>
+              <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="20" height="20">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg></td>
+            </tr>
+            <tr>
+              <td class="feat-name">
+                Kampanye Blast
+                <small>Kirim promosi massal ke pelanggan</small>
+              </td>
+              <td class="feat-val"><svg class="cross-icon" data-icon viewBox="0 0 24 24" width="20" height="20">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg></td>
+              <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="20" height="20">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg></td>
+            </tr>
+            <tr>
+              <td class="feat-name">Blog</td>
+              <td class="feat-val"><svg class="cross-icon" data-icon viewBox="0 0 24 24" width="20" height="20">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
                 </svg></td>
               <td class="feat-val"><svg class="check-icon" data-icon viewBox="0 0 24 24" width="20" height="20">
                   <polyline points="20 6 9 17 4 12" />
@@ -3315,6 +3511,237 @@
         requestAnimationFrame(tiltTick);
       }
       requestAnimationFrame(tiltTick);
+    })();
+  </script>
+
+  <!-- VIP Merchant registration — merged from the former standalone
+       /vip-merchant-registration/ page. See docs/superpowers/specs/2026-06-27-vip-registration-form-security-design.md
+       for the bot/abuse protection this depends on (reCAPTCHA v3, honeypot, min fill-time, server-side dedup). -->
+  <script>
+    (function () {
+      // Ganti URL ini setelah deploy ulang Apps Script — lihat vip-merchant-registration/README.md
+      var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwHQT9rvPpYchEe9l8lV6HWF8h1eYP0G_4qB4bFTWrZ4SDchBf6COVIe4PHmd_Astl4Sg/exec';
+      var RECAPTCHA_SITE_KEY = '6Lc6OzgtAAAAAPi3Ejm3sXRDBkfkZA-p5uOvGOjL';
+      var TOTAL_SLOTS = 30;
+
+      // Waktu form pertama kali siap diisi — dipakai untuk deteksi submit instan (bot).
+      var formRenderedAt = Date.now();
+
+      var recaptchaReady = null;
+      if (RECAPTCHA_SITE_KEY && RECAPTCHA_SITE_KEY.indexOf('[REPLACE') !== 0) {
+        recaptchaReady = new Promise(function (resolve) {
+          var script = document.createElement('script');
+          script.src = 'https://www.google.com/recaptcha/api.js?render=' + RECAPTCHA_SITE_KEY;
+          script.onload = function () { resolve(true); };
+          script.onerror = function () { resolve(false); };
+          document.head.appendChild(script);
+        });
+      }
+
+      var form = document.getElementById('vipForm');
+      if (!form) return;
+
+      var submitBtn = document.getElementById('vipSubmitBtn');
+      var submitBtnText = document.getElementById('vipSubmitBtnText');
+
+      var namaTokoInput = document.getElementById('vipNamaToko');
+      var emailInput = document.getElementById('vipEmail');
+      var waInput = document.getElementById('vipWaNumber');
+      var linkInput = document.getElementById('vipLinkMarketplace');
+      var commitmentInput = document.getElementById('vipCommitment');
+      var commitmentField = document.getElementById('vipCommitmentField');
+      var honeypotInput = document.getElementById('vipWebsite');
+
+      var slotBadge = document.getElementById('vipSlotBadge');
+      var slotBar = document.getElementById('vipSlotBar');
+      var slotFill = document.getElementById('vipSlotFill');
+
+      var fullState = document.getElementById('vipFullState');
+      var submittedState = document.getElementById('vipSubmittedState');
+      var successModal = document.getElementById('vipSuccessModal');
+      var errorModal = document.getElementById('vipErrorModal');
+      var successText = document.getElementById('vipSuccessText');
+      var successCloseBtn = document.getElementById('vipSuccessCloseBtn');
+      var retryBtn = document.getElementById('vipRetryBtn');
+
+      // ── WhatsApp number: strip non-digits, strip leading zero ──
+      waInput.addEventListener('input', function () {
+        var digits = waInput.value.replace(/\D/g, '');
+        if (digits.indexOf('0') === 0) digits = digits.replace(/^0+/, '');
+        waInput.value = digits;
+      });
+
+      // ── Slot indicator: fetch current registration count ──
+      function renderSlots(remaining) {
+        var filled = Math.max(TOTAL_SLOTS - remaining, 0);
+        var pct = Math.min((filled / TOTAL_SLOTS) * 100, 100);
+        slotBar.hidden = false;
+        slotFill.style.width = pct + '%';
+
+        if (remaining <= 0) {
+          slotBadge.textContent = 'Slot VIP Merchant sudah penuh';
+          showFullState();
+        } else {
+          slotBadge.textContent = 'Sisa ' + remaining + ' dari ' + TOTAL_SLOTS + ' slot VIP Merchant';
+        }
+      }
+
+      function loadSlotCount() {
+        if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.indexOf('PASTE_YOUR') === 0) {
+          // Belum di-deploy / URL belum diisi — jangan blokir form, sembunyikan indikator slot.
+          return;
+        }
+
+        fetch(APPS_SCRIPT_URL, { method: 'GET' })
+          .then(function (res) { return res.json(); })
+          .then(function (data) {
+            if (data.status === 'success' && typeof data.count === 'number') {
+              renderSlots(TOTAL_SLOTS - data.count);
+            }
+          })
+          .catch(function () {
+            // Gagal ambil jumlah slot — jangan blokir pendaftaran, biarkan badge statis.
+          });
+      }
+
+      loadSlotCount();
+
+      // ── Validation helpers ──
+      function setFieldError(input, errorEl, isValid) {
+        if (isValid) {
+          input.classList.remove('error');
+          errorEl.classList.remove('show');
+        } else {
+          input.classList.add('error');
+          errorEl.classList.add('show');
+        }
+      }
+
+      function validateForm() {
+        var valid = true;
+
+        var namaTokoValid = namaTokoInput.value.trim().length > 0;
+        setFieldError(namaTokoInput, document.getElementById('vipNamaTokoError'), namaTokoValid);
+        if (!namaTokoValid) valid = false;
+
+        var emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim());
+        setFieldError(emailInput, document.getElementById('vipEmailError'), emailValid);
+        if (!emailValid) valid = false;
+
+        var waValid = waInput.value.replace(/\D/g, '').length >= 8;
+        setFieldError(waInput, document.getElementById('vipWaNumberError'), waValid);
+        if (!waValid) valid = false;
+
+        var linkValid = linkInput.value.trim().length > 0;
+        setFieldError(linkInput, document.getElementById('vipLinkMarketplaceError'), linkValid);
+        if (!linkValid) valid = false;
+
+        if (!commitmentInput.checked) {
+          commitmentField.classList.add('error');
+          valid = false;
+        } else {
+          commitmentField.classList.remove('error');
+        }
+
+        return valid;
+      }
+
+      function normalizeLink(value) {
+        var trimmed = value.trim();
+        if (!/^https?:\/\//i.test(trimmed)) {
+          return 'https://' + trimmed;
+        }
+        return trimmed;
+      }
+
+      function showFullState() {
+        form.hidden = true;
+        fullState.hidden = false;
+      }
+
+      function setLoading(isLoading) {
+        submitBtn.disabled = isLoading;
+        submitBtnText.textContent = isLoading ? 'Mengirim...' : 'Kirim Pendaftaran →';
+      }
+
+      function showSuccess(namaToko) {
+        successText.textContent = 'Terima kasih, ' + namaToko + '! Pendaftaran kamu sudah kami terima.';
+        successModal.hidden = false;
+        document.documentElement.style.overflow = 'hidden';
+        successCloseBtn.focus();
+      }
+
+      function showError(message) {
+        document.getElementById('vipErrorBoxText').textContent = message ||
+          'Ups, ada kendala teknis. Data kamu belum tersimpan. Coba lagi atau hubungi kami via WhatsApp di 0851 1720 8085.';
+        errorModal.hidden = false;
+        document.documentElement.style.overflow = 'hidden';
+        retryBtn.focus();
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        if (!validateForm()) return;
+
+        setLoading(true);
+        errorModal.hidden = true;
+
+        var basePayload = {
+          namaToko: namaTokoInput.value.trim(),
+          email: emailInput.value.trim(),
+          whatsapp: '+62' + waInput.value.replace(/\D/g, ''),
+          linkMarketplace: normalizeLink(linkInput.value),
+          website: honeypotInput.value, // honeypot — harus selalu kosong untuk manusia
+          elapsedMs: Date.now() - formRenderedAt
+        };
+
+        // reCAPTCHA wajib berhasil sebelum submit jalan — gagal tertutup (fail closed)
+        // supaya bot tidak bisa lolos hanya dengan memblokir script reCAPTCHA.
+        var tokenPromise = recaptchaReady
+          ? recaptchaReady.then(function (loaded) {
+            if (!loaded || typeof grecaptcha === 'undefined') return Promise.reject(new Error('recaptcha-unavailable'));
+            return grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'vip_register' });
+          })
+          : Promise.resolve(null); // reCAPTCHA belum dikonfigurasi (site key belum diisi) — lewati saja
+
+        tokenPromise
+          .then(function (token) {
+            var payload = Object.assign({}, basePayload, { recaptchaToken: token });
+
+            return fetch(APPS_SCRIPT_URL, {
+              method: 'POST',
+              headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // hindari CORS preflight di Apps Script
+              body: JSON.stringify(payload)
+            });
+          })
+          .then(function (res) { return res.json(); })
+          .then(function (data) {
+            setLoading(false);
+            if (data.status === 'success') {
+              showSuccess(basePayload.namaToko);
+            } else {
+              showError(data.message);
+            }
+          })
+          .catch(function () {
+            setLoading(false);
+            showError();
+          });
+      });
+
+      successCloseBtn.addEventListener('click', function () {
+        successModal.hidden = true;
+        document.documentElement.style.overflow = '';
+        form.hidden = true;
+        submittedState.hidden = false;
+      });
+
+      retryBtn.addEventListener('click', function () {
+        errorModal.hidden = true;
+        document.documentElement.style.overflow = '';
+        setLoading(false);
+      });
     })();
   </script>
 

@@ -31,8 +31,8 @@
   }
 
   function sectionLink(id) {
-    // If we are on an internal page like /vip-merchant-registration, 
-    // force an absolute URL routing back to the home origin root plus the hash.
+    // If we are on an internal page (not the homepage), force an absolute URL
+    // routing back to the home origin root plus the hash.
     if (isHomePage()) {
       return '#' + id;
     } else {

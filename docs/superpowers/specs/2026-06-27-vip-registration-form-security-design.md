@@ -3,6 +3,11 @@
 **Status:** Approved
 **Scope:** `vip-merchant-registration/index.html` + `vip-merchant-registration/appscript.gs`
 
+> **2026-07-30 update:** the frontend described below was later merged into the `#vip-program`
+> section of the root `index.html` (see the VIP-prefixed IDs/classes there); the protections and
+> backend contract documented here are unchanged. `appscript.gs` still lives in
+> `vip-merchant-registration/`.
+
 ## Problem
 
 The VIP merchant registration form POSTs JSON directly to a public Google Apps Script Web App

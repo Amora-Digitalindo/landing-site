@@ -1,7 +1,9 @@
 # VIP Merchant Registration — Deploy Guide
 
-Dua file di folder ini:
-- `index.html` — halaman form lengkap (CSS & JS inline), siap deploy ke Netlify/Vercel/hosting statis apapun.
+The registration form itself is no longer a standalone page — it's merged directly into the
+`#vip-program` section of the root `index.html` (CSS in `css/amora-landing-v2.css`, JS in the
+last inline `<script>` before `</body>`). This folder now only holds the backend:
+
 - `appscript.gs` — backend Google Apps Script yang menyimpan submission ke Google Sheets.
 
 ## 1. Buat Google Sheet baru
@@ -23,18 +25,17 @@ Dua file di folder ini:
 7. Klik **Deploy**. Google akan minta otorisasi izin pertama kali — klik **Authorize access**, pilih akun, lalu klik **Advanced → Go to (project name) → Allow**.
 8. Setelah deploy berhasil, copy **Web app URL** yang muncul (bentuknya seperti `https://script.google.com/macros/s/AKfycb.../exec`).
 
-## 3. Pasang Web App URL ke index.html
+## 3. Pasang Web App URL di index.html
 
-1. Buka `index.html`.
-2. Cari baris ini di bagian atas `<script>`:
+1. Buka `index.html` (root proyek), cari blok `<script>` VIP Merchant registration menjelang `</body>`.
+2. Cari baris ini:
    ```js
-   const APPS_SCRIPT_URL = 'PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';
+   var APPS_SCRIPT_URL = '...';
    ```
-3. Ganti dengan URL yang sudah di-copy dari langkah 2.8, contoh:
-   ```js
-   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/exec';
-   ```
-4. (Opsional) Ganti juga `SUBSCRIBE_URL` di bawahnya jika link tujuan "subscribe langsung" berbeda dari default.
+3. Ganti dengan URL yang sudah di-copy dari langkah 2.8.
+4. (Opsional) Link "subscribe langsung tanpa coba gratis" sudah mengarah ke `#harga` (bagian
+   pricing di halaman yang sama) — ganti `href="#harga"` pada `#vipSubscribeLink` /
+   `#vipFullSubscribeLink` kalau tujuannya berbeda.
 
 ## 4. Setup reCAPTCHA v3 (anti-bot)
 
@@ -44,11 +45,11 @@ mengisi form secara otomatis.
 
 1. Buka [google.com/recaptcha/admin](https://www.google.com/recaptcha/admin) → daftarkan site baru.
 2. Pilih jenis **reCAPTCHA v3**.
-3. Isi domain tempat `index.html` akan di-hosting (contoh: `amora.id`, atau domain Netlify/Vercel kamu).
+3. Isi domain tempat situs di-hosting (contoh: `amora.id`).
 4. Setelah submit, kamu akan mendapat dua key: **Site Key** dan **Secret Key**.
-5. Di `index.html`, cari baris ini dan ganti `[REPLACE SITEKEY]` dengan Site Key:
+5. Di blok `<script>` yang sama di `index.html`, cari baris ini dan ganti dengan Site Key:
    ```js
-   const RECAPTCHA_SITE_KEY = '[REPLACE SITEKEY]';
+   var RECAPTCHA_SITE_KEY = '...';
    ```
 6. Di `appscript.gs`, cari baris ini dan ganti `[REPLACE SECRET KEY]` dengan Secret Key:
    ```js
@@ -60,17 +61,15 @@ Catatan: jika kedua key ini dibiarkan sebagai placeholder, form tetap berfungsi 
 reCAPTCHA dilewati) — tapi lapisan proteksi anti-bot yang paling kuat jadi tidak aktif. Honeypot
 field, minimum waktu isi form, dan validasi/dedup server-side tetap aktif tanpa konfigurasi tambahan.
 
-## 5. Deploy index.html
+## 5. Deploy
 
-Upload folder ini (atau cukup `index.html`) ke hosting statis pilihanmu:
-- **Netlify**: drag-and-drop folder ke [app.netlify.com/drop](https://app.netlify.com/drop)
-- **Vercel**: `vercel deploy` dari dalam folder ini, atau hubungkan repo via dashboard
-- **Hosting lain**: upload `index.html` apa adanya — tidak butuh build step
+Situs (termasuk form ini) di-deploy sebagai satu kesatuan lewat proses deploy statis biasa untuk
+root proyek — tidak ada langkah deploy terpisah untuk folder ini lagi.
 
 ## Catatan penting soal permission "Anyone"
 
 Apps Script Web App **harus** di-deploy dengan **"Who has access: Anyone"** (bukan "Anyone with Google account" atau "Only myself"). Tanpa ini:
-- Request `fetch()` dari domain hosting (Netlify/Vercel) akan ditolak browser/Google dengan error 401/403.
+- Request `fetch()` dari domain hosting akan ditolak browser/Google dengan error 401/403.
 - Setiap kali kamu mengubah isi `appscript.gs`, kamu harus membuat **New deployment** baru (bukan edit deployment lama) agar perubahan kode benar-benar live — atau gunakan **Deploy → Manage deployments → Edit (ikon pensil) → New version**.
 
 ## Cara cek data masuk
