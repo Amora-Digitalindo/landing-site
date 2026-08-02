@@ -82,8 +82,8 @@
       '      <a href="' + sectionLink('faq') + '">FAQ</a>' +
       '    </div>' +
       '    <div class="nav-ctas">' +
-      '      <a href="https://admin.amora.id/" class="btn-ghost">Masuk</a>' +
-      '      <a href="https://admin.amora.id/" class="btn-primary">' +
+      '      <a href="https://amora.id/segera-hadir" class="btn-ghost">Masuk</a>' +
+      '      <a href="https://amora.id/segera-hadir" class="btn-primary">' +
       '        Buat Toko' +
       '        <svg data-icon viewBox="0 0 24 24" width="14" height="14"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>' +
       '      </a>' +
@@ -109,8 +109,8 @@
       '  </div>' +
       '  <div class="menu-footer">' +
       '    <div class="mobile-ctas">' +
-      '      <a href="https://admin.amora.id/" class="outline">Masuk</a>' +
-      '      <a href="https://admin.amora.id/" class="filled">Buat Toko</a>' +
+      '      <a href="https://amora.id/segera-hadir" class="outline">Masuk</a>' +
+      '      <a href="https://amora.id/segera-hadir" class="filled">Buat Toko</a>' +
       '    </div>' +
       '    <div class="mobile-legal">' +
       '      <a href="https://amora.id/syarat-ketentuan">Syarat &amp; Ketentuan</a>' +
